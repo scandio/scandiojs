@@ -26,7 +26,9 @@
       "grunt-jsonlint": "~1.0.0",
       "grunt-contrib-uglify": "~0.2.2",
       "grunt-contrib-concat": "~0.1.2",
-      "grunt-docco2": "latest"
+      "grunt-docco2": "latest",
+      "grunt-jstestdriver": "latest",
+      "grunt-contrib-copy": "~0.4.0"
    },
 
    "scripts": {

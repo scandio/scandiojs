@@ -14,7 +14,7 @@ module.exports = function( grunt ) {
    grunt.initConfig({
       pkg: grunt.file.readJSON("package.json"),
       concat: {
-        scandiojs: {
+        scandio: {
           options: {
             separator: ""
           },
@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
             "src/core.js",
             "src/outro.js"
           ],
-          dest: "dist/scandiojs-<%= pkg.version %>.js"
+          dest: "dist/scandio-<%= pkg.version %>.js"
         }
       },
       jsonlint: {
@@ -40,7 +40,7 @@ module.exports = function( grunt ) {
       },
       jshint: {
          dist: {
-            src: [ "dist/scandiojs-<%= pkg.version %>.js" ],
+            src: [ "dist/scandio-<%= pkg.version %>.js" ],
             options: srcHintOptions
          },
          grunt: {
@@ -53,12 +53,12 @@ module.exports = function( grunt ) {
       uglify: {
          all: {
             files: {
-               "dist/scandiojs-<%= pkg.version %>.min.js": [ "dist/scandiojs-<%= pkg.version %>.js" ]
+               "dist/scandio-<%= pkg.version %>.min.js": [ "dist/scandio-<%= pkg.version %>.js" ]
             },
             options: {
                preserveComments: "some",
-               sourceMap: "dist/scandiojs-<%= pkg.version %>.min.map",
-               sourceMappingURL: "scandiojs-<%= pkg.version %>.min.map",
+               sourceMap: "dist/scandio-<%= pkg.version %>.min.map",
+               sourceMappingURL: "scandio-<%= pkg.version %>.min.map",
                beautify: {
                   ascii_only: true
                },
@@ -74,13 +74,25 @@ module.exports = function( grunt ) {
             }
          }
       },
+      copy: {
+         main: {
+            files: [
+               {src: "dist/scandio-<%= pkg.version %>.js", dest: "dist/scandio.js"},
+               {src: "dist/scandio-<%= pkg.version %>.min.js", dest: "dist/scandio.min.js"},
+               {src: "dist/scandio-<%= pkg.version %>.min.map", dest: "dist/scandio.min.map"}
+            ]
+         }
+      },
       docco: {
          docs: {
-            src: ['src/*js', 'dist/scandiojs-<%= pkg.version %>.js'],
+            src: ['src/*js', 'dist/scandio-<%= pkg.version %>.js'],
             options: {
                output: 'docs'
             }
          }
+      },
+      jstestdriver: {
+         files: ["jsTestDriver.conf"]
       }
    });
 
@@ -89,6 +101,9 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks("grunt-contrib-concat");
    grunt.loadNpmTasks("grunt-contrib-uglify");
    grunt.loadNpmTasks('grunt-docco2');
+   grunt.loadNpmTasks('grunt-contrib-copy');
+   grunt.loadNpmTasks('grunt-jstestdriver');
 
-   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "docco"] );
+   grunt.registerTask( "test", ["jsonlint", "concat", "jshint", "uglify", "copy", "jstestdriver"] );
+   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "copy", "docco"] );
 };
