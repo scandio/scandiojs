@@ -20,7 +20,6 @@
 
   // Sets up a global set of variables
    var
-      // Shorthand to root
       ß                  = null,
       loadedJs           = {},
       // Previous version for `ß.noConflict`

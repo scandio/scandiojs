@@ -73,6 +73,14 @@ module.exports = function( grunt ) {
                }
             }
          }
+      },
+      docco: {
+         docs: {
+            src: ['src/*js', 'dist/scandiojs-<%= pkg.version %>.js'],
+            options: {
+               output: 'docs'
+            }
+         }
       }
    });
 
@@ -80,6 +88,7 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks("grunt-jsonlint");
    grunt.loadNpmTasks("grunt-contrib-concat");
    grunt.loadNpmTasks("grunt-contrib-uglify");
+   grunt.loadNpmTasks('grunt-docco2');
 
-   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify"] );
+   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "docco"] );
 };
