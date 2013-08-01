@@ -63,14 +63,14 @@
             script.onreadystatechange = null;
 
             // Invoke callback if passed and type is function
-            ß.isFunction(done) && done();
+            if (ß.isFunction(done)) { done(); }
          }
       };
    } else {
       // Bind `onload` callback on script element
       script.onload = function(){
          // Invoke callback if passed and type is function
-         ß.isFunction(done) && done();
+         if (ß.isFunction(done)) { done(); }
       };
    }
 
@@ -81,4 +81,4 @@
    // *Note:* Binding it to body not possible cause it may not be parsed if `ß.libs` is
    // called in html's head-section
    document.head.appendChild(script);
-}
+};

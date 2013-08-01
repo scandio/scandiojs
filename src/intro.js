@@ -15,10 +15,13 @@
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
+  //Establish the root
+  root = root || this;
+
   // Sets up a global set of variables
    var
       // Shorthand to root
-      root               = root,
+      ß                  = null,
       loadedJs           = {},
       // Previous version for `ß.noConflict`
       previousScandio    = root.ß,
@@ -36,10 +39,10 @@
                           'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
                           'timeStamp', 'trace'],
       // Log methods to be caught and routed to `ß.debug`
-      logMethods         = ['error', 'warn', 'info', 'debug', 'log'];
+      logMethods         = ['error', 'warn', 'info', 'debug', 'log'],
 
    // All the important native methods shorthanded and used if defined in e.g. `ß.each`
-   var
+
       push               = ArrayProto.push,
       slice              = ArrayProto.slice,
       concat             = ArrayProto.concat,
@@ -56,21 +59,21 @@
       nativeLastIndexOf  = ArrayProto.lastIndexOf,
       nativeIsArray      = Array.isArray,
       nativeKeys         = Object.keys,
-      nativeBind         = FuncProto.bind;
+      nativeBind         = FuncProto.bind,
 
    // Defining one self
-   var ß = function(obj) {
+   Scandio = function(obj) {
       // If already instance return
-      if (obj instanceof ß) { return obj; }
+      if (obj instanceof Scandio) { return obj; }
       // Otherwise creates new instance
-      if (!(this instanceof ß)) { return new ß(obj); }
+      if (!(this instanceof Scandio)) { return new Scandio(obj); }
 
       // for chaining
       this._wrapped = obj;
-   };
+   },
 
    // Catches all possible console calls if they are undefined
-   var _catchConsole = function() {
+   _catchConsole = function() {
       var
          method,
          noop     = function () {},
@@ -85,11 +88,11 @@
             // Bind a noop to call if not defined
             if (!console[method]) { console[method] = noop; }
          }
-   };
+   },
 
    // Any call to subordinate initialization function goes here
    // *Note:* We're in pre-creation state
-   var _initialize = function() {
+   _initialize = function() {
       // As the adove catching of console calls
       _catchConsole();
    };
@@ -98,7 +101,7 @@
    _initialize();
 
    // Create yerself
-   root.ß = root.Scandio = ß;
+   ß = root.ß = root.Scandio = Scandio;
 
    // Version of our library
    ß.VERSION   = '0.0.1';

@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
       } catch(e) {}
       return data;
    },
-   srcHintOptions = readOptionalJSON( "src/.jshintrc" );
+   srcHintOptions = readOptionalJSON( ".jshintrc" );
 
    grunt.initConfig({
       pkg: grunt.file.readJSON("package.json"),
@@ -40,7 +40,7 @@ module.exports = function( grunt ) {
       },
       jshint: {
          dist: {
-            src: [ "dist/scandiojs2-<%= pkg.version %>.js" ],
+            src: [ "dist/scandiojs-<%= pkg.version %>.js" ],
             options: srcHintOptions
          },
          grunt: {
@@ -81,5 +81,5 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks("grunt-contrib-concat");
    grunt.loadNpmTasks("grunt-contrib-uglify");
 
-   grunt.registerTask( "dist", ["jshint", "jsonlint", "concat", "uglify"] );
+   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify"] );
 };

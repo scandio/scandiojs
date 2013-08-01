@@ -12,8 +12,13 @@
 // Iterates over an `object` with an `iterator` in an optional `context`
 // Falls back to nativeForEach if supported by browser (on prototpye)
 ß.util.each = ß.forEach = function(obj, iterator, context) {
+   var
+      key = null,
+      i = null,
+      l = obj.length;
+
    // Nothing to iterate, somewhat funny eh?
-   if (obj == null) { return; }
+   if (obj === null || obj === undefined) { return; }
 
    // Fall back to native foreach which is faster in newer browsers
    if (nativeForEach && obj.forEach === nativeForEach) {
@@ -24,20 +29,20 @@
    // and an optimized for-loop can be used.
    else if (obj.length === +obj.length) {
       // Iterate over length of `obj`
-      for (var i = 0, l = obj.length; i < l; i++) {
+      for (i = 0, l = obj.length; i < l; i++) {
          // …call the `iterator`-function and return if its the breaker (done)
-         if (iterator.call(context, obj[i], i, obj) === breaker) return;
+         if (iterator.call(context, obj[i], i, obj) === breaker) { return; }
       }
    }
 
    // Iterate over object
    else {
       // For each key in obj
-      for (var key in obj) {
+      for (key in obj) {
          // Only if it hasOwnProperty
          if (ß.util.has(obj, key)) {
             // …call the `iterator`-function and return if its the breaker (done)
-            if (iterator.call(context, obj[key], key, obj) === breaker) return;
+            if (iterator.call(context, obj[key], key, obj) === breaker) { return; }
          }
       }
    }
@@ -66,7 +71,7 @@
    // What will be returned
    var results = [];
    // Nothing to iterate
-   if (obj == null) { return results; }
+   if (obj === null || obj === undefined) { return results; }
 
    //Fallback to native filter for performance reasons
    if (nativeFilter && obj.filter === nativeFilter)
@@ -89,10 +94,11 @@
    // Setup path and destination variables
    var
       dest   = obj,
-      path           = dots.split('.');
+      path   = dots.split('.'),
+      i      = null;
 
    // Dig into the `path` an question the `objc`
-   for(var i = 0; i < path.length; i++) {
+   for(i = 0; i < path.length; i++) {
       // Found something on the `objc` and reset the destination
       if(obj) { dest = dest[path[i]]; }
       // Nothing found…

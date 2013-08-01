@@ -15,10 +15,13 @@
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
+  //Establish the root
+  root = root || this;
+
   // Sets up a global set of variables
    var
       // Shorthand to root
-      root               = root,
+      ß                  = null,
       loadedJs           = {},
       // Previous version for `ß.noConflict`
       previousScandio    = root.ß,
@@ -36,10 +39,10 @@
                           'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
                           'timeStamp', 'trace'],
       // Log methods to be caught and routed to `ß.debug`
-      logMethods         = ['error', 'warn', 'info', 'debug', 'log'];
+      logMethods         = ['error', 'warn', 'info', 'debug', 'log'],
 
    // All the important native methods shorthanded and used if defined in e.g. `ß.each`
-   var
+
       push               = ArrayProto.push,
       slice              = ArrayProto.slice,
       concat             = ArrayProto.concat,
@@ -56,21 +59,21 @@
       nativeLastIndexOf  = ArrayProto.lastIndexOf,
       nativeIsArray      = Array.isArray,
       nativeKeys         = Object.keys,
-      nativeBind         = FuncProto.bind;
+      nativeBind         = FuncProto.bind,
 
    // Defining one self
-   var ß = function(obj) {
+   Scandio = function(obj) {
       // If already instance return
-      if (obj instanceof ß) { return obj; }
+      if (obj instanceof Scandio) { return obj; }
       // Otherwise creates new instance
-      if (!(this instanceof ß)) { return new ß(obj); }
+      if (!(this instanceof Scandio)) { return new Scandio(obj); }
 
       // for chaining
       this._wrapped = obj;
-   };
+   },
 
    // Catches all possible console calls if they are undefined
-   var _catchConsole = function() {
+   _catchConsole = function() {
       var
          method,
          noop     = function () {},
@@ -85,11 +88,11 @@
             // Bind a noop to call if not defined
             if (!console[method]) { console[method] = noop; }
          }
-   };
+   },
 
    // Any call to subordinate initialization function goes here
    // *Note:* We're in pre-creation state
-   var _initialize = function() {
+   _initialize = function() {
       // As the adove catching of console calls
       _catchConsole();
    };
@@ -98,7 +101,7 @@
    _initialize();
 
    // Create yerself
-   root.ß = root.Scandio = ß;
+   ß = root.ß = root.Scandio = Scandio;
 
    // Version of our library
    ß.VERSION   = '0.0.1';
@@ -116,32 +119,33 @@
    var
       console  = window.console,
       length   = logMethods.length,
-      methods  = {};
-
-   // For every console-method
-   while(length--) {
+      methods  = {},
       // Closes the scope for `method and level`
       // *Note:* Due to js and its state-maintainance for closures
       // the last passed argument would otherwise win
-      (function(method, level) {
-         // Sets up history for the log-method
-         ß.logger.logs[method] = [];
+      createLogger = function() {
+          return function (method, level) {
+              // Sets up history for the log-method
+              ß.logger.logs[method] = [];
 
-         // The return value's log-type gets a function
-         methods[method] = function() {
-            // Lets get some arguments
-            var args = slice.call(arguments);
+              // The return value's log-type gets a function
+              methods[method] = function() {
+                 // Lets get some arguments
+                 var args = slice.call(arguments);
 
-            // Only log to console if required by level
-            if(ß.logger.level >= level) {
-               console[method].apply(console, args);
-            }
+                 // Only log to console if required by level
+                 if(ß.logger.level >= level) {
+                    console[method].apply(console, args);
+                 }
 
-            // but always push it to history
-            ß.logger.logs[method].push(args.join(', '));
-         };
-      })(logMethods[length], length);
-   }
+                 // but always push it to history
+                 ß.logger.logs[method].push(args.join(', '));
+              };
+          };
+      };
+
+   // For every console-method
+   while(length--) { createLogger(logMethods[length], length); }
 
    // Now the `ß.debug`-object gets its functions
    return methods;
@@ -160,8 +164,13 @@
 // Iterates over an `object` with an `iterator` in an optional `context`
 // Falls back to nativeForEach if supported by browser (on prototpye)
 ß.util.each = ß.forEach = function(obj, iterator, context) {
+   var
+      key = null,
+      i = null,
+      l = obj.length;
+
    // Nothing to iterate, somewhat funny eh?
-   if (obj == null) { return; }
+   if (obj === null || obj === undefined) { return; }
 
    // Fall back to native foreach which is faster in newer browsers
    if (nativeForEach && obj.forEach === nativeForEach) {
@@ -172,20 +181,20 @@
    // and an optimized for-loop can be used.
    else if (obj.length === +obj.length) {
       // Iterate over length of `obj`
-      for (var i = 0, l = obj.length; i < l; i++) {
+      for (i = 0, l = obj.length; i < l; i++) {
          // …call the `iterator`-function and return if its the breaker (done)
-         if (iterator.call(context, obj[i], i, obj) === breaker) return;
+         if (iterator.call(context, obj[i], i, obj) === breaker) { return; }
       }
    }
 
    // Iterate over object
    else {
       // For each key in obj
-      for (var key in obj) {
+      for (key in obj) {
          // Only if it hasOwnProperty
          if (ß.util.has(obj, key)) {
             // …call the `iterator`-function and return if its the breaker (done)
-            if (iterator.call(context, obj[key], key, obj) === breaker) return;
+            if (iterator.call(context, obj[key], key, obj) === breaker) { return; }
          }
       }
    }
@@ -214,7 +223,7 @@
    // What will be returned
    var results = [];
    // Nothing to iterate
-   if (obj == null) { return results; }
+   if (obj === null || obj === undefined) { return results; }
 
    //Fallback to native filter for performance reasons
    if (nativeFilter && obj.filter === nativeFilter)
@@ -237,10 +246,11 @@
    // Setup path and destination variables
    var
       dest   = obj,
-      path           = dots.split('.');
+      path   = dots.split('.'),
+      i      = null;
 
    // Dig into the `path` an question the `objc`
-   for(var i = 0; i < path.length; i++) {
+   for(i = 0; i < path.length; i++) {
       // Found something on the `objc` and reset the destination
       if(obj) { dest = dest[path[i]]; }
       // Nothing found…
@@ -334,14 +344,14 @@
             script.onreadystatechange = null;
 
             // Invoke callback if passed and type is function
-            ß.isFunction(done) && done();
+            if (ß.isFunction(done)) { done(); }
          }
       };
    } else {
       // Bind `onload` callback on script element
       script.onload = function(){
          // Invoke callback if passed and type is function
-         ß.isFunction(done) && done();
+         if (ß.isFunction(done)) { done(); }
       };
    }
 
@@ -352,7 +362,7 @@
    // *Note:* Binding it to body not possible cause it may not be parsed if `ß.libs` is
    // called in html's head-section
    document.head.appendChild(script);
-}
+};
 // Core functionality
 // ---------------
 
@@ -370,11 +380,12 @@
 
    // Returns a function requiring `name, module and an module environment object`
    return function(name, module, modEnv) {
+      var typeError = null;
 
       // Validates types of parameters in requiring `string, function and object`
       if (!ß.isString(name) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
          // Set up a crazy long eloquent error message and…
-         var typeError = 'Parameter mismatch in Scandio.mod - please provide (1) name as' +
+         typeError = 'Parameter mismatch in Scandio.mod - please provide (1) name as' +
             'string and a (2) module as function. (3) an modEnv object may be given to' +
             'extend the default global environment';
 
@@ -385,7 +396,7 @@
       // Module names need to be unique
       if (modules.sequence.indexOf(name) >= 0) {
          // Otherwise error will be triggered
-         var typeError = 'Error: there is already a module with name "' + name + '".';
+         typeError = 'Error: there is already a module with name "' + name + '".';
 
          ß.debug.error(typeError);
       }
@@ -432,21 +443,21 @@
          // a condition function
          condition      = params.condition || function() {},
          // object containing all the callbacks (done and fail)
-         callbacks      = {};
+         callbacks      = {},
 
-      // Runs one roundtrip of execution
-      var execute = function() {
-         // Time flew by and duration for execution exceeded
-         if (new Date().getTime() - startTime > duration) {
-            ß.isFunction(callbacks.fail) && callbacks.fail();
-         // The condition passed and we're good
-         } else if (condition()) {
-            ß.isFunction(callbacks.done) && callbacks.done();
-         // Defer execution again by interval
-         } else {
-            setTimeout(execute, interval);
-         }
-      };
+         // Runs one roundtrip of execution
+         execute = function() {
+            // Time flew by and duration for execution exceeded
+            if (new Date().getTime() - startTime > duration) {
+               if (ß.isFunction(callbacks.fail)) { callbacks.fail(); }
+            // The condition passed and we're good
+            } else if (condition()) {
+               if (ß.isFunction(callbacks.done)) { callbacks.done(); }
+            // Defer execution again by interval
+            } else {
+               setTimeout(execute, interval);
+            }
+         };
 
       // Starts up intitial execution with delay
       setTimeout(execute, initialDelay);
@@ -477,7 +488,7 @@
 // Shorthand for redirecting the browser to a new `url`
 ß.redirect = ß.core.redirect = function(url) {
    location.href = url;
-}
+};
 // Outro, AMD and conflict resolution
 // ---------------
 

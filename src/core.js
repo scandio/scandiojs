@@ -15,11 +15,12 @@
 
    // Returns a function requiring `name, module and an module environment object`
    return function(name, module, modEnv) {
+      var typeError = null;
 
       // Validates types of parameters in requiring `string, function and object`
       if (!ß.isString(name) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
          // Set up a crazy long eloquent error message and…
-         var typeError = 'Parameter mismatch in Scandio.mod - please provide (1) name as' +
+         typeError = 'Parameter mismatch in Scandio.mod - please provide (1) name as' +
             'string and a (2) module as function. (3) an modEnv object may be given to' +
             'extend the default global environment';
 
@@ -30,7 +31,7 @@
       // Module names need to be unique
       if (modules.sequence.indexOf(name) >= 0) {
          // Otherwise error will be triggered
-         var typeError = 'Error: there is already a module with name "' + name + '".';
+         typeError = 'Error: there is already a module with name "' + name + '".';
 
          ß.debug.error(typeError);
       }
@@ -77,21 +78,21 @@
          // a condition function
          condition      = params.condition || function() {},
          // object containing all the callbacks (done and fail)
-         callbacks      = {};
+         callbacks      = {},
 
-      // Runs one roundtrip of execution
-      var execute = function() {
-         // Time flew by and duration for execution exceeded
-         if (new Date().getTime() - startTime > duration) {
-            ß.isFunction(callbacks.fail) && callbacks.fail();
-         // The condition passed and we're good
-         } else if (condition()) {
-            ß.isFunction(callbacks.done) && callbacks.done();
-         // Defer execution again by interval
-         } else {
-            setTimeout(execute, interval);
-         }
-      };
+         // Runs one roundtrip of execution
+         execute = function() {
+            // Time flew by and duration for execution exceeded
+            if (new Date().getTime() - startTime > duration) {
+               if (ß.isFunction(callbacks.fail)) { callbacks.fail(); }
+            // The condition passed and we're good
+            } else if (condition()) {
+               if (ß.isFunction(callbacks.done)) { callbacks.done(); }
+            // Defer execution again by interval
+            } else {
+               setTimeout(execute, interval);
+            }
+         };
 
       // Starts up intitial execution with delay
       setTimeout(execute, initialDelay);
@@ -122,4 +123,4 @@
 // Shorthand for redirecting the browser to a new `url`
 ß.redirect = ß.core.redirect = function(url) {
    location.href = url;
-}
+};
