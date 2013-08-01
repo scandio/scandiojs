@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
             separator: ""
           },
           src: [
-            "src/intro.js",
+            "src/index.js",
             "src/logger.js",
             "src/util.js",
             "src/is.js",
