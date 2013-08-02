@@ -1,0 +1,7 @@
+ok 1 - testem.json -  Chrome 28.0 - A suite contains spec with an expectation.
+ok 2 - testem.json -  Safari 6.0 - A suite contains spec with an expectation.
+
+1..2
+# tests 2
+# pass 2
+# fail 0

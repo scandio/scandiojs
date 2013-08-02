@@ -94,7 +94,19 @@ module.exports = function( grunt ) {
       },
       jstestdriver: {
          files: ["jsTestDriver.conf"]
-      }
+      },
+      testem: {
+          options : {
+            launch_in_ci : [
+              'chrome',
+              'safari'
+            ]
+          },
+          main : {
+            src: ['testem.json'],
+            dest: 'test/testem.tap'
+          }
+        }
    });
 
    grunt.loadNpmTasks("grunt-contrib-jshint");
@@ -104,7 +116,10 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks('grunt-docco2');
    grunt.loadNpmTasks('grunt-contrib-copy');
    grunt.loadNpmTasks('grunt-jstestdriver');
+   grunt.loadNpmTasks('grunt-testem');
 
-   grunt.registerTask( "test", ["jsonlint", "concat", "jshint", "uglify", "copy", "jstestdriver"] );
+   grunt.registerTask( "test-driver", ["jsonlint", "concat", "jshint", "uglify", "copy", "jstestdriver"] );
+   grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "copy", "testem"] );
+
    grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "copy", "docco"] );
 };

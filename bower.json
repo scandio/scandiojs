@@ -9,7 +9,8 @@
   ],
   "dependencies": {
     "jquery": "latest",
-    "jasmine": "latest"
+    "jasmine": "latest",
+    "jasmine-jstd-adapter": "latest"
   },
   "devDependencies": {
 
