@@ -540,6 +540,11 @@
 ß.redirect = ß.core.redirect = function(url) {
    location.href = url;
 };
+// Conflucence module
+// ---------------
+
+// Sets up confluence object
+ß.confluence = {};
 // Outro, AMD and conflict resolution
 // ---------------
 
