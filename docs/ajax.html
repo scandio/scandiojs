@@ -200,7 +200,7 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.cdns = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.cdns = ß.ajax.cdns = {</pre></div></div>
             
         </li>
         
@@ -236,7 +236,10 @@ will load alert and log from their respective folder.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.plugins = ß.ajax.plugins = <span class="keyword">function</span>(requested) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.plugins = ß.ajax.plugins = <span class="keyword">function</span>(requested) {
+   <span class="keyword">var</span>
+      url            = <span class="literal">null</span>,
+      resultUrls     = [];</pre></div></div>
             
         </li>
         
@@ -281,9 +284,15 @@ will load alert and log from their respective folder.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         ß.ajax.script(window.location.origin + <span class="string">'/'</span> + folder + script + <span class="string">'.js'</span>);
+            <div class="content"><div class='highlight'><pre>         url = window.location.origin + <span class="string">'/'</span> + folder + script + <span class="string">'.js'</span>;
+
+         ß.ajax.script(url);
+
+         resultUrls.push(url);
       });
    });
+
+   <span class="keyword">return</span> resultUrls;
 };</pre></div></div>
             
         </li>
@@ -431,6 +440,8 @@ called in html&#39;s head-section</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   document.head.appendChild(script);
+
+   <span class="keyword">return</span> url;
 };</pre></div></div>
             
         </li>

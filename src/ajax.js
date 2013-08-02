@@ -26,7 +26,7 @@
 
 // Object containing callback function per cdn invoked by requiring libs
 // Every callback gets `repository, version and file` as parameters
-ß.cdns = {
+ß.cdns = ß.ajax.cdns = {
    // Callback for cdnjs called as in `ß.libs({cdnjss: [...]})`
    'cdnjs' : function(repository, version, file) {
       return "//cdnjs.cloudflare.com/ajax/libs/"+repository+"/"+version+"/"+file;
@@ -38,14 +38,24 @@
 // will load alert and log from their respective folder.
 // *Notes:* the extension is ommited and the path is relative to `window.location.origin`
 ß.plugins = ß.ajax.plugins = function(requested) {
+   var
+      url            = null,
+      resultUrls     = [];
+
    // Each `requested`set of scripts
    ß.util.each(requested, function(scripts, folder) {
       // As script…
       ß.util.each(scripts, function(script) {
          // …and loading it by folder and script-name
-         ß.ajax.script(window.location.origin + '/' + folder + script + '.js');
+         url = window.location.origin + '/' + folder + script + '.js';
+
+         ß.ajax.script(url);
+
+         resultUrls.push(url);
       });
    });
+
+   return resultUrls;
 };
 
 // Helper function responsible for loading js-script-files
@@ -81,4 +91,6 @@
    // *Note:* Binding it to body not possible cause it may not be parsed if `ß.libs` is
    // called in html's head-section
    document.head.appendChild(script);
+
+   return url;
 };

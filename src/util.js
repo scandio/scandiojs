@@ -13,9 +13,9 @@
 // Falls back to nativeForEach if supported by browser (on prototpye)
 ß.util.each = ß.forEach = function(obj, iterator, context) {
    var
-      key = null,
-      i = null,
-      l = obj.length;
+      key   = null,
+      i     = null,
+      l     = null;
 
    // Nothing to iterate, somewhat funny eh?
    if (obj === null || obj === undefined) { return; }
@@ -97,9 +97,9 @@
       path   = dots.split('.'),
       i      = null;
 
-   // Dig into the `path` an question the `objc`
+   // Dig into the `path` an question the `obj`
    for(i = 0; i < path.length; i++) {
-      // Found something on the `objc` and reset the destination
+      // Found something on the `obj` and reset the destination
       if(obj) { dest = dest[path[i]]; }
       // Nothing found…
       else { dest = undefined; }
@@ -115,13 +115,13 @@
 ß.util.functions = function(obj) {
    // Setup local variables
    var
-      functions   = [],
+      functions   = {},
       key         = null;
 
    // For each key in object…
    for (key in obj) {
       // …check if it is a function and push it to result
-      if (ß.isFunction(obj[key])) { functions.push(key); }
+      if (ß.isFunction(obj[key])) { functions[key] = obj[key]; }
    }
 
    return functions;
@@ -147,10 +147,7 @@
    }
 
    // For each function on the passed in `obj` by name
-   ß.util.each(ß.util.functions(obj), function(name) {
-      // Gets the function from the `obj` parameter
-      var func = obj[name];
-
+   ß.util.each(ß.util.functions(obj), function(func, name) {
       // Defines the function on the destination module
       destination[name] = function() {
          // Merge args with wrapped object (constructor new ß(obj))

@@ -135,9 +135,9 @@ Falls back to nativeForEach if supported by browser (on prototpye)</p>
             
             <div class="content"><div class='highlight'><pre>ß.util.each = ß.forEach = <span class="keyword">function</span>(obj, iterator, context) {
    <span class="keyword">var</span>
-      key = <span class="literal">null</span>,
-      i = <span class="literal">null</span>,
-      l = obj.length;</pre></div></div>
+      key   = <span class="literal">null</span>,
+      i     = <span class="literal">null</span>,
+      l     = <span class="literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -505,7 +505,7 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Dig into the <code>path</code> an question the <code>objc</code></p>
+              <p>Dig into the <code>path</code> an question the <code>obj</code></p>
 
             </div>
             
@@ -520,7 +520,7 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>Found something on the <code>objc</code> and reset the destination</p>
+              <p>Found something on the <code>obj</code> and reset the destination</p>
 
             </div>
             
@@ -589,7 +589,7 @@ would only return an array containing the <code>capitalize</code> function.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      functions   = [],
+      functions   = {},
       key         = <span class="literal">null</span>;</pre></div></div>
             
         </li>
@@ -620,7 +620,7 @@ would only return an array containing the <code>capitalize</code> function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction(obj[key])) { functions.push(key); }
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction(obj[key])) { functions[key] = obj[key]; }
    }
 
    <span class="keyword">return</span> functions;
@@ -707,7 +707,7 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(ß.util.functions(obj), <span class="keyword">function</span>(name) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   ß.util.each(ß.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
             
         </li>
         
@@ -718,21 +718,6 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
-              <p>Gets the function from the <code>obj</code> parameter</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> func = obj[name];</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-41">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-41">&#182;</a>
-              </div>
               <p>Defines the function on the destination module</p>
 
             </div>
@@ -742,11 +727,11 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
         </li>
         
         
-        <li id="section-42">
+        <li id="section-41">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
               <p>Merge args with wrapped object (constructor new ß(obj))</p>
 
@@ -758,11 +743,11 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
         </li>
         
         
-        <li id="section-43">
+        <li id="section-42">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-43">&#182;</a>
+                <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
               <p>The result of applying the function with ß and its args</p>
 

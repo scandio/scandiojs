@@ -162,9 +162,9 @@
 // Falls back to nativeForEach if supported by browser (on prototpye)
 ß.util.each = ß.forEach = function(obj, iterator, context) {
    var
-      key = null,
-      i = null,
-      l = obj.length;
+      key   = null,
+      i     = null,
+      l     = null;
 
    // Nothing to iterate, somewhat funny eh?
    if (obj === null || obj === undefined) { return; }
@@ -246,9 +246,9 @@
       path   = dots.split('.'),
       i      = null;
 
-   // Dig into the `path` an question the `objc`
+   // Dig into the `path` an question the `obj`
    for(i = 0; i < path.length; i++) {
-      // Found something on the `objc` and reset the destination
+      // Found something on the `obj` and reset the destination
       if(obj) { dest = dest[path[i]]; }
       // Nothing found…
       else { dest = undefined; }
@@ -264,13 +264,13 @@
 ß.util.functions = function(obj) {
    // Setup local variables
    var
-      functions   = [],
+      functions   = {},
       key         = null;
 
    // For each key in object…
    for (key in obj) {
       // …check if it is a function and push it to result
-      if (ß.isFunction(obj[key])) { functions.push(key); }
+      if (ß.isFunction(obj[key])) { functions[key] = obj[key]; }
    }
 
    return functions;
@@ -296,10 +296,7 @@
    }
 
    // For each function on the passed in `obj` by name
-   ß.util.each(ß.util.functions(obj), function(name) {
-      // Gets the function from the `obj` parameter
-      var func = obj[name];
-
+   ß.util.each(ß.util.functions(obj), function(func, name) {
       // Defines the function on the destination module
       destination[name] = function() {
          // Merge args with wrapped object (constructor new ß(obj))
@@ -358,7 +355,7 @@
 
 // Object containing callback function per cdn invoked by requiring libs
 // Every callback gets `repository, version and file` as parameters
-ß.cdns = {
+ß.cdns = ß.ajax.cdns = {
    // Callback for cdnjs called as in `ß.libs({cdnjss: [...]})`
    'cdnjs' : function(repository, version, file) {
       return "//cdnjs.cloudflare.com/ajax/libs/"+repository+"/"+version+"/"+file;
@@ -370,14 +367,24 @@
 // will load alert and log from their respective folder.
 // *Notes:* the extension is ommited and the path is relative to `window.location.origin`
 ß.plugins = ß.ajax.plugins = function(requested) {
+   var
+      url            = null,
+      resultUrls     = [];
+
    // Each `requested`set of scripts
    ß.util.each(requested, function(scripts, folder) {
       // As script…
       ß.util.each(scripts, function(script) {
          // …and loading it by folder and script-name
-         ß.ajax.script(window.location.origin + '/' + folder + script + '.js');
+         url = window.location.origin + '/' + folder + script + '.js';
+
+         ß.ajax.script(url);
+
+         resultUrls.push(url);
       });
    });
+
+   return resultUrls;
 };
 
 // Helper function responsible for loading js-script-files
@@ -413,6 +420,8 @@
    // *Note:* Binding it to body not possible cause it may not be parsed if `ß.libs` is
    // called in html's head-section
    document.head.appendChild(script);
+
+   return url;
 };
 // Core functionality
 // ---------------

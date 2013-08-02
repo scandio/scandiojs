@@ -1,6 +1,8 @@
 {
-  "framework": "jasmine",
-  "src_files": [
-    "test/modules/intro.js"
-  ]
+   "framework": "jasmine",
+   "src_files": [
+      "libs/jquery/jquery.js",
+      "dist/scandio.js",
+      "test/specs/*.js"
+   ]
 }
