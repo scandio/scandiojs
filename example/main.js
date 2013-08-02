@@ -9,3 +9,11 @@
 ß.plugins({
    'scandio.js/example/scripts/': ['alert', 'log']
 });
+
+ß.util.mixin('string', {
+  capitalize : function(string) {
+    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+  }
+});
+
+ß.debug.log(ß.string.capitalize('noooh'));

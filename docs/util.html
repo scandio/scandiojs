@@ -555,6 +555,221 @@ while results will only contain values if they pass the <code>iterator</code>-te
             
         </li>
         
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Collects all function from an object and returns an array containing them
+<em>E.g.:</em> calling it with ß.util.functions({capitalize: function() {return}, greet: &#39;hi&#39;})
+would only return an array containing the <code>capitalize</code> function.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.util.functions = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Setup local variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      functions   = [],
+      key         = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>For each key in object…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span> (key <span class="keyword">in</span> obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>…check if it is a function and push it to result</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction(obj[key])) { functions.push(key); }
+   }
+
+   <span class="keyword">return</span> functions;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Allows for extending ß functionality by handing in an <code>namespace</code> and a object-literal
+containing the functions.
+<em>E.g.:</em> calling <code>ß.util.mixin(&#39;string&#39;, {capitalize: fn(string)})</code> makes the capitalize function
+available as in ß.string.capitalize(&#39;string&#39;).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.util.mixin = <span class="keyword">function</span>(namespace, obj) {
+   <span class="keyword">var</span>
+      destination = ß,
+      path        = namespace.split(<span class="string">"."</span>),
+      i           = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Register the namespace if its not existent</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; path.length; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Namespace not registered yet</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!ß.path) { ß[ path[i] ] = {}; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Sets the current pointer to module</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      destination = destination[ path[i] ];
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>For each function on the passed in <code>obj</code> by name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   ß.util.each(ß.util.functions(obj), <span class="keyword">function</span>(name) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>Gets the function from the <code>obj</code> parameter</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> func = obj[name];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Defines the function on the destination module</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      destination[name] = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Merge args with wrapped object (constructor new ß(obj))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">var</span> args = <span class="keyword">this</span>._wrapped ? [<span class="keyword">this</span>._wrapped] : [];
+         push.apply(args, arguments);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <p>The result of applying the function with ß and its args</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> func.apply(ß, args);
+      };
+   });
+};</pre></div></div>
+            
+        </li>
+        
     </ul>
   </div>
 </body>

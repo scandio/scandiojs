@@ -108,3 +108,57 @@
    // Dest or notFound
    return dest || notFound;
 };
+
+// Collects all function from an object and returns an array containing them
+// *E.g.:* calling it with ß.util.functions({capitalize: function() {return}, greet: 'hi'})
+// would only return an array containing the `capitalize` function.
+ß.util.functions = function(obj) {
+   // Setup local variables
+   var
+      functions   = [],
+      key         = null;
+
+   // For each key in object…
+   for (key in obj) {
+      // …check if it is a function and push it to result
+      if (ß.isFunction(obj[key])) { functions.push(key); }
+   }
+
+   return functions;
+};
+
+// Allows for extending ß functionality by handing in an `namespace` and a object-literal
+// containing the functions.
+// *E.g.:* calling `ß.util.mixin('string', {capitalize: fn(string)})` makes the capitalize function
+// available as in ß.string.capitalize('string').
+ß.util.mixin = function(namespace, obj) {
+   var
+      destination = ß,
+      path        = namespace.split("."),
+      i           = null;
+
+   // Register the namespace if its not existent
+   for (i = 0; i < path.length; i++) {
+      // Namespace not registered yet
+      if (!ß.path) { ß[ path[i] ] = {}; }
+
+      // Sets the current pointer to module
+      destination = destination[ path[i] ];
+   }
+
+   // For each function on the passed in `obj` by name
+   ß.util.each(ß.util.functions(obj), function(name) {
+      // Gets the function from the `obj` parameter
+      var func = obj[name];
+
+      // Defines the function on the destination module
+      destination[name] = function() {
+         // Merge args with wrapped object (constructor new ß(obj))
+         var args = this._wrapped ? [this._wrapped] : [];
+         push.apply(args, arguments);
+
+         // The result of applying the function with ß and its args
+         return func.apply(ß, args);
+      };
+   });
+};
