@@ -1,0 +1,33 @@
+# How to contribute
+
+Third-party additions are essential for a project like this. Scandiojs is open for any changes and suggestions and will try to incorporate your own ideas.
+We only demand a few thing of you to get your code added to this library.
+
+## Getting started to code
+
+* Make sure you have a [GitHub account](https://github.com/signup/free)
+* Fork the repository on GitHub into your own account
+* Create a topic branch from where you want to base your work.
+  * This is usually the master branch.
+  * To quickly create a topic branch based on master; `git branch
+    feature/my-addition master` then checkout the new branch with `git checkout feature/my-addition`
+* Make commits of logical units.
+* Check for unnecessary whitespace with `git diff --check` before committing.
+* Make sure your commit messages are in the proper format.
+
+# Write your little module or addition
+
+We only demand that you follow a simple TDD approach before adding your features
+Have a look at the `test`-directory and checkout the `src`- and `test`-subdirectory. The `src`-directory will contain your feature while its under development. You can use the `TEMPLATE.js`-file as a blueprint.
+
+After creating your own file (e.g. tde_capitalize.js) from the `TEMPLATE.js`-file you create your function and mix it into the Scandio.js library by calling the `Scandio.util.mixin('string', {capitalize: fn})`.
+
+You're now ready to test your code after you created test-file under `test` using the `TEMPLATE_TEST.js`-file. After adding the tests you think nessesary and letting them pass by following the intructions in the `README.md` (running jsTestDriver and firing up `grunt test`) you should open a pull request and wait for us to check it out.
+
+After we decided to like what you did, we'll move the code from the `feature.js`-file into the library and get back to you!
+
+## Submitting Changes
+
+* Push your changes to a topic branch in your fork of the repository.
+* Submit a pull request to the repository.
+* Wait for us to check our your awesomeness!

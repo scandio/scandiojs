@@ -41,6 +41,8 @@ The built version of scandio.js will be put in the `dist/` subdirectory, along w
 
 ## Test your changes or build
 
+This part should also be read after checking out the [CONTRIBUTING.md](https://github.com/scandio/scandiojs/blob/master/contributing.md) after you added a feature-request and you want to test your code.
+
 In order to test your build or any changes you made you should run:
 
 ```bash
