@@ -1,1 +1,1 @@
-ß.debug.warn('yay!');
+console.warn('yay!');

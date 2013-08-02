@@ -134,8 +134,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      createLogger = <span class="keyword">function</span>() {
-          <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">(method, level)</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>      createLogger = <span class="function"><span class="keyword">function</span> <span class="params">(method, level)</span> {</span></pre></div></div>
             
         </li>
         
@@ -150,7 +149,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>              ß.logger.logs[method] = [];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         ß.logger.logs[method] = [];</pre></div></div>
             
         </li>
         
@@ -165,7 +164,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>              methods[method] = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         methods[method] = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -180,7 +179,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
             
         </li>
         
@@ -195,9 +194,9 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 <span class="keyword">if</span>(ß.logger.level &gt;= level) {
-                    console[method].apply(console, args);
-                 }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span>(ß.logger.level &gt;= level) {
+               console[method].apply(console, args);
+            }</pre></div></div>
             
         </li>
         
@@ -212,9 +211,8 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 ß.logger.logs[method].push(args.join(<span class="string">', '</span>));
-              };
-          };
+            <div class="content"><div class='highlight'><pre>            ß.logger.logs[method].push(args.join(<span class="string">', '</span>));
+         };
       };</pre></div></div>
             
         </li>
