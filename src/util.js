@@ -140,7 +140,7 @@
    // Register the namespace if its not existent
    for (i = 0; i < path.length; i++) {
       // Namespace not registered yet
-      if (!ß.path) { ß[ path[i] ] = {}; }
+      if (!destination[path]) { destination[ path[i] ] = {}; }
 
       // Sets the current pointer to module
       destination = destination[ path[i] ];

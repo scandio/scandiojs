@@ -18,13 +18,13 @@ We only demand a few thing of you to get your code added to this library.
 # Write your little module or addition
 
 We only demand that you follow a simple TDD approach before adding your features
-Have a look at the `test`-directory and checkout the `src`- and `test`-subdirectory. The `src`-directory will contain your feature while its under development. You can use the `TEMPLATE.js`-file as a blueprint.
+Have a look at the `test`-directory and checkout the `src`- and `test`-subdirectory. The `src`-directory will contain your feature as a mixin while its under development. You can use the `src/template.js`-file as a blueprint.
 
-After creating your own file (e.g. tde_capitalize.js) from the `TEMPLATE.js`-file you create your function and mix it into the Scandio.js library by calling the `Scandio.util.mixin('string', {capitalize: fn})`.
+After creating your own module file (e.g. tde_string.js) from the `template.js`-file you create your own module which mixes in functions into `Scandiojs`. You could also mixin function the the global object by omitting the namespace as `undefined`.
 
-You're now ready to test your code after you created test-file under `test` using the `TEMPLATE_TEST.js`-file. After adding the tests you think nessesary and letting them pass by following the intructions in the `README.md` (running jsTestDriver and firing up `grunt test`) you should open a pull request and wait for us to check it out.
+You're now ready to test your code after you created testsuite under `test` using the `test/template.js`-file. After adding the tests you think nessesary and letting them pass by following the intructions in the `README.md` (running *jsTestDriver* and firing up `grunt test-driver` or *Testem* with `grunt test-em`) you should open a pull request and wait for us to check it out.
 
-After we decided to like what you did, we'll move the code from the `feature.js`-file into the library and get back to you!
+After we decided to like what you did, we'll move the code from the `featurerequest/src/tde_string.js`-file into the library and get back to you!
 
 ## Submitting Changes
 
