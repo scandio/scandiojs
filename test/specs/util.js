@@ -1,14 +1,14 @@
-describe("A suite testing the initialization of scandio.js", function() {
+describe("A suite testing the utility functions", function() {
    var obj = null;
    var temp = null;
 
    beforeEach(function() {
       temp = null;
       obj = {
-         str: 'string',
+         str: "string",
          some: 1,
          func: function() {
-           return 'string';
+           return "string";
          },
          arr: [2, 4, 13]
       };
@@ -16,14 +16,14 @@ describe("A suite testing the initialization of scandio.js", function() {
 
    describe("tests on object properties", function() {
       it("should return correctly check on object props", function() {
-          expect(ß.util.has(obj, 'str')).toBe(true);
-          expect(ß.util.has(obj, 'some')).toBe(true);
-          expect(ß.util.has(obj, 'func')).toBe(true);
+          expect(ß.util.has(obj, "str")).toBe(true);
+          expect(ß.util.has(obj, "some")).toBe(true);
+          expect(ß.util.has(obj, "func")).toBe(true);
       });
 
       it("should not assume unexistent props on an object", function() {
-          expect(ß.util.has(obj, 'str2')).toBe(false);
-          expect(ß.util.has(obj, 'func2')).toBe(false);
+          expect(ß.util.has(obj, "str2")).toBe(false);
+          expect(ß.util.has(obj, "func2")).toBe(false);
       });
    });
 
@@ -43,7 +43,7 @@ describe("A suite testing the initialization of scandio.js", function() {
             temp.push(key);
          });
 
-         expect(temp.join(", ")).toEqual('one, two, three');
+         expect(temp.join(", ")).toEqual("one, two, three");
       });
 
       it("should handle null props", function() {
@@ -64,7 +64,7 @@ describe("A suite testing the initialization of scandio.js", function() {
          });
 
          expect(temp).toContain(1);
-         expect(temp).not.toContain('string');
+         expect(temp).not.toContain("string");
       });
 
       it("should filter values of an array", function() {
@@ -80,29 +80,29 @@ describe("A suite testing the initialization of scandio.js", function() {
 
    describe("tests on mixing in another module", function() {
       it("should mixin function of a passed object", function() {
-         ß.util.mixin('string', {
+         ß.util.mixin("string", {
            capitalize : function(string) {
              return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
            }
          });
 
          expect(ß.string).toBeDefined();
-         expect(ß.string.capitalize('yay')).toEqual('Yay');
+         expect(ß.string.capitalize("yay")).toEqual("Yay");
       });
 
       it("should not mixin anything except an function", function() {
-         ß.util.mixin('string', {
+         ß.util.mixin("string", {
            lowercase : function(string) {
              return string.toLowerCase();
            },
-           another : 'maybe is around'
+           another : "maybe is around"
          });
 
          expect(ß.string).toBeDefined();
          expect(ß.string.another).not.toBeDefined();
 
          expect(ß.string.lowercase).toEqual(jasmine.any(Function));
-         expect(ß.string.lowercase('Yay')).toEqual('yay');
+         expect(ß.string.lowercase("Yay")).toEqual("yay");
       });
    });
 
@@ -113,6 +113,69 @@ describe("A suite testing the initialization of scandio.js", function() {
          ß.util.each(temp, function(value, key) {
             expect(value).toEqual(jasmine.any(Function));
          });
+      });
+   });
+
+   describe("tests on accessing object and arrays using dot notation", function() {
+      it("should access nesting properties on an object", function() {
+         temp = {name: {firstname: "Scandio", lastname: "GmbH"}, location: "München"};
+
+         expect(ß.util.dots("name.firstname", temp)).toEqual("Scandio");
+      });
+
+      it("should use a default value if the prop is not found", function() {
+         temp = {name: {firstname: "Scandio", lastname: "GmbH"}, location: "München"};
+
+         expect(ß.util.dots("name.firstname.none", temp, null)).toBe(null);
+      });
+
+      it("should access nesting properties on an array", function() {
+         temp = [];
+         temp["name"] = [];
+         temp["name"]["firstname"] = "Scandio";
+         temp["name"]["lastname"] = "GmbH";
+         temp["location"] = "München";
+
+         expect(ß.util.dots("name.firstname", temp)).toEqual("Scandio");
+      });
+
+      it("should use a default value if the prop is not found", function() {
+         temp = [];
+         temp["name"] = [];
+         temp["name"]["firstname"] = "Scandio";
+         temp["name"]["lastname"] = "GmbH";
+         temp["location"] = "München";
+
+         expect(ß.util.dots("name.firstname.none", temp, null)).toBe(null);
+      });
+   });
+
+   describe("tests extending a source with a destination object", function() {
+      it("should extend an object's attributes with another one", function() {
+         temp = ß.util.extend({}, {a:"b"});
+         expect(temp.a).toBeDefined();
+      });
+
+      it("should overwrite destination with source", function() {
+         temp = ß.util.extend({a:"x"}, {a:"b"});
+         expect(temp.a).toEqual("b");
+      });
+
+      it("should not overwrite existent properties in source", function() {
+         temp = ß.util.extend({x:"x"}, {a:"a"});
+         expect(temp.x).toEqual("x");
+         expect(temp.a).toEqual("a");
+      });
+
+      it("should extend from multiple object where last value wins", function() {
+         temp = ß.util.extend({x:"x"}, {a:"a", x:2}, {a:"b"});
+         expect(temp.a).toEqual("b");
+      });
+
+      it("should not extend undefined values but nulled ones", function() {
+         temp = ß.util.extend({}, {a: void 0, b: null});
+         expect(temp.a).not.toBeDefined();
+         expect(temp.b).toBeDefined();
       });
    });
 });

@@ -132,7 +132,7 @@
             var args = slice.call(arguments);
 
             // Only log to console if required by level
-            if(ß.logger.level >= level) {
+            if(ß.logger.level > level) {
                console[method].apply(console, args);
             }
 
