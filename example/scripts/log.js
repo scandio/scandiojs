@@ -1,1 +1,1 @@
-console.warn('yay!');
+console.log('yay!');

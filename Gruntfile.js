@@ -26,6 +26,7 @@ module.exports = function( grunt ) {
             "src/ajax.js",
             "src/core.js",
             "src/confluence.js",
+            "src/responsive.js",
             "src/outro.js"
           ],
           dest: "dist/scandio-<%= pkg.version %>.js"
