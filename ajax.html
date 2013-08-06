@@ -59,6 +59,11 @@
               </a>
             
               
+              <a class="source" href="responsive.html">
+                responsive.js
+              </a>
+            
+              
               <a class="source" href="util.html">
                 util.js
               </a>
@@ -112,13 +117,13 @@
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>Loads a in <code>requested</code> specified set of files from CDNs
-<strong>Example:</strong> <code>cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]</code>
-Will <em>load</em> and inject the ´bacon.js´ library as a <code>&lt;scipt /&gt;</code> right after the html&#39;s head-section.
+<strong>Example:</strong> <code>ß.ajax.libs({cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]})</code>
+will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;</code> right after the html&#39;s head-section.
 <strong>Callback</strong> function for each cdn should be defined on the ß.cdns-object below.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.libs = ß.ajax.libs = <span class="keyword">function</span>(requested) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.ajax.libs = <span class="keyword">function</span>(requested) {</pre></div></div>
             
         </li>
         
@@ -148,7 +153,7 @@ Will <em>load</em> and inject the ´bacon.js´ library as a <code>&lt;scipt /&gt
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction( ß.cdns[cdn] )) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction( ß.ajax.cdns[cdn] )) {</pre></div></div>
             
         </li>
         
@@ -178,10 +183,10 @@ Will <em>load</em> and inject the ´bacon.js´ library as a <code>&lt;scipt /&gt
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            ß.ajax.script(ß.cdns[cdn](lib.repository, lib.version, lib.file));
+            <div class="content"><div class='highlight'><pre>            ß.ajax.script(ß.ajax.cdns[cdn](lib.repository, lib.version, lib.file), lib.success || <span class="literal">undefined</span>);
          });
       } <span class="keyword">else</span> {
-         ß.debug.warn(<span class="string">'CDN: '</span> + cdn + <span class="string">' not defined in ß.cdns!'</span>);
+         ß.debug.warn(<span class="string">'CDN: '</span> + cdn + <span class="string">' not defined in ß.ajax.cdns!'</span>);
       }
    });
 };</pre></div></div>
@@ -200,7 +205,7 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.cdns = ß.ajax.cdns = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.ajax.cdns = {</pre></div></div>
             
         </li>
         
@@ -230,13 +235,13 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Loads a in <code>requested</code> specified set of files by folder
-<strong>Example:</strong> <code>ß.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
+<strong>Example:</strong> <code>ß.ajax.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
 will load alert and log from their respective folder.
 <em>Notes:</em> the extension is ommited and the path is relative to <code>window.location.origin</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.plugins = ß.ajax.plugins = <span class="keyword">function</span>(requested) {
+            <div class="content"><div class='highlight'><pre>ß.ajax.plugins = <span class="keyword">function</span>(requested) {
    <span class="keyword">var</span>
       url            = <span class="literal">null</span>,
       resultUrls     = [];</pre></div></div>
@@ -304,12 +309,16 @@ will load alert and log from their respective folder.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Helper function responsible for loading js-script-files
-Parameters are ´url´ as fully qualified url and an optional ´done´ callback</p>
+              <p>Loads a set of libs and plugin files based on a condition (the <code>when</code> key)
+<em>E.g.:</em> Calling ß.ajax.maybe({when: true, libs:…, plugins:…})
+The libs and plugins object literal should be used as in <code>ß.ajax.libs</code> and <code>ß.ajax.plugins</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax.script = <span class="keyword">function</span>(url, done) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.ajax.maybe = <span class="keyword">function</span>(requested) {
+   <span class="keyword">var</span>
+      url            = <span class="literal">null</span>,
+      resultUrls     = [];</pre></div></div>
             
         </li>
         
@@ -319,6 +328,45 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Each <code>requested</code>set of scripts</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   ß.util.each(requested, <span class="keyword">function</span>(request) {
+      <span class="keyword">if</span> (request.when) {
+         <span class="keyword">if</span> (ß.isObject( request.libs )) { ß.ajax.libs(request.libs); }
+         <span class="keyword">if</span> (ß.isObject( request.plugins )) { ß.ajax.plugins(request.plugins); }
+      }
+   });
+
+   <span class="keyword">return</span> resultUrls;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Helper function responsible for loading js-script-files
+Parameters are ´url´ as fully qualified url and an optional <code>success</code> callback</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.ajax.script = <span class="keyword">function</span>(url, success) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>Create script element and set its type</p>
 
@@ -330,11 +378,11 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
         </li>
         
         
-        <li id="section-16">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>Bind to readyState or register ´onload´ callback</p>
 
@@ -345,11 +393,11 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
         </li>
         
         
-        <li id="section-17">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Callback for IE&#39;s <code>onreadystatechange</code> (I feel seesick)</p>
 
@@ -358,39 +406,6 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
             <div class="content"><div class='highlight'><pre>      script.onreadystatechange = <span class="keyword">function</span>(){
          <span class="keyword">if</span> (script.readyState == <span class="string">"loaded"</span> || script.readyState == <span class="string">"complete"</span>) {
             script.onreadystatechange = <span class="literal">null</span>;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
-              <p>Invoke callback if passed and type is function</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.isFunction(done)) { done(); }
-         }
-      };
-   } <span class="keyword">else</span> {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
-              </div>
-              <p>Bind <code>onload</code> callback on script element</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      script.onload = <span class="keyword">function</span>(){</pre></div></div>
             
         </li>
         
@@ -405,9 +420,10 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isFunction(done)) { done(); }
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.isFunction(success)) { success(); }
+         }
       };
-   }</pre></div></div>
+   } <span class="keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -418,11 +434,11 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>Set the url</p>
+              <p>Bind <code>onload</code> callback on script element</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   script.src = url;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      script.onload = <span class="keyword">function</span>(){</pre></div></div>
             
         </li>
         
@@ -432,6 +448,38 @@ Parameters are ´url´ as fully qualified url and an optional ´done´ callback<
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Invoke callback if passed and type is function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isFunction(success)) { success(); }
+      };
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Set the url</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   script.src = url;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>Append it to the head
 <em>Note:</em> Binding it to body not possible cause it may not be parsed if <code>ß.libs</code> is
