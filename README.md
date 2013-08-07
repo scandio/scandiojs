@@ -16,7 +16,7 @@ Linux/BSD users should use their appropriate package managers to install git and
 First, clone a copy of the main scandio.js git repo by running:
 
 ```bash
-git clone git://github.com/scandio.js/scandiojs.git
+git clone git://github.com/scandio/scandiojs.git
 ```
 
 Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) and [bower](http://bower.io/) packages if you haven't before. These should be done as global installs:
