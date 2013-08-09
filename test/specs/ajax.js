@@ -9,7 +9,7 @@ describe("A suite testing ajax functionality of scandio.js", function() {
    });
 
    it("should maintain a set of callbacks for cdns", function() {
-      expect(ß.cdns).toEqual(jasmine.any(Object));
+      expect(ß.ajax.cdns).toEqual(jasmine.any(Object));
    });
 
    it("should be able to contruct a proper url from a cdnjs", function() {
@@ -33,7 +33,7 @@ describe("A suite testing ajax functionality of scandio.js", function() {
    });
 
    it("should construct a set of valid plugin urls", function() {
-      var resultUrls = ß.plugins({
+      var resultUrls = ß.ajax.plugins({
          'scandio.js/example/scripts/': ['alert', 'log']
       });
 
