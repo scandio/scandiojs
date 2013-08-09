@@ -451,7 +451,7 @@
 
 // Closes and secures a module by name within its own scope
 // *Note:* This function being an IIFE leaves of parameters on outer function
-ß.mod = ß.core.mod = (function() {
+ß.mod = ß.core.mod = ß.core.module = (function() {
    // Setting up global environment object and DOM-ready state
    var
       isDomReady  = false,
@@ -522,7 +522,7 @@
          // a condition function
          condition      = params.condition || function() {},
          // object containing all the callbacks (done and fail)
-         callbacks      = {},
+         callbacks      = ß.util.extend({}, params.callbacks),
 
          // Runs one roundtrip of execution
          execute = function() {
@@ -578,8 +578,8 @@
 
 // Sets up responsive object
 ß.responsive = {
-   mobile:        ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
-   breakpoint:    '.breakpoint'
+   mobile:           ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
+   breakpointEl:     '.breakpoint'
 };
 
 // A rudimentary function testing for mobile devices
@@ -594,7 +594,7 @@
 };
 
 ß.responsive.breakpoint = function(name) {
-   return $( ß.responsive.breakpoint ).html() === name;
+   return $( ß.responsive.breakpointEl ).html() === name;
 };
 // Outro, AMD and conflict resolution
 // ---------------

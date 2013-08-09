@@ -78,7 +78,7 @@
          // a condition function
          condition      = params.condition || function() {},
          // object containing all the callbacks (done and fail)
-         callbacks      = {},
+         callbacks      = ß.util.extend({}, params.callbacks),
 
          // Runs one roundtrip of execution
          execute = function() {

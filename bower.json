@@ -11,7 +11,8 @@
     "jquery": "latest",
     "jasmine": "latest",
     "jasmine-jstd-adapter": "latest",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "rainbow": "latest"
   },
   "devDependencies": {
 

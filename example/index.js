@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title></title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <script src="../dist/scandio.js"></script>
-      <script src="index.js"></script>
-
-      <link rel="stylesheet" media="all" href="../docs/docco.css" />
-      <link rel="stylesheet" media="all" href="../libs/rainbow/themes/github.css" />
-   </head>
-   <body>
-      <div id="container">
-      <div id="background"></div>
-
-      <ul class="sections">
-         <li id="title">
-            <div class="annotation">
-               <div class="pilwrap ">
-                  <a class="pilcrow" href="#section-1">&#182;</a>
-               </div>
-
-               <h1>Play with scandio.js</h1>
-               <p>
-                  Check your DevTool's console!
-               </p>
-            </div>
-         </li>
-         <li id="section-1">
-            <div class="annotation">
-               <div class="pilwrap ">
-                  <a class="pilcrow" href="#section-1">¶</a>
-               </div>
-            </div>
-
-            <div class="content">
-               <pre>
-                  <code data-language="javascript">
 // Console methods are caught if undefined in e.g. IE
 
 ß.debug.log('Log to console piped through console.log');
@@ -239,16 +194,3 @@ var Person = {
 }, {
    readyFn: $
 });
-                  </code>
-               </pre>
-            </div>
-         </li>
-      </ul>
-
-      <script src="../libs/rainbow/js/rainbow.min.js"></script>
-      <script src="../libs/rainbow/js/language/generic.js"></script>
-      <script src="../libs/rainbow/js/language/javascript.js"></script>
-      <script src="scripts/load.js"></script>
-
-   </body>
-</html>

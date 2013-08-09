@@ -2225,7 +2225,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         callbacks      = {},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         callbacks      = ß.util.extend({}, params.callbacks),</pre></div></div>
             
         </li>
         
@@ -2426,8 +2426,8 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>ß.responsive = {
-   mobile:        [<span class="string">"android"</span>, <span class="string">"webos"</span>, <span class="string">"iphone"</span>, <span class="string">"ipad"</span>, <span class="string">"ipod"</span>, <span class="string">"blackberry"</span>],
-   breakpoint:    <span class="string">'.breakpoint'</span>
+   mobile:           [<span class="string">"android"</span>, <span class="string">"webos"</span>, <span class="string">"iphone"</span>, <span class="string">"ipad"</span>, <span class="string">"ipod"</span>, <span class="string">"blackberry"</span>],
+   breakpointEl:     <span class="string">'.breakpoint'</span>
 };</pre></div></div>
             
         </li>
@@ -2466,7 +2466,7 @@ it will be invoked on DOM-Ready</p>
 };
 
 ß.responsive.breakpoint = <span class="keyword">function</span>(name) {
-   <span class="keyword">return</span> $( ß.responsive.breakpoint ).html() === name;
+   <span class="keyword">return</span> $( ß.responsive.breakpointEl ).html() === name;
 };</pre></div></div>
             
         </li>

@@ -3,8 +3,8 @@
 
 // Sets up responsive object
 ß.responsive = {
-   mobile:        ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
-   breakpoint:    '.breakpoint'
+   mobile:           ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
+   breakpointEl:     '.breakpoint'
 };
 
 // A rudimentary function testing for mobile devices
@@ -19,5 +19,5 @@
 };
 
 ß.responsive.breakpoint = function(name) {
-   return $( ß.responsive.breakpoint ).html() === name;
+   return $( ß.responsive.breakpointEl ).html() === name;
 };

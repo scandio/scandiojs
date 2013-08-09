@@ -1,1 +1,1 @@
-console.warn('desktop plugin here!');
+ß.debug.warn('Desktop-warn script loaded!');
