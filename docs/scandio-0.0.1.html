@@ -39,6 +39,11 @@
               </a>
             
               
+              <a class="source" href="dom.html">
+                dom.js
+              </a>
+            
+              
               <a class="source" href="index.html">
                 index.js
               </a>
@@ -1890,7 +1895,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.mod = ß.core.mod = (<span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.mod = ß.core.mod = ß.core.module = (<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -2478,7 +2483,7 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-146">&#182;</a>
               </div>
-              <h2>Outro, AMD and conflict resolution</h2>
+              <h2>DOM functionality</h2>
 
             </div>
             
@@ -2491,11 +2496,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-147">&#182;</a>
               </div>
-              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
+              <p>Register dom namespace on scandiojs object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.noConflict = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.dom = {};</pre></div></div>
             
         </li>
         
@@ -2506,11 +2511,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-148">&#182;</a>
               </div>
-              <p>Retore the <code>previousScandio</code></p>
+              <p>Closes and secures a cache module with within its own scope
+<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   root.ß = previousScandio;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.dom.cache = (<span class="keyword">function</span>($, ß){</pre></div></div>
             
         </li>
         
@@ -2520,6 +2526,252 @@ it will be invoked on DOM-Ready</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-149">&#182;</a>
+              </div>
+              <p>Sets up local cache store</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      cache = {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-150">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-150">&#182;</a>
+              </div>
+              <p>Handler of DOMNodeRemoved handling external node removals
+Sorry, I didn&#39;t hack this</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      nodeRemoved = <span class="keyword">function</span>(event) {
+         <span class="keyword">var</span> label, coll, l, t = event.target;
+         <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
+            l = (coll = cache[label]).length;
+            <span class="keyword">while</span> (l--) {
+               <span class="keyword">if</span> (coll[l] === t || $.contains(t,coll[l])) {
+                  <span class="keyword">delete</span> coll[l]; --coll.length;
+               }
+            }
+         }
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-151">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-151">&#182;</a>
+              </div>
+              <p>Updates complete cache or scoped to a label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      update = <span class="keyword">function</span>(label) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-152">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-152">&#182;</a>
+              </div>
+              <p>Passed in label is string, scoping to that label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isString(label)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-153">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-153">&#182;</a>
+              </div>
+              <p>Reset cache value at label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            cache[label] = $(cache[label].selector || <span class="string">''</span>);
+         } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-154">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-154">&#182;</a>
+              </div>
+              <p>For each value in cache refresh it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            ß.util.each(cache, <span class="keyword">function</span>($cached, label) {
+               cache[label] = $($cached.selector);
+            });
+         }
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-155">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-155">&#182;</a>
+              </div>
+              <p>Gets a value from cache or loads it from DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      get = <span class="keyword">function</span>(label, selector) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-156">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-156">&#182;</a>
+              </div>
+              <p>Both label and selector passed, cache/dom reading...</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isString(selector) &amp;&amp; ß.isString(label)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-157">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-157">&#182;</a>
+              </div>
+              <p>...either from cache or DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || $(selector);
+         }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-158">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-158">&#182;</a>
+              </div>
+              <p>What the callee gets: a jQuery object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> cache[label];
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-159">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-159">&#182;</a>
+              </div>
+              <p>Bind to node removal in DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   $(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-160">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-160">&#182;</a>
+              </div>
+              <p>Return public functions in object literal</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+      get:     get,
+      update:  update
+   };
+}(jQuery, ß));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-161">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-161">&#182;</a>
+              </div>
+              <h2>Outro, AMD and conflict resolution</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-162">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-162">&#182;</a>
+              </div>
+              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.noConflict = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-163">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-163">&#182;</a>
+              </div>
+              <p>Retore the <code>previousScandio</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   root.ß = previousScandio;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-164">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-164">&#182;</a>
               </div>
               <p>Return yerself to continue</p>
 
@@ -2531,11 +2783,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-150">
+        <li id="section-165">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-150">&#182;</a>
+                <a class="pilcrow" href="#section-165">&#182;</a>
               </div>
               <p>Support for AMD/RequireJS
 If define function deefined and its amd</p>
@@ -2547,11 +2799,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-151">
+        <li id="section-166">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-151">&#182;</a>
+                <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
               <p>Define Scandio</p>
 
@@ -2562,11 +2814,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-152">
+        <li id="section-167">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-152">&#182;</a>
+                <a class="pilcrow" href="#section-167">&#182;</a>
               </div>
               <p>and return the library</p>
 

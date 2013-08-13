@@ -7,7 +7,7 @@
 
 // Closes and secures a module by name within its own scope
 // *Note:* This function being an IIFE leaves of parameters on outer function
-ß.mod = ß.core.mod = (function() {
+ß.mod = ß.core.mod = ß.core.module = (function() {
    // Setting up global environment object and DOM-ready state
    var
       isDomReady  = false,

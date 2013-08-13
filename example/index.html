@@ -239,6 +239,16 @@ var Person = {
 }, {
    readyFn: $
 });
+
+// Query and DOM and cache results
+
+ß.dom.cache.get('forms', 'body forms'); // returns jQuery-object
+
+ß.dom.cache.get('forms'); // Does not re-query the DOM
+
+ß.dom.cache.update('forms'); // Updates cache for single label
+
+ß.dom.cache.update() // Updates complete cache
                   </code>
                </pre>
             </div>
