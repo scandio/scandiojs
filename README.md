@@ -1,5 +1,17 @@
 # [Scandiojs](http://scandio.de/) - A little bit of help
 
+## Dive into scandio.js
+
+You can check out some examples after cloning scandio.js by looking at the `/example` directory. The `index.html` shows and executes every function-call from the `index.js` which currently covers almost every function available in scnadio.js.
+
+Furthermore, you can check out the *annotated source* residing in the `/docs` directory. It's automatically generated during the build process (`Gruntfile.js`) by [Docco](http://jashkenas.github.io/docco/).
+
+## Extending scandio.js
+
+You can easily extend scandio.js suiting your own needs using the `ß.util.mixin-fn`. The `test/featurerequest/src/template.js` contains an example for this. Testing your code is also fairly easy and already setup. Just have a look at the `test/featurerequest/test/template.js`.
+
+For further information please refer to the [CONTRIBUTING.md](https://github.com/scandio/scandiojs/blob/master/contributing.md).
+
 ## What you need to build scandio.js
 
 In order to build scandio.js, you need to have Node.js/npm latest and git 1.7 or later.
