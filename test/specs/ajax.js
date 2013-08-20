@@ -34,11 +34,11 @@ describe("A suite testing ajax functionality of scandio.js", function() {
 
    it("should construct a set of valid plugin urls", function() {
       var resultUrls = ß.ajax.plugins({
-         'scandio.js/example/scripts/': ['alert', 'log']
+         'scandio.js/example/scripts/': ['debug-error', 'debug-log']
       });
 
-      expect(resultUrls).toMatch('scandio.js/example/scripts/alert.js');
-      expect(resultUrls).toMatch('scandio.js/example/scripts/log.js');
-      expect(resultUrls).not.toMatch('scandio.js/example/scripts/warn.js');
+      expect(resultUrls).toMatch('scandio.js/example/scripts/debug-error.js');
+      expect(resultUrls).toMatch('scandio.js/example/scripts/debug-log.js');
+      expect(resultUrls).not.toMatch('scandio.js/example/scripts/debug-warn.js');
    });
 });
