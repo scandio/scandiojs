@@ -366,6 +366,17 @@
       return result;
    };
 };
+
+// Delays a function execution `ms` milliseconds.
+ß.util.delay = function(fn, ms) {
+   // Arguments are anything after `fn` and `ms`
+   var args = slice.call(arguments, 2);
+
+   // Return the result of setTimeout
+   return setTimeout(function() {
+         return fn.apply(null, args);
+   }, ms);
+};
 // Function for type-checking (no duck punching)
 // ---------------
 
