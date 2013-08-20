@@ -178,4 +178,27 @@ describe("A suite testing the utility functions", function() {
          expect(temp.b).toBeDefined();
       });
    });
+
+   describe("tests on delaying a function call for n-milliseconds", function() {
+      it("should defer the execution of a function", function() {
+         runs(function() {
+            this.hasBeenCalled = false;
+            var that = this;
+
+            ß.util.delay(function() {
+               that.hasBeenCalled = true;
+            }, 50);
+         });
+
+         runs(function() {
+            expect(this.hasBeenCalled).toBe(false);
+         });
+
+         waits(100);
+
+         runs(function() {
+            expect(this.hasBeenCalled).toBe(true);
+         });
+      });
+   });
 });

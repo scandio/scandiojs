@@ -1,8 +1,6 @@
 // This is where to put your specs in jasmine BDD style example below
-describe("tests on string module", function() {
+describe("Tests on string module", function() {
    it("should have mixed in the module on namespace 'string'", function() {
-      console.log(ß.string);
-
       expect(ß.string).toBeDefined();
    });
 
