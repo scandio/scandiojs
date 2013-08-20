@@ -1001,6 +1001,54 @@ The function will actually be called after <code>release</code>-milliseconds ela
             
         </li>
         
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
+              <p>Delays a function execution <code>ms</code> milliseconds.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.util.delay = <span class="keyword">function</span>(fn, ms) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <p>Arguments are anything after <code>fn</code> and <code>ms</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> args = slice.call(arguments, <span class="number">2</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-59">&#182;</a>
+              </div>
+              <p>Return the result of setTimeout</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> setTimeout(<span class="keyword">function</span>() {
+         <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, args);
+   }, ms);
+};</pre></div></div>
+            
+        </li>
+        
     </ul>
   </div>
 </body>
