@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>dom.js</title>
+  <title>timing.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -86,7 +86,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>dom.js</h1>
+                  <h1>timing.js</h1>
               </div>
           </li>
         
@@ -98,7 +98,7 @@
               <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>DOM functionality</h2>
+              <h2>Timining functions</h2>
 
             </div>
             
@@ -111,11 +111,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Register dom namespace on scandiojs object</p>
+              <p>Register timinig namespace on scandiojs object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.dom = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.timing = {};</pre></div></div>
             
         </li>
         
@@ -126,12 +126,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Closes and secures a cache module with within its own scope
-<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+              <p>Puts the breaks on a function which may be called to often
+such as scrolling or resizing callbacks.
+The function will actually be called after <code>release</code>-milliseconds elapsed</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.dom.cache = (<span class="keyword">function</span>($, ß){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.timing.breaks = <span class="keyword">function</span>(on, release) {</pre></div></div>
             
         </li>
         
@@ -142,12 +143,17 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Sets up local cache store</p>
+              <p>Initialize the context, arg, timeout and previous local variables</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      cache = {},</pre></div></div>
+      context = <span class="literal">null</span>,
+      args = <span class="literal">null</span>,
+      result = <span class="literal">null</span>,
+      timeout = <span class="literal">null</span>,
+      previous = <span class="number">0</span>,
+      remaining = <span class="literal">null</span>,</pre></div></div>
             
         </li>
         
@@ -158,22 +164,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Handler of DOMNodeRemoved handling external node removals
-Sorry, I didn&#39;t hack this</p>
+              <p>Wrapper to be called if <code>release</code> has not elapsed yet</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      nodeRemoved = <span class="keyword">function</span>(event) {
-         <span class="keyword">var</span> label, coll, l, t = event.target;
-         <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
-            l = (coll = cache[label]).length;
-            <span class="keyword">while</span> (l--) {
-               <span class="keyword">if</span> (coll[l] === t || $.contains(t,coll[l])) {
-                  <span class="keyword">delete</span> coll[l]; --coll.length;
-               }
-            }
-         }
-      },</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      toBeCalled = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -184,11 +179,12 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Updates complete cache or scoped to a label</p>
+              <p>Timestamp of call</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      update = <span class="keyword">function</span>(label) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         previous = <span class="keyword">new</span> Date();
+         timeout = <span class="literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -199,11 +195,12 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Passed in label is string, scoping to that label</p>
+              <p>Result being function on which brakes have been put</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isString(label)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         result = on.apply(context, args);
+      };</pre></div></div>
             
         </li>
         
@@ -214,12 +211,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Reset cache value at label</p>
+              <p>Returning a function which returns the execution&#39;s result</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            cache[label] = $(cache[label].selector || <span class="string">''</span>);
-         } <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -230,15 +226,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>For each value in cache refresh it</p>
+              <p>Where the function is in time</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            ß.util.each(cache, <span class="keyword">function</span>($cached, label) {
-               cache[label] = $($cached.selector);
-            });
-         }
-      },</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> now = <span class="keyword">new</span> Date();</pre></div></div>
             
         </li>
         
@@ -249,11 +241,13 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Gets a value from cache or loads it from DOM</p>
+              <p>If a previous call hasnt been made its now</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      get = <span class="keyword">function</span>(label, selector) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!previous) {
+         previous = now;
+      }</pre></div></div>
             
         </li>
         
@@ -264,11 +258,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Both label and selector passed, cache/dom reading...</p>
+              <p>How much time remains until final execution of <code>on</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isString(selector) &amp;&amp; ß.isString(label)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      remaining = release - (now - previous);</pre></div></div>
             
         </li>
         
@@ -279,12 +273,12 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>...either from cache or DOM</p>
+              <p>The function context and arguments</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || $(selector);
-         }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      context = <span class="keyword">this</span>;
+      args = arguments;</pre></div></div>
             
         </li>
         
@@ -295,12 +289,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>What the callee gets: a jQuery object</p>
+              <p>Time has elapsed, <code>on</code> can be called</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> cache[label];
-      };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span>) {</pre></div></div>
             
         </li>
         
@@ -311,11 +304,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Bind to node removal in DOM</p>
+              <p>Clears all state</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   $(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         clearTimeout(timeout);</pre></div></div>
             
         </li>
         
@@ -326,15 +319,82 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Return public functions in object literal</p>
+              <p>This will break it on next call</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
-      get:     get,
-      update:  update
+            <div class="content"><div class='highlight'><pre>         timeout = <span class="literal">null</span>;
+         previous = now;
+         result = on.apply(context, args);
+      } <span class="keyword">else</span> <span class="keyword">if</span> (!timeout) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Next execution round</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         timeout = setTimeout(toBeCalled, remaining);
+      }
+
+      <span class="keyword">return</span> result;
    };
-}(jQuery, ß));</pre></div></div>
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Delays a function execution <code>ms</code> milliseconds.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.timing.delay = <span class="keyword">function</span>(fn, ms) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Arguments are anything after <code>fn</code> and <code>ms</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> args = slice.call(arguments, <span class="number">2</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Return the result of setTimeout</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> setTimeout(<span class="keyword">function</span>() {
+         <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, args);
+   }, ms);
+};</pre></div></div>
             
         </li>
         
