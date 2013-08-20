@@ -179,6 +179,17 @@ var Person = {
 
 ß.debug.info( ß.string.capitalize("tobias") );
 
+// Puts the breaks on the window scroll event callback
+
+var scrolled = function() {
+   console.log('Wow, you scrolled a webpage!');
+};
+
+$(window).scroll(
+   // Only actually call the callback every second
+   ß.util.breaks(scrolled, 1000);
+);
+
 // Safe typchecking on primitive types
 
 ß.isString("tobias");
