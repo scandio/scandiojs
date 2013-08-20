@@ -1891,7 +1891,7 @@ called in html&#39;s head-section</p>
                 <a class="pilcrow" href="#section-110">&#182;</a>
               </div>
               <p>Closes and secures a module by name within its own scope
-<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
@@ -2106,7 +2106,7 @@ it will be invoked on DOM-Ready</p>
                 <a class="pilcrow" href="#section-123">&#182;</a>
               </div>
               <p>Defers function execution based on condition and delay
-<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
@@ -2368,6 +2368,124 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-139">&#182;</a>
               </div>
+              <p>A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.core.messenger = ß.messenger = (<span class="keyword">function</span>($, ß){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-140">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-140">&#182;</a>
+              </div>
+              <p>The messenger/hub is just a plain jQuery object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      messenger = $({}),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-141">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-141">&#182;</a>
+              </div>
+              <p>Subscribing to messenger with namespace as in <em>ß.messenger.subscribe(&#39;foo.bar&#39;, fn)</em>
+<em>Note:</em> First argument is event as in subscribe(&#39;foo&#39;, fn(e, arg…))!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      subscribe = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-142">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-142">&#182;</a>
+              </div>
+              <p>Using $ as emitter allows namespaced events e.g. &#39;foo.bar&#39; will trigger on &#39;foo&#39; and &#39;foo.bar&#39;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         messenger.on.apply(messenger, arguments);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-143">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-143">&#182;</a>
+              </div>
+              <p>Unsubscribes in same syntax as subscribing (namespaced)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      unsubscribe = <span class="keyword">function</span>() {
+         messenger.off.apply(messenger, arguments);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-144">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-144">&#182;</a>
+              </div>
+              <p>Triggers subscribed listener&#39;s function with arguements (1st is $-event)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      publish = <span class="keyword">function</span>() {
+         messenger.trigger.apply(messenger, arguments);
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-145">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-145">&#182;</a>
+              </div>
+              <p>Returns public functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+      subscribe: subscribe,
+      unsubscribe: unsubscribe,
+      publish: publish
+   };
+}(jQuery, ß));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-146">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-146">&#182;</a>
+              </div>
               <p>Shorthand for redirecting the browser to a new <code>url</code></p>
 
             </div>
@@ -2379,11 +2497,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-140">
+        <li id="section-147">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-140">&#182;</a>
+                <a class="pilcrow" href="#section-147">&#182;</a>
               </div>
               <h2>Conflucence module</h2>
 
@@ -2392,11 +2510,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-141">
+        <li id="section-148">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-141">&#182;</a>
+                <a class="pilcrow" href="#section-148">&#182;</a>
               </div>
               <p>Sets up confluence object</p>
 
@@ -2407,11 +2525,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-142">
+        <li id="section-149">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-142">&#182;</a>
+                <a class="pilcrow" href="#section-149">&#182;</a>
               </div>
               <h2>Utility module for responsive</h2>
 
@@ -2420,11 +2538,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-143">
+        <li id="section-150">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-143">&#182;</a>
+                <a class="pilcrow" href="#section-150">&#182;</a>
               </div>
               <p>Sets up responsive object</p>
 
@@ -2438,11 +2556,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-144">
+        <li id="section-151">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-144">&#182;</a>
+                <a class="pilcrow" href="#section-151">&#182;</a>
               </div>
               <p>A rudimentary function testing for mobile devices
 <em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
@@ -2457,11 +2575,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-145">
+        <li id="section-152">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-145">&#182;</a>
+                <a class="pilcrow" href="#section-152">&#182;</a>
               </div>
               <p>Checks the navigator&#39;s user agent against the list of mobile devices</p>
 
@@ -2477,11 +2595,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-146">
+        <li id="section-153">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-146">&#182;</a>
+                <a class="pilcrow" href="#section-153">&#182;</a>
               </div>
               <h2>DOM functionality</h2>
 
@@ -2490,11 +2608,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-147">
+        <li id="section-154">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-147">&#182;</a>
+                <a class="pilcrow" href="#section-154">&#182;</a>
               </div>
               <p>Register dom namespace on scandiojs object</p>
 
@@ -2505,11 +2623,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-148">
+        <li id="section-155">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-148">&#182;</a>
+                <a class="pilcrow" href="#section-155">&#182;</a>
               </div>
               <p>Closes and secures a cache module with within its own scope
 <em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
@@ -2521,11 +2639,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-149">
+        <li id="section-156">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-149">&#182;</a>
+                <a class="pilcrow" href="#section-156">&#182;</a>
               </div>
               <p>Sets up local cache store</p>
 
@@ -2537,11 +2655,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-150">
+        <li id="section-157">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-150">&#182;</a>
+                <a class="pilcrow" href="#section-157">&#182;</a>
               </div>
               <p>Handler of DOMNodeRemoved handling external node removals
 Sorry, I didn&#39;t hack this</p>
@@ -2563,11 +2681,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-151">
+        <li id="section-158">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-151">&#182;</a>
+                <a class="pilcrow" href="#section-158">&#182;</a>
               </div>
               <p>Updates complete cache or scoped to a label</p>
 
@@ -2578,11 +2696,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-152">
+        <li id="section-159">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-152">&#182;</a>
+                <a class="pilcrow" href="#section-159">&#182;</a>
               </div>
               <p>Passed in label is string, scoping to that label</p>
 
@@ -2593,11 +2711,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-153">
+        <li id="section-160">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-153">&#182;</a>
+                <a class="pilcrow" href="#section-160">&#182;</a>
               </div>
               <p>Reset cache value at label</p>
 
@@ -2609,11 +2727,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-154">
+        <li id="section-161">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-154">&#182;</a>
+                <a class="pilcrow" href="#section-161">&#182;</a>
               </div>
               <p>For each value in cache refresh it</p>
 
@@ -2628,11 +2746,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-155">
+        <li id="section-162">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-155">&#182;</a>
+                <a class="pilcrow" href="#section-162">&#182;</a>
               </div>
               <p>Gets a value from cache or loads it from DOM</p>
 
@@ -2643,11 +2761,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-156">
+        <li id="section-163">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-156">&#182;</a>
+                <a class="pilcrow" href="#section-163">&#182;</a>
               </div>
               <p>Both label and selector passed, cache/dom reading...</p>
 
@@ -2658,11 +2776,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-157">
+        <li id="section-164">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-157">&#182;</a>
+                <a class="pilcrow" href="#section-164">&#182;</a>
               </div>
               <p>...either from cache or DOM</p>
 
@@ -2674,11 +2792,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-158">
+        <li id="section-165">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-158">&#182;</a>
+                <a class="pilcrow" href="#section-165">&#182;</a>
               </div>
               <p>What the callee gets: a jQuery object</p>
 
@@ -2690,11 +2808,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-159">
+        <li id="section-166">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-159">&#182;</a>
+                <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
               <p>Bind to node removal in DOM</p>
 
@@ -2705,11 +2823,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-160">
+        <li id="section-167">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-160">&#182;</a>
+                <a class="pilcrow" href="#section-167">&#182;</a>
               </div>
               <p>Return public functions in object literal</p>
 
@@ -2724,11 +2842,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-161">
+        <li id="section-168">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-161">&#182;</a>
+                <a class="pilcrow" href="#section-168">&#182;</a>
               </div>
               <h2>Outro, AMD and conflict resolution</h2>
 
@@ -2737,11 +2855,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-162">
+        <li id="section-169">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-162">&#182;</a>
+                <a class="pilcrow" href="#section-169">&#182;</a>
               </div>
               <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
 
@@ -2752,11 +2870,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-163">
+        <li id="section-170">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-163">&#182;</a>
+                <a class="pilcrow" href="#section-170">&#182;</a>
               </div>
               <p>Retore the <code>previousScandio</code></p>
 
@@ -2767,11 +2885,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-164">
+        <li id="section-171">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-164">&#182;</a>
+                <a class="pilcrow" href="#section-171">&#182;</a>
               </div>
               <p>Return yerself to continue</p>
 
@@ -2783,11 +2901,11 @@ Sorry, I didn&#39;t hack this</p>
         </li>
         
         
-        <li id="section-165">
+        <li id="section-172">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-165">&#182;</a>
+                <a class="pilcrow" href="#section-172">&#182;</a>
               </div>
               <p>Support for AMD/RequireJS
 If define function deefined and its amd</p>
@@ -2799,11 +2917,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-166">
+        <li id="section-173">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-166">&#182;</a>
+                <a class="pilcrow" href="#section-173">&#182;</a>
               </div>
               <p>Define Scandio</p>
 
@@ -2814,11 +2932,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-167">
+        <li id="section-174">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-167">&#182;</a>
+                <a class="pilcrow" href="#section-174">&#182;</a>
               </div>
               <p>and return the library</p>
 

@@ -122,7 +122,7 @@
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>Closes and secures a module by name within its own scope
-<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
@@ -337,7 +337,7 @@ it will be invoked on DOM-Ready</p>
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Defers function execution based on condition and delay
-<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
@@ -598,6 +598,124 @@ it will be invoked on DOM-Ready</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.core.messenger = ß.messenger = (<span class="keyword">function</span>($, ß){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>The messenger/hub is just a plain jQuery object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      messenger = $({}),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Subscribing to messenger with namespace as in <em>ß.messenger.subscribe(&#39;foo.bar&#39;, fn)</em>
+<em>Note:</em> First argument is event as in subscribe(&#39;foo&#39;, fn(e, arg…))!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      subscribe = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Using $ as emitter allows namespaced events e.g. &#39;foo.bar&#39; will trigger on &#39;foo&#39; and &#39;foo.bar&#39;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         messenger.on.apply(messenger, arguments);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Unsubscribes in same syntax as subscribing (namespaced)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      unsubscribe = <span class="keyword">function</span>() {
+         messenger.off.apply(messenger, arguments);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Triggers subscribed listener&#39;s function with arguements (1st is $-event)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      publish = <span class="keyword">function</span>() {
+         messenger.trigger.apply(messenger, arguments);
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Returns public functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+      subscribe: subscribe,
+      unsubscribe: unsubscribe,
+      publish: publish
+   };
+}(jQuery, ß));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <p>Shorthand for redirecting the browser to a new <code>url</code></p>
 
