@@ -195,6 +195,22 @@ var Person = {
    readyFn: $
 });
 
+// Using the internal pub/sub implementation
+
+ß.messenger.subscribe('foo.bar', function(event, arg1, arg2) {
+   console.log("foo.bar", arg1, arg2);
+});
+
+ß.messenger.subscribe('foo', function(event, arg1) {
+   console.log("foo", arg1);
+});
+
+ß.messenger.publish('foo', 'Couple ', 'it loosly!');
+ß.messenger.publish('foo.bar', 'Bind to qualified namespace!');
+
+ß.messenger.unsubscribe('foo.bar');
+ß.messenger.publish('foo', 'Couple ', 'it loosly!');
+
 // Query and DOM and cache results
 
 ß.dom.cache.get('forms', 'body forms'); // returns jQuery-object

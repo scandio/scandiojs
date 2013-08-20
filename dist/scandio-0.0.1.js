@@ -450,7 +450,7 @@
 ß.core = {};
 
 // Closes and secures a module by name within its own scope
-// *Note:* This function being an IIFE leaves of parameters on outer function
+// *Note:* This function being an IIFE leaves off parameters on outer function
 ß.mod = ß.core.mod = ß.core.module = (function() {
    // Setting up global environment object and DOM-ready state
    var
@@ -504,7 +504,7 @@
 }());
 
 // Defers function execution based on condition and delay
-// *Note:* This function being an IIFE leaves of parameters on outer function
+// *Note:* This function being an IIFE leaves off parameters on outer function
 ß.wait = ß.core.wait = (function () {
 
    // Sets up the defered function
@@ -563,6 +563,38 @@
    return waitFn;
 
 }());
+
+// A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
+// *Note:* This function being an IIFE leaves off parameters on outer function
+ß.core.messenger = ß.messenger = (function($, ß){
+   // The messenger/hub is just a plain jQuery object
+   var
+      messenger = $({}),
+
+      // Subscribing to messenger with namespace as in *ß.messenger.subscribe('foo.bar', fn)*
+      // *Note:* First argument is event as in subscribe('foo', fn(e, arg…))!
+      subscribe = function() {
+         // Using $ as emitter allows namespaced events e.g. 'foo.bar' will trigger on 'foo' and 'foo.bar'
+         messenger.on.apply(messenger, arguments);
+      },
+
+      // Unsubscribes in same syntax as subscribing (namespaced)
+      unsubscribe = function() {
+         messenger.off.apply(messenger, arguments);
+      },
+
+      // Triggers subscribed listener's function with arguements (1st is $-event)
+      publish = function() {
+         messenger.trigger.apply(messenger, arguments);
+      };
+
+   // Returns public functions
+   return {
+      subscribe: subscribe,
+      unsubscribe: unsubscribe,
+      publish: publish
+   };
+}(jQuery, ß));
 
 // Shorthand for redirecting the browser to a new `url`
 ß.redirect = ß.core.redirect = function(url) {
