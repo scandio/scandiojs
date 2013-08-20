@@ -142,7 +142,7 @@ var scrolled = function() {
 
 $(window).scroll(
    // Only actually call the callback every second
-   ß.util.breaks(scrolled, 1000);
+   ß.timing.breaks(scrolled, 1000);
 );
 
 // Delays the fn-exeuction for specified milliseconds
@@ -152,7 +152,7 @@ var logIt = function(here) {
 };
 
 // Pass some additional arguments
-ß.util.delay(logIt, 1000, " With some arguments!");
+ß.timing.delay(logIt, 1000, " With some arguments!");
 
 // Safe typchecking on primitive types
 

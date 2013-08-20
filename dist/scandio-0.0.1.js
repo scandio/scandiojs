@@ -150,7 +150,7 @@
 // Utility functions
 // ---------------
 
-// Register ajax namespace on scandiojs object
+// Register util namespace on scandiojs object
 ß.util = {};
 
 // Nothing too fancy: shorthand to `hasOwnProperty`
@@ -308,11 +308,16 @@
       };
    });
 };
+// Timining functions
+// ---------------
+
+// Register timinig namespace on scandiojs object
+ß.timing = {};
 
 // Puts the breaks on a function which may be called to often
 // such as scrolling or resizing callbacks.
 // The function will actually be called after `release`-milliseconds elapsed
-ß.util.breaks = function(on, release) {
+ß.timing.breaks = function(on, release) {
    // Initialize the context, arg, timeout and previous local variables
    var
       context = null,
@@ -368,7 +373,7 @@
 };
 
 // Delays a function execution `ms` milliseconds.
-ß.util.delay = function(fn, ms) {
+ß.timing.delay = function(fn, ms) {
    // Arguments are anything after `fn` and `ms`
    var args = slice.call(arguments, 2);
 
