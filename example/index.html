@@ -170,14 +170,15 @@ var Person = {
 ß.debug.info( ß.util.functions(Person) );
 
 // Extend/mixin functionality into the library at runtime
+// may overwrite existing function plus it can be sub-namespaced
 
-ß.util.mixin("string", {
+ß.util.mixin("string.custom", {
   capitalize : function(string) {
     return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
   }
 });
 
-ß.debug.info( ß.string.capitalize("tobias") );
+ß.debug.info( ß.string.custom.capitalize("tobias") );
 
 // Puts the breaks on the window scroll event callback
 
@@ -187,7 +188,7 @@ var scrolled = function() {
 
 $(window).scroll(
    // Only actually call the callback every second
-   ß.timing.breaks(scrolled, 1000);
+   ß.timing.breaks(scrolled, 1000)
 );
 
 // Delays the fn-exeuction for specified milliseconds
