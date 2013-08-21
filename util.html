@@ -69,6 +69,11 @@
               </a>
             
               
+              <a class="source" href="string.html">
+                string.js
+              </a>
+            
+              
               <a class="source" href="timing.html">
                 timing.js
               </a>
@@ -661,6 +666,7 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
    <span class="keyword">var</span>
       destination = ß,
       path        = namespace.split(<span class="string">"."</span>),
+      atModule    = <span class="literal">null</span>,
       i           = <span class="literal">null</span>;</pre></div></div>
             
         </li>
@@ -687,11 +693,11 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
-              <p>Namespace not registered yet</p>
+              <p>The current sub/module</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!destination[path]) { destination[ path[i] ] = {}; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      atModule = path[i];</pre></div></div>
             
         </li>
         
@@ -702,12 +708,13 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
-              <p>Sets the current pointer to module</p>
+              <p>Namespace not registered yet</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      destination = destination[ path[i] ];
-   }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!destination[ atModule ]) {
+         destination[ atModule ] = {};
+      }</pre></div></div>
             
         </li>
         
@@ -718,11 +725,12 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
-              <p>For each function on the passed in <code>obj</code> by name</p>
+              <p>Sets the current pointer to module</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(ß.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      destination = destination[ atModule ];
+   }</pre></div></div>
             
         </li>
         
@@ -733,11 +741,11 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
-              <p>Defines the function on the destination module</p>
+              <p>For each function on the passed in <code>obj</code> by name</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      destination[name] = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   ß.util.each(ß.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
             
         </li>
         
@@ -747,6 +755,21 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Defines the function on the destination module</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      destination[name] = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
               <p>Merge args with wrapped object (constructor new ß(obj))</p>
 
@@ -758,11 +781,11 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
         </li>
         
         
-        <li id="section-42">
+        <li id="section-43">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
               <p>The result of applying the function with ß and its args</p>
 
