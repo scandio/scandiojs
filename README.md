@@ -6,7 +6,7 @@ You can check out some examples after cloning scandio.js by looking at the `/exa
 
 Furthermore, you can check out the *annotated source* residing in the `/docs` directory. It's automatically generated during the build process (`Gruntfile.js`) by [Docco](http://jashkenas.github.io/docco/).
 
-Lastly, if you just want to checkout the latest version of the documented source code, just hit on the [scandio.js](https://github.com/scandio/scandiojs/blob/master/scandio.js) file.
+Lastly, if you just want to checkout the latest version of the documented source code, just hit on the [scandio.js](https://github.com/scandio/scandiojs/blob/master/dist/scandio.js) file.
 
 ## Extending scandio.js
 
