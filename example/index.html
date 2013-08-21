@@ -61,6 +61,8 @@
 ß.debug.debug('Debug to console piped through console.debug');
 ß.debug.error('Error to console piped through console.error');
 
+ß.logger.level = 5;
+
 // Load ajax libraries from cdns by providing cdn-callbacks on ß.ajax.cdns-object
 
 ß.ajax.libs({
@@ -286,6 +288,30 @@ var logIt = function(here) {
 ß.dom.cache.update('forms'); // Updates cache for single label
 
 ß.dom.cache.update() // Updates complete cache
+
+// Using the string module and its helper functions
+
+// Easy capitalization or transforming a string to lowercase
+ß.debug.log(ß.string.capitalize("yAy yay yay"));
+ß.debug.log(ß.string.lower("yAy"));
+
+// Clean up the mess around it eventually by 'triming' or 'cleaning'
+ß.debug.log("A messy '    Scandio GmbH    ' get cleaned up: " + ß.string.clean("    Scandio GmbH    "));
+ß.debug.log("One might aswell just trim '    Scandio     GmbH    ' it to: " + ß.string.trim("    Scandio     GmbH    "));
+
+// Chop it up into 'n-parts'
+ß.debug.log("For whatever reason you can chop up the lovely 'Scandio GmbH' into: " + ß.string.chop("Scandio GmbH", 2));
+
+// Search in a string
+ß.debug.log("Yes, it's a 'GmbH. It's in the name 'Scandio GmbH'" + ß.string.contains("GmbH", "Scandio GmbH"));
+
+// Check for starts/ends-with substring of a string
+ß.debug.log("The name 'Scandio GmbH' starts with 'Scandio'? " + ß.string.starts("Scandio GmbH", "Scandio"));
+ß.debug.log("and ends with 'GmbH'? " + ß.string.ends("GmbH", "GmbH"));
+
+// Implde and explode strings/arrays
+ß.debug.log("If you ever want to explode the company you get: " + ß.string.explode("Scandio GmbH", " "));
+ß.debug.log("but please put it together again, would you: " + ß.string.implode("", ["Sc", "an", "dio", " Gmb", "H"]));
                   </code>
                </pre>
             </div>
