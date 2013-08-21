@@ -59,6 +59,9 @@
       nativeIsArray      = Array.isArray,
       nativeKeys         = Object.keys,
       nativeBind         = FuncProto.bind,
+      nativeTrim         = String.prototype.trim,
+      nativeTrimRight    = String.prototype.trimRight,
+      nativeTrimLeft     = String.prototype.trimLeft,
 
    // Defining one self
    Scandio = function(obj) {
@@ -284,15 +287,21 @@
    var
       destination = ß,
       path        = namespace.split("."),
+      atModule    = null,
       i           = null;
 
    // Register the namespace if its not existent
    for (i = 0; i < path.length; i++) {
+      // The current sub/module
+      atModule = path[i];
+
       // Namespace not registered yet
-      if (!destination[path]) { destination[ path[i] ] = {}; }
+      if (!destination[ atModule ]) {
+         destination[ atModule ] = {};
+      }
 
       // Sets the current pointer to module
-      destination = destination[ path[i] ];
+      destination = destination[ atModule ];
    }
 
    // For each function on the passed in `obj` by name
@@ -308,7 +317,106 @@
       };
    });
 };
-// Timining functions
+// String functions
+// ---------------
+
+// Register string namespace on scandiojs object
+ß.string = {};
+
+// Capitalizes a given string (scandio becomes Scandio etc.)
+ß.string.capitalize = function(string) {
+   // First char gets upppercased every other char lowercased
+   return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+};
+
+// Lowercases a given string (ScanDiO becomes scandio)
+ß.string.lower = function(string) {
+   // Just everything to lowercase
+   return string.toLowerCase();
+};
+
+// Cleans up the mess of a string ('  Scandio    GmbH   ' becomes 'Scandio GmbH')
+ß.string.clean = function(string) {
+   // Trims the mess (whitespace default) and replaces consecutive (s+) whitespaces within with one whitespace
+   return ß.string.trim(string).replace(/\s+/g, ' ');
+};
+
+// Trims away the given characters around a given string (defaults to whitespace)
+ß.string.trim = function(string, characters){
+   // Uses nativeTrim if defined and no characters are given (not supported by native impl.)
+   if (!characters && nativeTrim) {
+      return nativeTrim.call(string);
+   }
+
+   // A RegExp starting at the beginning of the string, the string wrapped by the `characters`
+   // replacing them around the `string`
+   return String(string).replace(new RegExp('^' + characters + '+|' + characters + '+$', 'g'), '');
+};
+
+// Chops a string up `at` every position in the string `ß.string.chop('chopchop', 3) === 'cho pch op'`
+ß.string.chop = function(string, at) {
+   // Better make a string out of the passed in 'string'
+   string = String(string);
+
+   // Double NOT bitwise (sorta same as Math.floor())
+   at = ~~at;
+
+   // RegExp works like a UNIX expansion list, expanding around the whitespace from 1-to-at
+   return at > 0 ? string.match(new RegExp('.{1,' + at + '}', 'g')) : [string];
+};
+
+// Finds a string within a string (fuzzy) e.g. `ß.string.contains('I'veADream', 'Dream') === true`
+ß.string.contains = function(needle, haystack) {
+   // Don't do work if no needle passed (but we've found something right!)
+   if (needle === '') { return true; }
+   // Empty haystack should also lead to some chilling without having found something
+   if (haystack === null || haystack === undefined) { return false; }
+
+   // Do the old trick of using `indexOf` of the haystack with the needle
+   return String(haystack).indexOf(needle) !== -1;
+};
+
+// Checks if string starts with a given string
+ß.string.starts = function(string, what) {
+   // Wrap the passed in arguments in a String object for sanity
+   string   = String(string);
+   what     = String(what);
+
+   // If the string is longer, equally long than the one it's supposed to start with
+   // and if its slice from 0 to the starting string's length is the starting string
+   return string.length >= what.length && string.slice(0, what.length) === what;
+};
+
+// Checks if string ends with a given string
+ß.string.ends = function(string, what) {
+   // Wrap the passed in arguments in a String object for sanity
+   string   = String(string);
+   what     = String(what);
+
+   // If the string is longer, equally long than the one it's supposed to end with
+   // and if its slice from the end to the length of its suppoed ending is equals to its ending
+   return string.length >= what.length && string.slice(string.length - what.length) === what;
+};
+
+// Implodes/joins a string with a given glue
+ß.string.implode = function(glue, pieces) {
+   // Defaults the glue to empty string
+   if (glue === null || glue === undefined) { glue = ''; }
+
+   // Pipes call through join on pieces
+   return pieces.join(glue);
+};
+
+// Explodes/splits a string with by given delimiter
+// *Note:* Arguments are faked, it'll be sliced up in the function
+ß.string.explode = function(string, delimiter) {
+   // Wrap the passed in argument in a String object for sanity
+   delimiter   = String(delimiter);
+   string      = String(string);
+
+   // Pipes passed in arguments through `split`
+   return string.split(delimiter);
+};// Timining functions
 // ---------------
 
 // Register timinig namespace on scandiojs object

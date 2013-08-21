@@ -135,15 +135,21 @@
    var
       destination = ß,
       path        = namespace.split("."),
+      atModule    = null,
       i           = null;
 
    // Register the namespace if its not existent
    for (i = 0; i < path.length; i++) {
+      // The current sub/module
+      atModule = path[i];
+
       // Namespace not registered yet
-      if (!destination[path]) { destination[ path[i] ] = {}; }
+      if (!destination[ atModule ]) {
+         destination[ atModule ] = {};
+      }
 
       // Sets the current pointer to module
-      destination = destination[ path[i] ];
+      destination = destination[ atModule ];
    }
 
    // For each function on the passed in `obj` by name

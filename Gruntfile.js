@@ -22,6 +22,7 @@ module.exports = function( grunt ) {
             "src/index.js",
             "src/logger.js",
             "src/util.js",
+            "src/string.js",
             "src/timing.js",
             "src/is.js",
             "src/ajax.js",

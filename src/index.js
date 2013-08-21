@@ -59,6 +59,9 @@
       nativeIsArray      = Array.isArray,
       nativeKeys         = Object.keys,
       nativeBind         = FuncProto.bind,
+      nativeTrim         = String.prototype.trim,
+      nativeTrimRight    = String.prototype.trimRight,
+      nativeTrimLeft     = String.prototype.trimLeft,
 
    // Defining one self
    Scandio = function(obj) {

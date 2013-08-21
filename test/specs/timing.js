@@ -1,4 +1,4 @@
-describe("A suite testing the timining functions", function() {
+describe("A suite testing the timing functions", function() {
    describe("tests on delaying a function call for n-milliseconds", function() {
       it("should defer the execution of a function", function() {
          runs(function() {
