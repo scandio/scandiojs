@@ -19,18 +19,18 @@ module.exports = function( grunt ) {
             separator: ""
           },
           src: [
-            "src/index.js",
-            "src/logger.js",
-            "src/util.js",
-            "src/string.js",
-            "src/timing.js",
-            "src/is.js",
-            "src/ajax.js",
-            "src/core.js",
-            "src/confluence.js",
-            "src/responsive.js",
-            "src/dom.js",
-            "src/outro.js"
+            "js/index.js",
+            "js/logger.js",
+            "js/util.js",
+            "js/string.js",
+            "js/timing.js",
+            "js/is.js",
+            "js/ajax.js",
+            "js/core.js",
+            "js/confluence.js",
+            "js/responsive.js",
+            "js/dom.js",
+            "js/outro.js"
           ],
           dest: "dist/scandio-<%= pkg.version %>.js"
         }
