@@ -38,7 +38,7 @@
 // while using callbacks to init the plugin...
 
 ß.ajax.maybe([{
-   when: ß.responsive.isMobile(),
+   when: ß.device.isMobile(),
    libs: {
       cdnjs: [{
          repository: 'Colors.js',
@@ -57,7 +57,7 @@
 // Load different libraries in differnt contexts
 
 ß.ajax.maybe([{
-   when: !ß.responsive.isMobile(),
+   when: !ß.device.isMobile(),
    libs: {
       cdnjs: [{
          repository: 'Cookies.js',
@@ -166,7 +166,7 @@ var logIt = function(here) {
 
 // Use some helper-functions for responsive development
 
-ß.debug.info( ß.responsive.isMobile() );
+ß.debug.info( ß.device.isMobile() );
 ß.debug.info( ß.responsive.breakpoint('tablet') );
 
 // configure the component yourself
@@ -174,7 +174,7 @@ var logIt = function(here) {
 ß.responsive.mobile        = ["mac"],
 ß.responsive.breakpointEl  = '.hidden-breakpoint-el';
 
-ß.debug.info( ß.responsive.isMobile() );
+ß.debug.info( ß.device.isMobile() );
 ß.debug.info( ß.responsive.breakpoint('tablet') );
 
 //ß.noConflict();

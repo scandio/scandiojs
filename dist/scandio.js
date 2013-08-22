@@ -200,9 +200,11 @@
 // `ß.debug` will get a set of methods (*see return-statement*)
 ß.debug = (function(){
    var
-      console  = window.console,
-      length   = logMethods.length,
-      methods  = {},
+      console              = window.console,
+      length               = logMethods.length,
+      methods              = {},
+      logOuterWrapperPath  = 'scandio-log',
+      $loggerEl            = null,
       alertEls = {
          debug: 'info',
          error: 'danger',
@@ -215,32 +217,34 @@
       // the last passed argument would otherwise win
       createLogger = function (method, level) {
          var
-            logElWrapperPath  = 'scandio-log--' + method,
-            logElInnerPath    = 'alert alert-' + alertEls[method] || method;
+            logElWrapperPath     = logOuterWrapperPath + '--' + method,
+            logElInnerPath       = 'alert alert-' + alertEls[method] || method,
+            $logEl               = null;
 
          // Sets up history for the log-method
          ß.logger.logs[method] = [];
 
          if (ß.logger.logDom === true) {
             $(function() {
-               $('<div/>', {
-                  class: logElWrapperPath
-               }).appendTo($scandioEl).html(
-                  $('<div />', {
-                     class: logElInnerPath
-                  })
+               $loggerEl.append(
+                  $('<div/>', {
+                     class: logElWrapperPath
+                  }).html(
+                     $('<div />', {
+                        class: logElInnerPath
+                     })
+                  )
                );
             });
-
-            ß.dom[method] = function(msg) {
-               var
-                  className = ".alert-" + alertEls[method] || method,
-                  $logEl = ß.dom.cache.get(logElInnerPath, className).length > 0 ?
-                     ß.dom.cache.get(logElInnerPath, className) : ß.dom.cache.update(logElInnerPath);
-
-               if (ß.logger.logDom && $logEl && $logEl.length > 0) { $logEl.append(msg + '<hr />'); }
-            };
          }
+
+         ß.dom[method] = function(msg) {
+            var
+               className = ".alert-" + alertEls[method] || method,
+               $logEl = $(className);
+
+            if (ß.logger.logDom && $logEl && $logEl.length > 0) { $logEl.append(msg + '<hr />'); }
+         };
 
          // The return value's log-type gets a function
          methods[method] = function() {
@@ -250,13 +254,21 @@
             // Only log to console if required by level
             if (ß.logger.level > level) {
                console[method].apply(console, args);
-               ß.dom[method].apply(ß, args);
+               if (ß.logger.logDom === true) { ß.dom[method].apply(ß, args); }
             }
 
             // but always push it to history
             ß.logger.logs[method].push(args.join(', '));
          };
       };
+
+   if (ß.logger.logDom === true) {
+      $(function() {
+         $loggerEl = $('<div/>', {
+            class: logOuterWrapperPath
+         }).appendTo($scandioEl);
+      });
+   }
 
    // For every console-method
    while(length--) { createLogger(logMethods[length], length); }
@@ -430,6 +442,25 @@
       };
    });
 };
+// Function for type-checking (no duck punching)
+// ---------------
+
+// This buils group of `is…`-typecheck functions
+// For every type who's `toString` returns `[object […]]`
+ß.util.each(['Array', 'Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
+   // Create a function requiring an `object` as paramters
+   ß['is' + name] = function(obj) {
+      // Returning a boolean indicating if its type is the name
+      return toString.call(obj) == '[object ' + name + ']';
+   };
+});
+
+// Objects behave differently
+ß.isObject = function(obj) {
+   // An new object with the `obj` should be equal to itself
+   // only if it is an object
+   return obj === Object(obj);
+};
 // String functions
 // ---------------
 
@@ -602,25 +633,6 @@
    return setTimeout(function() {
          return fn.apply(null, args);
    }, ms);
-};
-// Function for type-checking (no duck punching)
-// ---------------
-
-// This buils group of `is…`-typecheck functions
-// For every type who's `toString` returns `[object […]]`
-ß.util.each(['Array', 'Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
-   // Create a function requiring an `object` as paramters
-   ß['is' + name] = function(obj) {
-      // Returning a boolean indicating if its type is the name
-      return toString.call(obj) == '[object ' + name + ']';
-   };
-});
-
-// Objects behave differently
-ß.isObject = function(obj) {
-   // An new object with the `obj` should be equal to itself
-   // only if it is an object
-   return obj === Object(obj);
 };
 // Function utilising ajax
 // ---------------
@@ -900,24 +912,60 @@
 
 // Sets up confluence object
 ß.confluence = {};
-// Utility module for responsive
+// Utility module for device detection
 // ---------------
 
-// Sets up responsive object
-ß.responsive = {
-   mobile:           ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
-   breakpointEl:     '.breakpoint'
+// Sets up device object
+ß.device = {
+   mobile: ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
+   desktop: ["macintosh", "win", "linux"]
 };
 
 // A rudimentary function testing for mobile devices
 // *Note:* The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)
-ß.responsive.isMobile = function() {
+ß.device.isMobile = function() {
    var
-      regExp      = new RegExp(ß.responsive.mobile.join('|')),
+      regExp      = new RegExp(ß.device.mobile.join('|')),
       userAgent   = navigator.userAgent.toLowerCase();
 
    // Checks the navigator's user agent against the list of mobile devices
    return regExp.test(userAgent);
+};
+
+// A function testing for desktop devices
+ß.device.isDesktop = function() {
+   var
+      regExp      = new RegExp(ß.device.desktop.join('|')),
+      userAgent   = navigator.userAgent.toLowerCase();
+
+   // Checks the navigator's user agent against the list of desktop devices
+   return regExp.test(userAgent);
+};
+
+// A function testing for browser vendors
+ß.device.isBrowser = function(vendor) {
+   var
+      regExp      = new RegExp(vendor.toLowerCase()),
+      userAgent   = navigator.userAgent.toLowerCase();
+
+   // Checks the navigator's user agent against the list of desktop devices
+   return regExp.test(vendor);
+};
+
+// A function testing for browser vendors
+ß.device.isOs = function(vendor) {
+   var
+      regExp      = new RegExp(vendor.toLowerCase()),
+      userAgent   = navigator.userAgent.toLowerCase();
+
+   // Checks the navigator's user agent against the list of desktop devices
+   return regExp.test(vendor);
+};// Utility module for responsive design
+// ---------------
+
+// Sets up responsive object
+ß.responsive = {
+   breakpointEl:     '.breakpoint'
 };
 
 ß.responsive.breakpoint = function(name) {
