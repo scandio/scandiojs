@@ -5,8 +5,12 @@
 ß.logger = {
    level: 5,
    logs: {},
-   logDom: true
+   logDom: false
 };
+
+ß.logger.logDomFn = (function() {
+   return ß.logger.logDom || ( window.location.href.indexOf("scandiojs-log-dom") > -1);
+}());
 
 ß.debug = {};
 
@@ -38,7 +42,7 @@
          // Sets up history for the log-method
          ß.logger.logs[method] = [];
 
-         if (ß.logger.logDom === true) {
+         if (ß.logger.logDomFn === true) {
             $(function() {
                $loggerEl.append(
                   $('<div/>', {
@@ -57,7 +61,7 @@
 
             if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
 
-            if (ß.logger.logDom && $logEl.length > 0) { $logEl.append(args.join(', ') + '<hr />'); }
+            if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.append(args.join(', ') + '<hr />'); }
          };
 
          // The return value's log-type gets a function
@@ -68,7 +72,7 @@
             // Only log to console if required by level
             if (ß.logger.level > level) {
                console[method].apply(console, args);
-               if (ß.logger.logDom === true) { ß.dom[method].apply(ß, args); }
+               if (ß.logger.logDomFn === true) { ß.dom[method].apply(ß, args); }
             }
 
             // but always push it to history
@@ -76,7 +80,7 @@
          };
       };
 
-   if (ß.logger.logDom === true) {
+   if (ß.logger.logDomFn === true) {
       $(function() {
          $loggerEl = $('<div/>', {
             class: logOuterWrapperPath

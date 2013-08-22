@@ -714,8 +714,12 @@ Sorry, I didn&#39;t hack this</p>
             <div class="content"><div class='highlight'><pre>ß.logger = {
    level: <span class="number">5</span>,
    logs: {},
-   logDom: <span class="literal">true</span>
+   logDom: <span class="literal">false</span>
 };
+
+ß.logger.logDomFn = (<span class="keyword">function</span>() {
+   <span class="keyword">return</span> ß.logger.logDom || ( window.location.href.indexOf(<span class="string">"scandiojs-log-dom"</span>) &gt; -<span class="number">1</span>);
+}());
 
 ß.debug = {};</pre></div></div>
             
@@ -784,7 +788,7 @@ the last passed argument would otherwise win</p>
             
             <div class="content"><div class='highlight'><pre>         ß.logger.logs[method] = [];
 
-         <span class="keyword">if</span> (ß.logger.logDom === <span class="literal">true</span>) {
+         <span class="keyword">if</span> (ß.logger.logDomFn === <span class="literal">true</span>) {
             $(<span class="keyword">function</span>() {
                $loggerEl.append(
                   $(<span class="string">'&lt;div/&gt;'</span>, {
@@ -803,7 +807,7 @@ the last passed argument would otherwise win</p>
 
             <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = $(logElIdentifier); }
 
-            <span class="keyword">if</span> (ß.logger.logDom &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.append(args.join(<span class="string">', '</span>) + <span class="string">'&lt;hr /&gt;'</span>); }
+            <span class="keyword">if</span> (ß.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.append(args.join(<span class="string">', '</span>) + <span class="string">'&lt;hr /&gt;'</span>); }
          };</pre></div></div>
             
         </li>
@@ -851,7 +855,7 @@ the last passed argument would otherwise win</p>
             
             <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.logger.level &gt; level) {
                console[method].apply(console, args);
-               <span class="keyword">if</span> (ß.logger.logDom === <span class="literal">true</span>) { ß.dom[method].apply(ß, args); }
+               <span class="keyword">if</span> (ß.logger.logDomFn === <span class="literal">true</span>) { ß.dom[method].apply(ß, args); }
             }</pre></div></div>
             
         </li>
@@ -871,7 +875,7 @@ the last passed argument would otherwise win</p>
          };
       };
 
-   <span class="keyword">if</span> (ß.logger.logDom === <span class="literal">true</span>) {
+   <span class="keyword">if</span> (ß.logger.logDomFn === <span class="literal">true</span>) {
       $(<span class="keyword">function</span>() {
          $loggerEl = $(<span class="string">'&lt;div/&gt;'</span>, {
             class: logOuterWrapperPath
