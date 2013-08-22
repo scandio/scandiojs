@@ -31,7 +31,8 @@
       "grunt-docco2": "latest",
       "grunt-jstestdriver": "latest",
       "grunt-contrib-copy": "~0.4.0",
-      "grunt-testem": "latest"
+      "grunt-testem": "latest",
+      "grunt-contrib-cssmin": "latest"
    },
 
    "scripts": {

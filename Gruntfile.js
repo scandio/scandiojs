@@ -14,7 +14,7 @@ module.exports = function( grunt ) {
    grunt.initConfig({
       pkg: grunt.file.readJSON("package.json"),
       concat: {
-        scandio: {
+        scandiojs: {
           options: {
             separator: ""
           },
@@ -33,6 +33,16 @@ module.exports = function( grunt ) {
             "js/outro.js"
           ],
           dest: "dist/scandio-<%= pkg.version %>.js"
+        },
+        scandiocss: {
+          options: {
+            separator: ""
+          },
+          src: [
+            "assets/css/scandiojs.css",
+            "assets/css/alert.css"
+          ],
+          dest: "dist/scandio-<%= pkg.version %>.css"
         }
       },
       jsonlint: {
@@ -96,6 +106,14 @@ module.exports = function( grunt ) {
             }
          }
       },
+      cssmin: {
+        minify: {
+          src: [
+            'dist/scandio-<%= pkg.version %>.css'
+          ],
+          dest: 'dist/scandio-<%= pkg.version %>.min.css'
+        }
+      },
       jstestdriver: {
          files: ["jsTestDriver.conf"]
       },
@@ -121,9 +139,10 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks('grunt-contrib-copy');
    grunt.loadNpmTasks('grunt-jstestdriver');
    grunt.loadNpmTasks('grunt-testem');
+   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-   grunt.registerTask( "test-driver", ["jsonlint", "concat", "jshint", "uglify", "copy", "jstestdriver"] );
-   grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "copy", "testem"] );
+   grunt.registerTask( "test-driver", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "jstestdriver"] );
+   grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "testem"] );
 
-   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "copy", "docco"] );
+   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "docco"] );
 };
