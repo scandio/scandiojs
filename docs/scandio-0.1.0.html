@@ -766,7 +766,8 @@ the last passed argument would otherwise win</p>
          <span class="keyword">var</span>
             logElWrapperPath     = logOuterWrapperPath + <span class="string">'--'</span> + method,
             logElInnerPath       = <span class="string">'alert alert-'</span> + alertEls[method] || method,
-            $logEl               = <span class="literal">null</span>;</pre></div></div>
+            logElIdentifier      = <span class="string">'.alert.alert-'</span> + alertEls[method] || method,
+            $logEl               = [];</pre></div></div>
             
         </li>
         
@@ -797,12 +798,12 @@ the last passed argument would otherwise win</p>
             });
          }
 
-         ß.dom[method] = <span class="keyword">function</span>(msg) {
-            <span class="keyword">var</span>
-               className = <span class="string">".alert-"</span> + alertEls[method] || method,
-               $logEl = $(className);
+         ß.dom[method] = <span class="keyword">function</span>() {
+            <span class="keyword">var</span> args = slice.call(arguments);
 
-            <span class="keyword">if</span> (ß.logger.logDom &amp;&amp; $logEl &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.append(msg + <span class="string">'&lt;hr /&gt;'</span>); }
+            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = $(logElIdentifier); }
+
+            <span class="keyword">if</span> (ß.logger.logDom &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.append(args.join(<span class="string">', '</span>) + <span class="string">'&lt;hr /&gt;'</span>); }
          };</pre></div></div>
             
         </li>

@@ -219,7 +219,8 @@
          var
             logElWrapperPath     = logOuterWrapperPath + '--' + method,
             logElInnerPath       = 'alert alert-' + alertEls[method] || method,
-            $logEl               = null;
+            logElIdentifier      = '.alert.alert-' + alertEls[method] || method,
+            $logEl               = [];
 
          // Sets up history for the log-method
          ß.logger.logs[method] = [];
@@ -238,12 +239,12 @@
             });
          }
 
-         ß.dom[method] = function(msg) {
-            var
-               className = ".alert-" + alertEls[method] || method,
-               $logEl = $(className);
+         ß.dom[method] = function() {
+            var args = slice.call(arguments);
 
-            if (ß.logger.logDom && $logEl && $logEl.length > 0) { $logEl.append(msg + '<hr />'); }
+            if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
+
+            if (ß.logger.logDom && $logEl.length > 0) { $logEl.append(args.join(', ') + '<hr />'); }
          };
 
          // The return value's log-type gets a function
