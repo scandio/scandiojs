@@ -22,6 +22,8 @@
    var
       ß                  = null,
       loadedJs           = {},
+      scandioHtmlClass   = 'scandio-js',
+      $scandioEl         = null,
       // Previous version for `ß.noConflict`
       previousScandio    = root.ß,
       // Breaker for loop iteration
@@ -92,11 +94,22 @@
          }
    },
 
+   _injectDom = function() {
+      $(function() {
+         if ( $(scandioHtmlClass).length === 0 ) {
+            $scandioEl = $('<div/>', {
+                class: scandioHtmlClass
+            }).appendTo('body');
+         }
+      });
+   },
+
    // Any call to subordinate initialization function goes here
    // *Note:* We're in pre-creation state
    _initialize = function() {
       // As the adove catching of console calls
       _catchConsole();
+      _injectDom();
    };
 
    // Intialize

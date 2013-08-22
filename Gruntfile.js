@@ -20,6 +20,7 @@ module.exports = function( grunt ) {
           },
           src: [
             "js/index.js",
+            "js/dom.js",
             "js/logger.js",
             "js/util.js",
             "js/string.js",
@@ -29,7 +30,6 @@ module.exports = function( grunt ) {
             "js/core.js",
             "js/confluence.js",
             "js/responsive.js",
-            "js/dom.js",
             "js/outro.js"
           ],
           dest: "dist/scandio-<%= pkg.version %>.js"
@@ -90,12 +90,17 @@ module.exports = function( grunt ) {
          }
       },
       copy: {
-         main: {
+         scandiojs: {
             files: [
                {src: "dist/scandio-<%= pkg.version %>.js", dest: "dist/scandio.js"},
                {src: "dist/scandio-<%= pkg.version %>.min.js", dest: "dist/scandio.min.js"},
                {src: "dist/scandio-<%= pkg.version %>.min.map", dest: "dist/scandio.min.map"}
             ]
+         },
+         scandiocss: {
+            files: [
+               {src: "dist/scandio-<%= pkg.version %>.css", dest: "dist/scandio.css"},
+               {src: "dist/scandio-<%= pkg.version %>.min.css", dest: "dist/scandio.min.css"}            ]
          }
       },
       docco: {

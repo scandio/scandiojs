@@ -22,6 +22,8 @@
    var
       ß                  = null,
       loadedJs           = {},
+      scandioHtmlClass   = 'scandio-js',
+      $scandioEl         = null,
       // Previous version for `ß.noConflict`
       previousScandio    = root.ß,
       // Breaker for loop iteration
@@ -92,11 +94,22 @@
          }
    },
 
+   _injectDom = function() {
+      $(function() {
+         if ( $(scandioHtmlClass).length === 0 ) {
+            $scandioEl = $('<div/>', {
+                class: scandioHtmlClass
+            }).appendTo('body');
+         }
+      });
+   },
+
    // Any call to subordinate initialization function goes here
    // *Note:* We're in pre-creation state
    _initialize = function() {
       // As the adove catching of console calls
       _catchConsole();
+      _injectDom();
    };
 
    // Intialize
@@ -107,14 +120,82 @@
 
    // Version of our library
    ß.VERSION   = '0.0.1';
+// DOM functionality
+// ---------------
+
+// Register dom namespace on scandiojs object
+
+ß.dom = {};
+
+// Closes and secures a cache module with within its own scope
+// *Note:* This function being an IIFE leaves of parameters on outer function
+ß.dom.cache = (function($, ß){
+   // Sets up local cache store
+   var
+      cache = {},
+
+      // Handler of DOMNodeRemoved handling external node removals
+      // Sorry, I didn't hack this
+      nodeRemoved = function(event) {
+         var label, coll, l, t = event.target;
+         for (label in cache) {
+            l = (coll = cache[label]).length;
+            while (l--) {
+               if (coll[l] === t || $.contains(t,coll[l])) {
+                  delete coll[l]; --coll.length;
+               }
+            }
+         }
+      },
+
+      // Updates complete cache or scoped to a label
+      update = function(label) {
+         // Passed in label is string, scoping to that label
+         if (ß.isString(label)) {
+            //Reset cache value at label
+            if(cache[label] !== undefined) {
+               cache[label] = $(cache[label].selector || '');
+            }
+         } else {
+            // For each value in cache refresh it
+            ß.util.each(cache, function($cached, label) {
+               cache[label] = $($cached.selector);
+            });
+         }
+      },
+
+      // Gets a value from cache or loads it from DOM
+      get = function(label, selector) {
+         // Both label and selector passed, cache/dom reading...
+         if (ß.isString(selector) && ß.isString(label)) {
+            // ...either from cache or DOM
+            cache[label] = cache[label] || $(selector);
+         }
+
+         // What the callee gets: a jQuery object
+         return cache[label];
+      };
+
+   // Bind to node removal in DOM
+   $(document).on('DOMNodeRemoved', nodeRemoved);
+
+   // Return public functions in object literal
+   return {
+      get:     get,
+      update:  update
+   };
+}(jQuery, ß));
 // Debug/logging module
 // ---------------
 
 // Sets up logger object with level and log-history
 ß.logger = {
    level: 5,
-   logs: {}
+   logs: {},
+   logDom: true
 };
+
+ß.debug = {};
 
 // `ß.debug` will get a set of methods (*see return-statement*)
 ß.debug = (function(){
@@ -122,12 +203,44 @@
       console  = window.console,
       length   = logMethods.length,
       methods  = {},
+      alertEls = {
+         debug: 'info',
+         error: 'danger',
+         info: 'info',
+         log: 'success',
+         warn: 'warning'
+      },
       // Closes the scope for `method and level`
       // *Note:* Due to js and its state-maintainance for closures
       // the last passed argument would otherwise win
       createLogger = function (method, level) {
+         var
+            logElWrapperPath  = 'scandio-log--' + method,
+            logElInnerPath    = 'alert alert-' + alertEls[method] || method;
+
          // Sets up history for the log-method
          ß.logger.logs[method] = [];
+
+         if (ß.logger.logDom === true) {
+            $(function() {
+               $('<div/>', {
+                  class: logElWrapperPath
+               }).appendTo($scandioEl).html(
+                  $('<div />', {
+                     class: logElInnerPath
+                  })
+               );
+            });
+
+            ß.dom[method] = function(msg) {
+               var
+                  className = ".alert-" + alertEls[method] || method,
+                  $logEl = ß.dom.cache.get(logElInnerPath, className).length > 0 ?
+                     ß.dom.cache.get(logElInnerPath, className) : ß.dom.cache.update(logElInnerPath);
+
+               if (ß.logger.logDom && $logEl && $logEl.length > 0) { $logEl.append(msg + '<hr />'); }
+            };
+         }
 
          // The return value's log-type gets a function
          methods[method] = function() {
@@ -135,8 +248,9 @@
             var args = slice.call(arguments);
 
             // Only log to console if required by level
-            if(ß.logger.level > level) {
+            if (ß.logger.level > level) {
                console[method].apply(console, args);
+               ß.dom[method].apply(ß, args);
             }
 
             // but always push it to history
@@ -149,8 +263,7 @@
 
    // Now the `ß.debug`-object gets its functions
    return methods;
-})();
-// Utility functions
+})();// Utility functions
 // ---------------
 
 // Register util namespace on scandiojs object
@@ -810,69 +923,6 @@
 ß.responsive.breakpoint = function(name) {
    return $( ß.responsive.breakpointEl ).html() === name;
 };
-// DOM functionality
-// ---------------
-
-// Register dom namespace on scandiojs object
-
-ß.dom = {};
-
-// Closes and secures a cache module with within its own scope
-// *Note:* This function being an IIFE leaves of parameters on outer function
-ß.dom.cache = (function($, ß){
-   // Sets up local cache store
-   var
-      cache = {},
-
-      // Handler of DOMNodeRemoved handling external node removals
-      // Sorry, I didn't hack this
-      nodeRemoved = function(event) {
-         var label, coll, l, t = event.target;
-         for (label in cache) {
-            l = (coll = cache[label]).length;
-            while (l--) {
-               if (coll[l] === t || $.contains(t,coll[l])) {
-                  delete coll[l]; --coll.length;
-               }
-            }
-         }
-      },
-
-      // Updates complete cache or scoped to a label
-      update = function(label) {
-         // Passed in label is string, scoping to that label
-         if (ß.isString(label)) {
-            //Reset cache value at label
-            cache[label] = $(cache[label].selector || '');
-         } else {
-            // For each value in cache refresh it
-            ß.util.each(cache, function($cached, label) {
-               cache[label] = $($cached.selector);
-            });
-         }
-      },
-
-      // Gets a value from cache or loads it from DOM
-      get = function(label, selector) {
-         // Both label and selector passed, cache/dom reading...
-         if (ß.isString(selector) && ß.isString(label)) {
-            // ...either from cache or DOM
-            cache[label] = cache[label] || $(selector);
-         }
-
-         // What the callee gets: a jQuery object
-         return cache[label];
-      };
-
-   // Bind to node removal in DOM
-   $(document).on('DOMNodeRemoved', nodeRemoved);
-
-   // Return public functions in object literal
-   return {
-      get:     get,
-      update:  update
-   };
-}(jQuery, ß));
 // Outro, AMD and conflict resolution
 // ---------------
 

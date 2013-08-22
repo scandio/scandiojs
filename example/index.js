@@ -208,7 +208,7 @@ var logIt = function(here) {
          log();
       },
       log = function() {
-         ß.debug.log('Module oding some work');
+         ß.debug.log('Module doing some work');
       };
 
    return {

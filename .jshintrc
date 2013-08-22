@@ -15,7 +15,8 @@
    "globals": {
       "define": true,
       "jQuery": true,
-      "$": true
+      "$": true,
+      "alert": true
    },
    "node": true
 }

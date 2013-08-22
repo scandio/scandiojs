@@ -31,7 +31,9 @@
          // Passed in label is string, scoping to that label
          if (ß.isString(label)) {
             //Reset cache value at label
-            cache[label] = $(cache[label].selector || '');
+            if(cache[label] !== undefined) {
+               cache[label] = $(cache[label].selector || '');
+            }
          } else {
             // For each value in cache refresh it
             ß.util.each(cache, function($cached, label) {
