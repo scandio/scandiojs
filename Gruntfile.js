@@ -39,7 +39,7 @@ module.exports = function( grunt ) {
             separator: ""
           },
           src: [
-            "assets/css/scandiojs.css",
+            "assets/css/common.css",
             "assets/css/alert.css"
           ],
           dest: "dist/scandio-<%= pkg.version %>.css"
