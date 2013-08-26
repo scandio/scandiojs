@@ -89,8 +89,8 @@
 };
 
 // Accesses an obj by dot-notation allowing a default/notFound value
-// *E.g.:* ß.util.dots("name.fullname", {name: {fullname: 'me'}}) returns me
-ß.util.dots = function(dots, obj, notFound) {
+// *E.g.:* ß.util.getByDots("name.fullname", {name: {fullname: 'me'}}) returns me
+ß.util.getByDots = function(dots, obj, notFound) {
    // Setup path and destination variables
    var
       dest   = obj,
@@ -107,6 +107,31 @@
 
    // Dest or notFound
    return dest || notFound;
+};
+
+// Sets an obj by dot-notation
+// *E.g.:* ß.util.setByDots("name.firstname", "doop", {name: {fullname: 'me'}}) returns me
+ß.util.setByDots = function(dots, value, obj) {
+   // Split string by dots
+   var
+      path  = dots.split("."),
+      key   = null;
+
+   // Moves in on the path
+   while (path.length > 1) {
+      // Gets the latest key
+      key = path.shift();
+
+      // Creates empty object if not found
+      if (!ß.isObject(obj)) { obj = {}; }
+      if (!(key in obj)) { obj[key] = {}; }
+
+      // Sets the nesting to next deeper key
+      obj = obj[key];
+   }
+
+   // Returns the result of setting the value
+   return obj[path[0]] = value;
 };
 
 // Collects all function from an object and returns an array containing them

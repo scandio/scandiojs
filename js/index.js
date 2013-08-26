@@ -23,6 +23,7 @@
       ß                  = null,
       loadedJs           = {},
       scandioHtmlClass   = 'scandio-js',
+      injectDOM          = true,
       $scandioEl         = null,
       // Previous version for `ß.noConflict`
       previousScandio    = root.ß,
@@ -99,7 +100,7 @@
 
    _injectDom = function() {
       $(function() {
-         if ( $(scandioHtmlClass).length === 0 ) {
+         if ( injectDOM && $(scandioHtmlClass).length === 0 ) {
             $scandioEl = $('<div/>', {
                 class: scandioHtmlClass
             }).appendTo('body');

@@ -23,6 +23,7 @@
       ß                  = null,
       loadedJs           = {},
       scandioHtmlClass   = 'scandio-js',
+      injectDOM          = true,
       $scandioEl         = null,
       // Previous version for `ß.noConflict`
       previousScandio    = root.ß,
@@ -99,7 +100,7 @@
 
    _injectDom = function() {
       $(function() {
-         if ( $(scandioHtmlClass).length === 0 ) {
+         if ( injectDOM && $(scandioHtmlClass).length === 0 ) {
             $scandioEl = $('<div/>', {
                 class: scandioHtmlClass
             }).appendTo('body');
@@ -524,8 +525,8 @@
 };
 
 // Accesses an obj by dot-notation allowing a default/notFound value
-// *E.g.:* ß.util.dots("name.fullname", {name: {fullname: 'me'}}) returns me
-ß.util.dots = function(dots, obj, notFound) {
+// *E.g.:* ß.util.getByDots("name.fullname", {name: {fullname: 'me'}}) returns me
+ß.util.getByDots = function(dots, obj, notFound) {
    // Setup path and destination variables
    var
       dest   = obj,
@@ -542,6 +543,31 @@
 
    // Dest or notFound
    return dest || notFound;
+};
+
+// Sets an obj by dot-notation
+// *E.g.:* ß.util.setByDots("name.firstname", "doop", {name: {fullname: 'me'}}) returns me
+ß.util.setByDots = function(dots, value, obj) {
+   // Split string by dots
+   var
+      path  = dots.split("."),
+      key   = null;
+
+   // Moves in on the path
+   while (path.length > 1) {
+      // Gets the latest key
+      key = path.shift();
+
+      // Creates empty object if not found
+      if (!ß.isObject(obj)) { obj = {}; }
+      if (!(key in obj)) { obj[key] = {}; }
+
+      // Sets the nesting to next deeper key
+      obj = obj[key];
+   }
+
+   // Returns the result of setting the value
+   return obj[path[0]] = value;
 };
 
 // Collects all function from an object and returns an array containing them
@@ -619,6 +645,48 @@
    // only if it is an object
    return obj === Object(obj);
 };
+// Persistent store module
+// ---------------
+
+// Register store namespace on scandiojs object
+ß.store = {};
+
+ß.store.init = (function() {
+   if (injectDOM === false) { return; }
+
+   var
+      script     = document.createElement("script");
+
+   script.type    = "application/x-json";
+   script.id      = "scandio-js--store";
+
+   ß.store.script = $(script);
+   ß.store.script.text('{}');
+
+   document.head.appendChild(script);
+
+   ß.store.script = $(script);
+})();
+
+ß.store.get = function(dots, notFound) {
+   if (injectDOM === false) { ß.debug.warn("DOM injection disabled globally, script-tag not present!"); return; }
+
+   var storeData = $.parseJSON( ß.store.script.text() );
+
+   return ß.util.getByDots(dots, storeData, notFound);
+};
+
+ß.store.set = function(dots, value) {
+   if (injectDOM === false) { ß.debug.warn("DOM injection disabled globally, script-tag not present!"); return; }
+
+   var storeData = $.parseJSON( ß.store.script.text() );
+
+   ß.util.setByDots(dots, value, storeData);
+
+   ß.store.script.text( JSON.stringify(storeData) );
+
+   return value;
+};
 // Timining functions
 // ---------------
 
@@ -693,7 +761,7 @@
          return fn.apply(null, args);
    }, ms);
 };
-// Function utilising ajax
+// Functions utilising ajax
 // ---------------
 
 // Register ajax namespace on scandiojs object

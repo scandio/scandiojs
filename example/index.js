@@ -112,7 +112,7 @@ var even = ß.util.filter(numbers, function(number) {
 // Access everything via dot-notation providing optional default value
 
 var me = {forename: 'Tobias', surname: 'Deekens', company: {name: 'Scandio Gmbh'}};
-var street = ß.util.dots('company.street', me, 'In der Rosenau 6');
+var street = ß.util.getByDots('company.street', me, 'In der Rosenau 6');
 ß.debug.info(street);
 
 // Extract function from objects (mostly used internally)
@@ -267,3 +267,9 @@ var logIt = function(here) {
 // Implde and explode strings/arrays
 ß.debug.log("If you ever want to explode the company you get: " + ß.string.explode("Scandio GmbH", " "));
 ß.debug.log("but please put it together again, would you: " + ß.string.implode("", ["Sc", "an", "dio", " Gmb", "H"]));
+
+// Persist values in special script tag for later retrival
+
+ß.store.set('firms.cool', 'Scandio GmbH');
+ß.debug.log( ß.store.get('firms.cool', 'Not found') );
+ß.debug.log( ß.store.get('firms.uncool', 'Not found') );

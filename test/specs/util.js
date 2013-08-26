@@ -120,13 +120,13 @@ describe("A suite testing the utility functions", function() {
       it("should access nesting properties on an object", function() {
          temp = {name: {firstname: "Scandio", lastname: "GmbH"}, location: "München"};
 
-         expect(ß.util.dots("name.firstname", temp)).toEqual("Scandio");
+         expect(ß.util.getByDots("name.firstname", temp)).toEqual("Scandio");
       });
 
       it("should use a default value if the prop is not found", function() {
          temp = {name: {firstname: "Scandio", lastname: "GmbH"}, location: "München"};
 
-         expect(ß.util.dots("name.firstname.none", temp, null)).toBe(null);
+         expect(ß.util.getByDots("name.firstname.none", temp, null)).toBe(null);
       });
 
       it("should access nesting properties on an array", function() {
@@ -136,7 +136,7 @@ describe("A suite testing the utility functions", function() {
          temp["name"]["lastname"] = "GmbH";
          temp["location"] = "München";
 
-         expect(ß.util.dots("name.firstname", temp)).toEqual("Scandio");
+         expect(ß.util.getByDots("name.firstname", temp)).toEqual("Scandio");
       });
 
       it("should use a default value if the prop is not found", function() {
@@ -146,7 +146,7 @@ describe("A suite testing the utility functions", function() {
          temp["name"]["lastname"] = "GmbH";
          temp["location"] = "München";
 
-         expect(ß.util.dots("name.firstname.none", temp, null)).toBe(null);
+         expect(ß.util.getByDots("name.firstname.none", temp, null)).toBe(null);
       });
    });
 
