@@ -30,4 +30,29 @@ describe("A suite testing the store functionality of scandio.js", function() {
       expect(ß.store.get('foo.bar')).not.toEqual([4, 5, 6]);
    });
 
+   it("should merge existing stores into one", function() {
+      var
+         script            = document.createElement("script");
+
+      script.type       = "application/x-json";
+      script.className  = $('.scandio-js--store').last().attr('class');
+
+      document.head.appendChild(script);
+
+      $('.scandio-js--store').last().text(JSON.stringify({
+         yada: {
+            yada: 'yada',
+            foo: 20
+         }
+      }));
+
+      ß.store.init();
+
+      expect(ß.store.get('foo.bar')).toEqual([1, 2, 3]);
+      expect(ß.store.get('foo.bar2')).toEqual([4, 5, 6]);
+
+      expect(ß.store.get('yada.yada')).toEqual('yada');
+      expect(ß.store.get('yada.foo')).toEqual(20);
+   });
+
 });

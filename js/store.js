@@ -9,22 +9,30 @@
    // Gets all scripts and sets up the cache for merging
    var
       scripts     = $('.' + scandioStoreClass),
+      tempCache   = null,
       mergeCache  = {};
 
    // The main script to be the merge-bucket
    ß.store.script = scripts.last();
 
+   // Respects actually used script-tag having data already
+   mergeCache = ß.store.script.text() !== "" && ß.isObject(
+      tempCache = $.parseJSON(
+         ß.store.script.text()
+      )
+   ) ? tempCache : mergeCache;
+
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
-   ß.util.each(scripts.slice(0, scripts.length - 2), function(script) {
-      ß.util.extend(mergeCache, $.parseJSON( script.text() ));
+   ß.util.each(scripts.slice(0, scripts.length - 1), function(script) {
+      ß.util.extend(mergeCache, $.parseJSON( $(script).text() ));
       script.remove();
    });
 
    // Updates the merged contents to the main-script
    ß.store.script.text( JSON.stringify(mergeCache) );
 
-   return true;
+   return ß.store.script.length === 1;
 };
 
 // Gets a value from the script-tag
