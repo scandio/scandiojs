@@ -86,7 +86,7 @@
          noop     = function () {},
          methods  = logMethods.concat(consoleMethods),
          length   = methods.length,
-         console  = (window.console = window.console || {});
+         console  = ( window.console = window.console || {} );
 
          // Loop over all methods (log and console)
          while (length--) {

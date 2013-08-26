@@ -41,7 +41,7 @@ module.exports = function( grunt ) {
           },
           src: [
             "assets/css/common.css",
-            "assets/css/alert.css"
+            "assets/css/logger.css"
           ],
           dest: "dist/scandio-<%= pkg.version %>.css"
         }

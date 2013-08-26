@@ -26,11 +26,11 @@
       logElType            = '<div />',
       $loggerEl            = null,
       alertEls = {
-         debug: 'info',
-         error: 'danger',
-         info: 'info',
-         log: 'success',
-         warn: 'warning'
+         debug:   'info',
+         error:   'danger',
+         info:    'info',
+         log:     'success',
+         warn:    'warning'
       },
       // Pretty prints a log message stringifying objects and arrays as JSON
       logMessage           = function(args) {
@@ -81,7 +81,7 @@
                $logEl = $(logElIdentifier);
 
                ß.util.each(ß.logger.logs[method], function(log) {
-                  $logEl.append(log + '<hr />');
+                  $logEl.prepend(log + '<hr />');
                });
             });
          }
@@ -94,7 +94,7 @@
             if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
 
             // Only log to DOM if possible and wanted
-            if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.append(logMessage(args) + '<hr />'); }
+            if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.prepend(logMessage(args) + '<hr />'); }
          };
 
          // The return value's log-type gets a function

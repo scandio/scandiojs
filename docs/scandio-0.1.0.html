@@ -330,7 +330,7 @@
          noop     = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>},
          methods  = logMethods.concat(consoleMethods),
          length   = methods.length,
-         console  = (window.console = window.console || {});</pre></div></div>
+         console  = ( window.console = window.console || {} );</pre></div></div>
             
         </li>
         
@@ -1309,11 +1309,11 @@ E.g. <code>ß.string.replace(&#39;Scandio Gm&#39;, &#39;Gm&#39;, &#39;GmbH&#39;)
       logElType            = <span class="string">'&lt;div /&gt;'</span>,
       $loggerEl            = <span class="literal">null</span>,
       alertEls = {
-         debug: <span class="string">'info'</span>,
-         error: <span class="string">'danger'</span>,
-         info: <span class="string">'info'</span>,
-         log: <span class="string">'success'</span>,
-         warn: <span class="string">'warning'</span>
+         debug:   <span class="string">'info'</span>,
+         error:   <span class="string">'danger'</span>,
+         info:    <span class="string">'info'</span>,
+         log:     <span class="string">'success'</span>,
+         warn:    <span class="string">'warning'</span>
       },</pre></div></div>
             
         </li>
@@ -1478,7 +1478,7 @@ the last passed argument would otherwise win</p>
                $logEl = $(logElIdentifier);
 
                ß.util.each(ß.logger.logs[method], <span class="keyword">function</span>(log) {
-                  $logEl.append(log + <span class="string">'&lt;hr /&gt;'</span>);
+                  $logEl.prepend(log + <span class="string">'&lt;hr /&gt;'</span>);
                });
             });
          }</pre></div></div>
@@ -1527,7 +1527,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.append(logMessage(args) + <span class="string">'&lt;hr /&gt;'</span>); }
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.prepend(logMessage(args) + <span class="string">'&lt;hr /&gt;'</span>); }
          };</pre></div></div>
             
         </li>
