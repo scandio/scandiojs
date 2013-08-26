@@ -359,6 +359,12 @@
                      })
                   )
                );
+
+               $logEl = $(logElIdentifier);
+
+               ß.util.each(ß.logger.logs[method], function(log) {
+                  $logEl.append(log + '<hr />');
+               });
             });
          }
 
