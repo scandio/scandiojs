@@ -150,6 +150,29 @@ describe("A suite testing the utility functions", function() {
       });
    });
 
+   describe("tests on setting object values using dot notation", function() {
+      it("should set properties on an object", function() {
+         temp = {};
+
+         expect(ß.util.setByDots("name", 'Scandio GmbH', temp)).toEqual("Scandio GmbH");
+         expect(temp.name).toEqual("Scandio GmbH");
+      });
+
+      it("should set nested properties on an object", function() {
+         temp = {name: {firstname: "Scandio", lastname: "GmbH"}, location: "München"};
+
+         expect(ß.util.setByDots("name.zip", '9911', temp)).toEqual("9911");
+         expect(temp.name.zip).toEqual("9911");
+      });
+
+      it("should overwrite nested properties on an object", function() {
+         temp = {name: {firstname: "Scandio", lastname: "GmbH"}, location: "München"};
+
+         expect(ß.util.setByDots("name.firstname", 'Scandio GmbH', temp)).toEqual("Scandio GmbH");
+         expect(temp.name.firstname).toEqual("Scandio GmbH");
+      });
+   });
+
    describe("tests extending a source with a destination object", function() {
       it("should extend an object's attributes with another one", function() {
          temp = ß.util.extend({}, {a:"b"});

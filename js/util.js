@@ -131,7 +131,7 @@
    }
 
    // Returns the result of setting the value
-   return obj[path[0]] = value;
+   return obj[ path[0] ] = value;
 };
 
 // Collects all function from an object and returns an array containing them

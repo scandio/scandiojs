@@ -48,12 +48,12 @@ describe("A suite testing the timing functions", function() {
       it("should break the execution of a function with arguments", function() {
          runs(function() {
             this.counter = 0;
+            var that = this;
 
             this.breakedIncrementor = ß.timing.breaks(function(to) {
                this.counter = to;
             }, 10);
 
-            this.breakedIncrementor(5);
             this.breakedIncrementor(10);
 
             //Not called
@@ -61,11 +61,11 @@ describe("A suite testing the timing functions", function() {
 
             ß.timing.delay(function() {
                //Called once now
-               expect(that.counter).toEqual(5);
-            }, 15);
+               expect(that.counter).toEqual(10);
+            }, 10);
          });
 
-         waits(15);
+         waits(10);
 
          runs(function() {
             expect(this.counter).toEqual(10);
