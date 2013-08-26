@@ -39,6 +39,11 @@
               </a>
             
               
+              <a class="source" href="device.html">
+                device.js
+              </a>
+            
+              
               <a class="source" href="dom.html">
                 dom.js
               </a>
@@ -66,6 +71,11 @@
               
               <a class="source" href="responsive.html">
                 responsive.js
+              </a>
+            
+              
+              <a class="source" href="store.html">
+                store.js
               </a>
             
               
@@ -462,7 +472,7 @@ and if its slice from 0 to the starting string&#39;s length is the starting stri
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   string   = String(string);
+            <div class="content"><div class='highlight'><pre>   string   = String(string),
    what     = String(what);</pre></div></div>
             
         </li>
@@ -537,8 +547,7 @@ and if its slice from the end to the length of its suppoed ending is equals to i
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <p>Explodes/splits a string with by given delimiter
-<em>Note:</em> Arguments are faked, it&#39;ll be sliced up in the function</p>
+              <p>Explodes/splits a string with by given delimiter</p>
 
             </div>
             
@@ -557,7 +566,7 @@ and if its slice from the end to the length of its suppoed ending is equals to i
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   delimiter   = String(delimiter);
+            <div class="content"><div class='highlight'><pre>   delimiter   = String(delimiter),
    string      = String(string);</pre></div></div>
             
         </li>
@@ -574,6 +583,45 @@ and if its slice from the end to the length of its suppoed ending is equals to i
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> string.split(delimiter);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Replaces a substring within a string
+E.g. <code>ß.string.replace(&#39;Scandio Gm&#39;, &#39;Gm&#39;, &#39;GmbH&#39;)</code> will return &#39;Scandio GmbH&#39;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.string.replace = <span class="keyword">function</span>(string, subString, replacer) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Wrap the passed in argument in a String object for sanity</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   string      = String(string);
+   subString   = String(subString);
+   replacer    = String(replacer);
+
+   <span class="keyword">var</span>
+      regExp   = <span class="keyword">new</span> RegExp( subString.toLowerCase(), <span class="string">"gi"</span> );
+
+   <span class="keyword">return</span> string.replace(regExp, replacer);
 };</pre></div></div>
             
         </li>

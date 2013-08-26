@@ -102,12 +102,13 @@ module.exports = function( grunt ) {
          scandiocss: {
             files: [
                {src: "dist/scandio-<%= pkg.version %>.css", dest: "dist/scandio.css"},
-               {src: "dist/scandio-<%= pkg.version %>.min.css", dest: "dist/scandio.min.css"}            ]
+               {src: "dist/scandio-<%= pkg.version %>.min.css", dest: "dist/scandio.min.css"}
+            ]
          }
       },
       docco: {
          docs: {
-            src: ['src/*js', 'dist/scandio-<%= pkg.version %>.js'],
+            src: ['js/*js', 'dist/scandio-<%= pkg.version %>.js'],
             options: {
                output: 'docs'
             }

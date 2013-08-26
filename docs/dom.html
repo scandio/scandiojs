@@ -39,6 +39,11 @@
               </a>
             
               
+              <a class="source" href="device.html">
+                device.js
+              </a>
+            
+              
               <a class="source" href="dom.html">
                 dom.js
               </a>
@@ -66,6 +71,11 @@
               
               <a class="source" href="responsive.html">
                 responsive.js
+              </a>
+            
+              
+              <a class="source" href="store.html">
+                store.js
               </a>
             
               
@@ -223,7 +233,9 @@ Sorry, I didn&#39;t hack this</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            cache[label] = $(cache[label].selector || <span class="string">''</span>);
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span>(cache[label] !== <span class="literal">undefined</span>) {
+               cache[label] = $(cache[label].selector || <span class="string">''</span>);
+            }
          } <span class="keyword">else</span> {</pre></div></div>
             
         </li>

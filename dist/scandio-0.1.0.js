@@ -686,10 +686,6 @@
    return true;
 };
 
-$(function() {
-   ß.store.init();
-});
-
 // Gets a value from the script-tag
 // *E.g.:* `ß.store.get('firms.microsoft', false)` might return a company object-literal
 // or false if it is not set
@@ -1135,6 +1131,12 @@ $(function() {
 };
 // Outro, AMD and conflict resolution
 // ---------------
+
+// Global DOM-Ready which shall be used whenever possible
+// Logger does not use it cause it heavily relies on variable hoisting
+$(function() {
+   ß.store.init();
+});
 
 // Tries to resolve version conflicts by restoring the previously loaded version globally
 ß.noConflict = function() {

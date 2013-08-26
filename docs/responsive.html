@@ -39,6 +39,11 @@
               </a>
             
               
+              <a class="source" href="device.html">
+                device.js
+              </a>
+            
+              
               <a class="source" href="dom.html">
                 dom.js
               </a>
@@ -66,6 +71,11 @@
               
               <a class="source" href="responsive.html">
                 responsive.js
+              </a>
+            
+              
+              <a class="source" href="store.html">
+                store.js
               </a>
             
               
@@ -103,7 +113,7 @@
               <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Utility module for responsive</h2>
+              <h2>Utility module for responsive design</h2>
 
             </div>
             
@@ -121,43 +131,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>ß.responsive = {
-   mobile:           [<span class="string">"android"</span>, <span class="string">"webos"</span>, <span class="string">"iphone"</span>, <span class="string">"ipad"</span>, <span class="string">"ipod"</span>, <span class="string">"blackberry"</span>],
    breakpointEl:     <span class="string">'.breakpoint'</span>
-};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-3">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <p>A rudimentary function testing for mobile devices
-<em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>ß.responsive.isMobile = <span class="keyword">function</span>() {
-   <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(ß.responsive.mobile.join(<span class="string">'|'</span>)),
-      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>Checks the navigator&#39;s user agent against the list of mobile devices</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
 };
 
 ß.responsive.breakpoint = <span class="keyword">function</span>(name) {

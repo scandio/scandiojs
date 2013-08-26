@@ -11,6 +11,92 @@
   <div id="container">
     <div id="background"></div>
     
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="scandio-0.1.0.html">
+                scandio-0.1.0.js
+              </a>
+            
+              
+              <a class="source" href="ajax.html">
+                ajax.js
+              </a>
+            
+              
+              <a class="source" href="confluence.html">
+                confluence.js
+              </a>
+            
+              
+              <a class="source" href="core.html">
+                core.js
+              </a>
+            
+              
+              <a class="source" href="device.html">
+                device.js
+              </a>
+            
+              
+              <a class="source" href="dom.html">
+                dom.js
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+              
+              <a class="source" href="is.html">
+                is.js
+              </a>
+            
+              
+              <a class="source" href="logger.html">
+                logger.js
+              </a>
+            
+              
+              <a class="source" href="outro.html">
+                outro.js
+              </a>
+            
+              
+              <a class="source" href="responsive.html">
+                responsive.js
+              </a>
+            
+              
+              <a class="source" href="store.html">
+                store.js
+              </a>
+            
+              
+              <a class="source" href="string.html">
+                string.js
+              </a>
+            
+              
+              <a class="source" href="timing.html">
+                timing.js
+              </a>
+            
+              
+              <a class="source" href="util.html">
+                util.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
     <ul class="sections">
         
           <li id="title">
@@ -2704,11 +2790,7 @@ removing it afterwards</p>
             <div class="content"><div class='highlight'><pre>   ß.store.script.text( JSON.stringify(mergeCache) );
 
    <span class="keyword">return</span> <span class="literal">true</span>;
-};
-
-$(<span class="keyword">function</span>() {
-   ß.store.init();
-});</pre></div></div>
+};</pre></div></div>
             
         </li>
         
@@ -4479,11 +4561,14 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-270">&#182;</a>
               </div>
-              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
+              <p>Global DOM-Ready which shall be used whenever possible
+Logger does not use it cause it heavily relies on variable hoisting</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.noConflict = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
+   ß.store.init();
+});</pre></div></div>
             
         </li>
         
@@ -4494,11 +4579,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-271">&#182;</a>
               </div>
-              <p>Retore the <code>previousScandio</code></p>
+              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   root.ß = previousScandio;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.noConflict = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -4508,6 +4593,21 @@ it will be invoked on DOM-Ready</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-272">&#182;</a>
+              </div>
+              <p>Retore the <code>previousScandio</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   root.ß = previousScandio;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-273">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-273">&#182;</a>
               </div>
               <p>Return yerself to continue</p>
 
@@ -4519,11 +4619,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-273">
+        <li id="section-274">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-273">&#182;</a>
+                <a class="pilcrow" href="#section-274">&#182;</a>
               </div>
               <p>Support for AMD/RequireJS
 If define function deefined and its amd</p>
@@ -4535,11 +4635,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-274">
+        <li id="section-275">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-274">&#182;</a>
+                <a class="pilcrow" href="#section-275">&#182;</a>
               </div>
               <p>Define Scandio</p>
 
@@ -4550,11 +4650,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-275">
+        <li id="section-276">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-275">&#182;</a>
+                <a class="pilcrow" href="#section-276">&#182;</a>
               </div>
               <p>and return the library</p>
 
