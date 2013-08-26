@@ -1388,6 +1388,12 @@ the last passed argument would otherwise win</p>
                      })
                   )
                );
+
+               $logEl = $(logElIdentifier);
+
+               ß.util.each(ß.logger.logs[method], <span class="keyword">function</span>(log) {
+                  $logEl.append(log + <span class="string">'&lt;hr /&gt;'</span>);
+               });
             });
          }</pre></div></div>
             
