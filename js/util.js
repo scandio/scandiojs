@@ -48,7 +48,7 @@
    }
 };
 
-// Extends an object with all the arguments passed in other object
+// Extends an object with all the arguments passed in other objects
 ß.util.extend = function(obj) {
    // `obj` is destination `arguments`-2nd parater is source
    ß.util.each(slice.call(arguments, 1), function(source) {

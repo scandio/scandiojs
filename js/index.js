@@ -23,6 +23,7 @@
       ß                  = null,
       loadedJs           = {},
       scandioHtmlClass   = 'scandio-js',
+      scandioStoreClass  = 'scandio-js--store',
       injectDOM          = true,
       $scandioEl         = null,
       // Previous version for `ß.noConflict`
@@ -100,10 +101,21 @@
 
    _injectDom = function() {
       $(function() {
+         var
+            script   = null;
+
          if ( injectDOM && $(scandioHtmlClass).length === 0 ) {
             $scandioEl = $('<div/>', {
                 class: scandioHtmlClass
             }).appendTo('body');
+         }
+
+         if (injectDOM) {
+            script            = document.createElement("script");
+            script.type       = "application/x-json";
+            script.className  = scandioStoreClass;
+
+            document.head.appendChild(script);
          }
       });
    },

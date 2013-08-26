@@ -1,6 +1,12 @@
 // Outro, AMD and conflict resolution
 // ---------------
 
+// Global DOM-Ready which shall be used whenever possible
+// Logger does not use it cause it heavily relies on variable hoisting
+$(function() {
+   ß.store.init();
+});
+
 // Tries to resolve version conflicts by restoring the previously loaded version globally
 ß.noConflict = function() {
    // Retore the `previousScandio`
