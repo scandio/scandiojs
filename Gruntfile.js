@@ -21,10 +21,10 @@ module.exports = function( grunt ) {
           src: [
             "js/index.js",
             "js/dom.js",
+            "js/string.js",
             "js/logger.js",
             "js/util.js",
             "js/is.js",
-            "js/string.js",
             "js/timing.js",
             "js/ajax.js",
             "js/core.js",

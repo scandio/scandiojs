@@ -185,6 +185,119 @@
       update:  update
    };
 }(jQuery, ß));
+// String functions
+// ---------------
+
+// Register string namespace on scandiojs object
+ß.string = {};
+
+// Capitalizes a given string (scandio becomes Scandio etc.)
+ß.string.capitalize = function(string) {
+   // First char gets upppercased every other char lowercased
+   return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+};
+
+// Lowercases a given string (ScanDiO becomes scandio)
+ß.string.lower = function(string) {
+   // Just everything to lowercase
+   return string.toLowerCase();
+};
+
+// Cleans up the mess of a string ('  Scandio    GmbH   ' becomes 'Scandio GmbH')
+ß.string.clean = function(string) {
+   // Trims the mess (whitespace default) and replaces consecutive (s+) whitespaces within with one whitespace
+   return ß.string.trim(string).replace(/\s+/g, ' ');
+};
+
+// Trims away the given characters around a given string (defaults to whitespace)
+ß.string.trim = function(string, characters){
+   // Uses nativeTrim if defined and no characters are given (not supported by native impl.)
+   if (!characters && nativeTrim) {
+      return nativeTrim.call(string);
+   }
+
+   // A RegExp starting at the beginning of the string, the string wrapped by the `characters`
+   // replacing them around the `string`
+   return String(string).replace(new RegExp('^' + characters + '+|' + characters + '+$', 'g'), '');
+};
+
+// Chops a string up `at` every position in the string `ß.string.chop('chopchop', 3) === 'cho pch op'`
+ß.string.chop = function(string, at) {
+   // Better make a string out of the passed in 'string'
+   string = String(string);
+
+   // Double NOT bitwise (sorta same as Math.floor())
+   at = ~~at;
+
+   // RegExp works like a UNIX expansion list, expanding around the whitespace from 1-to-at
+   return at > 0 ? string.match(new RegExp('.{1,' + at + '}', 'g')) : [string];
+};
+
+// Finds a string within a string (fuzzy) e.g. `ß.string.contains('I'veADream', 'Dream') === true`
+ß.string.contains = function(needle, haystack) {
+   // Don't do work if no needle passed (but we've found something right!)
+   if (needle === '') { return true; }
+   // Empty haystack should also lead to some chilling without having found something
+   if (haystack === null || haystack === undefined) { return false; }
+
+   // Do the old trick of using `indexOf` of the haystack with the needle
+   return String(haystack).indexOf(needle) !== -1;
+};
+
+// Checks if string starts with a given string
+ß.string.starts = function(string, what) {
+   // Wrap the passed in arguments in a String object for sanity
+   string   = String(string);
+   what     = String(what);
+
+   // If the string is longer, equally long than the one it's supposed to start with
+   // and if its slice from 0 to the starting string's length is the starting string
+   return string.length >= what.length && string.slice(0, what.length) === what;
+};
+
+// Checks if string ends with a given string
+ß.string.ends = function(string, what) {
+   // Wrap the passed in arguments in a String object for sanity
+   string   = String(string),
+   what     = String(what);
+
+   // If the string is longer, equally long than the one it's supposed to end with
+   // and if its slice from the end to the length of its suppoed ending is equals to its ending
+   return string.length >= what.length && string.slice(string.length - what.length) === what;
+};
+
+// Implodes/joins a string with a given glue
+ß.string.implode = function(glue, pieces) {
+   // Defaults the glue to empty string
+   if (glue === null || glue === undefined) { glue = ''; }
+
+   // Pipes call through join on pieces
+   return pieces.join(glue);
+};
+
+// Explodes/splits a string with by given delimiter
+ß.string.explode = function(string, delimiter) {
+   // Wrap the passed in argument in a String object for sanity
+   delimiter   = String(delimiter),
+   string      = String(string);
+
+   // Pipes passed in arguments through `split`
+   return string.split(delimiter);
+};
+
+// Replaces a substring within a string
+// E.g. `ß.string.replace('Scandio Gm', 'Gm', 'GmbH')` will return 'Scandio GmbH'
+ß.string.replace = function(string, subString, replacer) {
+   // Wrap the passed in argument in a String object for sanity
+   string      = String(string);
+   subString   = String(subString);
+   replacer    = String(replacer);
+
+   var
+      regExp   = new RegExp( subString.toLowerCase(), "gi" );
+
+   return string.replace(regExp, replacer);
+};
 // Debug/logging module
 // ---------------
 
@@ -195,19 +308,22 @@
    logDom: false
 };
 
-ß.logger.logDomFn = (function() {
+// Define default logger callback if no custom callback defined
+ß.logger.logDomFn = ß.logger.logDomFn || (function() {
    return ß.logger.logDom || ( window.location.href.indexOf("scandiojs-log-dom") > -1);
 }());
 
 ß.debug = {};
 
 // `ß.debug` will get a set of methods (*see return-statement*)
-ß.debug = (function(){
+ß.debug = (function() {
    var
+      // Shorthands, DOM-element mappings and caching variables
       console              = window.console,
       length               = logMethods.length,
       methods              = {},
       logOuterWrapperPath  = 'scandio-log',
+      logElType            = '<div />',
       $loggerEl            = null,
       alertEls = {
          debug: 'info',
@@ -220,22 +336,25 @@
       // *Note:* Due to js and its state-maintainance for closures
       // the last passed argument would otherwise win
       createLogger = function (method, level) {
+         // DOM-Element names and cache variable
          var
             logElWrapperPath     = logOuterWrapperPath + '--' + method,
             logElInnerPath       = 'alert alert-' + alertEls[method] || method,
-            logElIdentifier      = '.alert.alert-' + alertEls[method] || method,
+            logElIdentifier      = '.' + ß.string.replace(logElInnerPath, ' ', '.'),
             $logEl               = [];
 
          // Sets up history for the log-method
          ß.logger.logs[method] = [];
 
+         // Creates the logger-els only if logDomFn is truthy
          if (ß.logger.logDomFn === true) {
             $(function() {
+               // Maintaines state and creates the logger els
                $loggerEl.append(
-                  $('<div/>', {
+                  $(logElType, {
                      class: logElWrapperPath
                   }).html(
-                     $('<div />', {
+                     $(logElType, {
                         class: logElInnerPath
                      })
                   )
@@ -243,11 +362,14 @@
             });
          }
 
+         // Registers function on DOM-Module for logging with method-name
          ß.dom[method] = function() {
             var args = slice.call(arguments);
 
+            // Query DOM only if nessesary (cache)
             if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
 
+            // Only log to DOM if possible and wanted
             if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.append(args.join(', ') + '<hr />'); }
          };
 
@@ -258,8 +380,11 @@
 
             // Only log to console if required by level
             if (ß.logger.level > level) {
+               // Calls the native console method
                console[method].apply(console, args);
-               if (ß.logger.logDomFn === true) { ß.dom[method].apply(ß, args); }
+
+               // Logs to DOM (function itself decides if intended)
+               ß.dom[method].apply(ß, args);
             }
 
             // but always push it to history
@@ -267,9 +392,10 @@
          };
       };
 
+   // Sets up the outer wrapper for DOM logging
    if (ß.logger.logDomFn === true) {
       $(function() {
-         $loggerEl = $('<div/>', {
+         $loggerEl = $(logElType, {
             class: logOuterWrapperPath
          }).appendTo($scandioEl);
       });
@@ -466,106 +592,7 @@
    // only if it is an object
    return obj === Object(obj);
 };
-// String functions
-// ---------------
-
-// Register string namespace on scandiojs object
-ß.string = {};
-
-// Capitalizes a given string (scandio becomes Scandio etc.)
-ß.string.capitalize = function(string) {
-   // First char gets upppercased every other char lowercased
-   return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
-};
-
-// Lowercases a given string (ScanDiO becomes scandio)
-ß.string.lower = function(string) {
-   // Just everything to lowercase
-   return string.toLowerCase();
-};
-
-// Cleans up the mess of a string ('  Scandio    GmbH   ' becomes 'Scandio GmbH')
-ß.string.clean = function(string) {
-   // Trims the mess (whitespace default) and replaces consecutive (s+) whitespaces within with one whitespace
-   return ß.string.trim(string).replace(/\s+/g, ' ');
-};
-
-// Trims away the given characters around a given string (defaults to whitespace)
-ß.string.trim = function(string, characters){
-   // Uses nativeTrim if defined and no characters are given (not supported by native impl.)
-   if (!characters && nativeTrim) {
-      return nativeTrim.call(string);
-   }
-
-   // A RegExp starting at the beginning of the string, the string wrapped by the `characters`
-   // replacing them around the `string`
-   return String(string).replace(new RegExp('^' + characters + '+|' + characters + '+$', 'g'), '');
-};
-
-// Chops a string up `at` every position in the string `ß.string.chop('chopchop', 3) === 'cho pch op'`
-ß.string.chop = function(string, at) {
-   // Better make a string out of the passed in 'string'
-   string = String(string);
-
-   // Double NOT bitwise (sorta same as Math.floor())
-   at = ~~at;
-
-   // RegExp works like a UNIX expansion list, expanding around the whitespace from 1-to-at
-   return at > 0 ? string.match(new RegExp('.{1,' + at + '}', 'g')) : [string];
-};
-
-// Finds a string within a string (fuzzy) e.g. `ß.string.contains('I'veADream', 'Dream') === true`
-ß.string.contains = function(needle, haystack) {
-   // Don't do work if no needle passed (but we've found something right!)
-   if (needle === '') { return true; }
-   // Empty haystack should also lead to some chilling without having found something
-   if (haystack === null || haystack === undefined) { return false; }
-
-   // Do the old trick of using `indexOf` of the haystack with the needle
-   return String(haystack).indexOf(needle) !== -1;
-};
-
-// Checks if string starts with a given string
-ß.string.starts = function(string, what) {
-   // Wrap the passed in arguments in a String object for sanity
-   string   = String(string);
-   what     = String(what);
-
-   // If the string is longer, equally long than the one it's supposed to start with
-   // and if its slice from 0 to the starting string's length is the starting string
-   return string.length >= what.length && string.slice(0, what.length) === what;
-};
-
-// Checks if string ends with a given string
-ß.string.ends = function(string, what) {
-   // Wrap the passed in arguments in a String object for sanity
-   string   = String(string);
-   what     = String(what);
-
-   // If the string is longer, equally long than the one it's supposed to end with
-   // and if its slice from the end to the length of its suppoed ending is equals to its ending
-   return string.length >= what.length && string.slice(string.length - what.length) === what;
-};
-
-// Implodes/joins a string with a given glue
-ß.string.implode = function(glue, pieces) {
-   // Defaults the glue to empty string
-   if (glue === null || glue === undefined) { glue = ''; }
-
-   // Pipes call through join on pieces
-   return pieces.join(glue);
-};
-
-// Explodes/splits a string with by given delimiter
-// *Note:* Arguments are faked, it'll be sliced up in the function
-ß.string.explode = function(string, delimiter) {
-   // Wrap the passed in argument in a String object for sanity
-   delimiter   = String(delimiter);
-   string      = String(string);
-
-   // Pipes passed in arguments through `split`
-   return string.split(delimiter);
-};// Timining functions
+// Timining functions
 // ---------------
 
 // Register timinig namespace on scandiojs object

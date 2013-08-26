@@ -71,7 +71,7 @@
 // Checks if string ends with a given string
 ß.string.ends = function(string, what) {
    // Wrap the passed in arguments in a String object for sanity
-   string   = String(string);
+   string   = String(string),
    what     = String(what);
 
    // If the string is longer, equally long than the one it's supposed to end with
@@ -89,12 +89,25 @@
 };
 
 // Explodes/splits a string with by given delimiter
-// *Note:* Arguments are faked, it'll be sliced up in the function
 ß.string.explode = function(string, delimiter) {
    // Wrap the passed in argument in a String object for sanity
-   delimiter   = String(delimiter);
+   delimiter   = String(delimiter),
    string      = String(string);
 
    // Pipes passed in arguments through `split`
    return string.split(delimiter);
+};
+
+// Replaces a substring within a string
+// E.g. `ß.string.replace('Scandio Gm', 'Gm', 'GmbH')` will return 'Scandio GmbH'
+ß.string.replace = function(string, subString, replacer) {
+   // Wrap the passed in argument in a String object for sanity
+   string      = String(string);
+   subString   = String(subString);
+   replacer    = String(replacer);
+
+   var
+      regExp   = new RegExp( subString.toLowerCase(), "gi" );
+
+   return string.replace(regExp, replacer);
 };
