@@ -1,4 +1,4 @@
-// Utility module for device detection
+// Device detection module
 // ---------------
 
 // Sets up device object

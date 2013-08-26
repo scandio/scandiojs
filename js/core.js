@@ -1,4 +1,4 @@
-// Core functionality
+// Core module
 // ---------------
 
 // Register core namespace on scandiojs object

@@ -1,4 +1,4 @@
-// Functions utilising ajax
+// Ajax module
 // ---------------
 
 // Register ajax namespace on scandiojs object

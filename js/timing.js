@@ -1,4 +1,4 @@
-// Timining functions
+// Timining module
 // ---------------
 
 // Register timinig namespace on scandiojs object

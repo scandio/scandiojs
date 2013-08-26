@@ -1,4 +1,4 @@
-// Utility module for responsive design
+// Eesponsive design module
 // ---------------
 
 // Sets up responsive object

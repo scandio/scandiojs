@@ -1,4 +1,4 @@
-// DOM functionality
+// DOM module
 // ---------------
 
 // Register dom namespace on scandiojs object

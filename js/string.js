@@ -1,4 +1,4 @@
-// String functions
+// String module
 // ---------------
 
 // Register string namespace on scandiojs object

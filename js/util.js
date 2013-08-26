@@ -1,4 +1,4 @@
-// Utility functions
+// Utility module
 // ---------------
 
 // Register util namespace on scandiojs object

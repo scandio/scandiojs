@@ -1,4 +1,4 @@
-// Function for type-checking (no duck punching)
+// Type checking module
 // ---------------
 
 // This buils group of `is…`-typecheck functions

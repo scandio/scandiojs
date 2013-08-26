@@ -136,7 +136,7 @@
 
    // Version of our library
    ß.VERSION   = '0.0.1';
-// DOM functionality
+// DOM module
 // ---------------
 
 // Register dom namespace on scandiojs object
@@ -201,7 +201,7 @@
       update:  update
    };
 }(jQuery, ß));
-// String functions
+// String module
 // ---------------
 
 // Register string namespace on scandiojs object
@@ -446,7 +446,8 @@
 
    // Now the `ß.debug`-object gets its functions
    return methods;
-})();// Utility functions
+})();
+// Utility module
 // ---------------
 
 // Register util namespace on scandiojs object
@@ -638,7 +639,7 @@
       };
    });
 };
-// Function for type-checking (no duck punching)
+// Type checking module
 // ---------------
 
 // This buils group of `is…`-typecheck functions
@@ -718,7 +719,7 @@
    // Returns the value so tmpl/views can pipe it through
    return value;
 };
-// Timining functions
+// Timining module
 // ---------------
 
 // Register timinig namespace on scandiojs object
@@ -792,7 +793,7 @@
          return fn.apply(null, args);
    }, ms);
 };
-// Functions utilising ajax
+// Ajax module
 // ---------------
 
 // Register ajax namespace on scandiojs object
@@ -907,7 +908,7 @@
 
    return url;
 };
-// Core functionality
+// Core module
 // ---------------
 
 // Register core namespace on scandiojs object
@@ -1070,7 +1071,7 @@
 
 // Sets up confluence object
 ß.confluence = {};
-// Utility module for device detection
+// Device detection module
 // ---------------
 
 // Sets up device object
@@ -1118,7 +1119,7 @@
 
    // Checks the navigator's user agent against the list of desktop devices
    return regExp.test(userAgent);
-};// Utility module for responsive design
+};// Eesponsive design module
 // ---------------
 
 // Sets up responsive object
