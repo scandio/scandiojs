@@ -1008,7 +1008,7 @@
       userAgent   = navigator.userAgent.toLowerCase();
 
    // Checks the navigator's user agent against the list of desktop devices
-   return regExp.test(vendor);
+   return regExp.test(userAgent);
 };
 
 // A function testing for browser vendors
@@ -1018,7 +1018,7 @@
       userAgent   = navigator.userAgent.toLowerCase();
 
    // Checks the navigator's user agent against the list of desktop devices
-   return regExp.test(vendor);
+   return regExp.test(userAgent);
 };// Utility module for responsive design
 // ---------------
 
