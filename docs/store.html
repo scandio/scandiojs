@@ -59,6 +59,11 @@
               </a>
             
               
+              <a class="source" href="json.html">
+                json.js
+              </a>
+            
+              
               <a class="source" href="logger.html">
                 logger.js
               </a>
@@ -214,7 +219,7 @@ removing it afterwards</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   ß.util.each(scripts.slice(<span class="number">0</span>, scripts.length - <span class="number">1</span>), <span class="keyword">function</span>(script) {
-      ß.util.extend(mergeCache, $.parseJSON( $(script).text() ));
+      ß.util.extend(mergeCache, ß.json.from( $(script).text() ));
       script.remove();
    });</pre></div></div>
             
@@ -231,7 +236,7 @@ removing it afterwards</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.store.script.text( JSON.stringify(mergeCache) );
+            <div class="content"><div class='highlight'><pre>   ß.store.script.text( ß.json.to(mergeCache) );
 
    <span class="keyword">return</span> ß.store.script.length === <span class="number">1</span>;
 };</pre></div></div>
@@ -281,7 +286,7 @@ or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = $.parseJSON( ß.store.script.text() );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.store.script.text() );</pre></div></div>
             
         </li>
         
@@ -344,7 +349,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = $.parseJSON( ß.store.script.text() );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.store.script.text() );</pre></div></div>
             
         </li>
         
@@ -374,7 +379,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.store.script.text( JSON.stringify(storeData) );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   ß.store.script.text( ß.json.to(storeData) );</pre></div></div>
             
         </li>
         

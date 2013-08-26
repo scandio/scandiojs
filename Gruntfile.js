@@ -25,6 +25,7 @@ module.exports = function( grunt ) {
             "js/logger.js",
             "js/util.js",
             "js/is.js",
+            "js/json.js",
             "js/store.js",
             "js/timing.js",
             "js/ajax.js",

@@ -658,6 +658,52 @@
    // only if it is an object
    return obj === Object(obj);
 };
+// JSON module
+// ---------------
+
+// Sets up the json object
+ß.json = {};
+
+ß.json.to = ß.json.encode = function(obj) {
+   if ("JSON" in window) {
+      return JSON.stringify(obj);
+   }
+
+   var
+      t = typeof (obj),
+      n,
+      v,
+      json = [],
+      arr = null;
+
+   if (t != "object" || obj === null) {
+      if (t == "string") { obj = '"' + obj + '"'; }
+
+      return String(obj);
+   } else {
+      arr = (obj && obj.constructor == Array);
+
+      for (n in obj) {
+         v = obj[n];
+         t = typeof(v);
+         if (obj.hasOwnProperty(n)) {
+            if (t == "string") {
+               v = '"' + v + '"';
+            } else if (t == "object" && v !== null){
+               v = jQuery.stringify(v);
+            }
+
+            json.push((arr ? "" : '"' + n + '":') + String(v));
+         }
+      }
+
+      return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+   }
+};
+
+ß.json.from = ß.json.decode = function(string) {
+   return $.parseJSON(string);
+};
 // Persistent store module
 // ---------------
 
@@ -685,12 +731,12 @@
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
    ß.util.each(scripts.slice(0, scripts.length - 1), function(script) {
-      ß.util.extend(mergeCache, $.parseJSON( $(script).text() ));
+      ß.util.extend(mergeCache, ß.json.from( $(script).text() ));
       script.remove();
    });
 
    // Updates the merged contents to the main-script
-   ß.store.script.text( JSON.stringify(mergeCache) );
+   ß.store.script.text( ß.json.to(mergeCache) );
 
    return ß.store.script.length === 1;
 };
@@ -703,7 +749,7 @@
    if (injectDOM === false) { ß.debug.warn("DOM injection disabled globally, script-tag not present!"); return; }
 
    // Parses the data from the script (ran everytime to not run into update-read conflicts)
-   var storeData = $.parseJSON( ß.store.script.text() );
+   var storeData = ß.json.from( ß.store.script.text() );
 
    // Gets the demanded value by dot-notation
    return ß.util.getByDots(dots, storeData, notFound);
@@ -717,12 +763,12 @@
    if (injectDOM === false) { ß.debug.warn("DOM injection disabled globally, script-tag not present!"); return; }
 
    // Parses the data from the script (ran everytime to not run into update-read conflicts)
-   var storeData = $.parseJSON( ß.store.script.text() );
+   var storeData = ß.json.from( ß.store.script.text() );
 
    // Sets the value by dot-notation on the retrieved data
    ß.util.setByDots(dots, value, storeData);
    // while setting it as strinfified JSON on the script-tag afterwards
-   ß.store.script.text( JSON.stringify(storeData) );
+   ß.store.script.text( ß.json.to(storeData) );
 
    // Returns the value so tmpl/views can pipe it through
    return value;

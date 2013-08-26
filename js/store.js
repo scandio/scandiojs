@@ -25,12 +25,12 @@
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
    ß.util.each(scripts.slice(0, scripts.length - 1), function(script) {
-      ß.util.extend(mergeCache, $.parseJSON( $(script).text() ));
+      ß.util.extend(mergeCache, ß.json.from( $(script).text() ));
       script.remove();
    });
 
    // Updates the merged contents to the main-script
-   ß.store.script.text( JSON.stringify(mergeCache) );
+   ß.store.script.text( ß.json.to(mergeCache) );
 
    return ß.store.script.length === 1;
 };
@@ -43,7 +43,7 @@
    if (injectDOM === false) { ß.debug.warn("DOM injection disabled globally, script-tag not present!"); return; }
 
    // Parses the data from the script (ran everytime to not run into update-read conflicts)
-   var storeData = $.parseJSON( ß.store.script.text() );
+   var storeData = ß.json.from( ß.store.script.text() );
 
    // Gets the demanded value by dot-notation
    return ß.util.getByDots(dots, storeData, notFound);
@@ -57,12 +57,12 @@
    if (injectDOM === false) { ß.debug.warn("DOM injection disabled globally, script-tag not present!"); return; }
 
    // Parses the data from the script (ran everytime to not run into update-read conflicts)
-   var storeData = $.parseJSON( ß.store.script.text() );
+   var storeData = ß.json.from( ß.store.script.text() );
 
    // Sets the value by dot-notation on the retrieved data
    ß.util.setByDots(dots, value, storeData);
    // while setting it as strinfified JSON on the script-tag afterwards
-   ß.store.script.text( JSON.stringify(storeData) );
+   ß.store.script.text( ß.json.to(storeData) );
 
    // Returns the value so tmpl/views can pipe it through
    return value;
