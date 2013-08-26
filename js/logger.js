@@ -10,7 +10,7 @@
 
 // Define default logger callback if no custom callback defined
 ß.logger.logDomFn = ß.logger.logDomFn || (function() {
-   return ß.logger.logDom || ( window.location.href.indexOf("scandiojs-log-dom") > -1);
+   return ß.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) > -1);
 }());
 
 ß.debug = {};
@@ -31,6 +31,24 @@
          info: 'info',
          log: 'success',
          warn: 'warning'
+      },
+      // Pretty prints a log message stringifying objects and arrays as JSON
+      logMessage           = function(args) {
+         var
+            response    = [];
+
+         // Each arguement processed separately
+         ß.util.each(args, function(arg) {
+            // If it is an object || array stringify its value
+            if ( (ß.isObject(arg) || ß.isArray(arg) ) && ß.isFunction(JSON.stringify) ) {
+               response.push( JSON.stringify(arg) );
+            } else {
+               // otherwise toString it
+               response.push(arg);
+            }
+         });
+
+         return response.join(' ,');
       },
       // Closes the scope for `method and level`
       // *Note:* Due to js and its state-maintainance for closures
@@ -76,7 +94,7 @@
             if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
 
             // Only log to DOM if possible and wanted
-            if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.append(args.join(', ') + '<hr />'); }
+            if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.append(logMessage(args) + '<hr />'); }
          };
 
          // The return value's log-type gets a function
@@ -94,7 +112,7 @@
             }
 
             // but always push it to history
-            ß.logger.logs[method].push(args.join(', '));
+            ß.logger.logs[method].push( logMessage(args) );
          };
       };
 

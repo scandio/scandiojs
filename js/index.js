@@ -41,9 +41,12 @@
                           'timeStamp', 'trace'],
       // Log methods to be caught and routed to `ß.debug`
       logMethods         = ['error', 'warn', 'info', 'debug', 'log'],
+      // Url hooks enabling e.g. DOM-logging
+      urlHooks           = {
+         domLogging:    'scandiojs--log-dom'
+      },
 
-   // All the important native methods shorthanded and used if defined in e.g. `ß.each`
-
+      // All the important native methods shorthanded and used if defined in e.g. `ß.each`
       push               = ArrayProto.push,
       slice              = ArrayProto.slice,
       concat             = ArrayProto.concat,
