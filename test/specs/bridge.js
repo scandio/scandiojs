@@ -1,4 +1,4 @@
-describe("A suite testing the store functionality of scandio.js", function() {
+describe("A suite testing the bridge functionality of scandio.js", function() {
 
    it("should persit simple values in the DOM-store", function() {
       ß.bridge.set('foo', 'bar');
@@ -35,11 +35,11 @@ describe("A suite testing the store functionality of scandio.js", function() {
          script            = document.createElement("script");
 
       script.type       = "application/x-json";
-      script.className  = $('.scandio-js--store').last().attr('class');
+      script.className  = $('.' + ß.bridge.className).last().attr('class');
 
       document.head.appendChild(script);
 
-      $('.scandio-js--store').last().text(JSON.stringify({
+      $('.' + ß.bridge.className).last().text(JSON.stringify({
          yada: {
             yada: 'yada',
             foo: 20

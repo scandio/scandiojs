@@ -22,8 +22,10 @@
    var
       ß                  = null,
       loadedJs           = {},
-      scandioHtmlClass   = 'scandio-js',
-      scandioStoreClass  = 'scandio-js--store',
+      config             = {
+         scandioHtmlClass: 'scandio-js',
+         scandioBridgeClass: 'scandio-js--bridge'
+      },
       injectDOM          = true,
       $scandioEl         = null,
       // Previous version for `ß.noConflict`
@@ -104,16 +106,16 @@
          var
             script   = null;
 
-         if ( injectDOM && $(scandioHtmlClass).length === 0 ) {
+         if ( injectDOM && $(config.scandioHtmlClass).length === 0 ) {
             $scandioEl = $('<div/>', {
-                class: scandioHtmlClass
+                class: config.scandioHtmlClass
             }).appendTo('body');
          }
 
          if (injectDOM) {
             script            = document.createElement("script");
             script.type       = "application/x-json";
-            script.className  = scandioStoreClass;
+            script.className  = config.scandioBridgeClass;
 
             document.head.appendChild(script);
          }
@@ -125,6 +127,8 @@
    _initialize = function() {
       // As the adove catching of console calls
       _catchConsole();
+
+      // Inject scandio elements into DOM
       _injectDom();
    };
 
@@ -723,12 +727,13 @@
 
 // Register store namespace on scandiojs object
 ß.bridge = {};
+ß.bridge.className = config.scandioBridgeClass;
 
 // IFFE setting up the store and merging all n possible 'script-tags' into one
 ß.bridge.init = function() {
    // Gets all scripts and sets up the cache for merging
    var
-      scripts     = $('.' + scandioStoreClass),
+      scripts     = $('.' + ß.bridge.className),
       tempCache   = null,
       mergeCache  = {};
 

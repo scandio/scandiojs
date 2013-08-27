@@ -3,12 +3,13 @@
 
 // Register store namespace on scandiojs object
 ß.bridge = {};
+ß.bridge.className = config.scandioBridgeClass;
 
 // IFFE setting up the store and merging all n possible 'script-tags' into one
 ß.bridge.init = function() {
    // Gets all scripts and sets up the cache for merging
    var
-      scripts     = $('.' + scandioStoreClass),
+      scripts     = $('.' + ß.bridge.className),
       tempCache   = null,
       mergeCache  = {};
 
