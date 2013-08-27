@@ -135,7 +135,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.bridge = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.bridge = {};
+ß.bridge.className = config.scandioBridgeClass;</pre></div></div>
             
         </li>
         
@@ -166,7 +167,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      scripts     = $(<span class="string">'.'</span> + scandioStoreClass),
+      scripts     = $(<span class="string">'.'</span> + ß.bridge.className),
       tempCache   = <span class="literal">null</span>,
       mergeCache  = {};</pre></div></div>
             

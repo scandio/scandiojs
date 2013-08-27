@@ -205,8 +205,10 @@
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
       ß                  = <span class="literal">null</span>,
       loadedJs           = {},
-      scandioHtmlClass   = <span class="string">'scandio-js'</span>,
-      scandioStoreClass  = <span class="string">'scandio-js--store'</span>,
+      config             = {
+         scandioHtmlClass: <span class="string">'scandio-js'</span>,
+         scandioBridgeClass: <span class="string">'scandio-js--bridge'</span>
+      },
       injectDOM          = <span class="literal">true</span>,
       $scandioEl         = <span class="literal">null</span>,</pre></div></div>
             
@@ -463,16 +465,16 @@
          <span class="keyword">var</span>
             script   = <span class="literal">null</span>;
 
-         <span class="keyword">if</span> ( injectDOM &amp;&amp; $(scandioHtmlClass).length === <span class="number">0</span> ) {
+         <span class="keyword">if</span> ( injectDOM &amp;&amp; $(config.scandioHtmlClass).length === <span class="number">0</span> ) {
             $scandioEl = $(<span class="string">'&lt;div/&gt;'</span>, {
-                class: scandioHtmlClass
+                class: config.scandioHtmlClass
             }).appendTo(<span class="string">'body'</span>);
          }
 
          <span class="keyword">if</span> (injectDOM) {
             script            = document.createElement(<span class="string">"script"</span>);
             script.type       = <span class="string">"application/x-json"</span>;
-            script.className  = scandioStoreClass;
+            script.className  = config.scandioBridgeClass;
 
             document.head.appendChild(script);
          }
@@ -508,9 +510,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      _catchConsole();
-      _injectDom();
-   };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      _catchConsole();</pre></div></div>
             
         </li>
         
@@ -521,11 +521,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Intialize</p>
+              <p>Inject scandio elements into DOM</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   _initialize();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      _injectDom();
+   };</pre></div></div>
             
         </li>
         
@@ -536,11 +537,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Create yerself</p>
+              <p>Intialize</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß = root.ß = root.Scandio = Scandio;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   _initialize();</pre></div></div>
             
         </li>
         
@@ -550,6 +551,21 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Create yerself</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   ß = root.ß = root.Scandio = Scandio;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>Version of our library</p>
 
