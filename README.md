@@ -1,5 +1,7 @@
 # [Scandiojs](http://scandio.de/) - A little bit of help
 
+[![Build Status](https://travis-ci.org/[scandio]/[scandiojs].png)](https://travis-ci.org/[scandio]/[scandiojs])
+
 ## Dive into scandio.js
 
 You can check out some examples after cloning scandio.js by looking at the `/example` directory. The `index.html` shows and executes every function-call from the `index.js` which currently covers almost every function available in scnadio.js.

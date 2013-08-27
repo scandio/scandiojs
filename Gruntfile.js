@@ -7,6 +7,7 @@ module.exports = function( grunt ) {
       try {
          data = grunt.file.readJSON( filepath );
       } catch(e) {}
+
       return data;
    },
    srcHintOptions = readOptionalJSON( ".jshintrc" );
@@ -14,11 +15,11 @@ module.exports = function( grunt ) {
    grunt.initConfig({
       pkg: grunt.file.readJSON("package.json"),
       concat: {
-        scandiojs: {
-          options: {
+         scandiojs: {
+            options: {
             separator: ""
-          },
-          src: [
+         },
+         src: [
             "js/index.js",
             "js/dom.js",
             "js/string.js",
@@ -34,19 +35,19 @@ module.exports = function( grunt ) {
             "js/device.js",
             "js/responsive.js",
             "js/outro.js"
-          ],
-          dest: "dist/scandio-<%= pkg.version %>.js"
-        },
-        scandiocss: {
-          options: {
-            separator: ""
-          },
-          src: [
-            "assets/css/common.css",
-            "assets/css/logger.css"
-          ],
-          dest: "dist/scandio-<%= pkg.version %>.css"
-        }
+         ],
+            dest: "dist/scandio-<%= pkg.version %>.js"
+         },
+         scandiocss: {
+            options: {
+               separator: ""
+            },
+            src: [
+               "assets/css/common.css",
+               "assets/css/logger.css"
+            ],
+            dest: "dist/scandio-<%= pkg.version %>.css"
+         }
       },
       jsonlint: {
          pkg: {
@@ -116,28 +117,41 @@ module.exports = function( grunt ) {
          }
       },
       cssmin: {
-        minify: {
-          src: [
-            'dist/scandio-<%= pkg.version %>.css'
-          ],
-          dest: 'dist/scandio-<%= pkg.version %>.min.css'
-        }
-      },
-      jstestdriver: {
-         files: ["jsTestDriver.conf"]
+         minify: {
+            src: [
+               'dist/scandio-<%= pkg.version %>.css'
+            ],
+            dest: 'dist/scandio-<%= pkg.version %>.min.css'
+         }
       },
       testem: {
-          options : {
+         options : {
             launch_in_ci : [
-              'chrome',
-              'safari'
+               'chrome',
+               'safari',
+               'firefox'
             ]
-          },
-          main : {
+         },
+         main : {
             src: ['testem.json'],
             dest: 'test/testem.tap'
-          }
-        }
+         }
+      },
+      jasmine: {
+         components: {
+            src: [
+               'dist/scandio.js'
+            ],
+            options: {
+               specs: 'test/specs/*.js',
+               keepRunner : true,
+               vendor: [
+                  'libs/jquery/jquery.js',
+                  'libs/requirejs/require.js'
+               ]
+            }
+         }
+      }
    });
 
    grunt.loadNpmTasks("grunt-contrib-jshint");
@@ -146,10 +160,11 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks("grunt-contrib-uglify");
    grunt.loadNpmTasks('grunt-docco2');
    grunt.loadNpmTasks('grunt-contrib-copy');
-   grunt.loadNpmTasks('grunt-jstestdriver');
    grunt.loadNpmTasks('grunt-testem');
    grunt.loadNpmTasks('grunt-contrib-cssmin');
+   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
    grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "testem"] );
+   grunt.registerTask( "travis", ["jsonlint", "jshint", "jasmine"] );
    grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "docco"] );
 };
