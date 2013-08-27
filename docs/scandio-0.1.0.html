@@ -29,6 +29,11 @@
               </a>
             
               
+              <a class="source" href="bridge.html">
+                bridge.js
+              </a>
+            
+              
               <a class="source" href="confluence.html">
                 confluence.js
               </a>
@@ -76,11 +81,6 @@
               
               <a class="source" href="responsive.html">
                 responsive.js
-              </a>
-            
-              
-              <a class="source" href="store.html">
-                store.js
               </a>
             
               
@@ -2780,7 +2780,7 @@ only if it is an object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.store = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.bridge = {};</pre></div></div>
             
         </li>
         
@@ -2795,7 +2795,7 @@ only if it is an object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.store.init = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.bridge.init = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -2828,7 +2828,7 @@ only if it is an object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.store.script = scripts.last();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   ß.bridge.script = scripts.last();</pre></div></div>
             
         </li>
         
@@ -2843,9 +2843,9 @@ only if it is an object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   mergeCache = ß.store.script.text() !== <span class="string">""</span> &amp;&amp; ß.isObject(
+            <div class="content"><div class='highlight'><pre>   mergeCache = ß.bridge.script.text() !== <span class="string">""</span> &amp;&amp; ß.isObject(
       tempCache = $.parseJSON(
-         ß.store.script.text()
+         ß.bridge.script.text()
       )
    ) ? tempCache : mergeCache;</pre></div></div>
             
@@ -2881,9 +2881,9 @@ removing it afterwards</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.store.script.text( ß.json.to(mergeCache) );
+            <div class="content"><div class='highlight'><pre>   ß.bridge.script.text( ß.json.to(mergeCache) );
 
-   <span class="keyword">return</span> ß.store.script.length === <span class="number">1</span>;
+   <span class="keyword">return</span> ß.bridge.script.length === <span class="number">1</span>;
 };</pre></div></div>
             
         </li>
@@ -2896,12 +2896,12 @@ removing it afterwards</p>
                 <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
               <p>Gets a value from the script-tag
-<em>E.g.:</em> <code>ß.store.get(&#39;firms.microsoft&#39;, false)</code> might return a company object-literal
+<em>E.g.:</em> <code>ß.bridge.get(&#39;firms.microsoft&#39;, false)</code> might return a company object-literal
 or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.store.get = <span class="keyword">function</span>(dots, notFound) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.bridge.get = <span class="keyword">function</span>(dots, notFound) {</pre></div></div>
             
         </li>
         
@@ -2931,7 +2931,7 @@ or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.store.script.text() );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.bridge.script.text() );</pre></div></div>
             
         </li>
         
@@ -2959,12 +2959,12 @@ or false if it is not set</p>
                 <a class="pilcrow" href="#section-170">&#182;</a>
               </div>
               <p>Sets a value on the script-tag
-*E.g.: <code>ß.store.set(&#39;firms.scandio, {name: &#39;Scandio GmbH&#39;})</code> will add the scandio literal to the firms
+*E.g.: <code>ß.bridge.set(&#39;firms.scandio, {name: &#39;Scandio GmbH&#39;})</code> will add the scandio literal to the firms
 object. It will overwrite an existing entry and fail if <code>firms</code> it not an object but a primitive type.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.store.set = <span class="keyword">function</span>(dots, value) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.bridge.set = <span class="keyword">function</span>(dots, value) {</pre></div></div>
             
         </li>
         
@@ -2994,7 +2994,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.store.script.text() );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.bridge.script.text() );</pre></div></div>
             
         </li>
         
@@ -3024,7 +3024,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.store.script.text( ß.json.to(storeData) );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   ß.bridge.script.text( ß.json.to(storeData) );</pre></div></div>
             
         </li>
         
@@ -4661,7 +4661,7 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
-   ß.store.init();
+   ß.bridge.init();
 });</pre></div></div>
             
         </li>

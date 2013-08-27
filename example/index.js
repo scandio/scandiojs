@@ -268,8 +268,10 @@ var logIt = function(here) {
 ß.debug.log("If you ever want to explode the company you get: " + ß.string.explode("Scandio GmbH", " "));
 ß.debug.log("but please put it together again, would you: " + ß.string.implode("", ["Sc", "an", "dio", " Gmb", "H"]));
 
-// Persist values in special script tag for later retrival
+// Persist values in special script tag for later retrival (php-bridge)
 
-ß.store.set('firms.cool', 'Scandio GmbH');
-ß.debug.log( ß.store.get('firms.cool', 'Not found') );
-ß.debug.log( ß.store.get('firms.uncool', 'Not found') );
+$(function() {
+   ß.bridge.set('firms.cool', 'Scandio GmbH');
+   ß.debug.log( ß.bridge.get('firms.cool', 'Not found') );
+   ß.debug.log( ß.bridge.get('firms.uncool', 'Not found') );
+});

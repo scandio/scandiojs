@@ -4,7 +4,7 @@
 // Global DOM-Ready which shall be used whenever possible
 // Logger does not use it cause it heavily relies on variable hoisting
 $(function() {
-   ß.store.init();
+   ß.bridge.init();
 });
 
 // Tries to resolve version conflicts by restoring the previously loaded version globally
