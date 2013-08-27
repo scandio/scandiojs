@@ -248,8 +248,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (ß.isObject(arg) || ß.isArray(arg) ) &amp;&amp; ß.isFunction(JSON.stringify) ) {
-               response.push( JSON.stringify(arg) );
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (ß.isObject(arg) || ß.isArray(arg) ) ) {
+               response.push( ß.json.to(arg) );
             } <span class="keyword">else</span> {</pre></div></div>
             
         </li>
