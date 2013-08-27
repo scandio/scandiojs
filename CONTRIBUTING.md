@@ -6,7 +6,7 @@ We only demand a few thing of you to get your code added to this library.
 ## Getting started to code
 
 * Make sure you have a [GitHub account](https://github.com/signup/free)
-* Fork the repository on GitHub into your own account
+* [Fork](https://github.com/scandio/scandiojs/fork) the repository on GitHub into your own account
 * Create a topic branch from where you want to base your work.
   * This is usually the master branch.
   * To quickly create a topic branch based on master; `git branch
@@ -22,7 +22,7 @@ Have a look at the `test`-directory and checkout the `src`- and `test`-subdirect
 
 After creating your own module file (e.g. tde_string.js) from the `template.js`-file you create your own module which mixes in functions into `Scandiojs`. You could also mixin function the the global object by omitting the namespace as `undefined`.
 
-You're now ready to test your code after you created testsuite under `test` using the `test/template.js`-file. After adding the tests you think nessesary and letting them pass by following the intructions in the `README.md` (running *jsTestDriver* and firing up `grunt test-driver` or *Testem* with `grunt test-em`) you should open a pull request and wait for us to check it out.
+You're now ready to test your code after you created testsuite under `test` using the `test/template.js`-file. After adding the tests you think nessesary and letting them pass by following the intructions in the `README.md` (running *testem* with `$ grunt test-em` or `$ testem`) you should open a pull request and wait for us to check it out.
 
 After we decided to like what you did, we'll move the code from the `featurerequest/src/tde_string.js`-file into the library and get back to you!
 
@@ -30,4 +30,4 @@ After we decided to like what you did, we'll move the code from the `featurerequ
 
 * Push your changes to a topic branch in your fork of the repository.
 * Submit a pull request to the repository.
-* Wait for us to check our your awesomeness!
+* Wait for us to check our your code!

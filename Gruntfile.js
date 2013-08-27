@@ -150,8 +150,6 @@ module.exports = function( grunt ) {
    grunt.loadNpmTasks('grunt-testem');
    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-   grunt.registerTask( "test-driver", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "jstestdriver"] );
    grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "testem"] );
-
    grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "docco"] );
 };

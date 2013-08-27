@@ -61,22 +61,14 @@ In order to test your build or any changes you made you should run:
 
 ```bash
 cd scandiojs
-
-java -jar node_modules/grunt-jstestdriver/lib/jstestdriver.jar --port 9876
 ```
 
-Navigate the browsers you want to test in to: `http://localhost:9876/capture` and finally run:
-
-```bash
-grunt test-jsdriver
-```
-
-if you want to use JSTestDriver.
-
-You can also use [testem](https://github.com/airportyh/testem) if you want, just type (if testem is not installed do a `npm install testem -g`):
+You should test your code using [testem](https://github.com/airportyh/testem): just type (if testem is not installed do a `npm install testem -g`):
 
 ```bash
 grunt test-em
 ```
 
-This will fire up `JSTestDriver` or `testem` and run the testsuite. You may also want to change additional test cases or featurerequests written by modifying the `jsTestDriver.conf` in the project's root-directory.
+will spin-up a *testem* server running tests in Safari, Chrome and Firefox.
+
+You can also manually spin-up `$ testem` and run the testsuite by navigating to the URL given by the *testem*-runner.
