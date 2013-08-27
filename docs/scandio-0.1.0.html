@@ -3997,7 +3997,7 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-235">&#182;</a>
               </div>
-              <p>Closes and secures a module by name within its own scope
+              <p>Closes and secures a module with namespace within its own scope
 <em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
@@ -4030,14 +4030,18 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-237">&#182;</a>
               </div>
-              <p>Returns a function requiring <code>name, module and an module environment object</code></p>
+              <p>Returns a function requiring <code>namespace, module and an module environment object</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>(name, module, modEnv) {
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>(namespace, module, modEnv) {
       <span class="keyword">var</span>
          typeError      = <span class="literal">null</span>,
-         invokedModule  = <span class="literal">null</span>;</pre></div></div>
+         invokedModule  = <span class="literal">null</span>;
+
+      namespace = ß.string.clean(
+         ß.string.lower(namespace)
+      );</pre></div></div>
             
         </li>
         
@@ -4052,7 +4056,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!ß.isString(name) || !ß.isFunction(module) || (modEnv &amp;&amp; !ß.isObject(modEnv))) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!ß.isString(namespace) || !ß.isFunction(module) || (modEnv &amp;&amp; !ß.isObject(modEnv))) {</pre></div></div>
             
         </li>
         
@@ -4067,7 +4071,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Parameter mismatch in Scandio.mod - please provide (1) name as'</span> +
+            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Parameter mismatch in Scandio.mod - please provide (1) namespace as'</span> +
             <span class="string">'string and a (2) module as function. (3) an modEnv object may be given to'</span> +
             <span class="string">'extend the default global environment'</span>;</pre></div></div>
             
@@ -4100,7 +4104,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.util.getByDots(name, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.util.getByDots(namespace, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
             
         </li>
         
@@ -4115,7 +4119,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Error: there is already a module with name "'</span> + name + <span class="string">'".'</span>;
+            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Error: there is already a module with namespace "'</span> + namespace + <span class="string">'".'</span>;
 
          ß.debug.error(typeError);
       }
@@ -4145,11 +4149,11 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-244">&#182;</a>
               </div>
-              <p>If module name is unique push it to internal state variable</p>
+              <p>If module namespace is unique push it to internal state variable</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         invokedModule = ß.util.setByDots(name, module.call(ß, $, globEnv, ß), modules);
+            <div class="content"><div class='highlight'><pre>         invokedModule = ß.util.setByDots(namespace, module.call(ß, $, globEnv, ß), modules);
       }</pre></div></div>
             
         </li>
@@ -4202,8 +4206,8 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.modules = <span class="keyword">function</span>(name) {
-   <span class="keyword">return</span> ß.util.getByDots(name, modules, <span class="literal">false</span>);
+            <div class="content"><div class='highlight'><pre>ß.modules = <span class="keyword">function</span>(namespace) {
+   <span class="keyword">return</span> ß.util.getByDots(namespace, modules, <span class="literal">false</span>);
 };</pre></div></div>
             
         </li>

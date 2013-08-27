@@ -989,7 +989,7 @@
 // Core module
 // ---------------
 
-// Closes and secures a module by name within its own scope
+// Closes and secures a module with namespace within its own scope
 // *Note:* This function being an IIFE leaves off parameters on outer function
 ß.mod = ß.module = (function() {
    // Setting up global environment object and DOM-ready state
@@ -997,16 +997,20 @@
       isDomReady  = false,
       globEnv     = {};
 
-   // Returns a function requiring `name, module and an module environment object`
-   return function(name, module, modEnv) {
+   // Returns a function requiring `namespace, module and an module environment object`
+   return function(namespace, module, modEnv) {
       var
          typeError      = null,
          invokedModule  = null;
 
+      namespace = ß.string.clean(
+         ß.string.lower(namespace)
+      );
+
       // Validates types of parameters in requiring `string, function and object`
-      if (!ß.isString(name) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
+      if (!ß.isString(namespace) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
          // Set up a crazy long eloquent error message and…
-         typeError = 'Parameter mismatch in Scandio.mod - please provide (1) name as' +
+         typeError = 'Parameter mismatch in Scandio.mod - please provide (1) namespace as' +
             'string and a (2) module as function. (3) an modEnv object may be given to' +
             'extend the default global environment';
 
@@ -1015,17 +1019,17 @@
       }
 
       // Module names need to be unique
-      if (ß.util.getByDots(name, modules, true) !== true) {
+      if (ß.util.getByDots(namespace, modules, true) !== true) {
          // Otherwise error will be triggered
-         typeError = 'Error: there is already a module with name "' + name + '".';
+         typeError = 'Error: there is already a module with namespace "' + namespace + '".';
 
          ß.debug.error(typeError);
       }
       else {
          // Extend global with module environment where module takes preference
          $.extend(true, globEnv, modEnv);
-         // If module name is unique push it to internal state variable
-         invokedModule = ß.util.setByDots(name, module.call(ß, $, globEnv, ß), modules);
+         // If module namespace is unique push it to internal state variable
+         invokedModule = ß.util.setByDots(namespace, module.call(ß, $, globEnv, ß), modules);
       }
 
       // *Convention:* if module environment has a function called `readyFn`
@@ -1041,8 +1045,8 @@
 
 // Returns a registered module by passing in a qualifier string (may be dot-notation)
 // *Note:* Handing over a not fully qualifying string returns an object with hashes for submodules.
-ß.modules = function(name) {
-   return ß.util.getByDots(name, modules, false);
+ß.modules = function(namespace) {
+   return ß.util.getByDots(namespace, modules, false);
 };
 
 // Defers function execution based on condition and delay
