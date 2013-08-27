@@ -3072,8 +3072,11 @@ removing it afterwards</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   ß.util.each(scripts.slice(<span class="number">0</span>, scripts.length - <span class="number">1</span>), <span class="keyword">function</span>(script) {
-      ß.util.extend(mergeCache, ß.json.from( $(script).text() ));
-      script.remove();
+      <span class="keyword">var</span> $script    = $(script);
+
+      ß.util.extend(mergeCache, ß.json.from( $script.text() ));
+
+      $script.remove();
    });</pre></div></div>
             
         </li>
