@@ -25,4 +25,4 @@ if (typeof define === 'function' && define.amd) {
       return ß;
    });
 }
-}(this, jQuery, window, document));
+}(this, jQuery, window, document, undefined));

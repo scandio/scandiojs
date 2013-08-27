@@ -227,7 +227,7 @@ var logIt = function(here) {
 
 // Defer function execution for duration for interval based on condition
 
-ß.core.wait({
+ß.wait({
    duration: 3000,
    interval: 1000,
    initialDelay: 10,
@@ -246,7 +246,7 @@ var logIt = function(here) {
 
 // Register your custom modules
 
-ß.core.module('scandio.plugin', function($, globEnv) {
+ß.module('scandio.plugin', function($, globEnv) {
    var
       init = function() {
          ß.debug.info('Module got initialized');
@@ -264,21 +264,25 @@ var logIt = function(here) {
    readyFn: $
 });
 
+// Returns all plugins under scandio namespace
+
+ß.modules('scandio');
+
 // Using the internal pub/sub implementation
 
-ß.messenger.subscribe('foo.bar', function(event, arg1, arg2) {
+ß.subscribe('foo.bar', function(event, arg1, arg2) {
    console.log("foo.bar", arg1, arg2);
 });
 
-ß.messenger.subscribe('foo', function(event, arg1) {
+ß.subscribe('foo', function(event, arg1) {
    console.log("foo", arg1);
 });
 
-ß.messenger.publish('foo', 'Couple ', 'it loosly!');
-ß.messenger.publish('foo.bar', 'Bind to qualified namespace!');
+ß.publish('foo', 'Couple ', 'it loosly!');
+ß.publish('foo.bar', 'Bind to qualified namespace!');
 
-ß.messenger.unsubscribe('foo.bar');
-ß.messenger.publish('foo', 'Couple ', 'it loosly!');
+ß.unsubscribe('foo.bar');
+ß.publish('foo', 'Couple ', 'it loosly!');
 
 // Query and DOM and cache results
 

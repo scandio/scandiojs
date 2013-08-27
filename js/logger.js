@@ -40,8 +40,8 @@
          // Each arguement processed separately
          ß.util.each(args, function(arg) {
             // If it is an object || array stringify its value
-            if ( (ß.isObject(arg) || ß.isArray(arg) ) && ß.isFunction(JSON.stringify) ) {
-               response.push( JSON.stringify(arg) );
+            if ( (ß.isObject(arg) || ß.isArray(arg) ) ) {
+               response.push( ß.json.to(arg) );
             } else {
                // otherwise toString it
                response.push(arg);

@@ -100,9 +100,12 @@
    // Dig into the `path` an question the `obj`
    for(i = 0; i < path.length; i++) {
       // Found something on the `obj` and reset the destination
-      if(obj) { dest = dest[path[i]]; }
+      if ( dest[path[i]] ) { dest = dest[path[i]]; }
       // Nothing found…
-      else { dest = undefined; }
+      else {
+         dest = undefined;
+         break;
+      }
    }
 
    // Dest or notFound
@@ -159,7 +162,7 @@
 ß.util.mixin = function(namespace, obj) {
    var
       destination = ß,
-      path        = namespace.split("."),
+      path        = namespace !== null ? namespace.split(".") : [],
       atModule    = null,
       i           = null;
 

@@ -11,7 +11,7 @@
 
  // Setup the library
  // ---------------
- ;(function(root, $, window, undefined) {
+ ;(function(root, $, window, document, undefined) {
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
@@ -34,10 +34,9 @@
       breaker            = {},
       // Set of shorthand to object protos
       ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
-      document           = window.document,
       location           = window.location,
       events             = $('<a>'),
-      modules            = { sequence: [] },
+      modules            = {},
       // Console methods to be caught when not defined in browser (IE I hear you)
       consoleMethods     = ['assert', 'clear', 'count', 'dir', 'dirxml',
                           'exception', 'group', 'groupCollapsed', 'groupEnd',

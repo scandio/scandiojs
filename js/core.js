@@ -1,13 +1,9 @@
 // Core module
 // ---------------
 
-// Register core namespace on scandiojs object
-
-ß.core = {};
-
 // Closes and secures a module by name within its own scope
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.mod = ß.core.mod = ß.core.module = (function() {
+ß.mod = ß.module = (function() {
    // Setting up global environment object and DOM-ready state
    var
       isDomReady  = false,
@@ -15,7 +11,9 @@
 
    // Returns a function requiring `name, module and an module environment object`
    return function(name, module, modEnv) {
-      var typeError = null;
+      var
+         typeError      = null,
+         invokedModule  = null;
 
       // Validates types of parameters in requiring `string, function and object`
       if (!ß.isString(name) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
@@ -29,39 +27,39 @@
       }
 
       // Module names need to be unique
-      if (modules.sequence.indexOf(name) >= 0) {
+      if (ß.util.getByDots(name, modules, true) !== true) {
          // Otherwise error will be triggered
          typeError = 'Error: there is already a module with name "' + name + '".';
 
          ß.debug.error(typeError);
       }
       else {
+         // Extend global with module environment where module takes preference
+         $.extend(true, globEnv, modEnv);
          // If module name is unique push it to internal state variable
-         modules.sequence.push(name);
+         invokedModule = ß.util.setByDots(name, module.call(ß, $, globEnv, ß), modules);
       }
-
-      // Extend global with module environment where module takes preference
-      $.extend(true, globEnv, modEnv);
-
-      // Register function on module object by calling it with scandiojs, jQuery and the global environment
-      modules[name] = module.call(ß, $, globEnv, ß);
 
       // *Convention:* if module environment has a function called `readyFn`
       // it will be invoked on DOM-Ready
       if (modEnv && ß.isFunction(modEnv.readyFn)) {
-         modEnv.readyFn(modules[name].ready);
+         modEnv.readyFn(invokedModule.ready);
       } else {
          // Otherwise the just load it on DOM-ready
-         $(document).ready(modules[name].ready);
+         $(document).ready(invokedModule.ready);
       }
-
    };
-
 }());
+
+// Returns a registered module by passing in a qualifier string (may be dot-notation)
+// *Note:* Handing over a not fully qualifying string returns an object with hashes for submodules.
+ß.modules = function(name) {
+   return ß.util.getByDots(name, modules, false);
+};
 
 // Defers function execution based on condition and delay
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.wait = ß.core.wait = (function () {
+ß.wait = (function () {
 
    // Sets up the defered function
    var waitFn = function(params) {
@@ -122,7 +120,7 @@
 
 // A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.core.messenger = ß.messenger = (function($, ß){
+ß.util.mixin(null, (function($, ß) {
    // The messenger/hub is just a plain jQuery object
    var
       messenger = $({}),
@@ -150,9 +148,9 @@
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, ß));
+}(jQuery, ß)));
 
 // Shorthand for redirecting the browser to a new `url`
-ß.redirect = ß.core.redirect = function(url) {
+ß.redirect = function(url) {
    location.href = url;
 };

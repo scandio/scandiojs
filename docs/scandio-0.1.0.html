@@ -157,7 +157,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, $, window, <span class="literal">undefined</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, $, window, document, <span class="literal">undefined</span>) {</pre></div></div>
             
         </li>
         
@@ -256,10 +256,9 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>      ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
-      document           = window.document,
       location           = window.location,
       events             = $(<span class="string">'&lt;a&gt;'</span>),
-      modules            = { sequence: [] },</pre></div></div>
+      modules            = {},</pre></div></div>
             
         </li>
         
@@ -1481,8 +1480,8 @@ E.g. <code>ß.string.replace(&#39;Scandio Gm&#39;, &#39;Gm&#39;, &#39;GmbH&#39;)
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (ß.isObject(arg) || ß.isArray(arg) ) &amp;&amp; ß.isFunction(JSON.stringify) ) {
-               response.push( JSON.stringify(arg) );
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (ß.isObject(arg) || ß.isArray(arg) ) ) {
+               response.push( ß.json.to(arg) );
             } <span class="keyword">else</span> {</pre></div></div>
             
         </li>
@@ -2245,7 +2244,7 @@ while results will only contain values if they pass the <code>iterator</code>-te
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span>(obj) { dest = dest[path[i]]; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> ( dest[path[i]] ) { dest = dest[path[i]]; }</pre></div></div>
             
         </li>
         
@@ -2260,7 +2259,10 @@ while results will only contain values if they pass the <code>iterator</code>-te
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">else</span> { dest = <span class="literal">undefined</span>; }
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">else</span> {
+         dest = <span class="literal">undefined</span>;
+         <span class="keyword">break</span>;
+      }
    }</pre></div></div>
             
         </li>
@@ -2477,7 +2479,7 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
             <div class="content"><div class='highlight'><pre>ß.util.mixin = <span class="keyword">function</span>(namespace, obj) {
    <span class="keyword">var</span>
       destination = ß,
-      path        = namespace.split(<span class="string">"."</span>),
+      path        = namespace !== <span class="literal">null</span> ? namespace.split(<span class="string">"."</span>) : [],
       atModule    = <span class="literal">null</span>,
       i           = <span class="literal">null</span>;</pre></div></div>
             
@@ -3995,11 +3997,12 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-235">&#182;</a>
               </div>
-              <p>Register core namespace on scandiojs object</p>
+              <p>Closes and secures a module by name within its own scope
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.core = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.mod = ß.module = (<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -4009,22 +4012,6 @@ called in html&#39;s head-section</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-236">&#182;</a>
-              </div>
-              <p>Closes and secures a module by name within its own scope
-<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>ß.mod = ß.core.mod = ß.core.module = (<span class="keyword">function</span>() {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-237">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-237">&#182;</a>
               </div>
               <p>Setting up global environment object and DOM-ready state</p>
 
@@ -4037,27 +4024,29 @@ called in html&#39;s head-section</p>
         </li>
         
         
-        <li id="section-238">
+        <li id="section-237">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-238">&#182;</a>
+                <a class="pilcrow" href="#section-237">&#182;</a>
               </div>
               <p>Returns a function requiring <code>name, module and an module environment object</code></p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>(name, module, modEnv) {
-      <span class="keyword">var</span> typeError = <span class="literal">null</span>;</pre></div></div>
+      <span class="keyword">var</span>
+         typeError      = <span class="literal">null</span>,
+         invokedModule  = <span class="literal">null</span>;</pre></div></div>
             
         </li>
         
         
-        <li id="section-239">
+        <li id="section-238">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-239">&#182;</a>
+                <a class="pilcrow" href="#section-238">&#182;</a>
               </div>
               <p>Validates types of parameters in requiring <code>string, function and object</code></p>
 
@@ -4068,11 +4057,11 @@ called in html&#39;s head-section</p>
         </li>
         
         
-        <li id="section-240">
+        <li id="section-239">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-240">&#182;</a>
+                <a class="pilcrow" href="#section-239">&#182;</a>
               </div>
               <p>Set up a crazy long eloquent error message and…</p>
 
@@ -4085,11 +4074,11 @@ called in html&#39;s head-section</p>
         </li>
         
         
-        <li id="section-241">
+        <li id="section-240">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-241">&#182;</a>
+                <a class="pilcrow" href="#section-240">&#182;</a>
               </div>
               <p>… debug it as an error</p>
 
@@ -4101,26 +4090,26 @@ called in html&#39;s head-section</p>
         </li>
         
         
-        <li id="section-242">
+        <li id="section-241">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-242">&#182;</a>
+                <a class="pilcrow" href="#section-241">&#182;</a>
               </div>
               <p>Module names need to be unique</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modules.sequence.indexOf(name) &gt;= <span class="number">0</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.util.getByDots(name, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
             
         </li>
         
         
-        <li id="section-243">
+        <li id="section-242">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-243">&#182;</a>
+                <a class="pilcrow" href="#section-242">&#182;</a>
               </div>
               <p>Otherwise error will be triggered</p>
 
@@ -4135,6 +4124,21 @@ called in html&#39;s head-section</p>
         </li>
         
         
+        <li id="section-243">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-243">&#182;</a>
+              </div>
+              <p>Extend global with module environment where module takes preference</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         $.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
+            
+        </li>
+        
+        
         <li id="section-244">
             <div class="annotation">
               
@@ -4145,7 +4149,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         modules.sequence.push(name);
+            <div class="content"><div class='highlight'><pre>         invokedModule = ß.util.setByDots(name, module.call(ß, $, globEnv, ß), modules);
       }</pre></div></div>
             
         </li>
@@ -4157,11 +4161,14 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-245">&#182;</a>
               </div>
-              <p>Extend global with module environment where module takes preference</p>
+              <p><em>Convention:</em> if module environment has a function called <code>readyFn</code>
+it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      $.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modEnv &amp;&amp; ß.isFunction(modEnv.readyFn)) {
+         modEnv.readyFn(invokedModule.ready);
+      } <span class="keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -4172,11 +4179,14 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-246">&#182;</a>
               </div>
-              <p>Register function on module object by calling it with scandiojs, jQuery and the global environment</p>
+              <p>Otherwise the just load it on DOM-ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      modules[name] = module.call(ß, $, globEnv, ß);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         $(document).ready(invokedModule.ready);
+      }
+   };
+}());</pre></div></div>
             
         </li>
         
@@ -4187,14 +4197,14 @@ called in html&#39;s head-section</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-247">&#182;</a>
               </div>
-              <p><em>Convention:</em> if module environment has a function called <code>readyFn</code>
-it will be invoked on DOM-Ready</p>
+              <p>Returns a registered module by passing in a qualifier string (may be dot-notation)
+<em>Note:</em> Handing over a not fully qualifying string returns an object with hashes for submodules.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modEnv &amp;&amp; ß.isFunction(modEnv.readyFn)) {
-         modEnv.readyFn(modules[name].ready);
-      } <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.modules = <span class="keyword">function</span>(name) {
+   <span class="keyword">return</span> ß.util.getByDots(name, modules, <span class="literal">false</span>);
+};</pre></div></div>
             
         </li>
         
@@ -4205,16 +4215,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-248">&#182;</a>
               </div>
-              <p>Otherwise the just load it on DOM-ready</p>
+              <p>Defers function execution based on condition and delay
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         $(document).ready(modules[name].ready);
-      }
-
-   };
-
-}());</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.wait = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
             
         </li>
         
@@ -4225,12 +4231,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-249">&#182;</a>
               </div>
-              <p>Defers function execution based on condition and delay
-<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+              <p>Sets up the defered function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.wait = ß.core.wait = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> waitFn = <span class="keyword">function</span>(params) {</pre></div></div>
             
         </li>
         
@@ -4241,11 +4246,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-250">&#182;</a>
               </div>
-              <p>Sets up the defered function</p>
+              <p>Reads all the allowed to be passed in</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> waitFn = <span class="keyword">function</span>(params) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span></pre></div></div>
             
         </li>
         
@@ -4256,11 +4261,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-251">&#182;</a>
               </div>
-              <p>Reads all the allowed to be passed in</p>
+              <p>When it all started</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>         startTime      = <span class="keyword">new</span> Date().getTime(),</pre></div></div>
             
         </li>
         
@@ -4271,11 +4276,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-252">&#182;</a>
               </div>
-              <p>When it all started</p>
+              <p>for how long the whole thing may take</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         startTime      = <span class="keyword">new</span> Date().getTime(),</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         duration       = params.duration || <span class="number">3000</span>,</pre></div></div>
             
         </li>
         
@@ -4286,11 +4291,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-253">&#182;</a>
               </div>
-              <p>for how long the whole thing may take</p>
+              <p>for how often we check the condition</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         duration       = params.duration || <span class="number">3000</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         interval       = params.interval || <span class="number">100</span>,</pre></div></div>
             
         </li>
         
@@ -4301,11 +4306,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-254">&#182;</a>
               </div>
-              <p>for how often we check the condition</p>
+              <p>the initial delay</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         interval       = params.interval || <span class="number">100</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         initialDelay   = params.initialDelay || <span class="number">10</span>,</pre></div></div>
             
         </li>
         
@@ -4316,11 +4321,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-255">&#182;</a>
               </div>
-              <p>the initial delay</p>
+              <p>a condition function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         initialDelay   = params.initialDelay || <span class="number">10</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         condition      = params.condition || <span class="keyword">function</span>() {},</pre></div></div>
             
         </li>
         
@@ -4331,11 +4336,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-256">&#182;</a>
               </div>
-              <p>a condition function</p>
+              <p>object containing all the callbacks (done and fail)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         condition      = params.condition || <span class="keyword">function</span>() {},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         callbacks      = ß.util.extend({}, params.callbacks),</pre></div></div>
             
         </li>
         
@@ -4346,21 +4351,6 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-257">&#182;</a>
               </div>
-              <p>object containing all the callbacks (done and fail)</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>         callbacks      = ß.util.extend({}, params.callbacks),</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-258">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-258">&#182;</a>
-              </div>
               <p>Runs one roundtrip of execution</p>
 
             </div>
@@ -4370,11 +4360,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-259">
+        <li id="section-258">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-259">&#182;</a>
+                <a class="pilcrow" href="#section-258">&#182;</a>
               </div>
               <p>Time flew by and duration for execution exceeded</p>
 
@@ -4386,11 +4376,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-260">
+        <li id="section-259">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-260">&#182;</a>
+                <a class="pilcrow" href="#section-259">&#182;</a>
               </div>
               <p>The condition passed and we&#39;re good</p>
 
@@ -4402,11 +4392,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-261">
+        <li id="section-260">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-261">&#182;</a>
+                <a class="pilcrow" href="#section-260">&#182;</a>
               </div>
               <p>Defer execution again by interval</p>
 
@@ -4420,11 +4410,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-262">
+        <li id="section-261">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-262">&#182;</a>
+                <a class="pilcrow" href="#section-261">&#182;</a>
               </div>
               <p>Starts up intitial execution with delay</p>
 
@@ -4435,11 +4425,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-263">
+        <li id="section-262">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-263">&#182;</a>
+                <a class="pilcrow" href="#section-262">&#182;</a>
               </div>
               <p>Outer <code>waitFn</code> returns its callbacks</p>
 
@@ -4459,11 +4449,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-264">
+        <li id="section-263">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-264">&#182;</a>
+                <a class="pilcrow" href="#section-263">&#182;</a>
               </div>
               <p>Sets up global return only requiring condition</p>
 
@@ -4482,27 +4472,27 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-265">
+        <li id="section-264">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-265">&#182;</a>
+                <a class="pilcrow" href="#section-264">&#182;</a>
               </div>
               <p>A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 <em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.core.messenger = ß.messenger = (<span class="keyword">function</span>($, ß){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ß.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>($, ß) {</pre></div></div>
             
         </li>
         
         
-        <li id="section-266">
+        <li id="section-265">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-266">&#182;</a>
+                <a class="pilcrow" href="#section-265">&#182;</a>
               </div>
               <p>The messenger/hub is just a plain jQuery object</p>
 
@@ -4514,11 +4504,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-267">
+        <li id="section-266">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-267">&#182;</a>
+                <a class="pilcrow" href="#section-266">&#182;</a>
               </div>
               <p>Subscribing to messenger with namespace as in <em>ß.messenger.subscribe(&#39;foo.bar&#39;, fn)</em>
 <em>Note:</em> First argument is event as in subscribe(&#39;foo&#39;, fn(e, arg…))!</p>
@@ -4530,11 +4520,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-268">
+        <li id="section-267">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-268">&#182;</a>
+                <a class="pilcrow" href="#section-267">&#182;</a>
               </div>
               <p>Using $ as emitter allows namespaced events e.g. &#39;foo.bar&#39; will trigger on &#39;foo&#39; and &#39;foo.bar&#39;</p>
 
@@ -4546,11 +4536,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-269">
+        <li id="section-268">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-269">&#182;</a>
+                <a class="pilcrow" href="#section-268">&#182;</a>
               </div>
               <p>Unsubscribes in same syntax as subscribing (namespaced)</p>
 
@@ -4563,11 +4553,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-270">
+        <li id="section-269">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-270">&#182;</a>
+                <a class="pilcrow" href="#section-269">&#182;</a>
               </div>
               <p>Triggers subscribed listener&#39;s function with arguements (1st is $-event)</p>
 
@@ -4580,11 +4570,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-271">
+        <li id="section-270">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-271">&#182;</a>
+                <a class="pilcrow" href="#section-270">&#182;</a>
               </div>
               <p>Returns public functions</p>
 
@@ -4595,7 +4585,24 @@ it will be invoked on DOM-Ready</p>
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, ß));</pre></div></div>
+}(jQuery, ß)));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-271">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-271">&#182;</a>
+              </div>
+              <p>Shorthand for redirecting the browser to a new <code>url</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ß.redirect = <span class="keyword">function</span>(url) {
+   location.href = url;
+};</pre></div></div>
             
         </li>
         
@@ -4603,25 +4610,8 @@ it will be invoked on DOM-Ready</p>
         <li id="section-272">
             <div class="annotation">
               
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-272">&#182;</a>
-              </div>
-              <p>Shorthand for redirecting the browser to a new <code>url</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>ß.redirect = ß.core.redirect = <span class="keyword">function</span>(url) {
-   location.href = url;
-};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-273">
-            <div class="annotation">
-              
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-273">&#182;</a>
+                <a class="pilcrow" href="#section-272">&#182;</a>
               </div>
               <h2>Conflucence module</h2>
 
@@ -4630,11 +4620,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-274">
+        <li id="section-273">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-274">&#182;</a>
+                <a class="pilcrow" href="#section-273">&#182;</a>
               </div>
               <p>Sets up confluence object</p>
 
@@ -4645,11 +4635,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-275">
+        <li id="section-274">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-275">&#182;</a>
+                <a class="pilcrow" href="#section-274">&#182;</a>
               </div>
               <h2>Device detection module</h2>
 
@@ -4658,11 +4648,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-276">
+        <li id="section-275">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-276">&#182;</a>
+                <a class="pilcrow" href="#section-275">&#182;</a>
               </div>
               <p>Sets up device object</p>
 
@@ -4676,11 +4666,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-277">
+        <li id="section-276">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-277">&#182;</a>
+                <a class="pilcrow" href="#section-276">&#182;</a>
               </div>
               <p>A rudimentary function testing for mobile devices
 <em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
@@ -4695,11 +4685,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-278">
+        <li id="section-277">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-278">&#182;</a>
+                <a class="pilcrow" href="#section-277">&#182;</a>
               </div>
               <p>Checks the navigator&#39;s user agent against the list of mobile devices</p>
 
@@ -4711,11 +4701,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-279">
+        <li id="section-278">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-279">&#182;</a>
+                <a class="pilcrow" href="#section-278">&#182;</a>
               </div>
               <p>A function testing for desktop devices</p>
 
@@ -4729,11 +4719,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-280">
+        <li id="section-279">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-280">&#182;</a>
+                <a class="pilcrow" href="#section-279">&#182;</a>
               </div>
               <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
 
@@ -4745,11 +4735,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-281">
+        <li id="section-280">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-281">&#182;</a>
+                <a class="pilcrow" href="#section-280">&#182;</a>
               </div>
               <p>A function testing for browser vendors</p>
 
@@ -4763,11 +4753,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-282">
+        <li id="section-281">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-282">&#182;</a>
+                <a class="pilcrow" href="#section-281">&#182;</a>
               </div>
               <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
 
@@ -4779,11 +4769,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-283">
+        <li id="section-282">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-283">&#182;</a>
+                <a class="pilcrow" href="#section-282">&#182;</a>
               </div>
               <p>A function testing for browser vendors</p>
 
@@ -4797,11 +4787,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-284">
+        <li id="section-283">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-284">&#182;</a>
+                <a class="pilcrow" href="#section-283">&#182;</a>
               </div>
               <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
 
@@ -4813,11 +4803,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-285">
+        <li id="section-284">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-285">&#182;</a>
+                <a class="pilcrow" href="#section-284">&#182;</a>
               </div>
               <hr>
 
@@ -4826,11 +4816,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-286">
+        <li id="section-285">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-286">&#182;</a>
+                <a class="pilcrow" href="#section-285">&#182;</a>
               </div>
               <p>Sets up responsive object</p>
 
@@ -4847,11 +4837,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-287">
+        <li id="section-286">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-287">&#182;</a>
+                <a class="pilcrow" href="#section-286">&#182;</a>
               </div>
               <h2>Outro, AMD and conflict resolution</h2>
 
@@ -4860,11 +4850,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-288">
+        <li id="section-287">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-288">&#182;</a>
+                <a class="pilcrow" href="#section-287">&#182;</a>
               </div>
               <p>Global DOM-Ready which shall be used whenever possible
 Logger does not use it cause it heavily relies on variable hoisting</p>
@@ -4878,11 +4868,11 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
         </li>
         
         
-        <li id="section-289">
+        <li id="section-288">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-289">&#182;</a>
+                <a class="pilcrow" href="#section-288">&#182;</a>
               </div>
               <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
 
@@ -4893,11 +4883,11 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
         </li>
         
         
-        <li id="section-290">
+        <li id="section-289">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-290">&#182;</a>
+                <a class="pilcrow" href="#section-289">&#182;</a>
               </div>
               <p>Retore the <code>previousScandio</code></p>
 
@@ -4908,11 +4898,11 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
         </li>
         
         
-        <li id="section-291">
+        <li id="section-290">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-291">&#182;</a>
+                <a class="pilcrow" href="#section-290">&#182;</a>
               </div>
               <p>Return yerself to continue</p>
 
@@ -4924,11 +4914,11 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
         </li>
         
         
-        <li id="section-292">
+        <li id="section-291">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-292">&#182;</a>
+                <a class="pilcrow" href="#section-291">&#182;</a>
               </div>
               <p>Support for AMD/RequireJS
 If define function deefined and its amd</p>
@@ -4940,11 +4930,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-293">
+        <li id="section-292">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-293">&#182;</a>
+                <a class="pilcrow" href="#section-292">&#182;</a>
               </div>
               <p>Define Scandio</p>
 
@@ -4955,11 +4945,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-294">
+        <li id="section-293">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-294">&#182;</a>
+                <a class="pilcrow" href="#section-293">&#182;</a>
               </div>
               <p>and return the library</p>
 
@@ -4968,7 +4958,7 @@ If define function deefined and its amd</p>
             <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> ß;
    });
 }
-}(<span class="keyword">this</span>, jQuery, window, document));</pre></div></div>
+}(<span class="keyword">this</span>, jQuery, window, document, <span class="literal">undefined</span>));</pre></div></div>
             
         </li>
         

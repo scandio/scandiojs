@@ -11,7 +11,7 @@
 
  // Setup the library
  // ---------------
- ;(function(root, $, window, undefined) {
+ ;(function(root, $, window, document, undefined) {
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
@@ -34,10 +34,9 @@
       breaker            = {},
       // Set of shorthand to object protos
       ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
-      document           = window.document,
       location           = window.location,
       events             = $('<a>'),
-      modules            = { sequence: [] },
+      modules            = {},
       // Console methods to be caught when not defined in browser (IE I hear you)
       consoleMethods     = ['assert', 'clear', 'count', 'dir', 'dirxml',
                           'exception', 'group', 'groupCollapsed', 'groupEnd',
@@ -360,8 +359,8 @@
          // Each arguement processed separately
          ß.util.each(args, function(arg) {
             // If it is an object || array stringify its value
-            if ( (ß.isObject(arg) || ß.isArray(arg) ) && ß.isFunction(JSON.stringify) ) {
-               response.push( JSON.stringify(arg) );
+            if ( (ß.isObject(arg) || ß.isArray(arg) ) ) {
+               response.push( ß.json.to(arg) );
             } else {
                // otherwise toString it
                response.push(arg);
@@ -553,9 +552,12 @@
    // Dig into the `path` an question the `obj`
    for(i = 0; i < path.length; i++) {
       // Found something on the `obj` and reset the destination
-      if(obj) { dest = dest[path[i]]; }
+      if ( dest[path[i]] ) { dest = dest[path[i]]; }
       // Nothing found…
-      else { dest = undefined; }
+      else {
+         dest = undefined;
+         break;
+      }
    }
 
    // Dest or notFound
@@ -612,7 +614,7 @@
 ß.util.mixin = function(namespace, obj) {
    var
       destination = ß,
-      path        = namespace.split("."),
+      path        = namespace !== null ? namespace.split(".") : [],
       atModule    = null,
       i           = null;
 
@@ -987,13 +989,9 @@
 // Core module
 // ---------------
 
-// Register core namespace on scandiojs object
-
-ß.core = {};
-
 // Closes and secures a module by name within its own scope
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.mod = ß.core.mod = ß.core.module = (function() {
+ß.mod = ß.module = (function() {
    // Setting up global environment object and DOM-ready state
    var
       isDomReady  = false,
@@ -1001,7 +999,9 @@
 
    // Returns a function requiring `name, module and an module environment object`
    return function(name, module, modEnv) {
-      var typeError = null;
+      var
+         typeError      = null,
+         invokedModule  = null;
 
       // Validates types of parameters in requiring `string, function and object`
       if (!ß.isString(name) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
@@ -1015,39 +1015,39 @@
       }
 
       // Module names need to be unique
-      if (modules.sequence.indexOf(name) >= 0) {
+      if (ß.util.getByDots(name, modules, true) !== true) {
          // Otherwise error will be triggered
          typeError = 'Error: there is already a module with name "' + name + '".';
 
          ß.debug.error(typeError);
       }
       else {
+         // Extend global with module environment where module takes preference
+         $.extend(true, globEnv, modEnv);
          // If module name is unique push it to internal state variable
-         modules.sequence.push(name);
+         invokedModule = ß.util.setByDots(name, module.call(ß, $, globEnv, ß), modules);
       }
-
-      // Extend global with module environment where module takes preference
-      $.extend(true, globEnv, modEnv);
-
-      // Register function on module object by calling it with scandiojs, jQuery and the global environment
-      modules[name] = module.call(ß, $, globEnv, ß);
 
       // *Convention:* if module environment has a function called `readyFn`
       // it will be invoked on DOM-Ready
       if (modEnv && ß.isFunction(modEnv.readyFn)) {
-         modEnv.readyFn(modules[name].ready);
+         modEnv.readyFn(invokedModule.ready);
       } else {
          // Otherwise the just load it on DOM-ready
-         $(document).ready(modules[name].ready);
+         $(document).ready(invokedModule.ready);
       }
-
    };
-
 }());
+
+// Returns a registered module by passing in a qualifier string (may be dot-notation)
+// *Note:* Handing over a not fully qualifying string returns an object with hashes for submodules.
+ß.modules = function(name) {
+   return ß.util.getByDots(name, modules, false);
+};
 
 // Defers function execution based on condition and delay
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.wait = ß.core.wait = (function () {
+ß.wait = (function () {
 
    // Sets up the defered function
    var waitFn = function(params) {
@@ -1108,7 +1108,7 @@
 
 // A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.core.messenger = ß.messenger = (function($, ß){
+ß.util.mixin(null, (function($, ß) {
    // The messenger/hub is just a plain jQuery object
    var
       messenger = $({}),
@@ -1136,10 +1136,10 @@
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, ß));
+}(jQuery, ß)));
 
 // Shorthand for redirecting the browser to a new `url`
-ß.redirect = ß.core.redirect = function(url) {
+ß.redirect = function(url) {
    location.href = url;
 };
 // Conflucence module
@@ -1233,4 +1233,4 @@ if (typeof define === 'function' && define.amd) {
       return ß;
    });
 }
-}(this, jQuery, window, document));
+}(this, jQuery, window, document, undefined));
