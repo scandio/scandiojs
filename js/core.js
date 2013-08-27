@@ -58,6 +58,10 @@
 // Returns a registered module by passing in a qualifier string (may be dot-notation)
 // *Note:* Handing over a not fully qualifying string returns an object with hashes for submodules.
 ß.modules = function(namespace) {
+   namespace = ß.string.clean(
+      ß.string.lower(namespace)
+   );
+
    return ß.util.getByDots(namespace, modules, false);
 };
 
