@@ -26,8 +26,11 @@
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
    ß.util.each(scripts.slice(0, scripts.length - 1), function(script) {
-      ß.util.extend(mergeCache, ß.json.from( $(script).text() ));
-      script.remove();
+      var $script    = $(script);
+
+      ß.util.extend(mergeCache, ß.json.from( $script.text() ));
+
+      $script.remove();
    });
 
    // Updates the merged contents to the main-script
