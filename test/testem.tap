@@ -2,146 +2,195 @@ ok 1 - testem.json -  Chrome 29.0 - A suite testing ajax functionality of scandi
 ok 2 - testem.json -  Chrome 29.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs.
 ok 3 - testem.json -  Chrome 29.0 - A suite testing ajax functionality of scandio.js is should construct a script tag.
 ok 4 - testem.json -  Chrome 29.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls.
-ok 5 - testem.json -  Chrome 29.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions.
-ok 6 - testem.json -  Chrome 29.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions.
-ok 7 - testem.json -  Chrome 29.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger.
-ok 8 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM.
-ok 9 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live).
-ok 10 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's.
-ok 11 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label.
-ok 12 - testem.json -  Chrome 29.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js.
-ok 13 - testem.json -  Chrome 29.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods.
-ok 14 - testem.json -  Chrome 29.0 - A suite testing the initialization of scandio.js should have any version number which is a string.
-ok 15 - testem.json -  Chrome 29.0 - A suite testing the type checking functionality should correctly test on primitive types.
-ok 16 - testem.json -  Chrome 29.0 - A suite testing the type checking functionality should not duck punch things.
-ok 17 - testem.json -  Chrome 29.0 - A suite testing the type checking functionality should check the type of objects.
-ok 18 - testem.json -  Chrome 29.0 - A suite testing the logger functions should exist a global variable for logging.
-ok 19 - testem.json -  Chrome 29.0 - A suite testing the logger functions should exist a logging function for any log method.
-ok 20 - testem.json -  Chrome 29.0 - A suite testing the logger functions should store debug statements in the log history.
-ok 21 - testem.json -  Chrome 29.0 - A suite testing the logger functions should not log below the log level but store the history.
-ok 22 - testem.json -  Chrome 29.0 - A suite testing the outro should have a conflict resolution function.
-ok 23 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'.
-ok 24 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings.
-ok 25 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on string capitalization should not capitalize every word.
-ok 26 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings.
-ok 27 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence.
-ok 28 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start.
-ok 29 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end.
-ok 30 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start.
-ok 31 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween.
-ok 32 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start.
-ok 33 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end.
-ok 34 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start.
-ok 35 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string.
-ok 36 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string.
-ok 37 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given.
-ok 38 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given.
-ok 39 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given.
-ok 40 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start.
-ok 41 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start.
-ok 42 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end.
-ok 43 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start.
-ok 44 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space).
-ok 45 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-).
-ok 46 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-).
-ok 47 - testem.json -  Chrome 29.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function.
-ok 48 - testem.json -  Chrome 29.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function.
-ok 49 - testem.json -  Chrome 29.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function with arguments.
-ok 50 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object properties should return correctly check on object props.
-ok 51 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object.
-ok 52 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count.
-ok 53 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype.
-ok 54 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object iteration with each should handle null props.
-ok 55 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on filtering objects should filter values of an object.
-ok 56 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on filtering objects should filter values of an array.
-ok 57 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object.
-ok 58 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function.
-ok 59 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on getting functions of an object should only return functions.
-ok 60 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object.
-ok 61 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
-ok 62 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array.
-ok 63 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
-ok 64 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one.
-ok 65 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source.
-ok 66 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source.
-ok 67 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins.
-ok 68 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones.
-ok 69 - testem.json -  Chrome 29.0 - Tests on string module should have mixed in the module on namespace 'string.custom'.
-ok 70 - testem.json -  Chrome 29.0 - Tests on string module should properly capitalize strings.
-ok 71 - testem.json -  Chrome 29.0 - Tests on string module should properly lowercase strings.
-ok 72 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns.
-ok 73 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs.
-ok 74 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js is should construct a script tag.
-ok 75 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls.
-ok 76 - testem.json -  Safari 6.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions.
-ok 77 - testem.json -  Safari 6.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions.
-ok 78 - testem.json -  Safari 6.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger.
-ok 79 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM.
-ok 80 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live).
-ok 81 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's.
-ok 82 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label.
-ok 83 - testem.json -  Safari 6.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js.
-ok 84 - testem.json -  Safari 6.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods.
-ok 85 - testem.json -  Safari 6.0 - A suite testing the initialization of scandio.js should have any version number which is a string.
-ok 86 - testem.json -  Safari 6.0 - A suite testing the type checking functionality should correctly test on primitive types.
-ok 87 - testem.json -  Safari 6.0 - A suite testing the type checking functionality should not duck punch things.
-ok 88 - testem.json -  Safari 6.0 - A suite testing the type checking functionality should check the type of objects.
-ok 89 - testem.json -  Safari 6.0 - A suite testing the logger functions should exist a global variable for logging.
-ok 90 - testem.json -  Safari 6.0 - A suite testing the logger functions should exist a logging function for any log method.
-ok 91 - testem.json -  Safari 6.0 - A suite testing the logger functions should store debug statements in the log history.
-ok 92 - testem.json -  Safari 6.0 - A suite testing the logger functions should not log below the log level but store the history.
-ok 93 - testem.json -  Safari 6.0 - A suite testing the outro should have a conflict resolution function.
-ok 94 - testem.json -  Safari 6.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'.
-ok 95 - testem.json -  Safari 6.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings.
-ok 96 - testem.json -  Safari 6.0 - A suite testing the string functions tests on string capitalization should not capitalize every word.
-ok 97 - testem.json -  Safari 6.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings.
-ok 98 - testem.json -  Safari 6.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence.
-ok 99 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start.
-ok 100 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end.
-ok 101 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start.
-ok 102 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween.
-ok 103 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start.
-ok 104 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end.
-ok 105 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start.
-ok 106 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string.
-ok 107 - testem.json -  Safari 6.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string.
-ok 108 - testem.json -  Safari 6.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given.
-ok 109 - testem.json -  Safari 6.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given.
-ok 110 - testem.json -  Safari 6.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given.
-ok 111 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start.
-ok 112 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start.
-ok 113 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end.
-ok 114 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start.
-ok 115 - testem.json -  Safari 6.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space).
-ok 116 - testem.json -  Safari 6.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-).
-ok 117 - testem.json -  Safari 6.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-).
-ok 118 - testem.json -  Safari 6.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function.
-ok 119 - testem.json -  Safari 6.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function.
-ok 120 - testem.json -  Safari 6.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function with arguments.
-ok 121 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object properties should return correctly check on object props.
-ok 122 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object.
-ok 123 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count.
-ok 124 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype.
-ok 125 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object iteration with each should handle null props.
-ok 126 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on filtering objects should filter values of an object.
-ok 127 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on filtering objects should filter values of an array.
-ok 128 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object.
-ok 129 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function.
-ok 130 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on getting functions of an object should only return functions.
-ok 131 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object.
-ok 132 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
-ok 133 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array.
-ok 134 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
-ok 135 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one.
-ok 136 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source.
-ok 137 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source.
-ok 138 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins.
-ok 139 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones.
-ok 140 - testem.json -  Safari 6.0 - Tests on string module should have mixed in the module on namespace 'string.custom'.
-ok 141 - testem.json -  Safari 6.0 - Tests on string module should properly capitalize strings.
-ok 142 - testem.json -  Safari 6.0 - Tests on string module should properly lowercase strings.
+ok 5 - testem.json -  Chrome 29.0 - A suite testing the bridge functionality of scandio.js should persit simple values in the DOM-store.
+ok 6 - testem.json -  Chrome 29.0 - A suite testing the bridge functionality of scandio.js should return default values on non-defined paths.
+ok 7 - testem.json -  Chrome 29.0 - A suite testing the bridge functionality of scandio.js should overwrite defined values.
+ok 8 - testem.json -  Chrome 29.0 - A suite testing the bridge functionality of scandio.js should persit nested values in the DOM-store.
+ok 9 - testem.json -  Chrome 29.0 - A suite testing the bridge functionality of scandio.js should merge existing stores into one.
+ok 10 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM.
+ok 11 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live).
+ok 12 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's.
+ok 13 - testem.json -  Chrome 29.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label.
+ok 14 - testem.json -  Chrome 29.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js.
+ok 15 - testem.json -  Chrome 29.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods.
+ok 16 - testem.json -  Chrome 29.0 - A suite testing the initialization of scandio.js should have any version number which is a string.
+ok 17 - testem.json -  Chrome 29.0 - A suite testing the type checking functionality should correctly test on primitive types.
+ok 18 - testem.json -  Chrome 29.0 - A suite testing the type checking functionality should not duck punch things.
+ok 19 - testem.json -  Chrome 29.0 - A suite testing the type checking functionality should check the type of objects.
+ok 20 - testem.json -  Chrome 29.0 - A suite testing json module should correctly encode json (using native if possible).
+ok 21 - testem.json -  Chrome 29.0 - A suite testing json module should correctly decode json (using native if possible).
+ok 22 - testem.json -  Chrome 29.0 - A suite testing json module should correctly encode json (using fallback).
+ok 23 - testem.json -  Chrome 29.0 - A suite testing json module should correctly decode json (using fallback).
+ok 24 - testem.json -  Chrome 29.0 - A suite testing the logger functions should exist a global variable for logging.
+ok 25 - testem.json -  Chrome 29.0 - A suite testing the logger functions should exist a logging function for any log method.
+ok 26 - testem.json -  Chrome 29.0 - A suite testing the logger functions should store debug statements in the log history.
+ok 27 - testem.json -  Chrome 29.0 - A suite testing the logger functions should not log below the log level but store the history.
+ok 28 - testem.json -  Chrome 29.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions.
+ok 29 - testem.json -  Chrome 29.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions.
+ok 30 - testem.json -  Chrome 29.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger.
+ok 31 - testem.json -  Chrome 29.0 - A suite testing the outro should have a conflict resolution function.
+ok 32 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'.
+ok 33 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings.
+ok 34 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on string capitalization should not capitalize every word.
+ok 35 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings.
+ok 36 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence.
+ok 37 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start.
+ok 38 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end.
+ok 39 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start.
+ok 40 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween.
+ok 41 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start.
+ok 42 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end.
+ok 43 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start.
+ok 44 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string.
+ok 45 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string.
+ok 46 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given.
+ok 47 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given.
+ok 48 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given.
+ok 49 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start.
+ok 50 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start.
+ok 51 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end.
+ok 52 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start.
+ok 53 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space).
+ok 54 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-).
+ok 55 - testem.json -  Chrome 29.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-).
+ok 56 - testem.json -  Chrome 29.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function.
+ok 57 - testem.json -  Chrome 29.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function.
+ok 58 - testem.json -  Chrome 29.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function with arguments.
+ok 59 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object properties should return correctly check on object props.
+ok 60 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object.
+ok 61 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count.
+ok 62 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype.
+ok 63 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on object iteration with each should handle null props.
+ok 64 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on filtering objects should filter values of an object.
+ok 65 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on filtering objects should filter values of an array.
+ok 66 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object.
+ok 67 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function.
+ok 68 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on getting functions of an object should only return functions.
+ok 69 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object.
+ok 70 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
+ok 71 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array.
+ok 72 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
+ok 73 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on setting object values using dot notation should set properties on an object.
+ok 74 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on setting object values using dot notation should set nested properties on an object.
+ok 75 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests on setting object values using dot notation should overwrite nested properties on an object.
+ok 76 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one.
+ok 77 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source.
+ok 78 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source.
+ok 79 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins.
+ok 80 - testem.json -  Chrome 29.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones.
+ok 81 - testem.json -  Chrome 29.0 - Tests on string module should have mixed in the module on namespace 'string.custom'.
+ok 82 - testem.json -  Chrome 29.0 - Tests on string module should properly capitalize strings.
+ok 83 - testem.json -  Chrome 29.0 - Tests on string module should properly lowercase strings.
+ok 84 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns.
+ok 85 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs.
+ok 86 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js is should construct a script tag.
+ok 87 - testem.json -  Safari 6.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls.
+ok 88 - testem.json -  Safari 6.0 - A suite testing the bridge functionality of scandio.js should persit simple values in the DOM-store.
+ok 89 - testem.json -  Safari 6.0 - A suite testing the bridge functionality of scandio.js should return default values on non-defined paths.
+ok 90 - testem.json -  Safari 6.0 - A suite testing the bridge functionality of scandio.js should overwrite defined values.
+ok 91 - testem.json -  Safari 6.0 - A suite testing the bridge functionality of scandio.js should persit nested values in the DOM-store.
+not ok 92 - testem.json -  Safari 6.0 - A suite testing the bridge functionality of scandio.js should merge existing stores into one.
+    ---
+        message: "TypeError: 'undefined' is not a function (evaluating 'script.remove()') in http://localhost:7357/dist/scandio.js (line 754)"
+        stack: "@http://localhost:7357/dist/scandio.js:754
+        forEach@http://localhost:7357/dist/scandio.js:487
+        init@http://localhost:7357/dist/scandio.js:755
+        @http://localhost:7357/test/specs/bridge.js:49
+        execute@http://localhost:7357/testem/jasmine.js:1064
+        next_@http://localhost:7357/testem/jasmine.js:2096
+        start@http://localhost:7357/testem/jasmine.js:2049
+        execute@http://localhost:7357/testem/jasmine.js:2378
+        next_@http://localhost:7357/testem/jasmine.js:2096
+        start@http://localhost:7357/testem/jasmine.js:2049
+        execute@http://localhost:7357/testem/jasmine.js:2523
+        next_@http://localhost:7357/testem/jasmine.js:2096
+        onComplete@http://localhost:7357/testem/jasmine.js:2092
+        finish@http://localhost:7357/testem/jasmine.js:2478
+        @http://localhost:7357/testem/jasmine.js:2522
+        next_@http://localhost:7357/testem/jasmine.js:2106
+        onComplete@http://localhost:7357/testem/jasmine.js:2092
+        finish@http://localhost:7357/testem/jasmine.js:2350
+        @http://localhost:7357/testem/jasmine.js:2377
+        next_@http://localhost:7357/testem/jasmine.js:2106
+        @http://localhost:7357/testem/jasmine.js:2086
+        [native code]"
+    ...
+ok 93 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM.
+ok 94 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live).
+ok 95 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's.
+ok 96 - testem.json -  Safari 6.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label.
+ok 97 - testem.json -  Safari 6.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js.
+ok 98 - testem.json -  Safari 6.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods.
+ok 99 - testem.json -  Safari 6.0 - A suite testing the initialization of scandio.js should have any version number which is a string.
+ok 100 - testem.json -  Safari 6.0 - A suite testing the type checking functionality should correctly test on primitive types.
+ok 101 - testem.json -  Safari 6.0 - A suite testing the type checking functionality should not duck punch things.
+ok 102 - testem.json -  Safari 6.0 - A suite testing the type checking functionality should check the type of objects.
+ok 103 - testem.json -  Safari 6.0 - A suite testing json module should correctly encode json (using native if possible).
+ok 104 - testem.json -  Safari 6.0 - A suite testing json module should correctly decode json (using native if possible).
+ok 105 - testem.json -  Safari 6.0 - A suite testing json module should correctly encode json (using fallback).
+ok 106 - testem.json -  Safari 6.0 - A suite testing json module should correctly decode json (using fallback).
+ok 107 - testem.json -  Safari 6.0 - A suite testing the logger functions should exist a global variable for logging.
+ok 108 - testem.json -  Safari 6.0 - A suite testing the logger functions should exist a logging function for any log method.
+ok 109 - testem.json -  Safari 6.0 - A suite testing the logger functions should store debug statements in the log history.
+ok 110 - testem.json -  Safari 6.0 - A suite testing the logger functions should not log below the log level but store the history.
+ok 111 - testem.json -  Safari 6.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions.
+ok 112 - testem.json -  Safari 6.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions.
+ok 113 - testem.json -  Safari 6.0 - A suite testing the modules core functions tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger.
+ok 114 - testem.json -  Safari 6.0 - A suite testing the outro should have a conflict resolution function.
+ok 115 - testem.json -  Safari 6.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'.
+ok 116 - testem.json -  Safari 6.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings.
+ok 117 - testem.json -  Safari 6.0 - A suite testing the string functions tests on string capitalization should not capitalize every word.
+ok 118 - testem.json -  Safari 6.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings.
+ok 119 - testem.json -  Safari 6.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence.
+ok 120 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start.
+ok 121 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end.
+ok 122 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start.
+ok 123 - testem.json -  Safari 6.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween.
+ok 124 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start.
+ok 125 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end.
+ok 126 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start.
+ok 127 - testem.json -  Safari 6.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string.
+ok 128 - testem.json -  Safari 6.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string.
+ok 129 - testem.json -  Safari 6.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given.
+ok 130 - testem.json -  Safari 6.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given.
+ok 131 - testem.json -  Safari 6.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given.
+ok 132 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start.
+ok 133 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start.
+ok 134 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end.
+ok 135 - testem.json -  Safari 6.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start.
+ok 136 - testem.json -  Safari 6.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space).
+ok 137 - testem.json -  Safari 6.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-).
+ok 138 - testem.json -  Safari 6.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-).
+ok 139 - testem.json -  Safari 6.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function.
+ok 140 - testem.json -  Safari 6.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function.
+ok 141 - testem.json -  Safari 6.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds should break the execution of a function with arguments.
+ok 142 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object properties should return correctly check on object props.
+ok 143 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object.
+ok 144 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count.
+ok 145 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype.
+ok 146 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on object iteration with each should handle null props.
+ok 147 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on filtering objects should filter values of an object.
+ok 148 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on filtering objects should filter values of an array.
+ok 149 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object.
+ok 150 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function.
+ok 151 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on getting functions of an object should only return functions.
+ok 152 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object.
+ok 153 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
+ok 154 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array.
+ok 155 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found.
+ok 156 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on setting object values using dot notation should set properties on an object.
+ok 157 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on setting object values using dot notation should set nested properties on an object.
+ok 158 - testem.json -  Safari 6.0 - A suite testing the utility functions tests on setting object values using dot notation should overwrite nested properties on an object.
+ok 159 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one.
+ok 160 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source.
+ok 161 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source.
+ok 162 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins.
+ok 163 - testem.json -  Safari 6.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones.
+ok 164 - testem.json -  Safari 6.0 - Tests on string module should have mixed in the module on namespace 'string.custom'.
+ok 165 - testem.json -  Safari 6.0 - Tests on string module should properly capitalize strings.
+ok 166 - testem.json -  Safari 6.0 - Tests on string module should properly lowercase strings.
 
-1..142
-# tests 142
-# pass 142
-# fail 0
+1..166
+# tests 166
+# pass 165
+# fail 1
