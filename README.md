@@ -14,7 +14,7 @@ Lastly, if you just want to checkout the latest version of the documented source
 
 You can easily extend scandio.js suiting your own needs using the `ß.util.mixin-fn`. The `test/featurerequest/src/template.js` contains an example for this. Testing your code is also fairly easy and already setup. Just have a look at the `test/featurerequest/test/template.js`.
 
-For further information please refer to the [CONTRIBUTING.md](https://github.com/scandio/scandiojs/blob/master/contributing.md).
+For further information please refer to the [CONTRIBUTING.md](https://github.com/scandio/scandiojs/blob/master/CONTRIBUTING.md).
 
 ## What you need to build scandio.js
 
@@ -57,7 +57,7 @@ The built version of scandio.js will be put in the `dist/` subdirectory, along w
 
 ## Test your changes or build
 
-This part should also be read after checking out the [CONTRIBUTING.md](https://github.com/scandio/scandiojs/blob/master/contributing.md) after you added a feature-request and you want to test your code.
+This part should also be read after checking out the [CONTRIBUTING.md](https://github.com/scandio/scandiojs/blob/master/CONTRIBUTING.md) after you added a feature-request and you want to test your code.
 
 In order to test your build or any changes you made you should run:
 
