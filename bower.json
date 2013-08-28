@@ -1,20 +1,17 @@
 {
-  "name": "scandio.js",
-  "version": "0.0.1",
-  "ignore": [
-    "test",
-    "CONTRIBUTING.md",
-    "*.txt",
-    "bower.json"
-  ],
-  "dependencies": {
-    "jquery": "latest",
-    "jasmine": "latest",
-    "jasmine-jstd-adapter": "latest",
-    "requirejs": "latest",
-    "rainbow": "latest"
-  },
-  "devDependencies": {
-
-  }
+   "name": "scandiojs",
+   "version": "0.1.0",
+   "ignore": [
+      "test",
+      "*.txt",
+      "bower.json"
+   ],
+   "dependencies": {
+      "jquery": "latest"
+   },
+   "devDependencies": {
+      "jasmine": "latest",
+      "requirejs": "latest",
+      "rainbow": "latest"
+   }
 }
