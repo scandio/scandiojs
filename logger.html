@@ -135,7 +135,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.logger = {
+            <div class="content"><div class='highlight'><pre>Scandio.logger = {
    level: <span class="number">5</span>,
    logs: {},
    logDom: <span class="literal">false</span>
@@ -154,11 +154,11 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.logger.logDomFn = ß.logger.logDomFn || (<span class="keyword">function</span>() {
-   <span class="keyword">return</span> ß.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) &gt; -<span class="number">1</span>);
+            <div class="content"><div class='highlight'><pre>Scandio.logger.logDomFn = Scandio.logger.logDomFn || (<span class="keyword">function</span>() {
+   <span class="keyword">return</span> Scandio.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) &gt; -<span class="number">1</span>);
 }());
 
-ß.debug = {};</pre></div></div>
+Scandio.debug = {};</pre></div></div>
             
         </li>
         
@@ -169,11 +169,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p><code>ß.debug</code> will get a set of methods (<em>see return-statement</em>)</p>
+              <p><code>Scandio.debug</code> will get a set of methods (<em>see return-statement</em>)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.debug = (<span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>Scandio.debug = (<span class="keyword">function</span>() {
    <span class="keyword">var</span></pre></div></div>
             
         </li>
@@ -233,7 +233,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         ß.util.each(args, <span class="keyword">function</span>(arg) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         Scandio.util.each(args, <span class="keyword">function</span>(arg) {</pre></div></div>
             
         </li>
         
@@ -248,8 +248,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (ß.isObject(arg) || ß.isArray(arg) ) ) {
-               response.push( ß.json.to(arg) );
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (Scandio.isObject(arg) || Scandio.isArray(arg) ) ) {
+               response.push( Scandio.json.to(arg) );
             } <span class="keyword">else</span> {</pre></div></div>
             
         </li>
@@ -305,7 +305,7 @@ the last passed argument would otherwise win</p>
             <div class="content"><div class='highlight'><pre>         <span class="keyword">var</span>
             logElWrapperPath     = logOuterWrapperPath + <span class="string">'--'</span> + method,
             logElInnerPath       = <span class="string">'alert alert-'</span> + alertEls[method] || method,
-            logElIdentifier      = <span class="string">'.'</span> + ß.string.replace(logElInnerPath, <span class="string">' '</span>, <span class="string">'.'</span>),
+            logElIdentifier      = <span class="string">'.'</span> + Scandio.string.replace(logElInnerPath, <span class="string">' '</span>, <span class="string">'.'</span>),
             $logEl               = [];</pre></div></div>
             
         </li>
@@ -321,7 +321,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         ß.logger.logs[method] = [];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         Scandio.logger.logs[method] = [];</pre></div></div>
             
         </li>
         
@@ -336,7 +336,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.logger.logDomFn === <span class="literal">true</span>) {
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
             $(<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
@@ -364,7 +364,7 @@ the last passed argument would otherwise win</p>
 
                $logEl = $(logElIdentifier);
 
-               ß.util.each(ß.logger.logs[method], <span class="keyword">function</span>(log) {
+               Scandio.util.each(Scandio.logger.logs[method], <span class="keyword">function</span>(log) {
                   $logEl.prepend(log + <span class="string">'&lt;hr /&gt;'</span>);
                });
             });
@@ -383,7 +383,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         ß.dom[method] = <span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>         Scandio.dom[method] = <span class="keyword">function</span>() {
             <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
             
         </li>
@@ -414,7 +414,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.prepend(logMessage(args) + <span class="string">'&lt;hr /&gt;'</span>); }
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.prepend(logMessage(args) + <span class="string">'&lt;hr /&gt;'</span>); }
          };</pre></div></div>
             
         </li>
@@ -460,7 +460,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.logger.level &gt; level) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.logger.level &gt; level) {</pre></div></div>
             
         </li>
         
@@ -490,7 +490,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>               ß.dom[method].apply(ß, args);
+            <div class="content"><div class='highlight'><pre>               Scandio.dom[method].apply(Scandio, args);
             }</pre></div></div>
             
         </li>
@@ -506,7 +506,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            ß.logger.logs[method].push( logMessage(args) );
+            <div class="content"><div class='highlight'><pre>            Scandio.logger.logs[method].push( logMessage(args) );
          };
       };</pre></div></div>
             
@@ -523,7 +523,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (ß.logger.logDomFn === <span class="literal">true</span>) {
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
       $(<span class="keyword">function</span>() {
          $loggerEl = $(logElType, {
             class: logOuterWrapperPath
@@ -555,7 +555,7 @@ the last passed argument would otherwise win</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Now the <code>ß.debug</code>-object gets its functions</p>
+              <p>Now the <code>Scandio.debug</code>-object gets its functions</p>
 
             </div>
             

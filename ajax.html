@@ -135,7 +135,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax = {};</pre></div></div>
             
         </li>
         
@@ -147,13 +147,13 @@
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>Loads a in <code>requested</code> specified set of files from CDNs
-<strong>Example:</strong> <code>ß.ajax.libs({cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]})</code>
+<strong>Example:</strong> <code>Scandio.ajax.libs({cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]})</code>
 will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;</code> right after the html&#39;s head-section.
-<strong>Callback</strong> function for each cdn should be defined on the ß.cdns-object below.</p>
+<strong>Callback</strong> function for each cdn should be defined on the Scandio.cdns-object below.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax.libs = <span class="keyword">function</span>(requested) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.libs = <span class="keyword">function</span>(requested) {</pre></div></div>
             
         </li>
         
@@ -168,7 +168,7 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(requested, <span class="keyword">function</span>(libs, cdn) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(libs, cdn) {</pre></div></div>
             
         </li>
         
@@ -183,7 +183,7 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction( ß.ajax.cdns[cdn] )) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.isFunction( Scandio.ajax.cdns[cdn] )) {</pre></div></div>
             
         </li>
         
@@ -198,7 +198,7 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         ß.util.each(libs, <span class="keyword">function</span>(lib) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         Scandio.util.each(libs, <span class="keyword">function</span>(lib) {</pre></div></div>
             
         </li>
         
@@ -213,10 +213,10 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            ß.ajax.script(ß.ajax.cdns[cdn](lib.repository, lib.version, lib.file), lib.success || <span class="literal">undefined</span>);
+            <div class="content"><div class='highlight'><pre>            Scandio.ajax.script(Scandio.ajax.cdns[cdn](lib.repository, lib.version, lib.file), lib.success || <span class="literal">undefined</span>);
          });
       } <span class="keyword">else</span> {
-         ß.debug.warn(<span class="string">'CDN: '</span> + cdn + <span class="string">' not defined in ß.ajax.cdns!'</span>);
+         Scandio.debug.warn(<span class="string">'CDN: '</span> + cdn + <span class="string">' not defined in Scandio.ajax.cdns!'</span>);
       }
    });
 };</pre></div></div>
@@ -235,7 +235,7 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax.cdns = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.cdns = {</pre></div></div>
             
         </li>
         
@@ -246,7 +246,7 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Callback for cdnjs called as in <code>ß.libs({cdnjss: [...]})</code></p>
+              <p>Callback for cdnjs called as in <code>Scandio.libs({cdnjss: [...]})</code></p>
 
             </div>
             
@@ -265,13 +265,13 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Loads a in <code>requested</code> specified set of files by folder
-<strong>Example:</strong> <code>ß.ajax.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
+<strong>Example:</strong> <code>Scandio.ajax.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
 will load alert and log from their respective folder.
 <em>Notes:</em> the extension is ommited and the path is relative to <code>window.location.origin</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax.plugins = <span class="keyword">function</span>(requested) {
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.plugins = <span class="keyword">function</span>(requested) {
    <span class="keyword">var</span>
       url            = <span class="literal">null</span>,
       resultUrls     = [];</pre></div></div>
@@ -289,7 +289,7 @@ will load alert and log from their respective folder.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(requested, <span class="keyword">function</span>(scripts, folder) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(scripts, folder) {</pre></div></div>
             
         </li>
         
@@ -304,7 +304,7 @@ will load alert and log from their respective folder.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      ß.util.each(scripts, <span class="keyword">function</span>(script) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      Scandio.util.each(scripts, <span class="keyword">function</span>(script) {</pre></div></div>
             
         </li>
         
@@ -321,7 +321,7 @@ will load alert and log from their respective folder.
             
             <div class="content"><div class='highlight'><pre>         url = window.location.origin + <span class="string">'/'</span> + folder + script + <span class="string">'.js'</span>;
 
-         ß.ajax.script(url);
+         Scandio.ajax.script(url);
 
          resultUrls.push(url);
       });
@@ -340,12 +340,12 @@ will load alert and log from their respective folder.
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Loads a set of libs and plugin files based on a condition (the <code>when</code> key)
-<em>E.g.:</em> Calling ß.ajax.maybe({when: true, libs:…, plugins:…})
-The libs and plugins object literal should be used as in <code>ß.ajax.libs</code> and <code>ß.ajax.plugins</code></p>
+<em>E.g.:</em> Calling Scandio.ajax.maybe({when: true, libs:…, plugins:…})
+The libs and plugins object literal should be used as in <code>Scandio.ajax.libs</code> and <code>Scandio.ajax.plugins</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax.maybe = <span class="keyword">function</span>(requested) {
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.maybe = <span class="keyword">function</span>(requested) {
    <span class="keyword">var</span>
       url            = <span class="literal">null</span>,
       resultUrls     = [];</pre></div></div>
@@ -363,10 +363,10 @@ The libs and plugins object literal should be used as in <code>ß.ajax.libs</cod
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(requested, <span class="keyword">function</span>(request) {
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(request) {
       <span class="keyword">if</span> (request.when) {
-         <span class="keyword">if</span> (ß.isObject( request.libs )) { ß.ajax.libs(request.libs); }
-         <span class="keyword">if</span> (ß.isObject( request.plugins )) { ß.ajax.plugins(request.plugins); }
+         <span class="keyword">if</span> (Scandio.isObject( request.libs )) { Scandio.ajax.libs(request.libs); }
+         <span class="keyword">if</span> (Scandio.isObject( request.plugins )) { Scandio.ajax.plugins(request.plugins); }
       }
    });
 
@@ -387,7 +387,7 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.ajax.script = <span class="keyword">function</span>(url, success) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.script = <span class="keyword">function</span>(url, success) {</pre></div></div>
             
         </li>
         
@@ -450,7 +450,7 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (ß.isFunction(success)) { success(); }
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.isFunction(success)) { success(); }
          }
       };
    } <span class="keyword">else</span> {</pre></div></div>
@@ -483,7 +483,7 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.isFunction(success)) { success(); }
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isFunction(success)) { success(); }
       };
    }</pre></div></div>
             
@@ -512,7 +512,7 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>Append it to the head
-<em>Note:</em> Binding it to body not possible cause it may not be parsed if <code>ß.libs</code> is
+<em>Note:</em> Binding it to body not possible cause it may not be parsed if <code>Scandio.libs</code> is
 called in html&#39;s head-section</p>
 
             </div>

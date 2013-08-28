@@ -135,7 +135,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util = {};</pre></div></div>
             
         </li>
         
@@ -150,7 +150,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.has = <span class="keyword">function</span>(obj, key) {
+            <div class="content"><div class='highlight'><pre>Scandio.util.has = <span class="keyword">function</span>(obj, key) {
    <span class="keyword">return</span> hasOwnProperty.call(obj, key);
 };</pre></div></div>
             
@@ -168,7 +168,7 @@ Falls back to nativeForEach if supported by browser (on prototpye)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.each = ß.forEach = <span class="keyword">function</span>(obj, iterator, context) {
+            <div class="content"><div class='highlight'><pre>Scandio.util.each = Scandio.forEach = <span class="keyword">function</span>(obj, iterator, context) {
    <span class="keyword">var</span>
       key   = <span class="literal">null</span>,
       i     = <span class="literal">null</span>,
@@ -297,7 +297,7 @@ and an optimized for-loop can be used.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (ß.util.has(obj, key)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.util.has(obj, key)) {</pre></div></div>
             
         </li>
         
@@ -331,7 +331,7 @@ and an optimized for-loop can be used.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.extend = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.extend = <span class="keyword">function</span>(obj) {</pre></div></div>
             
         </li>
         
@@ -346,7 +346,7 @@ and an optimized for-loop can be used.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(slice.call(arguments, <span class="number">1</span>), <span class="keyword">function</span>(source) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(slice.call(arguments, <span class="number">1</span>), <span class="keyword">function</span>(source) {</pre></div></div>
             
         </li>
         
@@ -413,7 +413,7 @@ while results will only contain values if they pass the <code>iterator</code>-te
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.filter = <span class="keyword">function</span>(obj, iterator, context) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.filter = <span class="keyword">function</span>(obj, iterator, context) {</pre></div></div>
             
         </li>
         
@@ -474,7 +474,7 @@ while results will only contain values if they pass the <code>iterator</code>-te
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(obj, <span class="keyword">function</span>(value, index, list) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(obj, <span class="keyword">function</span>(value, index, list) {</pre></div></div>
             
         </li>
         
@@ -507,11 +507,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>Accesses an obj by dot-notation allowing a default/notFound value
-<em>E.g.:</em> ß.util.getByDots(&quot;name.fullname&quot;, {name: {fullname: &#39;me&#39;}}) returns me</p>
+<em>E.g.:</em> Scandio.util.getByDots(&quot;name.fullname&quot;, {name: {fullname: &#39;me&#39;}}) returns me</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.getByDots = <span class="keyword">function</span>(dots, obj, notFound) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.getByDots = <span class="keyword">function</span>(dots, obj, notFound) {</pre></div></div>
             
         </li>
         
@@ -606,11 +606,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>Sets an obj by dot-notation
-<em>E.g.:</em> ß.util.setByDots(&quot;name.firstname&quot;, &quot;doop&quot;, {name: {fullname: &#39;me&#39;}}) returns me</p>
+<em>E.g.:</em> Scandio.util.setByDots(&quot;name.firstname&quot;, &quot;doop&quot;, {name: {fullname: &#39;me&#39;}}) returns me</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.setByDots = <span class="keyword">function</span>(dots, value, obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.setByDots = <span class="keyword">function</span>(dots, value, obj) {</pre></div></div>
             
         </li>
         
@@ -672,7 +672,7 @@ while results will only contain values if they pass the <code>iterator</code>-te
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!ß.isObject(obj)) { obj = {}; }
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!Scandio.isObject(obj)) { obj = {}; }
       <span class="keyword">if</span> (!(key <span class="keyword">in</span> obj)) { obj[key] = {}; }</pre></div></div>
             
         </li>
@@ -717,12 +717,12 @@ while results will only contain values if they pass the <code>iterator</code>-te
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <p>Collects all function from an object and returns an array containing them
-<em>E.g.:</em> calling it with ß.util.functions({capitalize: function() {return}, greet: &#39;hi&#39;})
+<em>E.g.:</em> calling it with Scandio.util.functions({capitalize: function() {return}, greet: &#39;hi&#39;})
 would only return an array containing the <code>capitalize</code> function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.functions = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.functions = <span class="keyword">function</span>(obj) {</pre></div></div>
             
         </li>
         
@@ -769,7 +769,7 @@ would only return an array containing the <code>capitalize</code> function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.isFunction(obj[key])) { functions[key] = obj[key]; }
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.isFunction(obj[key])) { functions[key] = obj[key]; }
    }
 
    <span class="keyword">return</span> functions;
@@ -784,16 +784,16 @@ would only return an array containing the <code>capitalize</code> function.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
-              <p>Allows for extending ß functionality by handing in an <code>namespace</code> and a object-literal
+              <p>Allows for extending Scandio. functionality by handing in an <code>namespace</code> and a object-literal
 containing the functions.
-<em>E.g.:</em> calling <code>ß.util.mixin(&#39;string&#39;, {capitalize: fn(string)})</code> makes the capitalize function
-available as in ß.string.capitalize(&#39;string&#39;).</p>
+<em>E.g.:</em> calling <code>Scandio.util.mixin(&#39;string&#39;, {capitalize: fn(string)})</code> makes the capitalize function
+available as in Scandio.string.capitalize(&#39;string&#39;).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.mixin = <span class="keyword">function</span>(namespace, obj) {
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin = <span class="keyword">function</span>(namespace, obj) {
    <span class="keyword">var</span>
-      destination = ß,
+      destination = Scandio,
       path        = namespace !== <span class="literal">null</span> ? namespace.split(<span class="string">"."</span>) : [],
       atModule    = <span class="literal">null</span>,
       i           = <span class="literal">null</span>;</pre></div></div>
@@ -874,7 +874,7 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(ß.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(Scandio.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
             
         </li>
         
@@ -900,7 +900,7 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-49">&#182;</a>
               </div>
-              <p>Merge args with wrapped object (constructor new ß(obj))</p>
+              <p>Merge args with wrapped object (constructor new Scandio.(obj))</p>
 
             </div>
             
@@ -916,11 +916,11 @@ available as in ß.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-50">&#182;</a>
               </div>
-              <p>The result of applying the function with ß and its args</p>
+              <p>The result of applying the function with Scandio. and its args</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> func.apply(ß, args);
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> func.apply(Scandio, args);
       };
    });
 };</pre></div></div>

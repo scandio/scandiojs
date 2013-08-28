@@ -135,7 +135,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string = {};</pre></div></div>
             
         </li>
         
@@ -150,7 +150,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.capitalize = <span class="keyword">function</span>(string) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.capitalize = <span class="keyword">function</span>(string) {</pre></div></div>
             
         </li>
         
@@ -181,7 +181,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.lower = <span class="keyword">function</span>(string) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.lower = <span class="keyword">function</span>(string) {</pre></div></div>
             
         </li>
         
@@ -212,7 +212,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.clean = <span class="keyword">function</span>(string) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.clean = <span class="keyword">function</span>(string) {</pre></div></div>
             
         </li>
         
@@ -227,7 +227,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> ß.string.trim(string).replace(<span class="regexp">/\s+/g</span>, <span class="string">' '</span>);
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> Scandio.string.trim(string).replace(<span class="regexp">/\s+/g</span>, <span class="string">' '</span>);
 };</pre></div></div>
             
         </li>
@@ -243,7 +243,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.trim = <span class="keyword">function</span>(string, characters){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.trim = <span class="keyword">function</span>(string, characters){</pre></div></div>
             
         </li>
         
@@ -288,11 +288,11 @@ replacing them around the <code>string</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>Chops a string up <code>at</code> every position in the string <code>ß.string.chop(&#39;chopchop&#39;, 3) === &#39;cho pch op&#39;</code></p>
+              <p>Chops a string up <code>at</code> every position in the string <code>Scandio.string.chop(&#39;chopchop&#39;, 3) === &#39;cho pch op&#39;</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.chop = <span class="keyword">function</span>(string, at) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.chop = <span class="keyword">function</span>(string, at) {</pre></div></div>
             
         </li>
         
@@ -349,11 +349,11 @@ replacing them around the <code>string</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>Finds a string within a string (fuzzy) e.g. <code>ß.string.contains(&#39;I&#39;veADream&#39;, &#39;Dream&#39;) === true</code></p>
+              <p>Finds a string within a string (fuzzy) e.g. <code>Scandio.string.contains(&#39;I&#39;veADream&#39;, &#39;Dream&#39;) === true</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.contains = <span class="keyword">function</span>(needle, haystack) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.contains = <span class="keyword">function</span>(needle, haystack) {</pre></div></div>
             
         </li>
         
@@ -414,7 +414,7 @@ replacing them around the <code>string</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.starts = <span class="keyword">function</span>(string, what) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.starts = <span class="keyword">function</span>(string, what) {</pre></div></div>
             
         </li>
         
@@ -462,7 +462,7 @@ and if its slice from 0 to the starting string&#39;s length is the starting stri
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.ends = <span class="keyword">function</span>(string, what) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.ends = <span class="keyword">function</span>(string, what) {</pre></div></div>
             
         </li>
         
@@ -510,7 +510,7 @@ and if its slice from the end to the length of its suppoed ending is equals to i
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.implode = <span class="keyword">function</span>(glue, pieces) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.implode = <span class="keyword">function</span>(glue, pieces) {</pre></div></div>
             
         </li>
         
@@ -556,7 +556,7 @@ and if its slice from the end to the length of its suppoed ending is equals to i
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.explode = <span class="keyword">function</span>(string, delimiter) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.explode = <span class="keyword">function</span>(string, delimiter) {</pre></div></div>
             
         </li>
         
@@ -600,11 +600,11 @@ and if its slice from the end to the length of its suppoed ending is equals to i
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>Replaces a substring within a string
-E.g. <code>ß.string.replace(&#39;Scandio Gm&#39;, &#39;Gm&#39;, &#39;GmbH&#39;)</code> will return &#39;Scandio GmbH&#39;</p>
+E.g. <code>Scandio.string.replace(&#39;Scandio Gm&#39;, &#39;Gm&#39;, &#39;GmbH&#39;)</code> will return &#39;Scandio GmbH&#39;</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.string.replace = <span class="keyword">function</span>(string, subString, replacer) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.string.replace = <span class="keyword">function</span>(string, subString, replacer) {</pre></div></div>
             
         </li>
         

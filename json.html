@@ -135,7 +135,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.json = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.json = {};</pre></div></div>
             
         </li>
         
@@ -151,7 +151,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.json.to = ß.json.encode = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.json.to = Scandio.json.encode = <span class="keyword">function</span>(obj) {</pre></div></div>
             
         </li>
         
@@ -312,7 +312,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> <span class="keyword">if</span> (t == <span class="string">"object"</span> &amp;&amp; v !== <span class="literal">null</span>) {
-               v = ß.json.to(v);
+               v = Scandio.json.to(v);
             }</pre></div></div>
             
         </li>
@@ -365,7 +365,7 @@ an <code>eval</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.json.from = ß.json.decode = <span class="keyword">function</span>(string) {
+            <div class="content"><div class='highlight'><pre>Scandio.json.from = Scandio.json.decode = <span class="keyword">function</span>(string) {
    <span class="keyword">return</span> $.parseJSON(string);
 };</pre></div></div>
             

@@ -137,7 +137,7 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
-   ß.bridge.init();
+   Scandio.bridge.init();
 });</pre></div></div>
             
         </li>
@@ -153,7 +153,7 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.noConflict = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -168,7 +168,7 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   root.ß = previousScandio;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   root.Scandio = previousScandio;</pre></div></div>
             
         </li>
         
@@ -230,7 +230,7 @@ If define function deefined and its amd</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> ß;
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> Scandio;
    });
 }
 }(<span class="keyword">this</span>, jQuery, window, document, <span class="literal">undefined</span>));</pre></div></div>
