@@ -39,7 +39,7 @@ Scandio.mod = Scandio.module = (function() {
       }
       else {
          // Extend global with module environment where module takes preference
-         $.extend(true, globEnv, modEnv);
+         jQuery.extend(true, globEnv, modEnv);
          // If module namespace is unique push it to internal state variable
          invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
       }
@@ -50,7 +50,7 @@ Scandio.mod = Scandio.module = (function() {
          modEnv.readyFn(invokedModule.ready);
       } else {
          // Otherwise the just load it on DOM-ready
-         $(document).ready(invokedModule.ready);
+         jQuery(document).ready(invokedModule.ready);
       }
    };
 }());
@@ -128,10 +128,10 @@ Scandio.wait = (function () {
 
 // A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 // *Note:* This function being an IIFE leaves off parameters on outer function
-Scandio.util.mixin(null, (function($, Scandio) {
+Scandio.util.mixin(null, (function(jQuery, Scandio) {
    // The messenger/hub is just a plain jQuery object
    var
-      messenger = $({}),
+      messenger = jQuery({}),
 
       // Subscribing to messenger with namespace as in *Scandio.messenger.subscribe('foo.bar', fn)*
       // *Note:* First argument is event as in subscribe('foo', fn(e, arg…))!

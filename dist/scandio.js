@@ -11,7 +11,7 @@
 
  // Setup the library
  // ---------------
- ;(function(root, $, window, document, undefined) {
+ ;(function(root, jQuery, window, document, undefined) {
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
@@ -34,7 +34,7 @@
       // Set of shorthand to object protos
       ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
       location           = window.location,
-      events             = $('<a>'),
+      events             = jQuery('<a>'),
       modules            = {},
       // Console methods to be caught when not defined in browser (IE I hear you)
       consoleMethods     = ['assert', 'clear', 'count', 'dir', 'dirxml',
@@ -100,12 +100,12 @@
    },
 
    _injectDom = function() {
-      $(function() {
+      jQuery(function() {
          var
             script   = null;
 
-         if ( injectDOM && $(config.scandioHtmlClass).length === 0 ) {
-            $scandioEl = $('<div/>', {
+         if ( injectDOM && jQuery(config.scandioHtmlClass).length === 0 ) {
+            $scandioEl = jQuery('<div/>', {
                 class: config.scandioHtmlClass
             }).appendTo('body');
          }
@@ -147,7 +147,7 @@ Scandio.dom = {};
 
 // Closes and secures a cache module with within its own scope
 // *Note:* This function being an IIFE leaves of parameters on outer function
-Scandio.dom.cache = (function($, Scandio){
+Scandio.dom.cache = (function(jQuery, Scandio){
    // Sets up local cache store
    var
       cache = {},
@@ -159,7 +159,7 @@ Scandio.dom.cache = (function($, Scandio){
          for (label in cache) {
             l = (coll = cache[label]).length;
             while (l--) {
-               if (coll[l] === t || $.contains(t,coll[l])) {
+               if (coll[l] === t || jQuery.contains(t,coll[l])) {
                   delete coll[l]; --coll.length;
                }
             }
@@ -172,12 +172,12 @@ Scandio.dom.cache = (function($, Scandio){
          if (Scandio.isString(label)) {
             //Reset cache value at label
             if(cache[label] !== undefined) {
-               cache[label] = $(cache[label].selector || '');
+               cache[label] = jQuery(cache[label].selector || '');
             }
          } else {
             // For each value in cache refresh it
             Scandio.util.each(cache, function($cached, label) {
-               cache[label] = $($cached.selector);
+               cache[label] = jQuery($cached.selector);
             });
          }
       },
@@ -187,7 +187,7 @@ Scandio.dom.cache = (function($, Scandio){
          // Both label and selector passed, cache/dom reading...
          if (Scandio.isString(selector) && Scandio.isString(label)) {
             // ...either from cache or DOM
-            cache[label] = cache[label] || $(selector);
+            cache[label] = cache[label] || jQuery(selector);
          }
 
          // What the callee gets: a jQuery object
@@ -195,7 +195,7 @@ Scandio.dom.cache = (function($, Scandio){
       };
 
    // Bind to node removal in DOM
-   $(document).on('DOMNodeRemoved', nodeRemoved);
+   jQuery(document).on('DOMNodeRemoved', nodeRemoved);
 
    // Return public functions in object literal
    return {
@@ -384,19 +384,19 @@ Scandio.debug = (function() {
 
          // Creates the logger-els only if logDomFn is truthy
          if (Scandio.logger.logDomFn === true) {
-            $(function() {
+            jQuery(function() {
                // Maintaines state and creates the logger els
                $loggerEl.append(
-                  $(logElType, {
+                  jQuery(logElType, {
                      class: logElWrapperPath
                   }).html(
-                     $(logElType, {
+                     jQuery(logElType, {
                         class: logElInnerPath
                      })
                   )
                );
 
-               $logEl = $(logElIdentifier);
+               $logEl = jQuery(logElIdentifier);
 
                Scandio.util.each(Scandio.logger.logs[method], function(log) {
                   $logEl.prepend(log + '<hr />');
@@ -409,7 +409,7 @@ Scandio.debug = (function() {
             var args = slice.call(arguments);
 
             // Query DOM only if nessesary (cache)
-            if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
+            if ($logEl.length === 0) { $logEl = jQuery(logElIdentifier); }
 
             // Only log to DOM if possible and wanted
             if (Scandio.logger.logDomFn && $logEl.length > 0) { $logEl.prepend(logMessage(args) + '<hr />'); }
@@ -436,8 +436,8 @@ Scandio.debug = (function() {
 
    // Sets up the outer wrapper for DOM logging
    if (Scandio.logger.logDomFn === true) {
-      $(function() {
-         $loggerEl = $(logElType, {
+      jQuery(function() {
+         $loggerEl = jQuery(logElType, {
             class: logOuterWrapperPath
          }).appendTo($scandioEl);
       });
@@ -717,11 +717,11 @@ Scandio.json.to = Scandio.json.encode = function(obj) {
 };
 
 // Decodes an json-string into an object
-// *Note:* Pipes through `$.parseJSON` which basically
+// *Note:* Pipes through `jQuery.parseJSON` which basically
 // does a simple RegEx-test and then returns `new Function(data)` instead of
 // an `eval`.
 Scandio.json.from = Scandio.json.decode = function(string) {
-   return $.parseJSON(string);
+   return jQuery.parseJSON(string);
 };
 // Persistent bridge module
 // ---------------
@@ -734,7 +734,7 @@ Scandio.bridge.className = config.scandioBridgeClass;
 Scandio.bridge.init = function() {
    // Gets all scripts and sets up the cache for merging
    var
-      scripts     = $('.' + Scandio.bridge.className),
+      scripts     = jQuery('.' + Scandio.bridge.className),
       tempCache   = null,
       mergeCache  = {};
 
@@ -743,7 +743,7 @@ Scandio.bridge.init = function() {
 
    // Respects actually used script-tag having data already
    mergeCache = Scandio.bridge.script.text() !== "" && Scandio.isObject(
-      tempCache = $.parseJSON(
+      tempCache = jQuery.parseJSON(
          Scandio.bridge.script.text()
       )
    ) ? tempCache : mergeCache;
@@ -751,7 +751,7 @@ Scandio.bridge.init = function() {
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
    Scandio.util.each(scripts.slice(0, scripts.length - 1), function(script) {
-      var $script    = $(script);
+      var $script    = jQuery(script);
 
       Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
 
@@ -1026,7 +1026,7 @@ Scandio.mod = Scandio.module = (function() {
       }
       else {
          // Extend global with module environment where module takes preference
-         $.extend(true, globEnv, modEnv);
+         jQuery.extend(true, globEnv, modEnv);
          // If module namespace is unique push it to internal state variable
          invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
       }
@@ -1037,7 +1037,7 @@ Scandio.mod = Scandio.module = (function() {
          modEnv.readyFn(invokedModule.ready);
       } else {
          // Otherwise the just load it on DOM-ready
-         $(document).ready(invokedModule.ready);
+         jQuery(document).ready(invokedModule.ready);
       }
    };
 }());
@@ -1115,10 +1115,10 @@ Scandio.wait = (function () {
 
 // A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 // *Note:* This function being an IIFE leaves off parameters on outer function
-Scandio.util.mixin(null, (function($, Scandio) {
+Scandio.util.mixin(null, (function(jQuery, Scandio) {
    // The messenger/hub is just a plain jQuery object
    var
-      messenger = $({}),
+      messenger = jQuery({}),
 
       // Subscribing to messenger with namespace as in *Scandio.messenger.subscribe('foo.bar', fn)*
       // *Note:* First argument is event as in subscribe('foo', fn(e, arg…))!
@@ -1211,14 +1211,14 @@ Scandio.responsive = {
 };
 
 Scandio.responsive.breakpoint = function(name) {
-   return $( Scandio.responsive.breakpointEl ).html() === name;
+   return jQuery( Scandio.responsive.breakpointEl ).html() === name;
 };
 // Outro, AMD and conflict resolution
 // ---------------
 
 // Global DOM-Ready which shall be used whenever possible
 // Logger does not use it cause it heavily relies on variable hoisting
-$(function() {
+jQuery(function() {
    Scandio.bridge.init();
 });
 

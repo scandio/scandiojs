@@ -52,9 +52,9 @@ Scandio.json.to = Scandio.json.encode = function(obj) {
 };
 
 // Decodes an json-string into an object
-// *Note:* Pipes through `$.parseJSON` which basically
+// *Note:* Pipes through `jQuery.parseJSON` which basically
 // does a simple RegEx-test and then returns `new Function(data)` instead of
 // an `eval`.
 Scandio.json.from = Scandio.json.decode = function(string) {
-   return $.parseJSON(string);
+   return jQuery.parseJSON(string);
 };

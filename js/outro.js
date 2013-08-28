@@ -3,7 +3,7 @@
 
 // Global DOM-Ready which shall be used whenever possible
 // Logger does not use it cause it heavily relies on variable hoisting
-$(function() {
+jQuery(function() {
    Scandio.bridge.init();
 });
 

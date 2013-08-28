@@ -359,14 +359,14 @@
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Decodes an json-string into an object
-<em>Note:</em> Pipes through <code>$.parseJSON</code> which basically
+<em>Note:</em> Pipes through <code>jQuery.parseJSON</code> which basically
 does a simple RegEx-test and then returns <code>new Function(data)</code> instead of
 an <code>eval</code>.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>Scandio.json.from = Scandio.json.decode = <span class="keyword">function</span>(string) {
-   <span class="keyword">return</span> $.parseJSON(string);
+   <span class="keyword">return</span> jQuery.parseJSON(string);
 };</pre></div></div>
             
         </li>

@@ -157,7 +157,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, $, window, document, <span class="literal">undefined</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, jQuery, window, document, <span class="literal">undefined</span>) {</pre></div></div>
             
         </li>
         
@@ -256,7 +256,7 @@
             
             <div class="content"><div class='highlight'><pre>      ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
       location           = window.location,
-      events             = $(<span class="string">'&lt;a&gt;'</span>),
+      events             = jQuery(<span class="string">'&lt;a&gt;'</span>),
       modules            = {},</pre></div></div>
             
         </li>
@@ -459,12 +459,12 @@
    },
 
    _injectDom = <span class="keyword">function</span>() {
-      $(<span class="keyword">function</span>() {
+      jQuery(<span class="keyword">function</span>() {
          <span class="keyword">var</span>
             script   = <span class="literal">null</span>;
 
-         <span class="keyword">if</span> ( injectDOM &amp;&amp; $(config.scandioHtmlClass).length === <span class="number">0</span> ) {
-            $scandioEl = $(<span class="string">'&lt;div/&gt;'</span>, {
+         <span class="keyword">if</span> ( injectDOM &amp;&amp; jQuery(config.scandioHtmlClass).length === <span class="number">0</span> ) {
+            $scandioEl = jQuery(<span class="string">'&lt;div/&gt;'</span>, {
                 class: config.scandioHtmlClass
             }).appendTo(<span class="string">'body'</span>);
          }
@@ -613,7 +613,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>($, Scandio){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>(jQuery, Scandio){</pre></div></div>
             
         </li>
         
@@ -650,7 +650,7 @@ Sorry, I didn&#39;t hack this</p>
          <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
             l = (coll = cache[label]).length;
             <span class="keyword">while</span> (l--) {
-               <span class="keyword">if</span> (coll[l] === t || $.contains(t,coll[l])) {
+               <span class="keyword">if</span> (coll[l] === t || jQuery.contains(t,coll[l])) {
                   <span class="keyword">delete</span> coll[l]; --coll.length;
                }
             }
@@ -701,7 +701,7 @@ Sorry, I didn&#39;t hack this</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span>(cache[label] !== <span class="literal">undefined</span>) {
-               cache[label] = $(cache[label].selector || <span class="string">''</span>);
+               cache[label] = jQuery(cache[label].selector || <span class="string">''</span>);
             }
          } <span class="keyword">else</span> {</pre></div></div>
             
@@ -719,7 +719,7 @@ Sorry, I didn&#39;t hack this</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>            Scandio.util.each(cache, <span class="keyword">function</span>($cached, label) {
-               cache[label] = $($cached.selector);
+               cache[label] = jQuery($cached.selector);
             });
          }
       },</pre></div></div>
@@ -767,7 +767,7 @@ Sorry, I didn&#39;t hack this</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || $(selector);
+            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || jQuery(selector);
          }</pre></div></div>
             
         </li>
@@ -799,7 +799,7 @@ Sorry, I didn&#39;t hack this</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   $(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   jQuery(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
             
         </li>
         
@@ -1568,7 +1568,7 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
-            $(<span class="keyword">function</span>() {</pre></div></div>
+            jQuery(<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -1584,16 +1584,16 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>               $loggerEl.append(
-                  $(logElType, {
+                  jQuery(logElType, {
                      class: logElWrapperPath
                   }).html(
-                     $(logElType, {
+                     jQuery(logElType, {
                         class: logElInnerPath
                      })
                   )
                );
 
-               $logEl = $(logElIdentifier);
+               $logEl = jQuery(logElIdentifier);
 
                Scandio.util.each(Scandio.logger.logs[method], <span class="keyword">function</span>(log) {
                   $logEl.prepend(log + <span class="string">'&lt;hr /&gt;'</span>);
@@ -1630,7 +1630,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = $(logElIdentifier); }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = jQuery(logElIdentifier); }</pre></div></div>
             
         </li>
         
@@ -1755,8 +1755,8 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
-      $(<span class="keyword">function</span>() {
-         $loggerEl = $(logElType, {
+      jQuery(<span class="keyword">function</span>() {
+         $loggerEl = jQuery(logElType, {
             class: logOuterWrapperPath
          }).appendTo($scandioEl);
       });
@@ -2952,14 +2952,14 @@ only if it is an object</p>
                 <a class="pilcrow" href="#section-172">&#182;</a>
               </div>
               <p>Decodes an json-string into an object
-<em>Note:</em> Pipes through <code>$.parseJSON</code> which basically
+<em>Note:</em> Pipes through <code>jQuery.parseJSON</code> which basically
 does a simple RegEx-test and then returns <code>new Function(data)</code> instead of
 an <code>eval</code>.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>Scandio.json.from = Scandio.json.decode = <span class="keyword">function</span>(string) {
-   <span class="keyword">return</span> $.parseJSON(string);
+   <span class="keyword">return</span> jQuery.parseJSON(string);
 };</pre></div></div>
             
         </li>
@@ -3020,7 +3020,7 @@ Scandio.bridge.className = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      scripts     = $(<span class="string">'.'</span> + Scandio.bridge.className),
+      scripts     = jQuery(<span class="string">'.'</span> + Scandio.bridge.className),
       tempCache   = <span class="literal">null</span>,
       mergeCache  = {};</pre></div></div>
             
@@ -3053,7 +3053,7 @@ Scandio.bridge.className = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   mergeCache = Scandio.bridge.script.text() !== <span class="string">""</span> &amp;&amp; Scandio.isObject(
-      tempCache = $.parseJSON(
+      tempCache = jQuery.parseJSON(
          Scandio.bridge.script.text()
       )
    ) ? tempCache : mergeCache;</pre></div></div>
@@ -3073,7 +3073,7 @@ removing it afterwards</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   Scandio.util.each(scripts.slice(<span class="number">0</span>, scripts.length - <span class="number">1</span>), <span class="keyword">function</span>(script) {
-      <span class="keyword">var</span> $script    = $(script);
+      <span class="keyword">var</span> $script    = jQuery(script);
 
       Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
 
@@ -4137,7 +4137,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         $.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         jQuery.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
             
         </li>
         
@@ -4186,7 +4186,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         $(document).ready(invokedModule.ready);
+            <div class="content"><div class='highlight'><pre>         jQuery(document).ready(invokedModule.ready);
       }
    };
 }());</pre></div></div>
@@ -4490,7 +4490,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>($, Scandio) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>(jQuery, Scandio) {</pre></div></div>
             
         </li>
         
@@ -4506,7 +4506,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      messenger = $({}),</pre></div></div>
+      messenger = jQuery({}),</pre></div></div>
             
         </li>
         
@@ -4838,7 +4838,7 @@ it will be invoked on DOM-Ready</p>
 };
 
 Scandio.responsive.breakpoint = <span class="keyword">function</span>(name) {
-   <span class="keyword">return</span> $( Scandio.responsive.breakpointEl ).html() === name;
+   <span class="keyword">return</span> jQuery( Scandio.responsive.breakpointEl ).html() === name;
 };</pre></div></div>
             
         </li>
@@ -4868,7 +4868,7 @@ Logger does not use it cause it heavily relies on variable hoisting</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>jQuery(<span class="keyword">function</span>() {
    Scandio.bridge.init();
 });</pre></div></div>
             
