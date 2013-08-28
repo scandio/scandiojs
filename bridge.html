@@ -167,7 +167,7 @@ Scandio.bridge.identifier = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      scripts     = jQuery(<span class="string">'body .'</span> + Scandio.bridge.identifier),
+      scripts     = jQuery(<span class="string">'.'</span> + Scandio.bridge.identifier),
       tempCache   = <span class="literal">null</span>,
       mergeCache  = {};</pre></div></div>
             
@@ -200,7 +200,7 @@ Scandio.bridge.identifier = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   mergeCache = Scandio.bridge.script.text() !== <span class="string">""</span> &amp;&amp; Scandio.isObject(
-      tempCache = jQuery.parseJSON(
+      tempCache = Scandio.json.from(
          Scandio.bridge.script.text()
       )
    ) ? tempCache : mergeCache;</pre></div></div>
