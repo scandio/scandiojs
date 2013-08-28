@@ -35,11 +35,11 @@ describe("A suite testing the bridge functionality of scandio.js", function() {
          script            = document.createElement("script");
 
       script.type       = "application/x-json";
-      script.className  = $('.' + Scandio.bridge.className).last().attr('class');
+      script.className  = Scandio.bridge.identifier;
 
       document.head.appendChild(script);
 
-      $('.' + Scandio.bridge.className).last().text(JSON.stringify({
+      $('.' + Scandio.bridge.identifier).last().text(Scandio.json.to({
          yada: {
             yada: 'yada',
             foo: 20

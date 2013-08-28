@@ -734,7 +734,7 @@ Scandio.bridge.identifier = config.scandioBridgeClass;
 Scandio.bridge.init = function() {
    // Gets all scripts and sets up the cache for merging
    var
-      scripts     = jQuery('body .' + Scandio.bridge.identifier),
+      scripts     = jQuery('.' + Scandio.bridge.identifier),
       tempCache   = null,
       mergeCache  = {};
 
@@ -743,7 +743,7 @@ Scandio.bridge.init = function() {
 
    // Respects actually used script-tag having data already
    mergeCache = Scandio.bridge.script.text() !== "" && Scandio.isObject(
-      tempCache = jQuery.parseJSON(
+      tempCache = Scandio.json.from(
          Scandio.bridge.script.text()
       )
    ) ? tempCache : mergeCache;
