@@ -3,7 +3,7 @@
 
 // Closes and secures a module with namespace within its own scope
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.mod = ß.module = (function() {
+Scandio.mod = Scandio.module = (function() {
    // Setting up global environment object and DOM-ready state
    var
       isDomReady  = false,
@@ -15,38 +15,38 @@
          typeError      = null,
          invokedModule  = null;
 
-      namespace = ß.string.clean(
-         ß.string.lower(namespace)
+      namespace = Scandio.string.clean(
+         Scandio.string.lower(namespace)
       );
 
       // Validates types of parameters in requiring `string, function and object`
-      if (!ß.isString(namespace) || !ß.isFunction(module) || (modEnv && !ß.isObject(modEnv))) {
+      if (!Scandio.isString(namespace) || !Scandio.isFunction(module) || (modEnv && !Scandio.isObject(modEnv))) {
          // Set up a crazy long eloquent error message and…
          typeError = 'Parameter mismatch in Scandio.mod - please provide (1) namespace as' +
             'string and a (2) module as function. (3) an modEnv object may be given to' +
             'extend the default global environment';
 
          // … debug it as an error
-         ß.debug.error(typeError);
+         Scandio.debug.error(typeError);
       }
 
       // Module names need to be unique
-      if (ß.util.getByDots(namespace, modules, true) !== true) {
+      if (Scandio.util.getByDots(namespace, modules, true) !== true) {
          // Otherwise error will be triggered
          typeError = 'Error: there is already a module with namespace "' + namespace + '".';
 
-         ß.debug.error(typeError);
+         Scandio.debug.error(typeError);
       }
       else {
          // Extend global with module environment where module takes preference
          $.extend(true, globEnv, modEnv);
          // If module namespace is unique push it to internal state variable
-         invokedModule = ß.util.setByDots(namespace, module.call(ß, $, globEnv, ß), modules);
+         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
       }
 
       // *Convention:* if module environment has a function called `readyFn`
       // it will be invoked on DOM-Ready
-      if (modEnv && ß.isFunction(modEnv.readyFn)) {
+      if (modEnv && Scandio.isFunction(modEnv.readyFn)) {
          modEnv.readyFn(invokedModule.ready);
       } else {
          // Otherwise the just load it on DOM-ready
@@ -57,17 +57,17 @@
 
 // Returns a registered module by passing in a qualifier string (may be dot-notation)
 // *Note:* Handing over a not fully qualifying string returns an object with hashes for submodules.
-ß.modules = function(namespace) {
-   namespace = ß.string.clean(
-      ß.string.lower(namespace)
+Scandio.modules = function(namespace) {
+   namespace = Scandio.string.clean(
+      Scandio.string.lower(namespace)
    );
 
-   return ß.util.getByDots(namespace, modules, false);
+   return Scandio.util.getByDots(namespace, modules, false);
 };
 
 // Defers function execution based on condition and delay
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.wait = (function () {
+Scandio.wait = (function () {
 
    // Sets up the defered function
    var waitFn = function(params) {
@@ -84,16 +84,16 @@
          // a condition function
          condition      = params.condition || function() {},
          // object containing all the callbacks (done and fail)
-         callbacks      = ß.util.extend({}, params.callbacks),
+         callbacks      = Scandio.util.extend({}, params.callbacks),
 
          // Runs one roundtrip of execution
          execute = function() {
             // Time flew by and duration for execution exceeded
             if (new Date().getTime() - startTime > duration) {
-               if (ß.isFunction(callbacks.fail)) { callbacks.fail(); }
+               if (Scandio.isFunction(callbacks.fail)) { callbacks.fail(); }
             // The condition passed and we're good
             } else if (condition()) {
-               if (ß.isFunction(callbacks.done)) { callbacks.done(); }
+               if (Scandio.isFunction(callbacks.done)) { callbacks.done(); }
             // Defer execution again by interval
             } else {
                setTimeout(execute, interval);
@@ -128,12 +128,12 @@
 
 // A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 // *Note:* This function being an IIFE leaves off parameters on outer function
-ß.util.mixin(null, (function($, ß) {
+Scandio.util.mixin(null, (function($, Scandio) {
    // The messenger/hub is just a plain jQuery object
    var
       messenger = $({}),
 
-      // Subscribing to messenger with namespace as in *ß.messenger.subscribe('foo.bar', fn)*
+      // Subscribing to messenger with namespace as in *Scandio.messenger.subscribe('foo.bar', fn)*
       // *Note:* First argument is event as in subscribe('foo', fn(e, arg…))!
       subscribe = function() {
          // Using $ as emitter allows namespaced events e.g. 'foo.bar' will trigger on 'foo' and 'foo.bar'
@@ -156,9 +156,9 @@
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, ß)));
+}(jQuery, Scandio)));
 
 // Shorthand for redirecting the browser to a new `url`
-ß.redirect = function(url) {
+Scandio.redirect = function(url) {
    location.href = url;
 };

@@ -20,19 +20,19 @@ describe("A suite testing json module", function() {
    });
 
    it("should correctly encode json (using native if possible)", function() {
-      expect(jsonObject).toEqual( ß.json.from(jsonString) );
+      expect(jsonObject).toEqual( Scandio.json.from(jsonString) );
    });
 
    it("should correctly decode json (using native if possible)", function() {
-      expect( ß.json.from(jsonString) ).toEqual( jsonObject );
+      expect( Scandio.json.from(jsonString) ).toEqual( jsonObject );
    });
 
    it("should correctly encode json (using fallback)", function() {
-      expect(jsonObject).toEqual( ß.json.from(jsonString) );
+      expect(jsonObject).toEqual( Scandio.json.from(jsonString) );
    });
 
    it("should correctly decode json (using fallback)", function() {
-      expect( ß.json.from(jsonString) ).toEqual( jsonObject );
+      expect( Scandio.json.from(jsonString) ).toEqual( jsonObject );
    });
 
 });

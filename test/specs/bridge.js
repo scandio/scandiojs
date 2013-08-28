@@ -1,33 +1,33 @@
 describe("A suite testing the bridge functionality of scandio.js", function() {
 
    it("should persit simple values in the DOM-store", function() {
-      ß.bridge.set('foo', 'bar');
+      Scandio.bridge.set('foo', 'bar');
 
-      expect(ß.bridge.get('foo')).toEqual('bar');
+      expect(Scandio.bridge.get('foo')).toEqual('bar');
    });
 
    it("should return default values on non-defined paths", function() {
-      expect(ß.bridge.get('foo')).toEqual('bar');
+      expect(Scandio.bridge.get('foo')).toEqual('bar');
 
-      expect(ß.bridge.get('foo.bar', false)).toBe(false);
+      expect(Scandio.bridge.get('foo.bar', false)).toBe(false);
    });
 
    it("should overwrite defined values", function() {
-      expect(ß.bridge.get('foo')).toEqual('bar');
-      ß.bridge.set('foo', 'barbar');
+      expect(Scandio.bridge.get('foo')).toEqual('bar');
+      Scandio.bridge.set('foo', 'barbar');
 
-      expect(ß.bridge.get('foo', false)).toEqual('barbar');
+      expect(Scandio.bridge.get('foo', false)).toEqual('barbar');
    });
 
    it("should persit nested values in the DOM-store", function() {
-      ß.bridge.set('foo', {});
-      ß.bridge.set('foo.bar', [1, 2, 3]);
-      ß.bridge.set('foo.bar2', [4, 5, 6]);
+      Scandio.bridge.set('foo', {});
+      Scandio.bridge.set('foo.bar', [1, 2, 3]);
+      Scandio.bridge.set('foo.bar2', [4, 5, 6]);
 
-      expect(ß.bridge.get('foo.bar')).toEqual([1, 2, 3]);
-      expect(ß.bridge.get('foo.bar2')).toEqual([4, 5, 6]);
+      expect(Scandio.bridge.get('foo.bar')).toEqual([1, 2, 3]);
+      expect(Scandio.bridge.get('foo.bar2')).toEqual([4, 5, 6]);
 
-      expect(ß.bridge.get('foo.bar')).not.toEqual([4, 5, 6]);
+      expect(Scandio.bridge.get('foo.bar')).not.toEqual([4, 5, 6]);
    });
 
    it("should merge existing stores into one", function() {
@@ -35,24 +35,24 @@ describe("A suite testing the bridge functionality of scandio.js", function() {
          script            = document.createElement("script");
 
       script.type       = "application/x-json";
-      script.className  = $('.' + ß.bridge.className).last().attr('class');
+      script.className  = $('.' + Scandio.bridge.className).last().attr('class');
 
       document.head.appendChild(script);
 
-      $('.' + ß.bridge.className).last().text(JSON.stringify({
+      $('.' + Scandio.bridge.className).last().text(JSON.stringify({
          yada: {
             yada: 'yada',
             foo: 20
          }
       }));
 
-      ß.bridge.init();
+      Scandio.bridge.init();
 
-      expect(ß.bridge.get('foo.bar')).toEqual([1, 2, 3]);
-      expect(ß.bridge.get('foo.bar2')).toEqual([4, 5, 6]);
+      expect(Scandio.bridge.get('foo.bar')).toEqual([1, 2, 3]);
+      expect(Scandio.bridge.get('foo.bar2')).toEqual([4, 5, 6]);
 
-      expect(ß.bridge.get('yada.yada')).toEqual('yada');
-      expect(ß.bridge.get('yada.foo')).toEqual(20);
+      expect(Scandio.bridge.get('yada.yada')).toEqual('yada');
+      expect(Scandio.bridge.get('yada.foo')).toEqual(20);
    });
 
 });

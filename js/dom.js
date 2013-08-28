@@ -3,11 +3,11 @@
 
 // Register dom namespace on scandiojs object
 
-ß.dom = {};
+Scandio.dom = {};
 
 // Closes and secures a cache module with within its own scope
 // *Note:* This function being an IIFE leaves of parameters on outer function
-ß.dom.cache = (function($, ß){
+Scandio.dom.cache = (function($, Scandio){
    // Sets up local cache store
    var
       cache = {},
@@ -29,14 +29,14 @@
       // Updates complete cache or scoped to a label
       update = function(label) {
          // Passed in label is string, scoping to that label
-         if (ß.isString(label)) {
+         if (Scandio.isString(label)) {
             //Reset cache value at label
             if(cache[label] !== undefined) {
                cache[label] = $(cache[label].selector || '');
             }
          } else {
             // For each value in cache refresh it
-            ß.util.each(cache, function($cached, label) {
+            Scandio.util.each(cache, function($cached, label) {
                cache[label] = $($cached.selector);
             });
          }
@@ -45,7 +45,7 @@
       // Gets a value from cache or loads it from DOM
       get = function(label, selector) {
          // Both label and selector passed, cache/dom reading...
-         if (ß.isString(selector) && ß.isString(label)) {
+         if (Scandio.isString(selector) && Scandio.isString(label)) {
             // ...either from cache or DOM
             cache[label] = cache[label] || $(selector);
          }
@@ -62,4 +62,4 @@
       get: get,
       update: update
    };
-}(jQuery, ß));
+}(jQuery, Scandio));

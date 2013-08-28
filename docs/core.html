@@ -136,7 +136,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.mod = ß.module = (<span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.mod = Scandio.module = (<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -173,8 +173,8 @@
          typeError      = <span class="literal">null</span>,
          invokedModule  = <span class="literal">null</span>;
 
-      namespace = ß.string.clean(
-         ß.string.lower(namespace)
+      namespace = Scandio.string.clean(
+         Scandio.string.lower(namespace)
       );</pre></div></div>
             
         </li>
@@ -190,7 +190,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!ß.isString(namespace) || !ß.isFunction(module) || (modEnv &amp;&amp; !ß.isObject(modEnv))) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!Scandio.isString(namespace) || !Scandio.isFunction(module) || (modEnv &amp;&amp; !Scandio.isObject(modEnv))) {</pre></div></div>
             
         </li>
         
@@ -222,7 +222,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         ß.debug.error(typeError);
+            <div class="content"><div class='highlight'><pre>         Scandio.debug.error(typeError);
       }</pre></div></div>
             
         </li>
@@ -238,7 +238,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (ß.util.getByDots(namespace, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.util.getByDots(namespace, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
             
         </li>
         
@@ -255,7 +255,7 @@
             
             <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Error: there is already a module with namespace "'</span> + namespace + <span class="string">'".'</span>;
 
-         ß.debug.error(typeError);
+         Scandio.debug.error(typeError);
       }
       <span class="keyword">else</span> {</pre></div></div>
             
@@ -287,7 +287,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         invokedModule = ß.util.setByDots(namespace, module.call(ß, $, globEnv, ß), modules);
+            <div class="content"><div class='highlight'><pre>         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
       }</pre></div></div>
             
         </li>
@@ -304,7 +304,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modEnv &amp;&amp; ß.isFunction(modEnv.readyFn)) {
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
          modEnv.readyFn(invokedModule.ready);
       } <span class="keyword">else</span> {</pre></div></div>
             
@@ -340,12 +340,12 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.modules = <span class="keyword">function</span>(namespace) {
-   namespace = ß.string.clean(
-      ß.string.lower(namespace)
+            <div class="content"><div class='highlight'><pre>Scandio.modules = <span class="keyword">function</span>(namespace) {
+   namespace = Scandio.string.clean(
+      Scandio.string.lower(namespace)
    );
 
-   <span class="keyword">return</span> ß.util.getByDots(namespace, modules, <span class="literal">false</span>);
+   <span class="keyword">return</span> Scandio.util.getByDots(namespace, modules, <span class="literal">false</span>);
 };</pre></div></div>
             
         </li>
@@ -362,7 +362,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.wait = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.wait = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
             
         </li>
         
@@ -482,7 +482,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         callbacks      = ß.util.extend({}, params.callbacks),</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         callbacks      = Scandio.util.extend({}, params.callbacks),</pre></div></div>
             
         </li>
         
@@ -513,7 +513,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (<span class="keyword">new</span> Date().getTime() - startTime &gt; duration) {
-               <span class="keyword">if</span> (ß.isFunction(callbacks.fail)) { callbacks.fail(); }</pre></div></div>
+               <span class="keyword">if</span> (Scandio.isFunction(callbacks.fail)) { callbacks.fail(); }</pre></div></div>
             
         </li>
         
@@ -529,7 +529,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> <span class="keyword">if</span> (condition()) {
-               <span class="keyword">if</span> (ß.isFunction(callbacks.done)) { callbacks.done(); }</pre></div></div>
+               <span class="keyword">if</span> (Scandio.isFunction(callbacks.done)) { callbacks.done(); }</pre></div></div>
             
         </li>
         
@@ -625,7 +625,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>($, ß) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>($, Scandio) {</pre></div></div>
             
         </li>
         
@@ -652,7 +652,7 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Subscribing to messenger with namespace as in <em>ß.messenger.subscribe(&#39;foo.bar&#39;, fn)</em>
+              <p>Subscribing to messenger with namespace as in <em>Scandio.messenger.subscribe(&#39;foo.bar&#39;, fn)</em>
 <em>Note:</em> First argument is event as in subscribe(&#39;foo&#39;, fn(e, arg…))!</p>
 
             </div>
@@ -727,7 +727,7 @@ it will be invoked on DOM-Ready</p>
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, ß)));</pre></div></div>
+}(jQuery, Scandio)));</pre></div></div>
             
         </li>
         
@@ -742,7 +742,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.redirect = <span class="keyword">function</span>(url) {
+            <div class="content"><div class='highlight'><pre>Scandio.redirect = <span class="keyword">function</span>(url) {
    location.href = url;
 };</pre></div></div>
             

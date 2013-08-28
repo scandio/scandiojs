@@ -1,1 +1,1 @@
-ß.debug.log('Log script loaded!');
+Scandio.debug.log('Log script loaded!');

@@ -2,11 +2,11 @@
 // ---------------
 
 // Sets up the json object
-ß.json = {};
+Scandio.json = {};
 
 // Used to encode an object to its json-string representation
 // *Note:* falls back to native `JSON.stringify` if it is defined
-ß.json.to = ß.json.encode = function(obj) {
+Scandio.json.to = Scandio.json.encode = function(obj) {
    // Falls back to native `JSON.stringify` if possible
    if ("JSON" in window) { return JSON.stringify(obj); }
 
@@ -40,7 +40,7 @@
                v = '"' + v + '"';
             // Recursive call to itself to work nested objects
             } else if (t == "object" && v !== null) {
-               v = ß.json.to(v);
+               v = Scandio.json.to(v);
             }
             // Push the processed output to result
             json.push((arr ? "" : '"' + n + '":') + String(v));
@@ -55,6 +55,6 @@
 // *Note:* Pipes through `$.parseJSON` which basically
 // does a simple RegEx-test and then returns `new Function(data)` instead of
 // an `eval`.
-ß.json.from = ß.json.decode = function(string) {
+Scandio.json.from = Scandio.json.decode = function(string) {
    return $.parseJSON(string);
 };

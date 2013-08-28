@@ -2,4 +2,4 @@
 // ---------------
 
 // Sets up confluence object
-ß.confluence = {};
+Scandio.confluence = {};

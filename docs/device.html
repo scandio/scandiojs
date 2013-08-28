@@ -135,7 +135,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.device = {
+            <div class="content"><div class='highlight'><pre>Scandio.device = {
    mobile: [<span class="string">"android"</span>, <span class="string">"webos"</span>, <span class="string">"iphone"</span>, <span class="string">"ipad"</span>, <span class="string">"ipod"</span>, <span class="string">"blackberry"</span>],
    desktop: [<span class="string">"macintosh"</span>, <span class="string">"win"</span>, <span class="string">"linux"</span>]
 };</pre></div></div>
@@ -154,9 +154,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.device.isMobile = <span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>Scandio.device.isMobile = <span class="keyword">function</span>() {
    <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(ß.device.mobile.join(<span class="string">'|'</span>)),
+      regExp      = <span class="keyword">new</span> RegExp(Scandio.device.mobile.join(<span class="string">'|'</span>)),
       userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
             
         </li>
@@ -188,9 +188,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.device.isDesktop = <span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>Scandio.device.isDesktop = <span class="keyword">function</span>() {
    <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(ß.device.desktop.join(<span class="string">'|'</span>)),
+      regExp      = <span class="keyword">new</span> RegExp(Scandio.device.desktop.join(<span class="string">'|'</span>)),
       userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
             
         </li>
@@ -222,7 +222,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.device.isBrowser = <span class="keyword">function</span>(vendor) {
+            <div class="content"><div class='highlight'><pre>Scandio.device.isBrowser = <span class="keyword">function</span>(vendor) {
    <span class="keyword">var</span>
       regExp      = <span class="keyword">new</span> RegExp(vendor.toLowerCase()),
       userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
@@ -256,7 +256,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.device.isOs = <span class="keyword">function</span>(vendor) {
+            <div class="content"><div class='highlight'><pre>Scandio.device.isOs = <span class="keyword">function</span>(vendor) {
    <span class="keyword">var</span>
       regExp      = <span class="keyword">new</span> RegExp(vendor.toLowerCase()),
       userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>

@@ -30,7 +30,7 @@
 (function() {
    // Mixing in overwrites existing functionality
    // plus it can be namespaced to an existing module's sub-namespace
-	ß.util.mixin("string.custom", {
+	Scandio.util.mixin("string.custom", {
       capitalize: function(string) {
          return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
       },

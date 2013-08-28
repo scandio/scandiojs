@@ -20,7 +20,6 @@
 
   // Sets up a global set of variables
    var
-      ß                  = null,
       loadedJs           = {},
       config             = {
          scandioHtmlClass: 'scandio-js',
@@ -28,8 +27,8 @@
       },
       injectDOM          = true,
       $scandioEl         = null,
-      // Previous version for `ß.noConflict`
-      previousScandio    = root.ß,
+      // Previous version for `Scandio.noConflict`
+      previousScandio    = root.Scandio,
       // Breaker for loop iteration
       breaker            = {},
       // Set of shorthand to object protos
@@ -42,14 +41,14 @@
                           'exception', 'group', 'groupCollapsed', 'groupEnd',
                           'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
                           'timeStamp', 'trace'],
-      // Log methods to be caught and routed to `ß.debug`
+      // Log methods to be caught and routed to `Scandio.debug`
       logMethods         = ['error', 'warn', 'info', 'debug', 'log'],
       // Url hooks enabling e.g. DOM-logging
       urlHooks           = {
          domLogging:    'scandiojs--log-dom'
       },
 
-      // All the important native methods shorthanded and used if defined in e.g. `ß.each`
+      // All the important native methods shorthanded and used if defined in e.g. `Scandio.each`
       push               = ArrayProto.push,
       slice              = ArrayProto.slice,
       concat             = ArrayProto.concat,
@@ -135,7 +134,7 @@
    _initialize();
 
    // Create yerself
-   ß = root.ß = root.Scandio = Scandio;
+   root.Scandio = Scandio;
 
    // Version of our library
-   ß.VERSION   = '0.0.1';
+   Scandio.VERSION   = '0.1.0';

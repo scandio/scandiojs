@@ -5,7 +5,7 @@ describe("A suite testing the timing functions", function() {
             this.hasBeenCalled = false;
             var that = this;
 
-            ß.timing.delay(function() {
+            Scandio.timing.delay(function() {
                that.hasBeenCalled = true;
             }, 50);
          });
@@ -27,7 +27,7 @@ describe("A suite testing the timing functions", function() {
          runs(function() {
             this.counter = 0;
 
-            this.breakedIncrementor = ß.timing.breaks(function() {
+            this.breakedIncrementor = Scandio.timing.breaks(function() {
                this.counter++;
             }, 42);
 
@@ -50,7 +50,7 @@ describe("A suite testing the timing functions", function() {
             this.counter = 0;
             var that = this;
 
-            this.breakedIncrementor = ß.timing.breaks(function(to) {
+            this.breakedIncrementor = Scandio.timing.breaks(function(to) {
                this.counter = to;
             }, 10);
 
@@ -59,7 +59,7 @@ describe("A suite testing the timing functions", function() {
             //Not called
             expect(this.counter).toEqual(0);
 
-            ß.timing.delay(function() {
+            Scandio.timing.delay(function() {
                //Called once now
                expect(that.counter).toEqual(10);
             }, 10);

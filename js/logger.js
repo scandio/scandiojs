@@ -2,21 +2,21 @@
 // ---------------
 
 // Sets up logger object with level and log-history
-ß.logger = {
+Scandio.logger = {
    level: 5,
    logs: {},
    logDom: false
 };
 
 // Define default logger callback if no custom callback defined
-ß.logger.logDomFn = ß.logger.logDomFn || (function() {
-   return ß.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) > -1);
+Scandio.logger.logDomFn = Scandio.logger.logDomFn || (function() {
+   return Scandio.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) > -1);
 }());
 
-ß.debug = {};
+Scandio.debug = {};
 
-// `ß.debug` will get a set of methods (*see return-statement*)
-ß.debug = (function() {
+// `Scandio.debug` will get a set of methods (*see return-statement*)
+Scandio.debug = (function() {
    var
       // Shorthands, DOM-element mappings and caching variables
       console              = window.console,
@@ -38,10 +38,10 @@
             response    = [];
 
          // Each arguement processed separately
-         ß.util.each(args, function(arg) {
+         Scandio.util.each(args, function(arg) {
             // If it is an object || array stringify its value
-            if ( (ß.isObject(arg) || ß.isArray(arg) ) ) {
-               response.push( ß.json.to(arg) );
+            if ( (Scandio.isObject(arg) || Scandio.isArray(arg) ) ) {
+               response.push( Scandio.json.to(arg) );
             } else {
                // otherwise toString it
                response.push(arg);
@@ -58,14 +58,14 @@
          var
             logElWrapperPath     = logOuterWrapperPath + '--' + method,
             logElInnerPath       = 'alert alert-' + alertEls[method] || method,
-            logElIdentifier      = '.' + ß.string.replace(logElInnerPath, ' ', '.'),
+            logElIdentifier      = '.' + Scandio.string.replace(logElInnerPath, ' ', '.'),
             $logEl               = [];
 
          // Sets up history for the log-method
-         ß.logger.logs[method] = [];
+         Scandio.logger.logs[method] = [];
 
          // Creates the logger-els only if logDomFn is truthy
-         if (ß.logger.logDomFn === true) {
+         if (Scandio.logger.logDomFn === true) {
             $(function() {
                // Maintaines state and creates the logger els
                $loggerEl.append(
@@ -80,21 +80,21 @@
 
                $logEl = $(logElIdentifier);
 
-               ß.util.each(ß.logger.logs[method], function(log) {
+               Scandio.util.each(Scandio.logger.logs[method], function(log) {
                   $logEl.prepend(log + '<hr />');
                });
             });
          }
 
          // Registers function on DOM-Module for logging with method-name
-         ß.dom[method] = function() {
+         Scandio.dom[method] = function() {
             var args = slice.call(arguments);
 
             // Query DOM only if nessesary (cache)
             if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
 
             // Only log to DOM if possible and wanted
-            if (ß.logger.logDomFn && $logEl.length > 0) { $logEl.prepend(logMessage(args) + '<hr />'); }
+            if (Scandio.logger.logDomFn && $logEl.length > 0) { $logEl.prepend(logMessage(args) + '<hr />'); }
          };
 
          // The return value's log-type gets a function
@@ -103,21 +103,21 @@
             var args = slice.call(arguments);
 
             // Only log to console if required by level
-            if (ß.logger.level > level) {
+            if (Scandio.logger.level > level) {
                // Calls the native console method
                console[method].apply(console, args);
 
                // Logs to DOM (function itself decides if intended)
-               ß.dom[method].apply(ß, args);
+               Scandio.dom[method].apply(Scandio, args);
             }
 
             // but always push it to history
-            ß.logger.logs[method].push( logMessage(args) );
+            Scandio.logger.logs[method].push( logMessage(args) );
          };
       };
 
    // Sets up the outer wrapper for DOM logging
-   if (ß.logger.logDomFn === true) {
+   if (Scandio.logger.logDomFn === true) {
       $(function() {
          $loggerEl = $(logElType, {
             class: logOuterWrapperPath
@@ -128,6 +128,6 @@
    // For every console-method
    while(length--) { createLogger(logMethods[length], length); }
 
-   // Now the `ß.debug`-object gets its functions
+   // Now the `Scandio.debug`-object gets its functions
    return methods;
 })();

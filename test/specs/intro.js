@@ -9,7 +9,7 @@ describe("A suite testing the initialization of scandio.js", function() {
    });
 
    it("should exist a global variable of scandio.js", function() {
-      expect(ß).toEqual(jasmine.any(Function));
+      expect(Scandio).toEqual(jasmine.any(Function));
       expect(Scandio).toEqual(jasmine.any(Function));
    });
 
@@ -20,6 +20,6 @@ describe("A suite testing the initialization of scandio.js", function() {
    });
 
    it("should have any version number which is a string", function() {
-      expect(ß.VERSION).toEqual(jasmine.any(String));
+      expect(Scandio.VERSION).toEqual(jasmine.any(String));
    });
 });

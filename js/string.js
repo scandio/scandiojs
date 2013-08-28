@@ -2,28 +2,28 @@
 // ---------------
 
 // Register string namespace on scandiojs object
-ß.string = {};
+Scandio.string = {};
 
 // Capitalizes a given string (scandio becomes Scandio etc.)
-ß.string.capitalize = function(string) {
+Scandio.string.capitalize = function(string) {
    // First char gets upppercased every other char lowercased
    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
 };
 
 // Lowercases a given string (ScanDiO becomes scandio)
-ß.string.lower = function(string) {
+Scandio.string.lower = function(string) {
    // Just everything to lowercase
    return string.toLowerCase();
 };
 
 // Cleans up the mess of a string ('  Scandio    GmbH   ' becomes 'Scandio GmbH')
-ß.string.clean = function(string) {
+Scandio.string.clean = function(string) {
    // Trims the mess (whitespace default) and replaces consecutive (s+) whitespaces within with one whitespace
-   return ß.string.trim(string).replace(/\s+/g, ' ');
+   return Scandio.string.trim(string).replace(/\s+/g, ' ');
 };
 
 // Trims away the given characters around a given string (defaults to whitespace)
-ß.string.trim = function(string, characters){
+Scandio.string.trim = function(string, characters){
    // Uses nativeTrim if defined and no characters are given (not supported by native impl.)
    if (!characters && nativeTrim) {
       return nativeTrim.call(string);
@@ -34,8 +34,8 @@
    return String(string).replace(new RegExp('^' + characters + '+|' + characters + '+$', 'g'), '');
 };
 
-// Chops a string up `at` every position in the string `ß.string.chop('chopchop', 3) === 'cho pch op'`
-ß.string.chop = function(string, at) {
+// Chops a string up `at` every position in the string `Scandio.string.chop('chopchop', 3) === 'cho pch op'`
+Scandio.string.chop = function(string, at) {
    // Better make a string out of the passed in 'string'
    string = String(string);
 
@@ -46,8 +46,8 @@
    return at > 0 ? string.match(new RegExp('.{1,' + at + '}', 'g')) : [string];
 };
 
-// Finds a string within a string (fuzzy) e.g. `ß.string.contains('I'veADream', 'Dream') === true`
-ß.string.contains = function(needle, haystack) {
+// Finds a string within a string (fuzzy) e.g. `Scandio.string.contains('I'veADream', 'Dream') === true`
+Scandio.string.contains = function(needle, haystack) {
    // Don't do work if no needle passed (but we've found something right!)
    if (needle === '') { return true; }
    // Empty haystack should also lead to some chilling without having found something
@@ -58,7 +58,7 @@
 };
 
 // Checks if string starts with a given string
-ß.string.starts = function(string, what) {
+Scandio.string.starts = function(string, what) {
    // Wrap the passed in arguments in a String object for sanity
    string   = String(string);
    what     = String(what);
@@ -69,7 +69,7 @@
 };
 
 // Checks if string ends with a given string
-ß.string.ends = function(string, what) {
+Scandio.string.ends = function(string, what) {
    // Wrap the passed in arguments in a String object for sanity
    string   = String(string),
    what     = String(what);
@@ -80,7 +80,7 @@
 };
 
 // Implodes/joins a string with a given glue
-ß.string.implode = function(glue, pieces) {
+Scandio.string.implode = function(glue, pieces) {
    // Defaults the glue to empty string
    if (glue === null || glue === undefined) { glue = ''; }
 
@@ -89,7 +89,7 @@
 };
 
 // Explodes/splits a string with by given delimiter
-ß.string.explode = function(string, delimiter) {
+Scandio.string.explode = function(string, delimiter) {
    // Wrap the passed in argument in a String object for sanity
    delimiter   = String(delimiter),
    string      = String(string);
@@ -99,8 +99,8 @@
 };
 
 // Replaces a substring within a string
-// E.g. `ß.string.replace('Scandio Gm', 'Gm', 'GmbH')` will return 'Scandio GmbH'
-ß.string.replace = function(string, subString, replacer) {
+// E.g. `Scandio.string.replace('Scandio Gm', 'Gm', 'GmbH')` will return 'Scandio GmbH'
+Scandio.string.replace = function(string, subString, replacer) {
    // Wrap the passed in argument in a String object for sanity
    string      = String(string);
    subString   = String(subString);

@@ -1,1 +1,1 @@
-ß.debug.warn('Desktop-warn script loaded!');
+Scandio.debug.warn('Desktop-warn script loaded!');

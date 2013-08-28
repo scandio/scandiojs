@@ -2,16 +2,16 @@
 // ---------------
 
 // Sets up device object
-ß.device = {
+Scandio.device = {
    mobile: ["android", "webos", "iphone", "ipad", "ipod", "blackberry"],
    desktop: ["macintosh", "win", "linux"]
 };
 
 // A rudimentary function testing for mobile devices
 // *Note:* The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)
-ß.device.isMobile = function() {
+Scandio.device.isMobile = function() {
    var
-      regExp      = new RegExp(ß.device.mobile.join('|')),
+      regExp      = new RegExp(Scandio.device.mobile.join('|')),
       userAgent   = navigator.userAgent.toLowerCase();
 
    // Checks the navigator's user agent against the list of mobile devices
@@ -19,9 +19,9 @@
 };
 
 // A function testing for desktop devices
-ß.device.isDesktop = function() {
+Scandio.device.isDesktop = function() {
    var
-      regExp      = new RegExp(ß.device.desktop.join('|')),
+      regExp      = new RegExp(Scandio.device.desktop.join('|')),
       userAgent   = navigator.userAgent.toLowerCase();
 
    // Checks the navigator's user agent against the list of desktop devices
@@ -29,7 +29,7 @@
 };
 
 // A function testing for browser vendors
-ß.device.isBrowser = function(vendor) {
+Scandio.device.isBrowser = function(vendor) {
    var
       regExp      = new RegExp(vendor.toLowerCase()),
       userAgent   = navigator.userAgent.toLowerCase();
@@ -39,7 +39,7 @@
 };
 
 // A function testing for browser vendors
-ß.device.isOs = function(vendor) {
+Scandio.device.isOs = function(vendor) {
    var
       regExp      = new RegExp(vendor.toLowerCase()),
       userAgent   = navigator.userAgent.toLowerCase();

@@ -135,8 +135,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.bridge = {};
-ß.bridge.className = config.scandioBridgeClass;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.bridge = {};
+Scandio.bridge.className = config.scandioBridgeClass;</pre></div></div>
             
         </li>
         
@@ -151,7 +151,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.bridge.init = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.bridge.init = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -167,7 +167,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      scripts     = $(<span class="string">'.'</span> + ß.bridge.className),
+      scripts     = $(<span class="string">'.'</span> + Scandio.bridge.className),
       tempCache   = <span class="literal">null</span>,
       mergeCache  = {};</pre></div></div>
             
@@ -184,7 +184,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.bridge.script = scripts.last();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script = scripts.last();</pre></div></div>
             
         </li>
         
@@ -199,9 +199,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   mergeCache = ß.bridge.script.text() !== <span class="string">""</span> &amp;&amp; ß.isObject(
+            <div class="content"><div class='highlight'><pre>   mergeCache = Scandio.bridge.script.text() !== <span class="string">""</span> &amp;&amp; Scandio.isObject(
       tempCache = $.parseJSON(
-         ß.bridge.script.text()
+         Scandio.bridge.script.text()
       )
    ) ? tempCache : mergeCache;</pre></div></div>
             
@@ -219,10 +219,10 @@ removing it afterwards</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.each(scripts.slice(<span class="number">0</span>, scripts.length - <span class="number">1</span>), <span class="keyword">function</span>(script) {
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(scripts.slice(<span class="number">0</span>, scripts.length - <span class="number">1</span>), <span class="keyword">function</span>(script) {
       <span class="keyword">var</span> $script    = $(script);
 
-      ß.util.extend(mergeCache, ß.json.from( $script.text() ));
+      Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
 
       $script.remove();
    });</pre></div></div>
@@ -240,9 +240,9 @@ removing it afterwards</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.bridge.script.text( ß.json.to(mergeCache) );
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script.text( Scandio.json.to(mergeCache) );
 
-   <span class="keyword">return</span> ß.bridge.script.length === <span class="number">1</span>;
+   <span class="keyword">return</span> Scandio.bridge.script.length === <span class="number">1</span>;
 };</pre></div></div>
             
         </li>
@@ -255,12 +255,12 @@ removing it afterwards</p>
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Gets a value from the script-tag
-<em>E.g.:</em> <code>ß.bridge.get(&#39;firms.microsoft&#39;, false)</code> might return a company object-literal
+<em>E.g.:</em> <code>Scandio.bridge.get(&#39;firms.microsoft&#39;, false)</code> might return a company object-literal
 or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.bridge.get = <span class="keyword">function</span>(dots, notFound) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.bridge.get = <span class="keyword">function</span>(dots, notFound) {</pre></div></div>
             
         </li>
         
@@ -275,7 +275,7 @@ or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (injectDOM === <span class="literal">false</span>) { ß.debug.warn(<span class="string">"DOM injection disabled globally, script-tag not present!"</span>); <span class="keyword">return</span>; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (injectDOM === <span class="literal">false</span>) { Scandio.debug.warn(<span class="string">"DOM injection disabled globally, script-tag not present!"</span>); <span class="keyword">return</span>; }</pre></div></div>
             
         </li>
         
@@ -290,7 +290,7 @@ or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.bridge.script.text() );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = Scandio.json.from( Scandio.bridge.script.text() );</pre></div></div>
             
         </li>
         
@@ -305,7 +305,7 @@ or false if it is not set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> ß.util.getByDots(dots, storeData, notFound);
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> Scandio.util.getByDots(dots, storeData, notFound);
 };</pre></div></div>
             
         </li>
@@ -318,12 +318,12 @@ or false if it is not set</p>
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>Sets a value on the script-tag
-*E.g.: <code>ß.bridge.set(&#39;firms.scandio, {name: &#39;Scandio GmbH&#39;})</code> will add the scandio literal to the firms
+*E.g.: <code>Scandio.bridge.set(&#39;firms.scandio, {name: &#39;Scandio GmbH&#39;})</code> will add the scandio literal to the firms
 object. It will overwrite an existing entry and fail if <code>firms</code> it not an object but a primitive type.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>ß.bridge.set = <span class="keyword">function</span>(dots, value) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.bridge.set = <span class="keyword">function</span>(dots, value) {</pre></div></div>
             
         </li>
         
@@ -338,7 +338,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (injectDOM === <span class="literal">false</span>) { ß.debug.warn(<span class="string">"DOM injection disabled globally, script-tag not present!"</span>); <span class="keyword">return</span>; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (injectDOM === <span class="literal">false</span>) { Scandio.debug.warn(<span class="string">"DOM injection disabled globally, script-tag not present!"</span>); <span class="keyword">return</span>; }</pre></div></div>
             
         </li>
         
@@ -353,7 +353,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = ß.json.from( ß.bridge.script.text() );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = Scandio.json.from( Scandio.bridge.script.text() );</pre></div></div>
             
         </li>
         
@@ -368,7 +368,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.util.setByDots(dots, value, storeData);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.setByDots(dots, value, storeData);</pre></div></div>
             
         </li>
         
@@ -383,7 +383,7 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   ß.bridge.script.text( ß.json.to(storeData) );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script.text( Scandio.json.to(storeData) );</pre></div></div>
             
         </li>
         

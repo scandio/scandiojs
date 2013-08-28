@@ -2,10 +2,10 @@
 // ---------------
 
 // Sets up responsive object
-ß.responsive = {
+Scandio.responsive = {
    breakpointEl:     '.breakpoint'
 };
 
-ß.responsive.breakpoint = function(name) {
-   return $( ß.responsive.breakpointEl ).html() === name;
+Scandio.responsive.breakpoint = function(name) {
+   return $( Scandio.responsive.breakpointEl ).html() === name;
 };

@@ -2,12 +2,12 @@
 // ---------------
 
 // Register timinig namespace on scandiojs object
-ß.timing = {};
+Scandio.timing = {};
 
 // Puts the breaks on a function which may be called to often
 // such as scrolling or resizing callbacks.
 // The function will actually be called after `release`-milliseconds elapsed
-ß.timing.breaks = function(on, release) {
+Scandio.timing.breaks = function(on, release) {
    // Initialize the context, arg, timeout and previous local variables
    var
       context = null,
@@ -63,7 +63,7 @@
 };
 
 // Delays a function execution `ms` milliseconds.
-ß.timing.delay = function(fn, ms) {
+Scandio.timing.delay = function(fn, ms) {
    // Arguments are anything after `fn` and `ms`
    var args = slice.call(arguments, 2);
 

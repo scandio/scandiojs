@@ -17,29 +17,29 @@ describe("A suite testing the core module", function() {
       });
 
       it("should allow for fully qualified subscriptions", function() {
-         ß.subscribe('foo.bar', callbacks.handler1);
-         ß.publish('foo.bar');
+         Scandio.subscribe('foo.bar', callbacks.handler1);
+         Scandio.publish('foo.bar');
 
          expect(callbacks.handler1).toHaveBeenCalled();
          expect(callbacks.handler2).not.toHaveBeenCalled();
       });
 
       it("should allow for fuzzy (unqualified) subscriptions", function() {
-         ß.subscribe('foo', callbacks.handler2);
-         ß.subscribe('foo.bar', callbacks.handler1);
+         Scandio.subscribe('foo', callbacks.handler2);
+         Scandio.subscribe('foo.bar', callbacks.handler1);
 
-         ß.publish('foo');
+         Scandio.publish('foo');
 
          expect(callbacks.handler1).toHaveBeenCalled();
          expect(callbacks.handler2).toHaveBeenCalled();
       });
 
       it("should allow for unsubscribing from messenger", function() {
-         ß.subscribe('foo.bar', callbacks.handler1);
-         ß.subscribe('foo', callbacks.handler2);
+         Scandio.subscribe('foo.bar', callbacks.handler1);
+         Scandio.subscribe('foo', callbacks.handler2);
 
-         ß.unsubscribe('foo.bar');
-         ß.publish('foo');
+         Scandio.unsubscribe('foo.bar');
+         Scandio.publish('foo');
 
          expect(callbacks.handler1).not.toHaveBeenCalled();
          expect(callbacks.handler2).toHaveBeenCalled();

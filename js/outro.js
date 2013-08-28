@@ -4,13 +4,13 @@
 // Global DOM-Ready which shall be used whenever possible
 // Logger does not use it cause it heavily relies on variable hoisting
 $(function() {
-   ß.bridge.init();
+   Scandio.bridge.init();
 });
 
 // Tries to resolve version conflicts by restoring the previously loaded version globally
-ß.noConflict = function() {
+Scandio.noConflict = function() {
    // Retore the `previousScandio`
-   root.ß = previousScandio;
+   root.Scandio = previousScandio;
 
    // Return yerself to continue
    return this;
@@ -22,7 +22,7 @@ if (typeof define === 'function' && define.amd) {
    // Define Scandio
    define('Scandio', function() {
       // and return the library
-      return ß;
+      return Scandio;
    });
 }
 }(this, jQuery, window, document, undefined));
