@@ -59,7 +59,7 @@
 
    // Return public functions in object literal
    return {
-      get:     get,
-      update:  update
+      get: get,
+      update: update
    };
 }(jQuery, ß));

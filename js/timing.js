@@ -69,6 +69,6 @@
 
    // Return the result of setTimeout
    return setTimeout(function() {
-         return fn.apply(null, args);
+      return fn.apply(null, args);
    }, ms);
 };

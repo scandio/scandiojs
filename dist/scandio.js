@@ -200,8 +200,8 @@
 
    // Return public functions in object literal
    return {
-      get:     get,
-      update:  update
+      get: get,
+      update: update
    };
 }(jQuery, ß));
 // String module
@@ -868,7 +868,7 @@
 
    // Return the result of setTimeout
    return setTimeout(function() {
-         return fn.apply(null, args);
+      return fn.apply(null, args);
    }, ms);
 };
 // Ajax module
