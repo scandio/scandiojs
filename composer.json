@@ -1,7 +1,7 @@
 {
     "name": "scandio/js",
     "type": "library",
-    "description": "Components easing interaction with scandiojs",
+    "description": "Components easing interaction with scandiojs.",
     "keywords": ["php", "library", "js", "scandio"],
     "homepage": "https://github.com/scandio/scandiojs",
     "license": "MIT",

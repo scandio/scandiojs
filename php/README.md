@@ -6,7 +6,7 @@ The library is available as a *composer* package and is also listed on *packagis
 
 ## Scandio\js\Bridge
 
-A little helper which may be used in views/templates to store data and communicate with the `ß.bridge`-module of *scandiojs*.
+A little helper which may be used in views/templates to store data and communicate with the `Scandio.bridge`-module of *scandiojs*.
 
 ### By having the following Html file with php in it
 
@@ -60,7 +60,7 @@ echo Bridge::script();
 
 ```js
 $(function() {
-   var customers = ß.bridge.get('customers', []);
+   var customers = Scandio.bridge.get('customers', []);
 });
 ```
 
