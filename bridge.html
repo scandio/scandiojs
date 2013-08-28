@@ -167,7 +167,7 @@ Scandio.bridge.className = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      scripts     = $(<span class="string">'.'</span> + Scandio.bridge.className),
+      scripts     = jQuery(<span class="string">'.'</span> + Scandio.bridge.className),
       tempCache   = <span class="literal">null</span>,
       mergeCache  = {};</pre></div></div>
             
@@ -200,7 +200,7 @@ Scandio.bridge.className = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   mergeCache = Scandio.bridge.script.text() !== <span class="string">""</span> &amp;&amp; Scandio.isObject(
-      tempCache = $.parseJSON(
+      tempCache = jQuery.parseJSON(
          Scandio.bridge.script.text()
       )
    ) ? tempCache : mergeCache;</pre></div></div>
@@ -220,7 +220,7 @@ removing it afterwards</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   Scandio.util.each(scripts.slice(<span class="number">0</span>, scripts.length - <span class="number">1</span>), <span class="keyword">function</span>(script) {
-      <span class="keyword">var</span> $script    = $(script);
+      <span class="keyword">var</span> $script    = jQuery(script);
 
       Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
 
