@@ -113,7 +113,7 @@
          if (injectDOM) {
             script            = document.createElement("script");
             script.type       = "application/x-json";
-            script.className  = config.scandioBridgeClass;
+            script.id         = config.scandioBridgeClass;
 
             document.head.appendChild(script);
          }

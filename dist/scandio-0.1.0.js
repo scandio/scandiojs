@@ -113,7 +113,7 @@
          if (injectDOM) {
             script            = document.createElement("script");
             script.type       = "application/x-json";
-            script.className  = config.scandioBridgeClass;
+            script.id         = config.scandioBridgeClass;
 
             document.head.appendChild(script);
          }
@@ -728,18 +728,18 @@ Scandio.json.from = Scandio.json.decode = function(string) {
 
 // Register store namespace on scandiojs object
 Scandio.bridge = {};
-Scandio.bridge.className = config.scandioBridgeClass;
+Scandio.bridge.identifier = config.scandioBridgeClass;
 
 // IFFE setting up the store and merging all n possible 'script-tags' into one
 Scandio.bridge.init = function() {
    // Gets all scripts and sets up the cache for merging
    var
-      scripts     = jQuery('.' + Scandio.bridge.className),
+      scripts     = jQuery('body .' + Scandio.bridge.identifier),
       tempCache   = null,
       mergeCache  = {};
 
    // The main script to be the merge-bucket
-   Scandio.bridge.script = scripts.last();
+   Scandio.bridge.script = jQuery('head #' + Scandio.bridge.identifier);
 
    // Respects actually used script-tag having data already
    mergeCache = Scandio.bridge.script.text() !== "" && Scandio.isObject(
@@ -750,7 +750,7 @@ Scandio.bridge.init = function() {
 
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
-   Scandio.util.each(scripts.slice(0, scripts.length - 1), function(script) {
+   Scandio.util.each(scripts, function(script) {
       var $script    = jQuery(script);
 
       Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
