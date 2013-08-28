@@ -472,7 +472,7 @@
          <span class="keyword">if</span> (injectDOM) {
             script            = document.createElement(<span class="string">"script"</span>);
             script.type       = <span class="string">"application/x-json"</span>;
-            script.className  = config.scandioBridgeClass;
+            script.id         = config.scandioBridgeClass;
 
             document.head.appendChild(script);
          }
