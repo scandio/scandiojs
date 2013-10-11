@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.1.2.html">
-                scandio-0.1.2.js
+              <a class="source" href="scandio-0.1.3.html">
+                scandio-0.1.3.js
               </a>
             
               
@@ -167,7 +167,7 @@ Scandio.bridge.identifier = config.scandioBridgeClass;</pre></div></div>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      scripts     = jQuery(<span class="string">'.'</span> + Scandio.bridge.identifier),
+      scripts     = $(<span class="string">'.'</span> + Scandio.bridge.identifier),
       tempCache   = <span class="literal">null</span>,
       mergeCache  = {};</pre></div></div>
             
@@ -184,7 +184,7 @@ Scandio.bridge.identifier = config.scandioBridgeClass;</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script = jQuery(<span class="string">'head #'</span> + Scandio.bridge.identifier);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script = $(<span class="string">'head #'</span> + Scandio.bridge.identifier);</pre></div></div>
             
         </li>
         
@@ -220,7 +220,7 @@ removing it afterwards</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   Scandio.util.each(scripts, <span class="keyword">function</span>(script) {
-      <span class="keyword">var</span> $script    = jQuery(script);
+      <span class="keyword">var</span> $script    = $(script);
 
       Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
 

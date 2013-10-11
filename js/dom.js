@@ -32,12 +32,12 @@ Scandio.dom.cache = (function(jQuery, Scandio){
          if (Scandio.isString(label)) {
             //Reset cache value at label
             if(cache[label] !== undefined) {
-               cache[label] = jQuery(cache[label].selector || '');
+               cache[label] = $(cache[label].selector || '');
             }
          } else {
             // For each value in cache refresh it
             Scandio.util.each(cache, function($cached, label) {
-               cache[label] = jQuery($cached.selector);
+               cache[label] = $($cached.selector);
             });
          }
       },
@@ -47,7 +47,7 @@ Scandio.dom.cache = (function(jQuery, Scandio){
          // Both label and selector passed, cache/dom reading...
          if (Scandio.isString(selector) && Scandio.isString(label)) {
             // ...either from cache or DOM
-            cache[label] = cache[label] || jQuery(selector);
+            cache[label] = cache[label] || $(selector);
          }
 
          // What the callee gets: a jQuery object
@@ -55,7 +55,7 @@ Scandio.dom.cache = (function(jQuery, Scandio){
       };
 
    // Bind to node removal in DOM
-   jQuery(document).on('DOMNodeRemoved', nodeRemoved);
+   $(document).on('DOMNodeRemoved', nodeRemoved);
 
    // Return public functions in object literal
    return {

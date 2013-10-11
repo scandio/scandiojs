@@ -9,12 +9,12 @@ Scandio.bridge.identifier = config.scandioBridgeClass;
 Scandio.bridge.init = function() {
    // Gets all scripts and sets up the cache for merging
    var
-      scripts     = jQuery('.' + Scandio.bridge.identifier),
+      scripts     = $('.' + Scandio.bridge.identifier),
       tempCache   = null,
       mergeCache  = {};
 
    // The main script to be the merge-bucket
-   Scandio.bridge.script = jQuery('head #' + Scandio.bridge.identifier);
+   Scandio.bridge.script = $('head #' + Scandio.bridge.identifier);
 
    // Respects actually used script-tag having data already
    mergeCache = Scandio.bridge.script.text() !== "" && Scandio.isObject(
@@ -26,7 +26,7 @@ Scandio.bridge.init = function() {
    // Collects each's script text and merges it into the `mergeCache` while
    // removing it afterwards
    Scandio.util.each(scripts, function(script) {
-      var $script    = jQuery(script);
+      var $script    = $(script);
 
       Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
 

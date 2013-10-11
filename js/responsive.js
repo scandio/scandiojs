@@ -7,5 +7,5 @@ Scandio.responsive = {
 };
 
 Scandio.responsive.breakpoint = function(name) {
-   return jQuery( Scandio.responsive.breakpointEl ).html() === name;
+   return $( Scandio.responsive.breakpointEl ).html() === name;
 };
