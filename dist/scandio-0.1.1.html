@@ -1,0 +1,5053 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>scandio-0.1.1.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>scandio-0.1.1.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="comment">/*!
+ * scandio.js JavaScript Library
+ * http://scandio.js/
+ *
+ * Copyright 2013 Scandio GmbH and other contributors
+ * Released under the MIT license
+ */</span>
+
+ <span class="comment">/*global console*/</span>
+ <span class="comment">/*jslint browser: true*/</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2>Setup the library</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, jQuery, window, document, <span class="literal">undefined</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>We&#39;re strict and in strict-mode: no aruguements.callee and globally leaking vars etc</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">"use strict"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Establish the root</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  root = root || <span class="keyword">this</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Sets up a global set of variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      loadedJs           = {},
+      config             = {
+         scandioHtmlClass: <span class="string">'scandio-js'</span>,
+         scandioBridgeClass: <span class="string">'scandio-js--bridge'</span>
+      },
+      injectDOM          = <span class="literal">true</span>,
+      $scandioEl         = <span class="literal">null</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Previous version for <code>Scandio.noConflict</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      previousScandio    = root.Scandio,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Breaker for loop iteration</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      breaker            = {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Set of shorthand to object protos</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
+      location           = window.location,
+      events             = jQuery(<span class="string">'&lt;a&gt;'</span>),
+      modules            = {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Console methods to be caught when not defined in browser (IE I hear you)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      consoleMethods     = [<span class="string">'assert'</span>, <span class="string">'clear'</span>, <span class="string">'count'</span>, <span class="string">'dir'</span>, <span class="string">'dirxml'</span>,
+                          <span class="string">'exception'</span>, <span class="string">'group'</span>, <span class="string">'groupCollapsed'</span>, <span class="string">'groupEnd'</span>,
+                          <span class="string">'markTimeline'</span>, <span class="string">'profile'</span>, <span class="string">'profileEnd'</span>, <span class="string">'table'</span>, <span class="string">'time'</span>, <span class="string">'timeEnd'</span>,
+                          <span class="string">'timeStamp'</span>, <span class="string">'trace'</span>],</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Log methods to be caught and routed to <code>Scandio.debug</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      logMethods         = [<span class="string">'error'</span>, <span class="string">'warn'</span>, <span class="string">'info'</span>, <span class="string">'debug'</span>, <span class="string">'log'</span>],</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Url hooks enabling e.g. DOM-logging</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      urlHooks           = {
+         domLogging:    <span class="string">'scandiojs--log-dom'</span>
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>All the important native methods shorthanded and used if defined in e.g. <code>Scandio.each</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      push               = ArrayProto.push,
+      slice              = ArrayProto.slice,
+      concat             = ArrayProto.concat,
+      toString           = ObjProto.toString,
+      hasOwnProperty     = ObjProto.hasOwnProperty,
+      nativeForEach      = ArrayProto.forEach,
+      nativeMap          = ArrayProto.map,
+      nativeReduce       = ArrayProto.reduce,
+      nativeReduceRight  = ArrayProto.reduceRight,
+      nativeFilter       = ArrayProto.filter,
+      nativeEvery        = ArrayProto.every,
+      nativeSome         = ArrayProto.some,
+      nativeIndexOf      = ArrayProto.indexOf,
+      nativeLastIndexOf  = ArrayProto.lastIndexOf,
+      nativeIsArray      = Array.isArray,
+      nativeKeys         = Object.keys,
+      nativeBind         = FuncProto.bind,
+      nativeTrim         = String.prototype.trim,
+      nativeTrimRight    = String.prototype.trimRight,
+      nativeTrimLeft     = String.prototype.trimLeft,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Defining one self</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>If already instance return</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Scandio) { <span class="keyword">return</span> obj; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Otherwise creates new instance</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Scandio)) { <span class="keyword">return</span> <span class="keyword">new</span> Scandio(obj); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>for chaining</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">this</span>._wrapped = obj;
+   },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Catches all possible console calls if they are undefined</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   _catchConsole = <span class="keyword">function</span>() {
+      <span class="keyword">var</span>
+         method,
+         noop     = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>},
+         methods  = logMethods.concat(consoleMethods),
+         length   = methods.length,
+         console  = ( window.console = window.console || {} );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Loop over all methods (log and console)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">while</span> (length--) {
+            method = methods[length];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Bind a noop to call if not defined</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (!console[method]) { console[method] = noop; }
+         }
+   },
+
+   _injectDom = <span class="keyword">function</span>() {
+      jQuery(<span class="keyword">function</span>() {
+         <span class="keyword">var</span>
+            script   = <span class="literal">null</span>;
+
+         <span class="keyword">if</span> ( injectDOM &amp;&amp; jQuery(config.scandioHtmlClass).length === <span class="number">0</span> ) {
+            $scandioEl = jQuery(<span class="string">'&lt;div/&gt;'</span>, {
+                class: config.scandioHtmlClass
+            }).appendTo(<span class="string">'body'</span>);
+         }
+
+         <span class="keyword">if</span> (injectDOM) {
+            script            = document.createElement(<span class="string">"script"</span>);
+            script.type       = <span class="string">"application/x-json"</span>;
+            script.id         = config.scandioBridgeClass;
+
+            document.head.appendChild(script);
+         }
+      });
+   },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Any call to subordinate initialization function goes here
+<em>Note:</em> We&#39;re in pre-creation state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   _initialize = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>As the adove catching of console calls</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      _catchConsole();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Inject scandio elements into DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      _injectDom();
+   };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Intialize</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   _initialize();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Create yerself</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   root.Scandio = Scandio;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Version of our library</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.VERSION   = <span class="string">'0.1.0'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h2>DOM module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>Register dom namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+Scandio.dom = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Closes and secures a cache module with within its own scope
+<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>(jQuery, Scandio){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Sets up local cache store</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      cache = {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Handler of DOMNodeRemoved handling external node removals
+Sorry, I didn&#39;t hack this</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      nodeRemoved = <span class="keyword">function</span>(event) {
+         <span class="keyword">var</span> label, coll, l, t = event.target;
+         <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
+            l = (coll = cache[label]).length;
+            <span class="keyword">while</span> (l--) {
+               <span class="keyword">if</span> (coll[l] === t || jQuery.contains(t,coll[l])) {
+                  <span class="keyword">delete</span> coll[l]; --coll.length;
+               }
+            }
+         }
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Updates complete cache or scoped to a label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      update = <span class="keyword">function</span>(label) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Passed in label is string, scoping to that label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isString(label)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Reset cache value at label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span>(cache[label] !== <span class="literal">undefined</span>) {
+               cache[label] = jQuery(cache[label].selector || <span class="string">''</span>);
+            }
+         } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>For each value in cache refresh it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            Scandio.util.each(cache, <span class="keyword">function</span>($cached, label) {
+               cache[label] = jQuery($cached.selector);
+            });
+         }
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Gets a value from cache or loads it from DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      get = <span class="keyword">function</span>(label, selector) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Both label and selector passed, cache/dom reading…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isString(selector) &amp;&amp; Scandio.isString(label)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>…either from cache or DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || jQuery(selector);
+         }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>What the callee gets: a jQuery object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> cache[label];
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Bind to node removal in DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   jQuery(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Return public functions in object literal</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+      get: get,
+      update: update
+   };
+}(jQuery, Scandio));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <h2>String module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <p>Register string namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>Capitalizes a given string (scandio becomes Scandio etc.)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.capitalize = <span class="keyword">function</span>(string) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <p>First char gets upppercased every other char lowercased</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> string.charAt(<span class="number">0</span>).toUpperCase() + string.substring(<span class="number">1</span>).toLowerCase();
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <p>Lowercases a given string (ScanDiO becomes scandio)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.lower = <span class="keyword">function</span>(string) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <p>Just everything to lowercase</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> string.toLowerCase();
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <p>Cleans up the mess of a string (‘  Scandio    GmbH   ’ becomes ‘Scandio GmbH’)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.clean = <span class="keyword">function</span>(string) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <p>Trims the mess (whitespace default) and replaces consecutive (s+) whitespaces within with one whitespace</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> Scandio.string.trim(string).replace(<span class="regexp">/\s+/g</span>, <span class="string">' '</span>);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-52">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-52">&#182;</a>
+              </div>
+              <p>Trims away the given characters around a given string (defaults to whitespace)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.trim = <span class="keyword">function</span>(string, characters){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-53">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-53">&#182;</a>
+              </div>
+              <p>Uses nativeTrim if defined and no characters are given (not supported by native impl.)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (!characters &amp;&amp; nativeTrim) {
+      <span class="keyword">return</span> nativeTrim.call(string);
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-54">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-54">&#182;</a>
+              </div>
+              <p>A RegExp starting at the beginning of the string, the string wrapped by the <code>characters</code>
+replacing them around the <code>string</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> String(string).replace(<span class="keyword">new</span> RegExp(<span class="string">'^'</span> + characters + <span class="string">'+|'</span> + characters + <span class="string">'+$'</span>, <span class="string">'g'</span>), <span class="string">''</span>);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-55">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-55">&#182;</a>
+              </div>
+              <p>Chops a string up <code>at</code> every position in the string <code>Scandio.string.chop(&#39;chopchop&#39;, 3) === &#39;cho pch op&#39;</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.chop = <span class="keyword">function</span>(string, at) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-56">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-56">&#182;</a>
+              </div>
+              <p>Better make a string out of the passed in ‘string’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   string = String(string);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
+              <p>Double NOT bitwise (sorta same as Math.floor())</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   at = ~~at;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <p>RegExp works like a UNIX expansion list, expanding around the whitespace from 1-to-at</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> at &gt; <span class="number">0</span> ? string.match(<span class="keyword">new</span> RegExp(<span class="string">'.{1,'</span> + at + <span class="string">'}'</span>, <span class="string">'g'</span>)) : [string];
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-59">&#182;</a>
+              </div>
+              <p>Finds a string within a string (fuzzy) e.g. <code>Scandio.string.contains(&#39;I&#39;veADream&#39;, &#39;Dream&#39;) === true</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.contains = <span class="keyword">function</span>(needle, haystack) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-60">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-60">&#182;</a>
+              </div>
+              <p>Don‘t do work if no needle passed (but we’ve found something right!)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (needle === <span class="string">''</span>) { <span class="keyword">return</span> <span class="literal">true</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-61">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-61">&#182;</a>
+              </div>
+              <p>Empty haystack should also lead to some chilling without having found something</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (haystack === <span class="literal">null</span> || haystack === <span class="literal">undefined</span>) { <span class="keyword">return</span> <span class="literal">false</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-62">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-62">&#182;</a>
+              </div>
+              <p>Do the old trick of using <code>indexOf</code> of the haystack with the needle</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> String(haystack).indexOf(needle) !== -<span class="number">1</span>;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-63">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-63">&#182;</a>
+              </div>
+              <p>Checks if string starts with a given string</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.starts = <span class="keyword">function</span>(string, what) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-64">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-64">&#182;</a>
+              </div>
+              <p>Wrap the passed in arguments in a String object for sanity</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   string   = String(string);
+   what     = String(what);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-65">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-65">&#182;</a>
+              </div>
+              <p>If the string is longer, equally long than the one it‘s supposed to start with
+and if its slice from 0 to the starting string’s length is the starting string</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> string.length &gt;= what.length &amp;&amp; string.slice(<span class="number">0</span>, what.length) === what;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-66">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-66">&#182;</a>
+              </div>
+              <p>Checks if string ends with a given string</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.ends = <span class="keyword">function</span>(string, what) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-67">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-67">&#182;</a>
+              </div>
+              <p>Wrap the passed in arguments in a String object for sanity</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   string   = String(string),
+   what     = String(what);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-68">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-68">&#182;</a>
+              </div>
+              <p>If the string is longer, equally long than the one it&#39;s supposed to end with
+and if its slice from the end to the length of its suppoed ending is equals to its ending</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> string.length &gt;= what.length &amp;&amp; string.slice(string.length - what.length) === what;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-69">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-69">&#182;</a>
+              </div>
+              <p>Implodes/joins a string with a given glue</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.implode = <span class="keyword">function</span>(glue, pieces) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-70">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-70">&#182;</a>
+              </div>
+              <p>Defaults the glue to empty string</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (glue === <span class="literal">null</span> || glue === <span class="literal">undefined</span>) { glue = <span class="string">''</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-71">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-71">&#182;</a>
+              </div>
+              <p>Pipes call through join on pieces</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> pieces.join(glue);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-72">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-72">&#182;</a>
+              </div>
+              <p>Explodes/splits a string with by given delimiter</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.explode = <span class="keyword">function</span>(string, delimiter) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-73">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-73">&#182;</a>
+              </div>
+              <p>Wrap the passed in argument in a String object for sanity</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   delimiter   = String(delimiter),
+   string      = String(string);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-74">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-74">&#182;</a>
+              </div>
+              <p>Pipes passed in arguments through <code>split</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> string.split(delimiter);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-75">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-75">&#182;</a>
+              </div>
+              <p>Replaces a substring within a string
+E.g. <code>Scandio.string.replace(&#39;Scandio Gm&#39;, &#39;Gm&#39;, &#39;GmbH&#39;)</code> will return ‘Scandio GmbH’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.string.replace = <span class="keyword">function</span>(string, subString, replacer) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-76">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-76">&#182;</a>
+              </div>
+              <p>Wrap the passed in argument in a String object for sanity</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   string      = String(string);
+   subString   = String(subString);
+   replacer    = String(replacer);
+
+   <span class="keyword">var</span>
+      regExp   = <span class="keyword">new</span> RegExp( subString.toLowerCase(), <span class="string">"gi"</span> );
+
+   <span class="keyword">return</span> string.replace(regExp, replacer);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-77">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-77">&#182;</a>
+              </div>
+              <h2>Debug/logging module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-78">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-78">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-79">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-79">&#182;</a>
+              </div>
+              <p>Sets up logger object with level and log-history</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.logger = {
+   level: <span class="number">5</span>,
+   logs: {},
+   logDom: <span class="literal">false</span>
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-80">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-80">&#182;</a>
+              </div>
+              <p>Define default logger callback if no custom callback defined</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.logger.logDomFn = Scandio.logger.logDomFn || (<span class="keyword">function</span>() {
+   <span class="keyword">return</span> Scandio.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) &gt; -<span class="number">1</span>);
+}());
+
+Scandio.debug = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-81">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-81">&#182;</a>
+              </div>
+              <p><code>Scandio.debug</code> will get a set of methods (<em>see return-statement</em>)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.debug = (<span class="keyword">function</span>() {
+   <span class="keyword">var</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-82">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-82">&#182;</a>
+              </div>
+              <p>Shorthands, DOM-element mappings and caching variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      console              = window.console,
+      length               = logMethods.length,
+      methods              = {},
+      logOuterWrapperPath  = <span class="string">'scandio-log'</span>,
+      logElType            = <span class="string">'&lt;div /&gt;'</span>,
+      $loggerEl            = <span class="literal">null</span>,
+      alertEls = {
+         debug:   <span class="string">'info'</span>,
+         error:   <span class="string">'danger'</span>,
+         info:    <span class="string">'info'</span>,
+         log:     <span class="string">'success'</span>,
+         warn:    <span class="string">'warning'</span>
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-83">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-83">&#182;</a>
+              </div>
+              <p>Pretty prints a log message stringifying objects and arrays as JSON</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      logMessage           = <span class="keyword">function</span>(args) {
+         <span class="keyword">var</span>
+            response    = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-84">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-84">&#182;</a>
+              </div>
+              <p>Each arguement processed separately</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.util.each(args, <span class="keyword">function</span>(arg) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-85">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-85">&#182;</a>
+              </div>
+              <p>If it is an object || array stringify its value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (Scandio.isObject(arg) || Scandio.isArray(arg) ) ) {
+               response.push( Scandio.json.to(arg) );
+            } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-86">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-86">&#182;</a>
+              </div>
+              <p>otherwise toString it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               response.push(arg);
+            }
+         });
+
+         <span class="keyword">return</span> response.join(<span class="string">' ,'</span>);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-87">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-87">&#182;</a>
+              </div>
+              <p>Closes the scope for <code>method and level</code>
+<em>Note:</em> Due to js and its state-maintainance for closures
+the last passed argument would otherwise win</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      createLogger = <span class="function"><span class="keyword">function</span> <span class="params">(method, level)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-88">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-88">&#182;</a>
+              </div>
+              <p>DOM-Element names and cache variable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">var</span>
+            logElWrapperPath     = logOuterWrapperPath + <span class="string">'--'</span> + method,
+            logElInnerPath       = <span class="string">'alert alert-'</span> + alertEls[method] || method,
+            logElIdentifier      = <span class="string">'.'</span> + Scandio.string.replace(logElInnerPath, <span class="string">' '</span>, <span class="string">'.'</span>),
+            $logEl               = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-89">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-89">&#182;</a>
+              </div>
+              <p>Sets up history for the log-method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.logger.logs[method] = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-90">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-90">&#182;</a>
+              </div>
+              <p>Creates the logger-els only if logDomFn is truthy</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
+            jQuery(<span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-91">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-91">&#182;</a>
+              </div>
+              <p>Maintaines state and creates the logger els</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               $loggerEl.append(
+                  jQuery(logElType, {
+                     class: logElWrapperPath
+                  }).html(
+                     jQuery(logElType, {
+                        class: logElInnerPath
+                     })
+                  )
+               );
+
+               $logEl = jQuery(logElIdentifier);
+
+               Scandio.util.each(Scandio.logger.logs[method], <span class="keyword">function</span>(log) {
+                  $logEl.prepend(log + <span class="string">'&lt;hr /&gt;'</span>);
+               });
+            });
+         }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-92">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-92">&#182;</a>
+              </div>
+              <p>Registers function on DOM-Module for logging with method-name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.dom[method] = <span class="keyword">function</span>() {
+            <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-93">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-93">&#182;</a>
+              </div>
+              <p>Query DOM only if nessesary (cache)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = jQuery(logElIdentifier); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-94">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-94">&#182;</a>
+              </div>
+              <p>Only log to DOM if possible and wanted</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.prepend(logMessage(args) + <span class="string">'&lt;hr /&gt;'</span>); }
+         };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-95">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-95">&#182;</a>
+              </div>
+              <p>The return value&#39;s log-type gets a function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         methods[method] = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-96">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-96">&#182;</a>
+              </div>
+              <p>Lets get some arguments</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-97">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-97">&#182;</a>
+              </div>
+              <p>Only log to console if required by level</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.logger.level &gt; level) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-98">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-98">&#182;</a>
+              </div>
+              <p>Calls the native console method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               console[method].apply(console, args);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-99">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-99">&#182;</a>
+              </div>
+              <p>Logs to DOM (function itself decides if intended)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               Scandio.dom[method].apply(Scandio, args);
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-100">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-100">&#182;</a>
+              </div>
+              <p>but always push it to history</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            Scandio.logger.logs[method].push( logMessage(args) );
+         };
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-101">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-101">&#182;</a>
+              </div>
+              <p>Sets up the outer wrapper for DOM logging</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
+      jQuery(<span class="keyword">function</span>() {
+         $loggerEl = jQuery(logElType, {
+            class: logOuterWrapperPath
+         }).appendTo($scandioEl);
+      });
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-102">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-102">&#182;</a>
+              </div>
+              <p>For every console-method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">while</span>(length--) { createLogger(logMethods[length], length); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-103">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-103">&#182;</a>
+              </div>
+              <p>Now the <code>Scandio.debug</code>-object gets its functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> methods;
+})();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-104">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-104">&#182;</a>
+              </div>
+              <h2>Utility module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-105">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-105">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-106">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-106">&#182;</a>
+              </div>
+              <p>Register util namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-107">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-107">&#182;</a>
+              </div>
+              <p>Nothing too fancy: shorthand to <code>hasOwnProperty</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.has = <span class="keyword">function</span>(obj, key) {
+   <span class="keyword">return</span> hasOwnProperty.call(obj, key);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-108">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-108">&#182;</a>
+              </div>
+              <p>Iterates over an <code>object</code> with an <code>iterator</code> in an optional <code>context</code>
+Falls back to nativeForEach if supported by browser (on prototpye)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.each = Scandio.forEach = <span class="keyword">function</span>(obj, iterator, context) {
+   <span class="keyword">var</span>
+      key   = <span class="literal">null</span>,
+      i     = <span class="literal">null</span>,
+      l     = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-109">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-109">&#182;</a>
+              </div>
+              <p>Nothing to iterate, somewhat funny eh?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (obj === <span class="literal">null</span> || obj === <span class="literal">undefined</span>) { <span class="keyword">return</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-110">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-110">&#182;</a>
+              </div>
+              <p>Fall back to native foreach which is faster in newer browsers</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (nativeForEach &amp;&amp; obj.forEach === nativeForEach) {
+      obj.forEach(iterator, context);
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-111">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-111">&#182;</a>
+              </div>
+              <p>Passed <code>obj</code> has a length property, meaning its an array
+and an optimized for-loop can be used.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">else</span> <span class="keyword">if</span> (obj.length === +obj.length) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-112">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-112">&#182;</a>
+              </div>
+              <p>Iterate over length of <code>obj</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">for</span> (i = <span class="number">0</span>, l = obj.length; i &lt; l; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-113">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-113">&#182;</a>
+              </div>
+              <p>…call the <code>iterator</code>-function and return if its the breaker (done)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (iterator.call(context, obj[i], i, obj) === breaker) { <span class="keyword">return</span>; }
+      }
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-114">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-114">&#182;</a>
+              </div>
+              <p>Iterate over object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-115">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-115">&#182;</a>
+              </div>
+              <p>For each key in obj</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">for</span> (key <span class="keyword">in</span> obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-116">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-116">&#182;</a>
+              </div>
+              <p>Only if it hasOwnProperty</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.util.has(obj, key)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-117">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-117">&#182;</a>
+              </div>
+              <p>…call the <code>iterator</code>-function and return if its the breaker (done)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (iterator.call(context, obj[key], key, obj) === breaker) { <span class="keyword">return</span>; }
+         }
+      }
+   }
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-118">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-118">&#182;</a>
+              </div>
+              <p>Extends an object with all the arguments passed in other objects</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.extend = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-119">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-119">&#182;</a>
+              </div>
+              <p><code>obj</code> is destination <code>arguments</code>-2nd parater is source</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(slice.call(arguments, <span class="number">1</span>), <span class="keyword">function</span>(source) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-120">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-120">&#182;</a>
+              </div>
+              <p>Source is set</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (source) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-121">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-121">&#182;</a>
+              </div>
+              <p>For every property in source</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> source) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-122">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-122">&#182;</a>
+              </div>
+              <p>Set it on the object without checking prior existence</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            obj[prop] = source[prop];
+         }
+      }
+   });
+
+   <span class="keyword">return</span> obj;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-123">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-123">&#182;</a>
+              </div>
+              <p>Iterates over an <code>object</code> with an <code>iterator</code> in an optional <code>context</code>
+while results will only contain values if they pass the <code>iterator</code>-test</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.filter = <span class="keyword">function</span>(obj, iterator, context) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-124">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-124">&#182;</a>
+              </div>
+              <p>What will be returned</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> results = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-125">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-125">&#182;</a>
+              </div>
+              <p>Nothing to iterate</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (obj === <span class="literal">null</span> || obj === <span class="literal">undefined</span>) { <span class="keyword">return</span> results; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-126">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-126">&#182;</a>
+              </div>
+              <p>Fallback to native filter for performance reasons</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (nativeFilter &amp;&amp; obj.filter === nativeFilter)
+         { <span class="keyword">return</span> obj.filter(iterator, context); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-127">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-127">&#182;</a>
+              </div>
+              <p>Foreach <code>value</code> with <code>index</code> and the <code>context</code> being <code>list</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(obj, <span class="keyword">function</span>(value, index, list) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-128">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-128">&#182;</a>
+              </div>
+              <p>Push the value to <code>results</code> if test passes as specified in iterator</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span>(iterator.call(context, value, index, list)) {
+         results.push(value);
+      }
+   });
+
+   <span class="keyword">return</span> results;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-129">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-129">&#182;</a>
+              </div>
+              <p>Accesses an obj by dot-notation allowing a default/notFound value
+<em>E.g.:</em> Scandio.util.getByDots(“name.fullname”, {name: {fullname: ‘me’}}) returns me</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.getByDots = <span class="keyword">function</span>(dots, obj, notFound) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-130">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-130">&#182;</a>
+              </div>
+              <p>Setup path and destination variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      dest   = obj,
+      path   = dots.split(<span class="string">'.'</span>),
+      i      = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-131">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-131">&#182;</a>
+              </div>
+              <p>Dig into the <code>path</code> an question the <code>obj</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; path.length; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-132">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-132">&#182;</a>
+              </div>
+              <p>Found something on the <code>obj</code> and reset the destination</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> ( dest[path[i]] ) { dest = dest[path[i]]; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-133">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-133">&#182;</a>
+              </div>
+              <p>Nothing found…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">else</span> {
+         dest = <span class="literal">undefined</span>;
+         <span class="keyword">break</span>;
+      }
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-134">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-134">&#182;</a>
+              </div>
+              <p>Dest or notFound</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> dest || notFound;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-135">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-135">&#182;</a>
+              </div>
+              <p>Sets an obj by dot-notation
+<em>E.g.:</em> Scandio.util.setByDots(“name.firstname”, “doop”, {name: {fullname: ‘me’}}) returns me</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.setByDots = <span class="keyword">function</span>(dots, value, obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-136">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-136">&#182;</a>
+              </div>
+              <p>Split string by dots</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      path  = dots.split(<span class="string">"."</span>),
+      key   = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-137">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-137">&#182;</a>
+              </div>
+              <p>Moves in on the path</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">while</span> (path.length &gt; <span class="number">1</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-138">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-138">&#182;</a>
+              </div>
+              <p>Gets the latest key</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      key = path.shift();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-139">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-139">&#182;</a>
+              </div>
+              <p>Creates empty object if not found</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!Scandio.isObject(obj)) { obj = {}; }
+      <span class="keyword">if</span> (!(key <span class="keyword">in</span> obj)) { obj[key] = {}; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-140">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-140">&#182;</a>
+              </div>
+              <p>Sets the nesting to next deeper key</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      obj = obj[key];
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-141">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-141">&#182;</a>
+              </div>
+              <p>Returns the result of setting the value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> obj[ path[<span class="number">0</span>] ] = value;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-142">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-142">&#182;</a>
+              </div>
+              <p>Collects all function from an object and returns an array containing them
+<em>E.g.:</em> calling it with Scandio.util.functions({capitalize: function() {return}, greet: ‘hi’})
+would only return an array containing the <code>capitalize</code> function.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.functions = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-143">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-143">&#182;</a>
+              </div>
+              <p>Setup local variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      functions   = {},
+      key         = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-144">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-144">&#182;</a>
+              </div>
+              <p>For each key in object…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span> (key <span class="keyword">in</span> obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-145">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-145">&#182;</a>
+              </div>
+              <p>…check if it is a function and push it to result</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.isFunction(obj[key])) { functions[key] = obj[key]; }
+   }
+
+   <span class="keyword">return</span> functions;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-146">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-146">&#182;</a>
+              </div>
+              <p>Allows for extending Scandio. functionality by handing in an <code>namespace</code> and a object-literal
+containing the functions.
+<em>E.g.:</em> calling <code>Scandio.util.mixin(&#39;string&#39;, {capitalize: fn(string)})</code> makes the capitalize function
+available as in Scandio.string.capitalize(‘string’).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin = <span class="keyword">function</span>(namespace, obj) {
+   <span class="keyword">var</span>
+      destination = Scandio,
+      path        = namespace !== <span class="literal">null</span> ? namespace.split(<span class="string">"."</span>) : [],
+      atModule    = <span class="literal">null</span>,
+      i           = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-147">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-147">&#182;</a>
+              </div>
+              <p>Register the namespace if its not existent</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; path.length; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-148">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-148">&#182;</a>
+              </div>
+              <p>The current sub/module</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      atModule = path[i];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-149">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-149">&#182;</a>
+              </div>
+              <p>Namespace not registered yet</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!destination[ atModule ]) {
+         destination[ atModule ] = {};
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-150">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-150">&#182;</a>
+              </div>
+              <p>Sets the current pointer to module</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      destination = destination[ atModule ];
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-151">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-151">&#182;</a>
+              </div>
+              <p>For each function on the passed in <code>obj</code> by name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(Scandio.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-152">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-152">&#182;</a>
+              </div>
+              <p>Defines the function on the destination module</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      destination[name] = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-153">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-153">&#182;</a>
+              </div>
+              <p>Merge args with wrapped object (constructor new Scandio.(obj))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">var</span> args = <span class="keyword">this</span>._wrapped ? [<span class="keyword">this</span>._wrapped] : [];
+         push.apply(args, arguments);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-154">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-154">&#182;</a>
+              </div>
+              <p>The result of applying the function with Scandio. and its args</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> func.apply(Scandio, args);
+      };
+   });
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-155">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-155">&#182;</a>
+              </div>
+              <h2>Type checking module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-156">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-156">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-157">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-157">&#182;</a>
+              </div>
+              <p>This buils group of <code>is…</code>-typecheck functions
+For every type who&#39;s <code>toString</code> returns <code>[object […]]</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.each([<span class="string">'Array'</span>, <span class="string">'Arguments'</span>, <span class="string">'Function'</span>, <span class="string">'String'</span>, <span class="string">'Number'</span>, <span class="string">'Date'</span>, <span class="string">'RegExp'</span>], <span class="keyword">function</span>(name) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-158">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-158">&#182;</a>
+              </div>
+              <p>Create a function requiring an <code>object</code> as paramters</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio[<span class="string">'is'</span> + name] = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-159">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-159">&#182;</a>
+              </div>
+              <p>Returning a boolean indicating if its type is the name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> toString.call(obj) == <span class="string">'[object '</span> + name + <span class="string">']'</span>;
+   };
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-160">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-160">&#182;</a>
+              </div>
+              <p>Objects behave differently</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.isObject = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-161">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-161">&#182;</a>
+              </div>
+              <p>An new object with the <code>obj</code> should be equal to itself
+only if it is an object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> obj === Object(obj);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-162">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-162">&#182;</a>
+              </div>
+              <h2>JSON module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-163">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-163">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-164">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-164">&#182;</a>
+              </div>
+              <p>Sets up the json object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.json = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-165">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-165">&#182;</a>
+              </div>
+              <p>Used to encode an object to its json-string representation
+<em>Note:</em> falls back to native <code>JSON.stringify</code> if it is defined</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.json.to = Scandio.json.encode = <span class="keyword">function</span>(obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-166">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-166">&#182;</a>
+              </div>
+              <p>Falls back to native <code>JSON.stringify</code> if possible</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (<span class="string">"JSON"</span> <span class="keyword">in</span> window) { <span class="keyword">return</span> JSON.stringify(obj); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-167">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-167">&#182;</a>
+              </div>
+              <p>Type, internation and progress variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      t = <span class="keyword">typeof</span> (obj),
+      n = <span class="literal">null</span>,
+      v = <span class="literal">null</span>,
+      json = [],
+      arr = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-168">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-168">&#182;</a>
+              </div>
+              <p>No object at hand, toString the output</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (t != <span class="string">"object"</span> || obj === <span class="literal">null</span>) {
+      <span class="keyword">if</span> (t == <span class="string">"string"</span>) { obj = <span class="string">'"'</span> + obj + <span class="string">'"'</span>; }
+
+      <span class="keyword">return</span> String(obj);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-169">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-169">&#182;</a>
+              </div>
+              <p>Work the object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-170">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-170">&#182;</a>
+              </div>
+              <p>Typecheck if object is an array</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      arr = (obj &amp;&amp; obj.constructor == Array);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-171">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-171">&#182;</a>
+              </div>
+              <p>For each value in object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">for</span> (n <span class="keyword">in</span> obj) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-172">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-172">&#182;</a>
+              </div>
+              <p>Get its value and type</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         v = obj[n];
+         t = <span class="keyword">typeof</span>(v);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-173">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-173">&#182;</a>
+              </div>
+              <p>Check if it has the property</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (obj.hasOwnProperty(n)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-174">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-174">&#182;</a>
+              </div>
+              <p>Embeds strings into result</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (t == <span class="string">"string"</span>) {
+               v = <span class="string">'"'</span> + v + <span class="string">'"'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-175">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-175">&#182;</a>
+              </div>
+              <p>Recursive call to itself to work nested objects</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> <span class="keyword">if</span> (t == <span class="string">"object"</span> &amp;&amp; v !== <span class="literal">null</span>) {
+               v = Scandio.json.to(v);
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-176">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-176">&#182;</a>
+              </div>
+              <p>Push the processed output to result</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            json.push((arr ? <span class="string">""</span> : <span class="string">'"'</span> + n + <span class="string">'":'</span>) + String(v));
+         }
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-177">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-177">&#182;</a>
+              </div>
+              <p>Wraps it with curlies or square brackets</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> (arr ? <span class="string">"["</span> : <span class="string">"{"</span>) + String(json) + (arr ? <span class="string">"]"</span> : <span class="string">"}"</span>);
+   }
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-178">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-178">&#182;</a>
+              </div>
+              <p>Decodes an json-string into an object
+<em>Note:</em> Pipes through <code>jQuery.parseJSON</code> which basically
+does a simple RegEx-test and then returns <code>new Function(data)</code> instead of
+an <code>eval</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.json.from = Scandio.json.decode = <span class="keyword">function</span>(string) {
+   <span class="keyword">return</span> jQuery.parseJSON(string);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-179">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-179">&#182;</a>
+              </div>
+              <h2>Persistent bridge module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-180">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-180">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-181">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-181">&#182;</a>
+              </div>
+              <p>Register store namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.bridge = {};
+Scandio.bridge.identifier = config.scandioBridgeClass;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-182">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-182">&#182;</a>
+              </div>
+              <p>IFFE setting up the store and merging all n possible ‘script-tags’ into one</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.bridge.init = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-183">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-183">&#182;</a>
+              </div>
+              <p>Gets all scripts and sets up the cache for merging</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      scripts     = jQuery(<span class="string">'.'</span> + Scandio.bridge.identifier),
+      tempCache   = <span class="literal">null</span>,
+      mergeCache  = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-184">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-184">&#182;</a>
+              </div>
+              <p>The main script to be the merge-bucket</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script = jQuery(<span class="string">'head #'</span> + Scandio.bridge.identifier);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-185">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-185">&#182;</a>
+              </div>
+              <p>Respects actually used script-tag having data already</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   mergeCache = Scandio.bridge.script.text() !== <span class="string">""</span> &amp;&amp; Scandio.isObject(
+      tempCache = Scandio.json.from(
+         Scandio.bridge.script.text()
+      )
+   ) ? tempCache : mergeCache;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-186">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-186">&#182;</a>
+              </div>
+              <p>Collects each&#39;s script text and merges it into the <code>mergeCache</code> while
+removing it afterwards</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(scripts, <span class="keyword">function</span>(script) {
+      <span class="keyword">var</span> $script    = jQuery(script);
+
+      Scandio.util.extend(mergeCache, Scandio.json.from( $script.text() ));
+
+      $script.remove();
+   });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-187">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-187">&#182;</a>
+              </div>
+              <p>Updates the merged contents to the main-script</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script.text( Scandio.json.to(mergeCache) );
+
+   <span class="keyword">return</span> Scandio.bridge.script.length === <span class="number">1</span>;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-188">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-188">&#182;</a>
+              </div>
+              <p>Gets a value from the script-tag
+<em>E.g.:</em> <code>Scandio.bridge.get(&#39;firms.microsoft&#39;, false)</code> might return a company object-literal
+or false if it is not set</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.bridge.get = <span class="keyword">function</span>(dots, notFound) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-189">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-189">&#182;</a>
+              </div>
+              <p>Break early if DOM-injection is disabled</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (injectDOM === <span class="literal">false</span>) { Scandio.debug.warn(<span class="string">"DOM injection disabled globally, script-tag not present!"</span>); <span class="keyword">return</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-190">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-190">&#182;</a>
+              </div>
+              <p>Parses the data from the script (ran everytime to not run into update-read conflicts)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = Scandio.json.from( Scandio.bridge.script.text() );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-191">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-191">&#182;</a>
+              </div>
+              <p>Gets the demanded value by dot-notation</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> Scandio.util.getByDots(dots, storeData, notFound);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-192">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-192">&#182;</a>
+              </div>
+              <p>Sets a value on the script-tag
+*E.g.: <code>Scandio.bridge.set(&#39;firms.scandio, {name: &#39;Scandio GmbH&#39;})</code> will add the scandio literal to the firms
+object. It will overwrite an existing entry and fail if <code>firms</code> it not an object but a primitive type.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.bridge.set = <span class="keyword">function</span>(dots, value) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-193">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-193">&#182;</a>
+              </div>
+              <p>Break early if DOM-injection is disabled</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (injectDOM === <span class="literal">false</span>) { Scandio.debug.warn(<span class="string">"DOM injection disabled globally, script-tag not present!"</span>); <span class="keyword">return</span>; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-194">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-194">&#182;</a>
+              </div>
+              <p>Parses the data from the script (ran everytime to not run into update-read conflicts)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> storeData = Scandio.json.from( Scandio.bridge.script.text() );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-195">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-195">&#182;</a>
+              </div>
+              <p>Sets the value by dot-notation on the retrieved data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.setByDots(dots, value, storeData);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-196">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-196">&#182;</a>
+              </div>
+              <p>while setting it as strinfified JSON on the script-tag afterwards</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.bridge.script.text( Scandio.json.to(storeData) );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-197">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-197">&#182;</a>
+              </div>
+              <p>Returns the value so tmpl/views can pipe it through</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> value;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-198">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-198">&#182;</a>
+              </div>
+              <h2>Timining module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-199">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-199">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-200">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-200">&#182;</a>
+              </div>
+              <p>Register timinig namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.timing = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-201">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-201">&#182;</a>
+              </div>
+              <p>Puts the breaks on a function which may be called to often
+such as scrolling or resizing callbacks.
+The function will actually be called after <code>release</code>-milliseconds elapsed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.timing.breaks = <span class="keyword">function</span>(on, release) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-202">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-202">&#182;</a>
+              </div>
+              <p>Initialize the context, arg, timeout and previous local variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      context = <span class="literal">null</span>,
+      args = <span class="literal">null</span>,
+      result = <span class="literal">null</span>,
+      timeout = <span class="literal">null</span>,
+      previous = <span class="number">0</span>,
+      remaining = <span class="literal">null</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-203">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-203">&#182;</a>
+              </div>
+              <p>Wrapper to be called if <code>release</code> has not elapsed yet</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      toBeCalled = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-204">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-204">&#182;</a>
+              </div>
+              <p>Timestamp of call</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         previous = <span class="keyword">new</span> Date();
+         timeout = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-205">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-205">&#182;</a>
+              </div>
+              <p>Result being function on which brakes have been put</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         result = on.apply(context, args);
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-206">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-206">&#182;</a>
+              </div>
+              <p>Returning a function which returns the execution&#39;s result</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-207">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-207">&#182;</a>
+              </div>
+              <p>Where the function is in time</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> now = <span class="keyword">new</span> Date();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-208">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-208">&#182;</a>
+              </div>
+              <p>If a previous call hasnt been made its now</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!previous) {
+         previous = now;
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-209">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-209">&#182;</a>
+              </div>
+              <p>How much time remains until final execution of <code>on</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      remaining = release - (now - previous);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-210">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-210">&#182;</a>
+              </div>
+              <p>The function context and arguments</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      context = <span class="keyword">this</span>;
+      args = arguments;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-211">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-211">&#182;</a>
+              </div>
+              <p>Time has elapsed, <code>on</code> can be called</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-212">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-212">&#182;</a>
+              </div>
+              <p>Clears all state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         clearTimeout(timeout);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-213">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-213">&#182;</a>
+              </div>
+              <p>This will break it on next call</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         timeout = <span class="literal">null</span>;
+         previous = now;
+         result = on.apply(context, args);
+      } <span class="keyword">else</span> <span class="keyword">if</span> (!timeout) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-214">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-214">&#182;</a>
+              </div>
+              <p>Next execution round</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         timeout = setTimeout(toBeCalled, remaining);
+      }
+
+      <span class="keyword">return</span> result;
+   };
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-215">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-215">&#182;</a>
+              </div>
+              <p>Delays a function execution <code>ms</code> milliseconds.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.timing.delay = <span class="keyword">function</span>(fn, ms) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-216">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-216">&#182;</a>
+              </div>
+              <p>Arguments are anything after <code>fn</code> and <code>ms</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> args = slice.call(arguments, <span class="number">2</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-217">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-217">&#182;</a>
+              </div>
+              <p>Return the result of setTimeout</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> setTimeout(<span class="keyword">function</span>() {
+      <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, args);
+   }, ms);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-218">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-218">&#182;</a>
+              </div>
+              <h2>Ajax module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-219">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-219">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-220">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-220">&#182;</a>
+              </div>
+              <p>Register ajax namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.ajax = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-221">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-221">&#182;</a>
+              </div>
+              <p>Loads a in <code>requested</code> specified set of files from CDNs
+<strong>Example:</strong> <code>Scandio.ajax.libs({cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]})</code>
+will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;</code> right after the html&#39;s head-section.
+<strong>Callback</strong> function for each cdn should be defined on the Scandio.cdns-object below.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.libs = <span class="keyword">function</span>(requested) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-222">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-222">&#182;</a>
+              </div>
+              <p>Iterate over each cdn holding multiple libs</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(libs, cdn) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-223">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-223">&#182;</a>
+              </div>
+              <p>Check if the cdn has a callback otherwise trigger warn-message</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.isFunction( Scandio.ajax.cdns[cdn] )) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-224">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-224">&#182;</a>
+              </div>
+              <p>Invoke callback and…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.util.each(libs, <span class="keyword">function</span>(lib) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-225">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-225">&#182;</a>
+              </div>
+              <p>…load the library</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            Scandio.ajax.script(Scandio.ajax.cdns[cdn](lib.repository, lib.version, lib.file), lib.success || <span class="literal">undefined</span>);
+         });
+      } <span class="keyword">else</span> {
+         Scandio.debug.warn(<span class="string">'CDN: '</span> + cdn + <span class="string">' not defined in Scandio.ajax.cdns!'</span>);
+      }
+   });
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-226">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-226">&#182;</a>
+              </div>
+              <p>Object containing callback function per cdn invoked by requiring libs
+Every callback gets <code>repository, version and file</code> as parameters</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.cdns = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-227">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-227">&#182;</a>
+              </div>
+              <p>Callback for cdnjs called as in <code>Scandio.libs({cdnjss: [...]})</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="string">'cdnjs'</span> : <span class="keyword">function</span>(repository, version, file) {
+      <span class="keyword">return</span> <span class="string">"//cdnjs.cloudflare.com/ajax/libs/"</span>+repository+<span class="string">"/"</span>+version+<span class="string">"/"</span>+file;
+   }
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-228">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-228">&#182;</a>
+              </div>
+              <p>Loads a in <code>requested</code> specified set of files by folder
+<strong>Example:</strong> <code>Scandio.ajax.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
+will load alert and log from their respective folder.
+<em>Notes:</em> the extension is ommited and the path is relative to <code>window.location.origin</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.plugins = <span class="keyword">function</span>(requested) {
+   <span class="keyword">var</span>
+      url            = <span class="literal">null</span>,
+      resultUrls     = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-229">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-229">&#182;</a>
+              </div>
+              <p>Each <code>requested</code>set of scripts</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(scripts, folder) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-230">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-230">&#182;</a>
+              </div>
+              <p>As script…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      Scandio.util.each(scripts, <span class="keyword">function</span>(script) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-231">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-231">&#182;</a>
+              </div>
+              <p>…and loading it by folder and script-name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         url = window.location.origin + <span class="string">'/'</span> + folder + script + <span class="string">'.js'</span>;
+
+         Scandio.ajax.script(url);
+
+         resultUrls.push(url);
+      });
+   });
+
+   <span class="keyword">return</span> resultUrls;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-232">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-232">&#182;</a>
+              </div>
+              <p>Loads a set of libs and plugin files based on a condition (the <code>when</code> key)
+<em>E.g.:</em> Calling Scandio.ajax.maybe({when: true, libs:…, plugins:…})
+The libs and plugins object literal should be used as in <code>Scandio.ajax.libs</code> and <code>Scandio.ajax.plugins</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.maybe = <span class="keyword">function</span>(requested) {
+   <span class="keyword">var</span>
+      url            = <span class="literal">null</span>,
+      resultUrls     = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-233">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-233">&#182;</a>
+              </div>
+              <p>Each <code>requested</code>set of scripts</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(request) {
+      <span class="keyword">if</span> (request.when) {
+         <span class="keyword">if</span> (Scandio.isObject( request.libs )) { Scandio.ajax.libs(request.libs); }
+         <span class="keyword">if</span> (Scandio.isObject( request.plugins )) { Scandio.ajax.plugins(request.plugins); }
+      }
+   });
+
+   <span class="keyword">return</span> resultUrls;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-234">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-234">&#182;</a>
+              </div>
+              <p>Helper function responsible for loading js-script-files
+Parameters are ´url´ as fully qualified url and an optional <code>success</code> callback</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.script = <span class="keyword">function</span>(url, success) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-235">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-235">&#182;</a>
+              </div>
+              <p>Create script element and set its type</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> script = document.createElement(<span class="string">"script"</span>);
+   script.type = <span class="string">"text/javascript"</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-236">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-236">&#182;</a>
+              </div>
+              <p>Bind to readyState or register ´onload´ callback</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (script.readyState) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-237">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-237">&#182;</a>
+              </div>
+              <p>Callback for IE&#39;s <code>onreadystatechange</code> (I feel seesick)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      script.onreadystatechange = <span class="keyword">function</span>(){
+         <span class="keyword">if</span> (script.readyState == <span class="string">"loaded"</span> || script.readyState == <span class="string">"complete"</span>) {
+            script.onreadystatechange = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-238">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-238">&#182;</a>
+              </div>
+              <p>Invoke callback if passed and type is function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.isFunction(success)) { success(); }
+         }
+      };
+   } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-239">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-239">&#182;</a>
+              </div>
+              <p>Bind <code>onload</code> callback on script element</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      script.onload = <span class="keyword">function</span>(){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-240">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-240">&#182;</a>
+              </div>
+              <p>Invoke callback if passed and type is function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isFunction(success)) { success(); }
+      };
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-241">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-241">&#182;</a>
+              </div>
+              <p>Set the url</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   script.src = url;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-242">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-242">&#182;</a>
+              </div>
+              <p>Append it to the head
+<em>Note:</em> Binding it to body not possible cause it may not be parsed if <code>Scandio.libs</code> is
+called in html&#39;s head-section</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   document.head.appendChild(script);
+
+   <span class="keyword">return</span> url;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-243">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-243">&#182;</a>
+              </div>
+              <h2>Core module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-244">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-244">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-245">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-245">&#182;</a>
+              </div>
+              <p>Closes and secures a module with namespace within its own scope
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.mod = Scandio.module = (<span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-246">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-246">&#182;</a>
+              </div>
+              <p>Setting up global environment object and DOM-ready state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      isDomReady  = <span class="literal">false</span>,
+      globEnv     = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-247">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-247">&#182;</a>
+              </div>
+              <p>Returns a function requiring <code>namespace, module and an module environment object</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>(namespace, module, modEnv) {
+      <span class="keyword">var</span>
+         typeError      = <span class="literal">null</span>,
+         invokedModule  = <span class="literal">null</span>;
+
+      namespace = Scandio.string.clean(
+         Scandio.string.lower(namespace)
+      );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-248">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-248">&#182;</a>
+              </div>
+              <p>Validates types of parameters in requiring <code>string, function and object</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!Scandio.isString(namespace) || !Scandio.isFunction(module) || (modEnv &amp;&amp; !Scandio.isObject(modEnv))) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-249">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-249">&#182;</a>
+              </div>
+              <p>Set up a crazy long eloquent error message and…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Parameter mismatch in Scandio.mod - please provide (1) namespace as'</span> +
+            <span class="string">'string and a (2) module as function. (3) an modEnv object may be given to'</span> +
+            <span class="string">'extend the default global environment'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-250">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-250">&#182;</a>
+              </div>
+              <p>… debug it as an error</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.debug.error(typeError);
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-251">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-251">&#182;</a>
+              </div>
+              <p>Module names need to be unique</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.util.getByDots(namespace, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-252">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-252">&#182;</a>
+              </div>
+              <p>Otherwise error will be triggered</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Error: there is already a module with namespace "'</span> + namespace + <span class="string">'".'</span>;
+
+         Scandio.debug.error(typeError);
+      }
+      <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-253">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-253">&#182;</a>
+              </div>
+              <p>Extend global with module environment where module takes preference</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         jQuery.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-254">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-254">&#182;</a>
+              </div>
+              <p>If module namespace is unique push it to internal state variable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, jQuery, globEnv, Scandio), modules);
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-255">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-255">&#182;</a>
+              </div>
+              <p><em>Convention:</em> if module environment has a function called <code>readyFn</code>
+it will be invoked on DOM-Ready</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
+         modEnv.readyFn(invokedModule.ready);
+      } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-256">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-256">&#182;</a>
+              </div>
+              <p>Otherwise the just load it on DOM-ready</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         jQuery(document).ready(invokedModule.ready);
+      }
+   };
+}());</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-257">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-257">&#182;</a>
+              </div>
+              <p>Returns a registered module by passing in a qualifier string (may be dot-notation)
+<em>Note:</em> Handing over a not fully qualifying string returns an object with hashes for submodules.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.modules = <span class="keyword">function</span>(namespace) {
+   namespace = Scandio.string.clean(
+      Scandio.string.lower(namespace)
+   );
+
+   <span class="keyword">return</span> Scandio.util.getByDots(namespace, modules, <span class="literal">false</span>);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-258">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-258">&#182;</a>
+              </div>
+              <p>Defers function execution based on condition and delay
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.wait = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-259">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-259">&#182;</a>
+              </div>
+              <p>Sets up the defered function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> waitFn = <span class="keyword">function</span>(params) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-260">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-260">&#182;</a>
+              </div>
+              <p>Reads all the allowed to be passed in</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-261">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-261">&#182;</a>
+              </div>
+              <p>When it all started</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         startTime      = <span class="keyword">new</span> Date().getTime(),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-262">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-262">&#182;</a>
+              </div>
+              <p>for how long the whole thing may take</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         duration       = params.duration || <span class="number">3000</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-263">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-263">&#182;</a>
+              </div>
+              <p>for how often we check the condition</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         interval       = params.interval || <span class="number">100</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-264">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-264">&#182;</a>
+              </div>
+              <p>the initial delay</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         initialDelay   = params.initialDelay || <span class="number">10</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-265">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-265">&#182;</a>
+              </div>
+              <p>a condition function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         condition      = params.condition || <span class="keyword">function</span>() {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-266">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-266">&#182;</a>
+              </div>
+              <p>object containing all the callbacks (done and fail)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         callbacks      = Scandio.util.extend({}, params.callbacks),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-267">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-267">&#182;</a>
+              </div>
+              <p>Runs one roundtrip of execution</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         execute = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-268">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-268">&#182;</a>
+              </div>
+              <p>Time flew by and duration for execution exceeded</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (<span class="keyword">new</span> Date().getTime() - startTime &gt; duration) {
+               <span class="keyword">if</span> (Scandio.isFunction(callbacks.fail)) { callbacks.fail(); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-269">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-269">&#182;</a>
+              </div>
+              <p>The condition passed and we&#39;re good</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> <span class="keyword">if</span> (condition()) {
+               <span class="keyword">if</span> (Scandio.isFunction(callbacks.done)) { callbacks.done(); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-270">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-270">&#182;</a>
+              </div>
+              <p>Defer execution again by interval</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> {
+               setTimeout(execute, interval);
+            }
+         };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-271">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-271">&#182;</a>
+              </div>
+              <p>Starts up intitial execution with delay</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      setTimeout(execute, initialDelay);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-272">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-272">&#182;</a>
+              </div>
+              <p>Outer <code>waitFn</code> returns its callbacks</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> {
+         done: <span class="keyword">function</span>(fn) {
+            callbacks.done = fn;
+         },
+         fail: <span class="keyword">function</span>(fn) {
+            callbacks.fail = fn;
+         }
+      };
+
+   };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-273">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-273">&#182;</a>
+              </div>
+              <p>Sets up global return only requiring condition</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   waitFn.until = <span class="keyword">function</span>(condition) {
+      waitFn({
+         condition: condition
+      });
+   };
+
+   <span class="keyword">return</span> waitFn;
+
+}());</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-274">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-274">&#182;</a>
+              </div>
+              <p>A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>(jQuery, Scandio) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-275">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-275">&#182;</a>
+              </div>
+              <p>The messenger/hub is just a plain jQuery object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      messenger = jQuery({}),</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-276">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-276">&#182;</a>
+              </div>
+              <p>Subscribing to messenger with namespace as in <em>Scandio.messenger.subscribe(‘foo.bar’, fn)</em>
+<em>Note:</em> First argument is event as in subscribe(‘foo’, fn(e, arg…))!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      subscribe = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-277">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-277">&#182;</a>
+              </div>
+              <p>Using $ as emitter allows namespaced events e.g. ‘foo.bar’ will trigger on ‘foo’ and ‘foo.bar’</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         messenger.on.apply(messenger, arguments);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-278">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-278">&#182;</a>
+              </div>
+              <p>Unsubscribes in same syntax as subscribing (namespaced)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      unsubscribe = <span class="keyword">function</span>() {
+         messenger.off.apply(messenger, arguments);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-279">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-279">&#182;</a>
+              </div>
+              <p>Triggers subscribed listener&#39;s function with arguements (1st is $-event)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      publish = <span class="keyword">function</span>() {
+         messenger.trigger.apply(messenger, arguments);
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-280">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-280">&#182;</a>
+              </div>
+              <p>Returns public functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+      subscribe: subscribe,
+      unsubscribe: unsubscribe,
+      publish: publish
+   };
+}(jQuery, Scandio)));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-281">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-281">&#182;</a>
+              </div>
+              <p>Shorthand for redirecting the browser to a new <code>url</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.redirect = <span class="keyword">function</span>(url) {
+   location.href = url;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-282">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-282">&#182;</a>
+              </div>
+              <h2>Conflucence module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-283">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-283">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-284">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-284">&#182;</a>
+              </div>
+              <p>Sets up confluence object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.confluence = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-285">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-285">&#182;</a>
+              </div>
+              <h2>Device detection module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-286">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-286">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-287">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-287">&#182;</a>
+              </div>
+              <p>Sets up device object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.device = {
+   mobile: [<span class="string">"android"</span>, <span class="string">"webos"</span>, <span class="string">"iphone"</span>, <span class="string">"ipad"</span>, <span class="string">"ipod"</span>, <span class="string">"blackberry"</span>],
+   desktop: [<span class="string">"macintosh"</span>, <span class="string">"win"</span>, <span class="string">"linux"</span>]
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-288">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-288">&#182;</a>
+              </div>
+              <p>A rudimentary function testing for mobile devices
+<em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.device.isMobile = <span class="keyword">function</span>() {
+   <span class="keyword">var</span>
+      regExp      = <span class="keyword">new</span> RegExp(Scandio.device.mobile.join(<span class="string">'|'</span>)),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-289">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-289">&#182;</a>
+              </div>
+              <p>Checks the navigator&#39;s user agent against the list of mobile devices</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-290">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-290">&#182;</a>
+              </div>
+              <p>A function testing for desktop devices</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.device.isDesktop = <span class="keyword">function</span>() {
+   <span class="keyword">var</span>
+      regExp      = <span class="keyword">new</span> RegExp(Scandio.device.desktop.join(<span class="string">'|'</span>)),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-291">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-291">&#182;</a>
+              </div>
+              <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-292">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-292">&#182;</a>
+              </div>
+              <p>A function testing for browser vendors</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.device.isBrowser = <span class="keyword">function</span>(vendor) {
+   <span class="keyword">var</span>
+      regExp      = <span class="keyword">new</span> RegExp(vendor.toLowerCase()),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-293">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-293">&#182;</a>
+              </div>
+              <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-294">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-294">&#182;</a>
+              </div>
+              <p>A function testing for browser vendors</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.device.isOs = <span class="keyword">function</span>(vendor) {
+   <span class="keyword">var</span>
+      regExp      = <span class="keyword">new</span> RegExp(vendor.toLowerCase()),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-295">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-295">&#182;</a>
+              </div>
+              <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
+};<span class="comment">// Eesponsive design module</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-296">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-296">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-297">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-297">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-298">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-298">&#182;</a>
+              </div>
+              <p>Sets up responsive object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.responsive = {
+   breakpointEl:     <span class="string">'.breakpoint'</span>
+};
+
+Scandio.responsive.breakpoint = <span class="keyword">function</span>(name) {
+   <span class="keyword">return</span> jQuery( Scandio.responsive.breakpointEl ).html() === name;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-299">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-299">&#182;</a>
+              </div>
+              <h2>Outro, AMD and conflict resolution</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-300">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-300">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-301">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-301">&#182;</a>
+              </div>
+              <p>Global DOM-Ready which shall be used whenever possible
+Logger does not use it cause it heavily relies on variable hoisting</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>jQuery(<span class="keyword">function</span>() {
+   Scandio.bridge.init();
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-302">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-302">&#182;</a>
+              </div>
+              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-303">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-303">&#182;</a>
+              </div>
+              <p>Retore the <code>previousScandio</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   root.Scandio = previousScandio;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-304">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-304">&#182;</a>
+              </div>
+              <p>Return yerself to continue</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">this</span>;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-305">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-305">&#182;</a>
+              </div>
+              <p>Support for AMD/RequireJS
+If define function deefined and its amd</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-306">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-306">&#182;</a>
+              </div>
+              <p>Define Scandio</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   define(<span class="string">'Scandio'</span>, <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-307">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-307">&#182;</a>
+              </div>
+              <p>and return the library</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> Scandio;
+   });
+}
+}(<span class="keyword">this</span>, jQuery, window, document, <span class="literal">undefined</span>));</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>timing.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>timing.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h2>Timining module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Register timinig namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.timing = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Puts the breaks on a function which may be called to often
+such as scrolling or resizing callbacks.
+The function will actually be called after <code>release</code>-milliseconds elapsed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.timing.breaks = <span class="keyword">function</span>(on, release) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Initialize the context, arg, timeout and previous local variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      context = <span class="literal">null</span>,
+      args = <span class="literal">null</span>,
+      result = <span class="literal">null</span>,
+      timeout = <span class="literal">null</span>,
+      previous = <span class="number">0</span>,
+      remaining = <span class="literal">null</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Wrapper to be called if <code>release</code> has not elapsed yet</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      toBeCalled = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Timestamp of call</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         previous = <span class="keyword">new</span> Date();
+         timeout = <span class="literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Result being function on which brakes have been put</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         result = on.apply(context, args);
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Returning a function which returns the execution&#39;s result</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Where the function is in time</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> now = <span class="keyword">new</span> Date();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>If a previous call hasnt been made its now</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!previous) {
+         previous = now;
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>How much time remains until final execution of <code>on</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      remaining = release - (now - previous);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>The function context and arguments</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      context = <span class="keyword">this</span>;
+      args = arguments;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Time has elapsed, <code>on</code> can be called</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Clears all state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         clearTimeout(timeout);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>This will break it on next call</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         timeout = <span class="literal">null</span>;
+         previous = now;
+         result = on.apply(context, args);
+      } <span class="keyword">else</span> <span class="keyword">if</span> (!timeout) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Next execution round</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         timeout = setTimeout(toBeCalled, remaining);
+      }
+
+      <span class="keyword">return</span> result;
+   };
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Delays a function execution <code>ms</code> milliseconds.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.timing.delay = <span class="keyword">function</span>(fn, ms) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Arguments are anything after <code>fn</code> and <code>ms</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> args = slice.call(arguments, <span class="number">2</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Return the result of setTimeout</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> setTimeout(<span class="keyword">function</span>() {
+      <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, args);
+   }, ms);
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
