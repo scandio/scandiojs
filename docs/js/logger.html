@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>logger.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>logger.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h2>Debug/logging module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Sets up logger object with level and log-history</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.logger = {
+   level: <span class="number">5</span>,
+   logs: {},
+   logDom: <span class="literal">false</span>
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Define default logger callback if no custom callback defined</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.logger.logDomFn = Scandio.logger.logDomFn || (<span class="keyword">function</span>() {
+   <span class="keyword">return</span> Scandio.logger.logDom || ( window.location.href.indexOf(urlHooks.domLogging) &gt; -<span class="number">1</span>);
+}());
+
+Scandio.debug = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p><code>Scandio.debug</code> will get a set of methods (<em>see return-statement</em>)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.debug = (<span class="keyword">function</span>() {
+   <span class="keyword">var</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Shorthands, DOM-element mappings and caching variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      console              = window.console,
+      length               = logMethods.length,
+      methods              = {},
+      logOuterWrapperPath  = <span class="string">'scandio-log'</span>,
+      logElType            = <span class="string">'&lt;div /&gt;'</span>,
+      $loggerEl            = <span class="literal">null</span>,
+      alertEls = {
+         debug:   <span class="string">'info'</span>,
+         error:   <span class="string">'danger'</span>,
+         info:    <span class="string">'info'</span>,
+         log:     <span class="string">'success'</span>,
+         warn:    <span class="string">'warning'</span>
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Pretty prints a log message stringifying objects and arrays as JSON</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      logMessage           = <span class="keyword">function</span>(args) {
+         <span class="keyword">var</span>
+            response    = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Each arguement processed separately</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.util.each(args, <span class="keyword">function</span>(arg) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>If it is an object || array stringify its value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ( (Scandio.isObject(arg) || Scandio.isArray(arg) ) ) {
+               response.push( Scandio.json.to(arg) );
+            } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>otherwise toString it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               response.push(arg);
+            }
+         });
+
+         <span class="keyword">return</span> response.join(<span class="string">' ,'</span>);
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Closes the scope for <code>method and level</code>
+<em>Note:</em> Due to js and its state-maintainance for closures
+the last passed argument would otherwise win</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      createLogger = <span class="function"><span class="keyword">function</span> <span class="params">(method, level)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>DOM-Element names and cache variable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">var</span>
+            logElWrapperPath     = logOuterWrapperPath + <span class="string">'--'</span> + method,
+            logElInnerPath       = <span class="string">'alert alert-'</span> + alertEls[method] || method,
+            logElIdentifier      = <span class="string">'.'</span> + Scandio.string.replace(logElInnerPath, <span class="string">' '</span>, <span class="string">'.'</span>),
+            $logEl               = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Sets up history for the log-method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.logger.logs[method] = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Creates the logger-els only if logDomFn is truthy</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
+            jQuery(<span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Maintaines state and creates the logger els</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               $loggerEl.append(
+                  jQuery(logElType, {
+                     class: logElWrapperPath
+                  }).html(
+                     jQuery(logElType, {
+                        class: logElInnerPath
+                     })
+                  )
+               );
+
+               $logEl = jQuery(logElIdentifier);
+
+               Scandio.util.each(Scandio.logger.logs[method], <span class="keyword">function</span>(log) {
+                  $logEl.prepend(log + <span class="string">'&lt;hr /&gt;'</span>);
+               });
+            });
+         }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Registers function on DOM-Module for logging with method-name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         Scandio.dom[method] = <span class="keyword">function</span>() {
+            <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Query DOM only if nessesary (cache)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = jQuery(logElIdentifier); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Only log to DOM if possible and wanted</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.logger.logDomFn &amp;&amp; $logEl.length &gt; <span class="number">0</span>) { $logEl.prepend(logMessage(args) + <span class="string">'&lt;hr /&gt;'</span>); }
+         };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>The return value&#39;s log-type gets a function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         methods[method] = <span class="keyword">function</span>() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Lets get some arguments</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> args = slice.call(arguments);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Only log to console if required by level</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.logger.level &gt; level) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Calls the native console method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               console[method].apply(console, args);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Logs to DOM (function itself decides if intended)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>               Scandio.dom[method].apply(Scandio, args);
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>but always push it to history</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            Scandio.logger.logs[method].push( logMessage(args) );
+         };
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Sets up the outer wrapper for DOM logging</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
+      jQuery(<span class="keyword">function</span>() {
+         $loggerEl = jQuery(logElType, {
+            class: logOuterWrapperPath
+         }).appendTo($scandioEl);
+      });
+   }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>For every console-method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">while</span>(length--) { createLogger(logMethods[length], length); }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Now the <code>Scandio.debug</code>-object gets its functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> methods;
+})();</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

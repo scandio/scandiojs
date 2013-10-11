@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>dom.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>dom.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h2>DOM module</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Register dom namespace on scandiojs object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+Scandio.dom = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Closes and secures a cache module with within its own scope
+<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>(jQuery, Scandio){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Sets up local cache store</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      cache = {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Handler of DOMNodeRemoved handling external node removals
+Sorry, I didn&#39;t hack this</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      nodeRemoved = <span class="keyword">function</span>(event) {
+         <span class="keyword">var</span> label, coll, l, t = event.target;
+         <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
+            l = (coll = cache[label]).length;
+            <span class="keyword">while</span> (l--) {
+               <span class="keyword">if</span> (coll[l] === t || jQuery.contains(t,coll[l])) {
+                  <span class="keyword">delete</span> coll[l]; --coll.length;
+               }
+            }
+         }
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Updates complete cache or scoped to a label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      update = <span class="keyword">function</span>(label) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Passed in label is string, scoping to that label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isString(label)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Reset cache value at label</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span>(cache[label] !== <span class="literal">undefined</span>) {
+               cache[label] = jQuery(cache[label].selector || <span class="string">''</span>);
+            }
+         } <span class="keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>For each value in cache refresh it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            Scandio.util.each(cache, <span class="keyword">function</span>($cached, label) {
+               cache[label] = jQuery($cached.selector);
+            });
+         }
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Gets a value from cache or loads it from DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      get = <span class="keyword">function</span>(label, selector) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Both label and selector passed, cache/dom reading…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isString(selector) &amp;&amp; Scandio.isString(label)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>…either from cache or DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || jQuery(selector);
+         }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>What the callee gets: a jQuery object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> cache[label];
+      };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Bind to node removal in DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   jQuery(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Return public functions in object literal</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+      get: get,
+      update: update
+   };
+}(jQuery, Scandio));</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
