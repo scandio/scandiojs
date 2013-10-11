@@ -7,7 +7,7 @@ Scandio.dom = {};
 
 // Closes and secures a cache module with within its own scope
 // *Note:* This function being an IIFE leaves of parameters on outer function
-Scandio.dom.cache = (function(jQuery, Scandio){
+Scandio.dom.cache = (function($, Scandio){
    // Sets up local cache store
    var
       cache = {},
@@ -19,7 +19,7 @@ Scandio.dom.cache = (function(jQuery, Scandio){
          for (label in cache) {
             l = (coll = cache[label]).length;
             while (l--) {
-               if (coll[l] === t || jQuery.contains(t,coll[l])) {
+               if (coll[l] === t || $.contains(t,coll[l])) {
                   delete coll[l]; --coll.length;
                }
             }
@@ -62,4 +62,4 @@ Scandio.dom.cache = (function(jQuery, Scandio){
       get: get,
       update: update
    };
-}(jQuery, Scandio));
+}($, Scandio));
