@@ -50,7 +50,7 @@ Scandio.mod = Scandio.module = (function() {
          modEnv.readyFn(invokedModule.ready);
       } else {
          // Otherwise the just load it on DOM-ready
-         jQuery(document).ready(invokedModule.ready);
+         $(document).ready(invokedModule.ready);
       }
    };
 }());
@@ -131,7 +131,7 @@ Scandio.wait = (function () {
 Scandio.util.mixin(null, (function(jQuery, Scandio) {
    // The messenger/hub is just a plain jQuery object
    var
-      messenger = jQuery({}),
+      messenger = $({}),
 
       // Subscribing to messenger with namespace as in *Scandio.messenger.subscribe('foo.bar', fn)*
       // *Note:* First argument is event as in subscribe('foo', fn(e, arg…))!

@@ -66,19 +66,19 @@ Scandio.debug = (function() {
 
          // Creates the logger-els only if logDomFn is truthy
          if (Scandio.logger.logDomFn === true) {
-            jQuery(function() {
+            $(function() {
                // Maintaines state and creates the logger els
                $loggerEl.append(
-                  jQuery(logElType, {
+                  $(logElType, {
                      'class': logElWrapperPath
                   }).html(
-                     jQuery(logElType, {
+                     $(logElType, {
                         'class': logElInnerPath
                      })
                   )
                );
 
-               $logEl = jQuery(logElIdentifier);
+               $logEl = $(logElIdentifier);
 
                Scandio.util.each(Scandio.logger.logs[method], function(log) {
                   $logEl.prepend(log + '<hr />');
@@ -91,7 +91,7 @@ Scandio.debug = (function() {
             var args = slice.call(arguments);
 
             // Query DOM only if nessesary (cache)
-            if ($logEl.length === 0) { $logEl = jQuery(logElIdentifier); }
+            if ($logEl.length === 0) { $logEl = $(logElIdentifier); }
 
             // Only log to DOM if possible and wanted
             if (Scandio.logger.logDomFn && $logEl.length > 0) { $logEl.prepend(logMessage(args) + '<hr />'); }
@@ -118,8 +118,8 @@ Scandio.debug = (function() {
 
    // Sets up the outer wrapper for DOM logging
    if (Scandio.logger.logDomFn === true) {
-      jQuery(function() {
-         $loggerEl = jQuery(logElType, {
+      $(function() {
+         $loggerEl = $(logElType, {
             'class': logOuterWrapperPath
          }).appendTo($scandioEl);
       });

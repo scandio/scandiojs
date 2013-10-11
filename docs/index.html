@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.1.2.html">
-                scandio-0.1.2.js
+              <a class="source" href="scandio-0.1.3.html">
+                scandio-0.1.3.js
               </a>
             
               
@@ -157,7 +157,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, jQuery, window, document, <span class="literal">undefined</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, $, window, document, <span class="literal">undefined</span>) {</pre></div></div>
             
         </li>
         
@@ -256,7 +256,7 @@
             
             <div class="content"><div class='highlight'><pre>      ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
       location           = window.location,
-      events             = jQuery(<span class="string">'&lt;a&gt;'</span>),
+      events             = $(<span class="string">'&lt;a&gt;'</span>),
       modules            = {},</pre></div></div>
             
         </li>
@@ -459,12 +459,12 @@
    },
 
    _injectDom = <span class="keyword">function</span>() {
-      jQuery(<span class="keyword">function</span>() {
+      $(<span class="keyword">function</span>() {
          <span class="keyword">var</span>
             script   = <span class="literal">null</span>;
 
-         <span class="keyword">if</span> ( injectDOM &amp;&amp; jQuery(config.scandioHtmlClass).length === <span class="number">0</span> ) {
-            $scandioEl = jQuery(<span class="string">'&lt;div/&gt;'</span>, {
+         <span class="keyword">if</span> ( injectDOM &amp;&amp; $(config.scandioHtmlClass).length === <span class="number">0</span> ) {
+            $scandioEl = $(<span class="string">'&lt;div/&gt;'</span>, {
                <span class="string">'class'</span>: config.scandioHtmlClass
             }).appendTo(<span class="string">'body'</span>);
          }

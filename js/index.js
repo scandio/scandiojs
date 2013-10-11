@@ -11,7 +11,7 @@
 
  // Setup the library
  // ---------------
- ;(function(root, jQuery, window, document, undefined) {
+ ;(function(root, $, window, document, undefined) {
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
@@ -34,7 +34,7 @@
       // Set of shorthand to object protos
       ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
       location           = window.location,
-      events             = jQuery('<a>'),
+      events             = $('<a>'),
       modules            = {},
       // Console methods to be caught when not defined in browser (IE I hear you)
       consoleMethods     = ['assert', 'clear', 'count', 'dir', 'dirxml',
@@ -100,12 +100,12 @@
    },
 
    _injectDom = function() {
-      jQuery(function() {
+      $(function() {
          var
             script   = null;
 
-         if ( injectDOM && jQuery(config.scandioHtmlClass).length === 0 ) {
-            $scandioEl = jQuery('<div/>', {
+         if ( injectDOM && $(config.scandioHtmlClass).length === 0 ) {
+            $scandioEl = $('<div/>', {
                'class': config.scandioHtmlClass
             }).appendTo('body');
          }
