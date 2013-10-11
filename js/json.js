@@ -56,5 +56,5 @@ Scandio.json.to = Scandio.json.encode = function(obj) {
 // does a simple RegEx-test and then returns `new Function(data)` instead of
 // an `eval`.
 Scandio.json.from = Scandio.json.decode = function(string) {
-   return jQuery.parseJSON(string);
+   return $.parseJSON(string);
 };
