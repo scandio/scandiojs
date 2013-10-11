@@ -3,17 +3,27 @@
 Third-party additions are essential for a project like this. *Scandiojs* is open for any changes and suggestions and will try to incorporate your own ideas.
 We only demand a few thing of you to get your code added to this library.
 
+## Branching model
+
+* Currently two main branches are used for development: `master` and `develop`
+   * `master` always containing a deployable version of scandiojs
+   * `develop` used to merge feature branches into
+* To fix or add a feature work in `develop` or branch of it with `git checkout feature/abc`
+   * The feature branch can then just be merged into `develop` with or without a `rebase`
+* When creating a new release version just increase the `package.version` in `develop` or `feature-abc`
+   * However, when merging into `master` please merge a non fast-forward (on master `git merge develop --no-ff`) to keep master clean of all your incremental commits
+
 ## Getting started to code
 
 * Make sure you have a [GitHub account](https://github.com/signup/free)
-* [Fork](https://github.com/scandio/scandiojs/fork) the repository on GitHub into your own account
-* Create a topic branch from where you want to base your work of.
-  * This is usually the master branch.
+* [Fork](https://github.com/scandio/scandiojs/fork) the repository on GitHub into your own account if your not an organization's member
+* Create a topic branch from where you want to base your work of
+  * This is usually the master branch
   * To quickly create a topic branch based on master: `git branch
     feature/my-addition master` then checkout the new branch with `git checkout feature/my-addition`
-* Make commits of logical units.
-* Check for unnecessary whitespace with `git diff --check` before committing.
-* Make sure your commit messages are in the proper format.
+* Make commits of logical units
+* Check for unnecessary whitespace with `git diff --check` before committing
+* Make sure your commit messages are in the proper format
 
 # Write your little module or addition
 
