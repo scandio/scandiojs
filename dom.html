@@ -151,7 +151,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>(jQuery, Scandio){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>($, Scandio){</pre></div></div>
             
         </li>
         
@@ -188,7 +188,7 @@ Sorry, I didn&#39;t hack this</p>
          <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
             l = (coll = cache[label]).length;
             <span class="keyword">while</span> (l--) {
-               <span class="keyword">if</span> (coll[l] === t || jQuery.contains(t,coll[l])) {
+               <span class="keyword">if</span> (coll[l] === t || $.contains(t,coll[l])) {
                   <span class="keyword">delete</span> coll[l]; --coll.length;
                }
             }
@@ -356,7 +356,7 @@ Sorry, I didn&#39;t hack this</p>
       get: get,
       update: update
    };
-}(jQuery, Scandio));</pre></div></div>
+}($, Scandio));</pre></div></div>
             
         </li>
         
