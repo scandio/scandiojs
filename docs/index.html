@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.1.0.html">
-                scandio-0.1.0.js
+              <a class="source" href="scandio-0.1.2.html">
+                scandio-0.1.2.js
               </a>
             
               
@@ -464,9 +464,7 @@
             script   = <span class="literal">null</span>;
 
          <span class="keyword">if</span> ( injectDOM &amp;&amp; jQuery(config.scandioHtmlClass).length === <span class="number">0</span> ) {
-            $scandioEl = jQuery(<span class="string">'&lt;div/&gt;'</span>, {
-                class: config.scandioHtmlClass
-            }).appendTo(<span class="string">'body'</span>);
+            $scandioEl = jQuery(<span class="string">'&lt;div class='</span> + config.scandioHtmlClass + <span class="string">'/&gt;'</span>).appendTo(<span class="string">'body'</span>);
          }
 
          <span class="keyword">if</span> (injectDOM) {
