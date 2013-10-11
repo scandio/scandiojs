@@ -105,7 +105,9 @@
             script   = null;
 
          if ( injectDOM && jQuery(config.scandioHtmlClass).length === 0 ) {
-            $scandioEl = jQuery('<div class=' + config.scandioHtmlClass + '/>').appendTo('body');
+            $scandioEl = jQuery('<div/>', {
+               'class': config.scandioHtmlClass
+            }).appendTo('body');
          }
 
          if (injectDOM) {

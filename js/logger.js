@@ -70,10 +70,10 @@ Scandio.debug = (function() {
                // Maintaines state and creates the logger els
                $loggerEl.append(
                   jQuery(logElType, {
-                     class: logElWrapperPath
+                     'class': logElWrapperPath
                   }).html(
                      jQuery(logElType, {
-                        class: logElInnerPath
+                        'class': logElInnerPath
                      })
                   )
                );
@@ -120,7 +120,7 @@ Scandio.debug = (function() {
    if (Scandio.logger.logDomFn === true) {
       jQuery(function() {
          $loggerEl = jQuery(logElType, {
-            class: logOuterWrapperPath
+            'class': logOuterWrapperPath
          }).appendTo($scandioEl);
       });
    }

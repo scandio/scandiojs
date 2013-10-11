@@ -464,7 +464,9 @@
             script   = <span class="literal">null</span>;
 
          <span class="keyword">if</span> ( injectDOM &amp;&amp; jQuery(config.scandioHtmlClass).length === <span class="number">0</span> ) {
-            $scandioEl = jQuery(<span class="string">'&lt;div class='</span> + config.scandioHtmlClass + <span class="string">'/&gt;'</span>).appendTo(<span class="string">'body'</span>);
+            $scandioEl = jQuery(<span class="string">'&lt;div/&gt;'</span>, {
+               <span class="string">'class'</span>: config.scandioHtmlClass
+            }).appendTo(<span class="string">'body'</span>);
          }
 
          <span class="keyword">if</span> (injectDOM) {

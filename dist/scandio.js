@@ -105,7 +105,9 @@
             script   = null;
 
          if ( injectDOM && jQuery(config.scandioHtmlClass).length === 0 ) {
-            $scandioEl = jQuery('<div class=' + config.scandioHtmlClass + '/>').appendTo('body');
+            $scandioEl = jQuery('<div/>', {
+               'class': config.scandioHtmlClass
+            }).appendTo('body');
          }
 
          if (injectDOM) {
@@ -386,10 +388,10 @@ Scandio.debug = (function() {
                // Maintaines state and creates the logger els
                $loggerEl.append(
                   jQuery(logElType, {
-                     class: logElWrapperPath
+                     'class': logElWrapperPath
                   }).html(
                      jQuery(logElType, {
-                        class: logElInnerPath
+                        'class': logElInnerPath
                      })
                   )
                );
@@ -436,7 +438,7 @@ Scandio.debug = (function() {
    if (Scandio.logger.logDomFn === true) {
       jQuery(function() {
          $loggerEl = jQuery(logElType, {
-            class: logOuterWrapperPath
+            'class': logOuterWrapperPath
          }).appendTo($scandioEl);
       });
    }
