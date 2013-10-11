@@ -1028,7 +1028,7 @@ Scandio.mod = Scandio.module = (function() {
          // Extend global with module environment where module takes preference
          jQuery.extend(true, globEnv, modEnv);
          // If module namespace is unique push it to internal state variable
-         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
+         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, jQuery, globEnv, Scandio), modules);
       }
 
       // *Convention:* if module environment has a function called `readyFn`
