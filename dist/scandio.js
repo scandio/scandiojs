@@ -147,7 +147,7 @@ Scandio.dom = {};
 
 // Closes and secures a cache module with within its own scope
 // *Note:* This function being an IIFE leaves of parameters on outer function
-Scandio.dom.cache = (function(jQuery, Scandio){
+Scandio.dom.cache = (function($, Scandio){
    // Sets up local cache store
    var
       cache = {},
@@ -159,7 +159,7 @@ Scandio.dom.cache = (function(jQuery, Scandio){
          for (label in cache) {
             l = (coll = cache[label]).length;
             while (l--) {
-               if (coll[l] === t || jQuery.contains(t,coll[l])) {
+               if (coll[l] === t || $.contains(t,coll[l])) {
                   delete coll[l]; --coll.length;
                }
             }
@@ -202,7 +202,7 @@ Scandio.dom.cache = (function(jQuery, Scandio){
       get: get,
       update: update
    };
-}(jQuery, Scandio));
+}($, Scandio));
 // String module
 // ---------------
 
@@ -721,7 +721,7 @@ Scandio.json.to = Scandio.json.encode = function(obj) {
 // does a simple RegEx-test and then returns `new Function(data)` instead of
 // an `eval`.
 Scandio.json.from = Scandio.json.decode = function(string) {
-   return jQuery.parseJSON(string);
+   return $.parseJSON(string);
 };
 // Persistent bridge module
 // ---------------
@@ -1026,9 +1026,9 @@ Scandio.mod = Scandio.module = (function() {
       }
       else {
          // Extend global with module environment where module takes preference
-         jQuery.extend(true, globEnv, modEnv);
+         $.extend(true, globEnv, modEnv);
          // If module namespace is unique push it to internal state variable
-         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, jQuery, globEnv, Scandio), modules);
+         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
       }
 
       // *Convention:* if module environment has a function called `readyFn`
@@ -1115,7 +1115,7 @@ Scandio.wait = (function () {
 
 // A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
 // *Note:* This function being an IIFE leaves off parameters on outer function
-Scandio.util.mixin(null, (function(jQuery, Scandio) {
+Scandio.util.mixin(null, (function($, Scandio) {
    // The messenger/hub is just a plain jQuery object
    var
       messenger = $({}),
@@ -1143,7 +1143,7 @@ Scandio.util.mixin(null, (function(jQuery, Scandio) {
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, Scandio)));
+}($, Scandio)));
 
 // Shorthand for redirecting the browser to a new `url`
 Scandio.redirect = function(url) {
