@@ -106,9 +106,7 @@
             head     = document.head || document.getElementsByTagName('head')[0];
 
          if ( injectDOM && $(config.scandioHtmlClass).length === 0 ) {
-            $scandioEl = $('<div/>', {
-               'class': config.scandioHtmlClass
-            }).appendTo('body');
+            $scandioEl = $('<div/>').addClass(config.scandioHtmlClass).appendTo('body');
          }
 
          if (injectDOM) {
