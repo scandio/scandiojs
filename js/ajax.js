@@ -81,7 +81,10 @@ Scandio.ajax.maybe = function(requested) {
 // Parameters are ´url´ as fully qualified url and an optional `success` callback
 Scandio.ajax.script = function(url, success) {
    // Create script element and set its type
-   var script = document.createElement("script");
+   var
+      script = document.createElement("script"),
+      head   = document.head || document.getElementsByTagName('head')[0];
+      
    script.type = "text/javascript";
 
    // Bind to readyState or register ´onload´ callback
@@ -109,7 +112,7 @@ Scandio.ajax.script = function(url, success) {
    // Append it to the head
    // *Note:* Binding it to body not possible cause it may not be parsed if `Scandio.libs` is
    // called in html's head-section
-   document.head.appendChild(script);
+   head.appendChild(script);
 
    return url;
 };

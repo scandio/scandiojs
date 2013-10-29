@@ -102,7 +102,8 @@
    _injectDom = function() {
       $(function() {
          var
-            script   = null;
+            script   = null,
+            head     = document.head || document.getElementsByTagName('head')[0];
 
          if ( injectDOM && $(config.scandioHtmlClass).length === 0 ) {
             $scandioEl = $('<div/>', {
@@ -115,7 +116,7 @@
             script.type       = "application/x-json";
             script.id         = config.scandioBridgeClass;
 
-            document.head.appendChild(script);
+            head.appendChild(script);
          }
       });
    },
