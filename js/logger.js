@@ -69,8 +69,17 @@ Scandio.debug = (function() {
             $(function() {
                // Maintaines state and creates the logger els
                $loggerEl.append(
+<<<<<<< HEAD
                   $(logElType).addClass(logElWrapperPath).html(
                      $(logElType).addClass(logElInnerPath)
+=======
+                  $(logElType, {
+                     "class": logElWrapperPath
+                  }).html(
+                     $(logElType, {
+                        "class": logElInnerPath
+                     })
+>>>>>>> 2b1791af66bdfd966dc4f27997ad672cd6fb7347
                   )
                );
 
