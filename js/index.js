@@ -107,7 +107,7 @@
 
          if ( injectDOM && $(config.scandioHtmlClass).length === 0 ) {
             $scandioEl = $('<div/>', {
-               'class': config.scandioHtmlClass
+               "class": config.scandioHtmlClass
             }).appendTo('body');
          }
 
