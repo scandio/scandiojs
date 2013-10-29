@@ -258,7 +258,7 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
-            jQuery(<span class="keyword">function</span>() {</pre></div></div>
+            $(<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -274,16 +274,16 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>               $loggerEl.append(
-                  jQuery(logElType, {
-                     class: logElWrapperPath
+                  $(logElType, {
+                     <span class="string">'class'</span>: logElWrapperPath
                   }).html(
-                     jQuery(logElType, {
-                        class: logElInnerPath
+                     $(logElType, {
+                        <span class="string">'class'</span>: logElInnerPath
                      })
                   )
                );
 
-               $logEl = jQuery(logElIdentifier);
+               $logEl = $(logElIdentifier);
 
                Scandio.util.each(Scandio.logger.logs[method], <span class="keyword">function</span>(log) {
                   $logEl.prepend(log + <span class="string">'&lt;hr /&gt;'</span>);
@@ -320,7 +320,7 @@ the last passed argument would otherwise win</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = jQuery(logElIdentifier); }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> ($logEl.length === <span class="number">0</span>) { $logEl = $(logElIdentifier); }</pre></div></div>
             
         </li>
         
@@ -445,9 +445,9 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
-      jQuery(<span class="keyword">function</span>() {
-         $loggerEl = jQuery(logElType, {
-            class: logOuterWrapperPath
+      $(<span class="keyword">function</span>() {
+         $loggerEl = $(logElType, {
+            <span class="string">'class'</span>: logOuterWrapperPath
          }).appendTo($scandioEl);
       });
    }</pre></div></div>

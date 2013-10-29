@@ -193,7 +193,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         jQuery.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         $.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
             
         </li>
         
@@ -208,7 +208,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, jQuery, globEnv, Scandio), modules);
+            <div class="content"><div class='highlight'><pre>         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
       }</pre></div></div>
             
         </li>
@@ -242,7 +242,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         jQuery(document).ready(invokedModule.ready);
+            <div class="content"><div class='highlight'><pre>         $(document).ready(invokedModule.ready);
       }
    };
 }());</pre></div></div>
@@ -546,7 +546,7 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>(jQuery, Scandio) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>($, Scandio) {</pre></div></div>
             
         </li>
         
@@ -562,7 +562,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      messenger = jQuery({}),</pre></div></div>
+      messenger = $({}),</pre></div></div>
             
         </li>
         
@@ -648,7 +648,7 @@ it will be invoked on DOM-Ready</p>
       unsubscribe: unsubscribe,
       publish: publish
    };
-}(jQuery, Scandio)));</pre></div></div>
+}($, Scandio)));</pre></div></div>
             
         </li>
         
