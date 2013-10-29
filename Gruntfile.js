@@ -142,7 +142,22 @@ module.exports = function( grunt ) {
                'dist/scandio.js'
             ],
             options: {
-               specs: 'test/specs/*.js',
+               specs: [
+                  "test/specs/index.js",
+                  "test/specs/dom.js",
+                  "test/specs/string.js",
+                  "test/specs/logger.js",
+                  "test/specs/util.js",
+                  "test/specs/is.js",
+                  "test/specs/json.js",
+                  "test/specs/timing.js",
+                  "test/specs/ajax.js",
+                  "test/specs/core.js",
+                  "test/specs/confluence.js",
+                  "test/specs/device.js",
+                  "test/specs/responsive.js",
+                  "test/specs/outro.js"
+               ],
                keepRunner : true,
                vendor: [
                   'libs/jquery/jquery.js',
