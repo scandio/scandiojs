@@ -117,7 +117,7 @@ Scandio.wait = (function () {
 
    // Sets up global return only requiring condition
    waitFn.until = function(condition) {
-      waitFn({
+      return waitFn({
          condition: condition
       });
    };
