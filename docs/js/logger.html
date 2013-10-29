@@ -274,12 +274,9 @@ the last passed argument would otherwise win</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>               $loggerEl.append(
-                  $(logElType, {
-                     <span class="string">'class'</span>: logElWrapperPath
-                  }).html(
-                     $(logElType, {
-                        <span class="string">'class'</span>: logElInnerPath
-                     })
+                  $(logElType).addClass(logElWrapperPath).html(
+                     $(logElType).addClass(logElInnerPath)
+
                   )
                );
 
@@ -446,9 +443,7 @@ the last passed argument would otherwise win</p>
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (Scandio.logger.logDomFn === <span class="literal">true</span>) {
       $(<span class="keyword">function</span>() {
-         $loggerEl = $(logElType, {
-            <span class="string">'class'</span>: logOuterWrapperPath
-         }).appendTo($scandioEl);
+         $loggerEl = $(logElType).addClass(logOuterWrapperPath).appendTo($scandioEl);
       });
    }</pre></div></div>
             

@@ -374,9 +374,7 @@
             head     = document.head || document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];
 
          <span class="keyword">if</span> ( injectDOM &amp;&amp; $(config.scandioHtmlClass).length === <span class="number">0</span> ) {
-            $scandioEl = $(<span class="string">'&lt;div/&gt;'</span>, {
-               <span class="string">'class'</span>: config.scandioHtmlClass
-            }).appendTo(<span class="string">'body'</span>);
+            $scandioEl = $(<span class="string">'&lt;div/&gt;'</span>).addClass(config.scandioHtmlClass).appendTo(<span class="string">'body'</span>);
          }
 
          <span class="keyword">if</span> (injectDOM) {
