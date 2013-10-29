@@ -66,7 +66,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, jQuery, window, document, <span class="literal">undefined</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre> ;(<span class="keyword">function</span>(root, $, window, document, <span class="literal">undefined</span>) {</pre></div></div>
             
         </li>
         
@@ -165,7 +165,7 @@
             
             <div class="content"><div class='highlight'><pre>      ArrayProto         = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype,
       location           = window.location,
-      events             = jQuery(<span class="string">'&lt;a&gt;'</span>),
+      events             = $(<span class="string">'&lt;a&gt;'</span>),
       modules            = {},</pre></div></div>
             
         </li>
@@ -368,13 +368,14 @@
    },
 
    _injectDom = <span class="keyword">function</span>() {
-      jQuery(<span class="keyword">function</span>() {
+      $(<span class="keyword">function</span>() {
          <span class="keyword">var</span>
-            script   = <span class="literal">null</span>;
+            script   = <span class="literal">null</span>,
+            head     = document.head || document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];
 
-         <span class="keyword">if</span> ( injectDOM &amp;&amp; jQuery(config.scandioHtmlClass).length === <span class="number">0</span> ) {
-            $scandioEl = jQuery(<span class="string">'&lt;div/&gt;'</span>, {
-                class: config.scandioHtmlClass
+         <span class="keyword">if</span> ( injectDOM &amp;&amp; $(config.scandioHtmlClass).length === <span class="number">0</span> ) {
+            $scandioEl = $(<span class="string">'&lt;div/&gt;'</span>, {
+               <span class="string">'class'</span>: config.scandioHtmlClass
             }).appendTo(<span class="string">'body'</span>);
          }
 
@@ -383,7 +384,7 @@
             script.type       = <span class="string">"application/x-json"</span>;
             script.id         = config.scandioBridgeClass;
 
-            document.head.appendChild(script);
+            head.appendChild(script);
          }
       });
    },</pre></div></div>

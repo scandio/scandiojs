@@ -323,7 +323,10 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> script = document.createElement(<span class="string">"script"</span>);
+            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
+      script = document.createElement(<span class="string">"script"</span>),
+      head   = document.head || document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];
+      
    script.type = <span class="string">"text/javascript"</span>;</pre></div></div>
             
         </li>
@@ -438,7 +441,7 @@ called in html&#39;s head-section</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   document.head.appendChild(script);
+            <div class="content"><div class='highlight'><pre>   head.appendChild(script);
 
    <span class="keyword">return</span> url;
 };</pre></div></div>
