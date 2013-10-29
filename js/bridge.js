@@ -71,3 +71,9 @@ Scandio.bridge.set = function(dots, value) {
    // Returns the value so tmpl/views can pipe it through
    return value;
 };
+
+// Global DOM-Ready which shall be used whenever possible
+// Logger does not use it cause it heavily relies on variable hoisting
+$(function() {
+   Scandio.bridge.init();
+});
