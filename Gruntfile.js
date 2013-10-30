@@ -166,5 +166,8 @@ module.exports = function( grunt ) {
 
    grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "testem"] );
    grunt.registerTask( "travis", ["jsonlint", "jshint", "jasmine"] );
-   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "docco"] );
+   grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy"] );
+   grunt.registerTask( "dist-docs", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "docco"] );
+   grunt.registerTask( "docs", ["docco"] );
+
 };
