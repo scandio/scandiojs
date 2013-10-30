@@ -324,6 +324,24 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
             
         </li>
         
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Global DOM-Ready which shall be used whenever possible
+Logger does not use it cause it heavily relies on variable hoisting</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
+   Scandio.bridge.init();
+});</pre></div></div>
+            
+        </li>
+        
     </ul>
   </div>
 </body>
