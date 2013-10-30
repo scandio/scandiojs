@@ -1,12 +1,6 @@
 // Outro, AMD and conflict resolution
 // ---------------
 
-// Global DOM-Ready which shall be used whenever possible
-// Logger does not use it cause it heavily relies on variable hoisting
-$(function() {
-   Scandio.bridge.init();
-});
-
 // Tries to resolve version conflicts by restoring the previously loaded version globally
 Scandio.noConflict = function() {
    // Retore the `previousScandio`
