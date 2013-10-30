@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.1.5.html">
-                scandio-0.1.5.js
+              <a class="source" href="scandio-0.1.6.html">
+                scandio-0.1.6.js
               </a>
             
               
@@ -400,6 +400,24 @@ object. It will overwrite an existing entry and fail if <code>firms</code> it no
             
             <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> value;
 };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Global DOM-Ready which shall be used whenever possible
+Logger does not use it cause it heavily relies on variable hoisting</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
+   Scandio.bridge.init();
+});</pre></div></div>
             
         </li>
         
