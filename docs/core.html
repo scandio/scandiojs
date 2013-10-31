@@ -602,7 +602,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   waitFn.until = <span class="keyword">function</span>(condition) {
-      waitFn({
+      <span class="keyword">return</span> waitFn({
          condition: condition
       });
    };

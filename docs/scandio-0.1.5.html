@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>scandio-0.1.6.js</title>
+  <title>scandio-0.1.5.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.1.6.html">
-                scandio-0.1.6.js
+              <a class="source" href="scandio-0.1.5.html">
+                scandio-0.1.5.js
               </a>
             
               
@@ -106,7 +106,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>scandio-0.1.6.js</h1>
+                  <h1>scandio-0.1.5.js</h1>
               </div>
           </li>
         
@@ -4172,7 +4172,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   waitFn.until = <span class="keyword">function</span>(condition) {
-      <span class="keyword">return</span> waitFn({
+      waitFn({
          condition: condition
       });
    };
@@ -4568,11 +4568,14 @@ Scandio.responsive.breakpoint = <span class="keyword">function</span>(name) {
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-269">&#182;</a>
               </div>
-              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
+              <p>Global DOM-Ready which shall be used whenever possible
+Logger does not use it cause it heavily relies on variable hoisting</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>$(<span class="keyword">function</span>() {
+   Scandio.bridge.init();
+});</pre></div></div>
             
         </li>
         
@@ -4583,11 +4586,11 @@ Scandio.responsive.breakpoint = <span class="keyword">function</span>(name) {
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-270">&#182;</a>
               </div>
-              <p>Retore the <code>previousScandio</code></p>
+              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   root.Scandio = previousScandio;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -4597,6 +4600,21 @@ Scandio.responsive.breakpoint = <span class="keyword">function</span>(name) {
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-271">&#182;</a>
+              </div>
+              <p>Retore the <code>previousScandio</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   root.Scandio = previousScandio;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-272">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-272">&#182;</a>
               </div>
               <p>Return yerself to continue</p>
 
@@ -4608,11 +4626,11 @@ Scandio.responsive.breakpoint = <span class="keyword">function</span>(name) {
         </li>
         
         
-        <li id="section-272">
+        <li id="section-273">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-272">&#182;</a>
+                <a class="pilcrow" href="#section-273">&#182;</a>
               </div>
               <p>Support for AMD/RequireJS
 If define function deefined and its amd</p>
@@ -4624,11 +4642,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-273">
+        <li id="section-274">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-273">&#182;</a>
+                <a class="pilcrow" href="#section-274">&#182;</a>
               </div>
               <p>Define Scandio</p>
 
@@ -4639,11 +4657,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-274">
+        <li id="section-275">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-274">&#182;</a>
+                <a class="pilcrow" href="#section-275">&#182;</a>
               </div>
               <p>and return the library</p>
 

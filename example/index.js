@@ -271,11 +271,3 @@ Scandio.debug.log("and ends with 'GmbH'? " + Scandio.string.ends("GmbH", "GmbH")
 // Implde and explode strings/arrays
 Scandio.debug.log("If you ever want to explode the company you get: " + Scandio.string.explode("Scandio GmbH", " "));
 Scandio.debug.log("but please put it together again, would you: " + Scandio.string.implode("", ["Sc", "an", "dio", " Gmb", "H"]));
-
-// Persist values in special script tag for later retrival (php-bridge)
-
-$(function() {
-   Scandio.bridge.set('firms.cool', 'Scandio GmbH');
-   Scandio.debug.log( Scandio.bridge.get('firms.cool', 'Not found') );
-   Scandio.debug.log( Scandio.bridge.get('firms.uncool', 'Not found') );
-});
