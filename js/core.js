@@ -6,8 +6,8 @@
 (function() {
 	
 	// Fix Array.prototype.indexOf for old browsers
-	if (!Array.prototype.indexOf) {
-		Array.prototype.indexOf = function(needle, fromIndex) {
+	if (!ArrayProto.indexOf) {
+		ArrayProto.indexOf = function(needle, fromIndex) {
 			return $.inArray(needle, this, fromIndex);
 		};
 	}
