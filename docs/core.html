@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.1.6.html">
-                scandio-0.1.6.js
+              <a class="source" href="scandio-0.1.8.html">
+                scandio-0.1.8.js
               </a>
             
               
@@ -31,6 +31,11 @@
               
               <a class="source" href="bridge.html">
                 bridge.js
+              </a>
+            
+              
+              <a class="source" href="compatibility.html">
+                compatibility.js
               </a>
             
               
@@ -602,7 +607,7 @@ it will be invoked on DOM-Ready</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>   waitFn.until = <span class="keyword">function</span>(condition) {
-      waitFn({
+      <span class="keyword">return</span> waitFn({
          condition: condition
       });
    };

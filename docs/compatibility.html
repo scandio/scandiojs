@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>confluence.js</title>
+  <title>compatibility.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -111,7 +111,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>confluence.js</h1>
+                  <h1>compatibility.js</h1>
               </div>
           </li>
         
@@ -123,7 +123,7 @@
               <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Conflucence module</h2>
+              <h2>Compatibility module</h2>
 
             </div>
             
@@ -136,11 +136,34 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Sets up confluence object</p>
+              <p>Backwards compatibility fixes for old browsers or old library versions</p>
+<p>Fix Array.prototype.indexOf for old browsers</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.confluence = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!ArrayProto.indexOf) {
+   ArrayProto.indexOf = <span class="keyword">function</span>(needle, fromIndex) {
+      <span class="keyword">return</span> $.inArray(needle, <span class="keyword">this</span>, fromIndex);
+   };
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>jQuery.fn.on was added in version 1.7. Its similar predecessor was &quot;bind&quot;.
+We delegate to &quot;bind&quot; in old jQuery versions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!$.fn.on) {
+   $.fn.on = $.fn.bind;
+}</pre></div></div>
             
         </li>
         
