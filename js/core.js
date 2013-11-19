@@ -2,19 +2,6 @@
 // ---------------
 
 
-// Browser compatibility fixes
-(function() {
-	
-	// Fix Array.prototype.indexOf for old browsers
-	if (!Array.prototype.indexOf) {
-		Array.prototype.indexOf = function(needle, fromIndex) {
-			return $.inArray(needle, this, fromIndex);
-		};
-	}
-	
-}());
-
-
 // Closes and secures a module with namespace within its own scope
 // *Note:* This function being an IIFE leaves off parameters on outer function
 Scandio.mod = Scandio.module = (function() {
