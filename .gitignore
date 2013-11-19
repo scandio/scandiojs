@@ -9,3 +9,4 @@
 *.sublime-workspace
 _SpecRunner.html
 /.grunt
+/.project
