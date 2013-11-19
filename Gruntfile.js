@@ -21,6 +21,7 @@ module.exports = function( grunt ) {
          },
          src: [
             "js/index.js",
+            "js/compatibility.js",
             "js/dom.js",
             "js/string.js",
             "js/logger.js",
