@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>is.js</title>
+  <title>compatibility.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -111,7 +111,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>is.js</h1>
+                  <h1>compatibility.js</h1>
               </div>
           </li>
         
@@ -123,7 +123,7 @@
               <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Type checking module</h2>
+              <h2>Compatibility module</h2>
 
             </div>
             
@@ -136,12 +136,16 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>This buils group of <code>is…</code>-typecheck functions
-For every type who&#39;s <code>toString</code> returns <code>[object […]]</code></p>
+              <p>Backwards compatibility fixes for old browsers or old library versions</p>
+<p>Fix Array.prototype.indexOf for old browsers</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.each([<span class="string">'Array'</span>, <span class="string">'Arguments'</span>, <span class="string">'Function'</span>, <span class="string">'String'</span>, <span class="string">'Number'</span>, <span class="string">'Date'</span>, <span class="string">'RegExp'</span>], <span class="keyword">function</span>(name) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!ArrayProto.indexOf) {
+   ArrayProto.indexOf = <span class="keyword">function</span>(needle, fromIndex) {
+      <span class="keyword">return</span> $.inArray(needle, <span class="keyword">this</span>, fromIndex);
+   };
+}</pre></div></div>
             
         </li>
         
@@ -152,60 +156,14 @@ For every type who&#39;s <code>toString</code> returns <code>[object […]]</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Create a function requiring an <code>object</code> as paramters</p>
+              <p>jQuery.fn.on was added in version 1.7. Its similar predecessor was &quot;bind&quot;.
+We delegate to &quot;bind&quot; in old jQuery versions.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio[<span class="string">'is'</span> + name] = <span class="keyword">function</span>(obj) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>Returning a boolean indicating if its type is the name</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> toString.call(obj) == <span class="string">'[object '</span> + name + <span class="string">']'</span>;
-   };
-});</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <p>Objects behave differently</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.isObject = <span class="keyword">function</span>(obj) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <p>An new object with the <code>obj</code> should be equal to itself
-only if it is an object</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> obj === Object(obj);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!$.fn.on) {
+   $.fn.on = $.fn.bind;
+}</pre></div></div>
             
         </li>
         
