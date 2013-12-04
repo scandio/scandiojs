@@ -1,5 +1,4 @@
 {
-   "indent": 3,
    "globals": {
       "define": true,
       "jQuery": true,
