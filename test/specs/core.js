@@ -45,4 +45,63 @@ describe("A suite testing the core module", function() {
          expect(callbacks.handler2).toHaveBeenCalled();
       });
    });
+
+   describe("tests on module definition", function() {
+      it("it should allow defining a root module", function() {
+         Scandio.module('scandio', function($) {
+            var
+               exposed = function() {
+                  return log();
+               },
+               log = function() {
+                  return true;
+               };
+
+            return {
+               log: exposed
+            }
+         });
+
+         expect(Scandio.modules('scandio')).toBeDefined();
+         expect(Scandio.modules('scandio').log()).toBe(true);
+      });
+
+      it("it should allow defining a nested module", function() {
+         Scandio.module('scandio.sub', function($) {
+            var
+               exposed = function() {
+                  return log();
+               },
+               log = function() {
+                  return true;
+               };
+
+            return {
+               log: exposed
+            }
+         });
+
+         expect(Scandio.modules('scandio.sub')).toBeDefined();
+         expect(Scandio.modules('scandio.sub').log()).toBe(true);
+      });
+
+      it("it should allow defining another nested module", function() {
+         Scandio.module('scandio.submore', function($) {
+            var
+               exposed = function() {
+                  return log();
+               },
+               log = function() {
+                  return true;
+               };
+
+            return {
+               log: exposed
+            }
+         });
+
+         expect(Scandio.modules('scandio.submore')).toBeDefined();
+         expect(Scandio.modules('scandio.submore').log()).toBe(true);
+      });
+   });
 });
