@@ -11,7 +11,7 @@
 
  // Setup the library
  // ---------------
- ;(function(root, $, window, document, undefined) {
+ ;(function(root, $, AJS, window, document, undefined) {
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 
@@ -1099,7 +1099,7 @@ Scandio.confluence = {};
 // ---------------
 
 Scandio.confluence.macro = (function() {
-   
+
    /**
     * Disable the macros defined as macroNames in the current Confluence editor.
     * If a function is given as second parameter, the macros are only disabled if
@@ -1110,7 +1110,7 @@ Scandio.confluence.macro = (function() {
     *    3) ['macroName1', 'macroName2', 'macroName3']
     */
    function disableMacro(macroNames, conditionFn) {
-      if (conditionFn && !conditionFn()) return;
+      if (conditionFn && !conditionFn()) { return; }
 
       var macroList = AJS.MacroBrowser.metadataList;
       if ($.type(macroNames) === 'string' && macroNames.indexOf(',') >= 0) {
@@ -1124,11 +1124,63 @@ Scandio.confluence.macro = (function() {
          });
       }
    }
-   
+
    return {
       disableMacro: disableMacro
    };
-   
+
+}());// Confluence label extensions
+// ---------------
+
+Scandio.confluence.labels = (function() {
+
+   /**
+    * @return {array} The labels of the current COE as array.
+    */
+   function getLabelsArray() {
+      return $('#labels-section .aui-label > a').map(function() {
+         return $(this).html();
+      }).get();
+   }
+
+   /**
+    * @return {string} The labels of the current COE as string, comma-separated.
+    */
+   function getLabelsString() {
+      var ret = "",
+          array = getLabelsArray();
+
+      if (array.length) {
+         ret = array.join(',');
+      }
+
+      return ret;
+   }
+
+   /**
+    * @param {string} label The label to be checked.
+    * @return {boolean} Flag indicating if the current COE has the given label.
+    */
+   function hasLabel(label) {
+      return $.inArray(label, getLabelsArray()) >= 0;
+   }
+
+   // This will be the interface on Scandio.confluence.labels
+   var interfaceObj = {
+      hasLabel: hasLabel,
+      getLabelsArray: getLabelsArray,
+      getLabelsString: getLabelsString
+   };
+
+   // We also want these methods to accessible on AJS.Labels
+   $.each(interfaceObj, function(key, value) {
+      if (!AJS.Labels[key]) {
+         AJS.Labels[key] = value;
+      }
+   });
+
+   return interfaceObj;
+
 }());// Device detection module
 // ---------------
 
@@ -1209,4 +1261,4 @@ if (typeof define === 'function' && define.amd) {
       return Scandio;
    });
 }
-}(this, jQuery, window, document, undefined));
+}(this, jQuery, AJS, window, document, undefined));

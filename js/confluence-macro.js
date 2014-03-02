@@ -2,7 +2,7 @@
 // ---------------
 
 Scandio.confluence.macro = (function() {
-   
+
    /**
     * Disable the macros defined as macroNames in the current Confluence editor.
     * If a function is given as second parameter, the macros are only disabled if
@@ -13,7 +13,7 @@ Scandio.confluence.macro = (function() {
     *    3) ['macroName1', 'macroName2', 'macroName3']
     */
    function disableMacro(macroNames, conditionFn) {
-      if (conditionFn && !conditionFn()) return;
+      if (conditionFn && !conditionFn()) { return; }
 
       var macroList = AJS.MacroBrowser.metadataList;
       if ($.type(macroNames) === 'string' && macroNames.indexOf(',') >= 0) {
@@ -27,9 +27,9 @@ Scandio.confluence.macro = (function() {
          });
       }
    }
-   
+
    return {
       disableMacro: disableMacro
    };
-   
+
 }());

@@ -3,6 +3,7 @@
    "src_files": [
       "libs/jquery/jquery.js",
       "libs/requirejs/require.js",
+      "test/mocks/AJS.js",
       "dist/scandio.js",
       "test/specs/index.js",
       "test/specs/dom.js",

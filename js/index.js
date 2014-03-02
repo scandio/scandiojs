@@ -11,7 +11,7 @@
 
  // Setup the library
  // ---------------
- ;(function(root, $, window, document, undefined) {
+ ;(function(root, $, AJS, window, document, undefined) {
   // We're strict and in strict-mode: no aruguements.callee and globally leaking vars etc
   "use strict";
 

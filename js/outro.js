@@ -19,4 +19,4 @@ if (typeof define === 'function' && define.amd) {
       return Scandio;
    });
 }
-}(this, jQuery, window, document, undefined));
+}(this, jQuery, AJS, window, document, undefined));
