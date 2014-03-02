@@ -16,13 +16,11 @@ Scandio.confluence.labels = (function() {
     * @return {string} The labels of the current COE as string, comma-separated.
     */
    function getLabelsString() {
-      var ret = "",
-          array = getLabelsArray();
-
+      var ret = "";
+      var array = getLabelsArray();
       if (array.length) {
          ret = array.join(',');
       }
-
       return ret;
    }
 
@@ -34,20 +32,10 @@ Scandio.confluence.labels = (function() {
       return $.inArray(label, getLabelsArray()) >= 0;
    }
 
-   // This will be the interface on Scandio.confluence.labels
-   var interfaceObj = {
+   return {
       hasLabel: hasLabel,
       getLabelsArray: getLabelsArray,
       getLabelsString: getLabelsString
    };
-
-   // We also want these methods to accessible on AJS.Labels
-   $.each(interfaceObj, function(key, value) {
-      if (!AJS.Labels[key]) {
-         AJS.Labels[key] = value;
-      }
-   });
-
-   return interfaceObj;
 
 }());
