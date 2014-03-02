@@ -1,3 +1,22 @@
 {
-  
+   "boss": true,
+   "curly": true,
+   "eqeqeq": false,
+   "eqnull": false,
+   "expr": true,
+   "immed": true,
+   "noarg": true,
+   "onevar": true,
+   "quotmark": "both",
+   "smarttabs": true,
+   "trailing": true,
+   "undef": true,
+   "unused": false,
+   "globals": {
+      "define": true,
+      "jQuery": true,
+      "$": true,
+      "alert": true
+   },
+   "node": true
 }
