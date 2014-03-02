@@ -15,6 +15,7 @@
       "test/specs/ajax.js",
       "test/specs/core.js",
       "test/specs/confluence.js",
+      "test/specs/confluence-macro.js",
       "test/specs/confluence-labels.js",
       "test/specs/device.js",
       "test/specs/responsive.js",

@@ -1,9 +1,6 @@
 // Confluence label extensions
 // ---------------
 
-//TEST
-Scandio = { confluence: {} };
-
 Scandio.confluence.labels = (function() {
    
    /**

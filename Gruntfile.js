@@ -33,6 +33,7 @@ module.exports = function( grunt ) {
             "js/core.js",
             "js/confluence.js",
             "js/confluence-macro.js",
+            "js/confluence-labels.js",
             "js/device.js",
             "js/responsive.js",
             "js/outro.js"

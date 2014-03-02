@@ -5,7 +5,7 @@ describe("A suite testing the confluence-labels module", function() {
       $(document.body).append('<div id="labels-section">');
       $('#labels-section').append('<ul class="label-list"></ul>');
       $.each(testLabels, function(index, value) {
-         $('.label-list').append('<li class="aui-label"<a href="#">'+ value +'</a></li>');
+         $('.label-list').append('<li class="aui-label"><a href="#">'+ value +'</a></li>');
       });
    });
    
