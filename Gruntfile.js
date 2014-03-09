@@ -163,9 +163,9 @@ module.exports = function( grunt ) {
                ],
                keepRunner : true,
                vendor: [
-                  'libs/jquery/jquery.js',
+                  'libs/jquery/dist/jquery.js',
                   'libs/requirejs/require.js',
-                  'test/mocks/AJS.js',
+                  'test/mocks/AJS.js'
                ]
             }
          }

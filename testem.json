@@ -1,7 +1,7 @@
 {
    "framework": "jasmine",
    "src_files": [
-      "libs/jquery/jquery.js",
+      "libs/jquery/dist/jquery.js",
       "libs/requirejs/require.js",
       "test/mocks/AJS.js",
       "dist/scandio.js",
