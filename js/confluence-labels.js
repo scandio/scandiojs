@@ -16,11 +16,13 @@ Scandio.confluence.labels = (function() {
     * @return {string} The labels of the current COE as string, comma-separated.
     */
    function getLabelsString() {
-      var ret = "";
-      var array = getLabelsArray();
+      var ret = "",
+          array = getLabelsArray();
+
       if (array.length) {
          ret = array.join(',');
       }
+
       return ret;
    }
 
