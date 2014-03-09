@@ -5,4 +5,6 @@
    AJS.Labels       = {};
 
    window.AJS = AJS;
+
+   return AJS;
 })();
