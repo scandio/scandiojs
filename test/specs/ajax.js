@@ -3,7 +3,7 @@ describe("A suite testing ajax functionality of scandio.js", function() {
    var temp = null;
 
    beforeEach(function() {
-      spyOn(Scandio.ajax, 'script').andCallThrough();
+      spyOn(Scandio.ajax, 'script').and.callThrough();
 
       temp = Scandio.ajax.script("//cdnjs.cloudflare.com/ajax/libs/bacon.js/0.6.8/Bacon.min.js");
    });
