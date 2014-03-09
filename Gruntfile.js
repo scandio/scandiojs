@@ -147,7 +147,7 @@ module.exports = function( grunt ) {
                specs: 'test/specs/*.js',
                keepRunner : true,
                vendor: [
-                  'libs/jquery/jquery.js',
+                  'libs/jquery/dist/jquery.js',
                   'libs/requirejs/require.js'
                ]
             }
