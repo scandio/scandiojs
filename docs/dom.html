@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>DOM module</h2>
+              <h2 id="dom-module">DOM module</h2>
 
             </div>
             
@@ -136,11 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Register dom namespace on scandiojs object</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.dom = {};</pre></div></div>
             
         </li>
         
@@ -151,12 +143,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Closes and secures a cache module with within its own scope
-<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
+              <p>Register dom namespace on scandiojs object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="keyword">function</span>($, Scandio){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+Scandio.dom = {};</pre></div></div>
             
         </li>
         
@@ -167,12 +159,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Sets up local cache store</p>
+              <p>Closes and secures a cache module with within its own scope
+<em>Note:</em> This function being an IIFE leaves of parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      cache = {},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.dom.cache = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($, Scandio)</span></span>{</pre></div></div>
             
         </li>
         
@@ -183,22 +175,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Handler of DOMNodeRemoved handling external node removals
-Sorry, I didn&#39;t hack this</p>
+              <p>Sets up local cache store</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      nodeRemoved = <span class="keyword">function</span>(event) {
-         <span class="keyword">var</span> label, coll, l, t = event.target;
-         <span class="keyword">for</span> (label <span class="keyword">in</span> cache) {
-            l = (coll = cache[label]).length;
-            <span class="keyword">while</span> (l--) {
-               <span class="keyword">if</span> (coll[l] === t || $.contains(t,coll[l])) {
-                  <span class="keyword">delete</span> coll[l]; --coll.length;
-               }
-            }
-         }
-      },</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      cache = {},</pre></div></div>
             
         </li>
         
@@ -209,11 +191,22 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Updates complete cache or scoped to a label</p>
+              <p>Handler of DOMNodeRemoved handling external node removals
+Sorry, I didn’t hack this</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      update = <span class="keyword">function</span>(label) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      nodeRemoved = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span> </span>{
+         <span class="hljs-keyword">var</span> label, coll, l, t = event.target;
+         <span class="hljs-keyword">for</span> (label <span class="hljs-keyword">in</span> cache) {
+            l = (coll = cache[label]).length;
+            <span class="hljs-keyword">while</span> (l--) {
+               <span class="hljs-keyword">if</span> (coll[l] === t || $.contains(t,coll[l])) {
+                  <span class="hljs-keyword">delete</span> coll[l]; --coll.length;
+               }
+            }
+         }
+      },</pre></div></div>
             
         </li>
         
@@ -224,11 +217,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Passed in label is string, scoping to that label</p>
+              <p>Updates complete cache or scoped to a label</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isString(label)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      update = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(label)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -239,14 +232,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Reset cache value at label</p>
+              <p>Passed in label is string, scoping to that label</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span>(cache[label] !== <span class="literal">undefined</span>) {
-               cache[label] = $(cache[label].selector || <span class="string">''</span>);
-            }
-         } <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">if</span> (Scandio.isString(label)) {</pre></div></div>
             
         </li>
         
@@ -257,15 +247,14 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>For each value in cache refresh it</p>
+              <p>Reset cache value at label</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            Scandio.util.each(cache, <span class="keyword">function</span>($cached, label) {
-               cache[label] = $($cached.selector);
-            });
-         }
-      },</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span>(cache[label] !== <span class="hljs-literal">undefined</span>) {
+               cache[label] = $(cache[label].selector || <span class="hljs-string">''</span>);
+            }
+         } <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -276,11 +265,15 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Gets a value from cache or loads it from DOM</p>
+              <p>For each value in cache refresh it</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      get = <span class="keyword">function</span>(label, selector) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            Scandio.util.each(cache, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($cached, label)</span> </span>{
+               cache[label] = $($cached.selector);
+            });
+         }
+      },</pre></div></div>
             
         </li>
         
@@ -291,11 +284,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Both label and selector passed, cache/dom reading...</p>
+              <p>Gets a value from cache or loads it from DOM</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isString(selector) &amp;&amp; Scandio.isString(label)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(label, selector)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -306,12 +299,11 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>...either from cache or DOM</p>
+              <p>Both label and selector passed, cache/dom reading…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || $(selector);
-         }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">if</span> (Scandio.isString(selector) &amp;&amp; Scandio.isString(label)) {</pre></div></div>
             
         </li>
         
@@ -322,12 +314,12 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>What the callee gets: a jQuery object</p>
+              <p>…either from cache or DOM</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> cache[label];
-      };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            cache[label] = cache[label] || $(selector);
+         }</pre></div></div>
             
         </li>
         
@@ -338,11 +330,12 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Bind to node removal in DOM</p>
+              <p>What the callee gets: a jQuery object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   $(document).on(<span class="string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">return</span> cache[label];
+      };</pre></div></div>
             
         </li>
         
@@ -353,11 +346,26 @@ Sorry, I didn&#39;t hack this</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
+              <p>Bind to node removal in DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   $(<span class="hljs-built_in">document</span>).on(<span class="hljs-string">'DOMNodeRemoved'</span>, nodeRemoved);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
               <p>Return public functions in object literal</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> {
       get: get,
       update: update
    };

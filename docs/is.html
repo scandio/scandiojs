@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Type checking module</h2>
+              <h2 id="type-checking-module">Type checking module</h2>
 
             </div>
             
@@ -136,12 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>This buils group of <code>is…</code>-typecheck functions
-For every type who&#39;s <code>toString</code> returns <code>[object […]]</code></p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.util.each([<span class="string">'Array'</span>, <span class="string">'Arguments'</span>, <span class="string">'Function'</span>, <span class="string">'String'</span>, <span class="string">'Number'</span>, <span class="string">'Date'</span>, <span class="string">'RegExp'</span>], <span class="keyword">function</span>(name) {</pre></div></div>
             
         </li>
         
@@ -152,11 +143,12 @@ For every type who&#39;s <code>toString</code> returns <code>[object […]]</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Create a function requiring an <code>object</code> as paramters</p>
+              <p>This buils group of <code>is…</code>-typecheck functions
+For every type who’s <code>toString</code> returns <code>[object […]]</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio[<span class="string">'is'</span> + name] = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.each([<span class="hljs-string">'Array'</span>, <span class="hljs-string">'Arguments'</span>, <span class="hljs-string">'Function'</span>, <span class="hljs-string">'String'</span>, <span class="hljs-string">'Number'</span>, <span class="hljs-string">'Date'</span>, <span class="hljs-string">'RegExp'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -167,13 +159,11 @@ For every type who&#39;s <code>toString</code> returns <code>[object […]]</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Returning a boolean indicating if its type is the name</p>
+              <p>Create a function requiring an <code>object</code> as paramters</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> toString.call(obj) == <span class="string">'[object '</span> + name + <span class="string">']'</span>;
-   };
-});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio[<span class="hljs-string">'is'</span> + name] = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -184,11 +174,13 @@ For every type who&#39;s <code>toString</code> returns <code>[object […]]</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Objects behave differently</p>
+              <p>Returning a boolean indicating if its type is the name</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.isObject = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">return</span> toString.call(obj) == <span class="hljs-string">'[object '</span> + name + <span class="hljs-string">']'</span>;
+   };
+});</pre></div></div>
             
         </li>
         
@@ -199,12 +191,27 @@ For every type who&#39;s <code>toString</code> returns <code>[object […]]</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
+              <p>Objects behave differently</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.isObject = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
               <p>An new object with the <code>obj</code> should be equal to itself
 only if it is an object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> obj === Object(obj);
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> obj === <span class="hljs-built_in">Object</span>(obj);
 };</pre></div></div>
             
         </li>

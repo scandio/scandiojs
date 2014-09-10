@@ -2,6 +2,8 @@ module.exports = function( grunt ) {
 
    "use strict";
 
+   require('load-grunt-config')(grunt);
+
    var readOptionalJSON = function( filepath ) {
       var data = {};
       try {
@@ -20,7 +22,7 @@ module.exports = function( grunt ) {
             separator: ""
          },
          src: [
-            "js/index.js",
+            "js/intro.js",
             "js/compatibility.js",
             "js/dom.js",
             "js/string.js",
@@ -111,10 +113,20 @@ module.exports = function( grunt ) {
       },
       docco: {
          docs: {
-            src: ['js/*js', 'dist/scandio-<%= pkg.version %>.js'],
+            src: ['js/*js', 'dist/scandio-<%= pkg.version %>.js', '!js/intro.js'],
             options: {
                output: 'docs'
             }
+         }
+      },
+      clean: {
+         docco: ['docs'],
+      },
+      rename: {
+         docco: {
+            files: [
+               {src: ['docs/scandio-<%= pkg.version %>.html'], dest: 'docs/index.html'},
+            ]
          }
       },
       cssmin: {
@@ -155,20 +167,10 @@ module.exports = function( grunt ) {
       }
    });
 
-   grunt.loadNpmTasks("grunt-contrib-jshint");
-   grunt.loadNpmTasks("grunt-jsonlint");
-   grunt.loadNpmTasks("grunt-contrib-concat");
-   grunt.loadNpmTasks("grunt-contrib-uglify");
-   grunt.loadNpmTasks('grunt-docco2');
-   grunt.loadNpmTasks('grunt-contrib-copy');
-   grunt.loadNpmTasks('grunt-testem');
-   grunt.loadNpmTasks('grunt-contrib-cssmin');
-   grunt.loadNpmTasks('grunt-contrib-jasmine');
-
    grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "testem"] );
    grunt.registerTask( "travis", ["jsonlint", "jshint", "jasmine"] );
    grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy"] );
-   grunt.registerTask( "dist-docs", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "docco"] );
-   grunt.registerTask( "docs", ["docco"] );
+   grunt.registerTask( "dist-docs", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "clean:docco", "docco", "rename:docco"] );
+   grunt.registerTask( "docs", ["clean:docco", "docco", "rename:docco"] );
 
 };

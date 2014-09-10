@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Ajax module</h2>
+              <h2 id="ajax-module">Ajax module</h2>
 
             </div>
             
@@ -136,11 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Register ajax namespace on scandiojs object</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.ajax = {};</pre></div></div>
             
         </li>
         
@@ -151,14 +143,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Loads a in <code>requested</code> specified set of files from CDNs
-<strong>Example:</strong> <code>Scandio.ajax.libs({cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]})</code>
-will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;</code> right after the html&#39;s head-section.
-<strong>Callback</strong> function for each cdn should be defined on the Scandio.cdns-object below.</p>
+              <p>Register ajax namespace on scandiojs object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.ajax.libs = <span class="keyword">function</span>(requested) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax = {};</pre></div></div>
             
         </li>
         
@@ -169,11 +158,14 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Iterate over each cdn holding multiple libs</p>
+              <p>Loads a in <code>requested</code> specified set of files from CDNs
+<strong>Example:</strong> <code>Scandio.ajax.libs({cdnjs: [{repository: &#39;bacon.js&#39;, version: &#39;0.6.8&#39;, file: &#39;Bacon.min.js&#39;}]})</code>
+will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;</code> right after the html’s head-section.
+<strong>Callback</strong> function for each cdn should be defined on the Scandio.cdns-object below.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(libs, cdn) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.libs = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(requested)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -184,11 +176,11 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Check if the cdn has a callback otherwise trigger warn-message</p>
+              <p>Iterate over each cdn holding multiple libs</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.isFunction( Scandio.ajax.cdns[cdn] )) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(libs, cdn)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -199,11 +191,11 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Invoke callback and…</p>
+              <p>Check if the cdn has a callback otherwise trigger warn-message</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         Scandio.util.each(libs, <span class="keyword">function</span>(lib) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isFunction( Scandio.ajax.cdns[cdn] )) {</pre></div></div>
             
         </li>
         
@@ -214,17 +206,11 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>…load the library</p>
+              <p>Invoke callback and…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            Scandio.ajax.script(Scandio.ajax.cdns[cdn](lib.repository, lib.version, lib.file), lib.success || <span class="literal">undefined</span>);
-         });
-      } <span class="keyword">else</span> {
-         Scandio.debug.warn(<span class="string">'CDN: '</span> + cdn + <span class="string">' not defined in Scandio.ajax.cdns!'</span>);
-      }
-   });
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         Scandio.util.each(libs, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(lib)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -234,6 +220,27 @@ will be passed to the handler and inject the library as a <code>&lt;scipt /&gt;<
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>…load the library</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            Scandio.ajax.script(Scandio.ajax.cdns[cdn](lib.repository, lib.version, lib.file), lib.success || <span class="hljs-literal">undefined</span>);
+         });
+      } <span class="hljs-keyword">else</span> {
+         Scandio.debug.warn(<span class="hljs-string">'CDN: '</span> + cdn + <span class="hljs-string">' not defined in Scandio.ajax.cdns!'</span>);
+      }
+   });
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Object containing callback function per cdn invoked by requiring libs
 Every callback gets <code>repository, version and file</code> as parameters</p>
@@ -245,41 +252,20 @@ Every callback gets <code>repository, version and file</code> as parameters</p>
         </li>
         
         
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              <p>Callback for cdnjs called as in <code>Scandio.libs({cdnjss: [...]})</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>   <span class="string">'cdnjs'</span> : <span class="keyword">function</span>(repository, version, file) {
-      <span class="keyword">return</span> <span class="string">"//cdnjs.cloudflare.com/ajax/libs/"</span>+repository+<span class="string">"/"</span>+version+<span class="string">"/"</span>+file;
-   }
-};</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Loads a in <code>requested</code> specified set of files by folder
-<strong>Example:</strong> <code>Scandio.ajax.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
-will load alert and log from their respective folder.
-<em>Notes:</em> the extension is ommited and the path is relative to <code>window.location.origin</code></p>
+              <p>Callback for cdnjs called as in <code>Scandio.libs({cdnjss: [...]})</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.ajax.plugins = <span class="keyword">function</span>(requested) {
-   <span class="keyword">var</span>
-      url            = <span class="literal">null</span>,
-      resultUrls     = [];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-string">'cdnjs'</span> : <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(repository, version, file)</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-string">"//cdnjs.cloudflare.com/ajax/libs/"</span>+repository+<span class="hljs-string">"/"</span>+version+<span class="hljs-string">"/"</span>+file;
+   }
+};</pre></div></div>
             
         </li>
         
@@ -290,11 +276,17 @@ will load alert and log from their respective folder.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Each <code>requested</code>set of scripts</p>
+              <p>Loads a in <code>requested</code> specified set of files by folder
+<strong>Example:</strong> <code>Scandio.ajax.plugins({&#39;scandio.js/example/scripts/&#39;: [&#39;alert&#39;, &#39;log&#39;]});</code>
+will load alert and log from their respective folder.
+<em>Notes:</em> the extension is ommited and the path is relative to <code>window.location.origin</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(scripts, folder) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.plugins = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(requested)</span> </span>{
+   <span class="hljs-keyword">var</span>
+      url            = <span class="hljs-literal">null</span>,
+      resultUrls     = [];</pre></div></div>
             
         </li>
         
@@ -305,11 +297,11 @@ will load alert and log from their respective folder.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>As script…</p>
+              <p>Each <code>requested</code>set of scripts</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      Scandio.util.each(scripts, <span class="keyword">function</span>(script) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(scripts, folder)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -320,20 +312,11 @@ will load alert and log from their respective folder.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>…and loading it by folder and script-name</p>
+              <p>As script…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         url = window.location.origin + <span class="string">'/'</span> + folder + script + <span class="string">'.js'</span>;
-
-         Scandio.ajax.script(url);
-
-         resultUrls.push(url);
-      });
-   });
-
-   <span class="keyword">return</span> resultUrls;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      Scandio.util.each(scripts, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(script)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -344,16 +327,20 @@ will load alert and log from their respective folder.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Loads a set of libs and plugin files based on a condition (the <code>when</code> key)
-<em>E.g.:</em> Calling Scandio.ajax.maybe({when: true, libs:…, plugins:…})
-The libs and plugins object literal should be used as in <code>Scandio.ajax.libs</code> and <code>Scandio.ajax.plugins</code></p>
+              <p>…and loading it by folder and script-name</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.ajax.maybe = <span class="keyword">function</span>(requested) {
-   <span class="keyword">var</span>
-      url            = <span class="literal">null</span>,
-      resultUrls     = [];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         url = <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">'/'</span> + folder + script + <span class="hljs-string">'.js'</span>;
+
+         Scandio.ajax.script(url);
+
+         resultUrls.push(url);
+      });
+   });
+
+   <span class="hljs-keyword">return</span> resultUrls;
+};</pre></div></div>
             
         </li>
         
@@ -364,19 +351,16 @@ The libs and plugins object literal should be used as in <code>Scandio.ajax.libs
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Each <code>requested</code>set of scripts</p>
+              <p>Loads a set of libs and plugin files based on a condition (the <code>when</code> key)
+<em>E.g.:</em> Calling Scandio.ajax.maybe({when: true, libs:…, plugins:…})
+The libs and plugins object literal should be used as in <code>Scandio.ajax.libs</code> and <code>Scandio.ajax.plugins</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="keyword">function</span>(request) {
-      <span class="keyword">if</span> (request.when) {
-         <span class="keyword">if</span> (Scandio.isObject( request.libs )) { Scandio.ajax.libs(request.libs); }
-         <span class="keyword">if</span> (Scandio.isObject( request.plugins )) { Scandio.ajax.plugins(request.plugins); }
-      }
-   });
-
-   <span class="keyword">return</span> resultUrls;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.maybe = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(requested)</span> </span>{
+   <span class="hljs-keyword">var</span>
+      url            = <span class="hljs-literal">null</span>,
+      resultUrls     = [];</pre></div></div>
             
         </li>
         
@@ -387,12 +371,19 @@ The libs and plugins object literal should be used as in <code>Scandio.ajax.libs
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>Helper function responsible for loading js-script-files
-Parameters are ´url´ as fully qualified url and an optional <code>success</code> callback</p>
+              <p>Each <code>requested</code>set of scripts</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.ajax.script = <span class="keyword">function</span>(url, success) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(requested, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(request)</span> </span>{
+      <span class="hljs-keyword">if</span> (request.when) {
+         <span class="hljs-keyword">if</span> (Scandio.isObject( request.libs )) { Scandio.ajax.libs(request.libs); }
+         <span class="hljs-keyword">if</span> (Scandio.isObject( request.plugins )) { Scandio.ajax.plugins(request.plugins); }
+      }
+   });
+
+   <span class="hljs-keyword">return</span> resultUrls;
+};</pre></div></div>
             
         </li>
         
@@ -403,15 +394,12 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>Create script element and set its type</p>
+              <p>Helper function responsible for loading js-script-files
+Parameters are ´url´ as fully qualified url and an optional <code>success</code> callback</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      script = document.createElement(<span class="string">"script"</span>),
-      head   = document.head || document.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>];
-      
-   script.type = <span class="string">"text/javascript"</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.ajax.script = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, success)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -422,11 +410,15 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>Bind to readyState or register ´onload´ callback</p>
+              <p>Create script element and set its type</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (script.readyState) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      script = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"script"</span>),
+      head   = <span class="hljs-built_in">document</span>.head || <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'head'</span>)[<span class="hljs-number">0</span>];
+      
+   script.type = <span class="hljs-string">"text/javascript"</span>;</pre></div></div>
             
         </li>
         
@@ -437,13 +429,11 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Callback for IE&#39;s <code>onreadystatechange</code> (I feel seesick)</p>
+              <p>Bind to readyState or register ´onload´ callback</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      script.onreadystatechange = <span class="keyword">function</span>(){
-         <span class="keyword">if</span> (script.readyState == <span class="string">"loaded"</span> || script.readyState == <span class="string">"complete"</span>) {
-            script.onreadystatechange = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">if</span> (script.readyState) {</pre></div></div>
             
         </li>
         
@@ -454,14 +444,13 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>Invoke callback if passed and type is function</p>
+              <p>Callback for IE’s <code>onreadystatechange</code> (I feel seesick)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (Scandio.isFunction(success)) { success(); }
-         }
-      };
-   } <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      script.onreadystatechange = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+         <span class="hljs-keyword">if</span> (script.readyState == <span class="hljs-string">"loaded"</span> || script.readyState == <span class="hljs-string">"complete"</span>) {
+            script.onreadystatechange = <span class="hljs-literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -472,11 +461,14 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>Bind <code>onload</code> callback on script element</p>
+              <p>Invoke callback if passed and type is function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      script.onload = <span class="keyword">function</span>(){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (Scandio.isFunction(success)) { success(); }
+         }
+      };
+   } <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -487,13 +479,11 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Invoke callback if passed and type is function</p>
+              <p>Bind <code>onload</code> callback on script element</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.isFunction(success)) { success(); }
-      };
-   }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      script.onload = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{</pre></div></div>
             
         </li>
         
@@ -504,11 +494,13 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Set the url</p>
+              <p>Invoke callback if passed and type is function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   script.src = url;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">if</span> (Scandio.isFunction(success)) { success(); }
+      };
+   }</pre></div></div>
             
         </li>
         
@@ -519,15 +511,30 @@ Parameters are ´url´ as fully qualified url and an optional <code>success</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
+              <p>Set the url</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   script.src = url;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
               <p>Append it to the head
 <em>Note:</em> Binding it to body not possible cause it may not be parsed if <code>Scandio.libs</code> is
-called in html&#39;s head-section</p>
+called in html’s head-section</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>   head.appendChild(script);
 
-   <span class="keyword">return</span> url;
+   <span class="hljs-keyword">return</span> url;
 };</pre></div></div>
             
         </li>

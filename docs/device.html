@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Device detection module</h2>
+              <h2 id="device-detection-module">Device detection module</h2>
 
             </div>
             
@@ -136,14 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Sets up device object</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.device = {
-   mobile: [<span class="string">"android"</span>, <span class="string">"webos"</span>, <span class="string">"iphone"</span>, <span class="string">"ipad"</span>, <span class="string">"ipod"</span>, <span class="string">"blackberry"</span>],
-   desktop: [<span class="string">"macintosh"</span>, <span class="string">"win"</span>, <span class="string">"linux"</span>]
-};</pre></div></div>
             
         </li>
         
@@ -154,15 +143,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>A rudimentary function testing for mobile devices
-<em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
+              <p>Sets up device object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.device.isMobile = <span class="keyword">function</span>() {
-   <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(Scandio.device.mobile.join(<span class="string">'|'</span>)),
-      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.device = {
+   mobile: [<span class="hljs-string">"android"</span>, <span class="hljs-string">"webos"</span>, <span class="hljs-string">"iphone"</span>, <span class="hljs-string">"ipad"</span>, <span class="hljs-string">"ipod"</span>, <span class="hljs-string">"blackberry"</span>],
+   desktop: [<span class="hljs-string">"macintosh"</span>, <span class="hljs-string">"win"</span>, <span class="hljs-string">"linux"</span>]
+};</pre></div></div>
             
         </li>
         
@@ -173,12 +161,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Checks the navigator&#39;s user agent against the list of mobile devices</p>
+              <p>A rudimentary function testing for mobile devices
+<em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.device.isMobile = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">var</span>
+      regExp      = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(Scandio.device.mobile.join(<span class="hljs-string">'|'</span>)),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
             
         </li>
         
@@ -189,14 +180,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>A function testing for desktop devices</p>
+              <p>Checks the navigator’s user agent against the list of mobile devices</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.device.isDesktop = <span class="keyword">function</span>() {
-   <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(Scandio.device.desktop.join(<span class="string">'|'</span>)),
-      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> regExp.test(userAgent);
+};</pre></div></div>
             
         </li>
         
@@ -207,12 +196,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
+              <p>A function testing for desktop devices</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.device.isDesktop = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">var</span>
+      regExp      = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(Scandio.device.desktop.join(<span class="hljs-string">'|'</span>)),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
             
         </li>
         
@@ -223,14 +214,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>A function testing for browser vendors</p>
+              <p>Checks the navigator’s user agent against the list of desktop devices</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.device.isBrowser = <span class="keyword">function</span>(vendor) {
-   <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(vendor.toLowerCase()),
-      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> regExp.test(userAgent);
+};</pre></div></div>
             
         </li>
         
@@ -241,12 +230,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
+              <p>A function testing for browser vendors</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.device.isBrowser = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(vendor)</span> </span>{
+   <span class="hljs-keyword">var</span>
+      regExp      = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(vendor.toLowerCase()),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
             
         </li>
         
@@ -257,14 +248,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>A function testing for browser vendors</p>
+              <p>Checks the navigator’s user agent against the list of desktop devices</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.device.isOs = <span class="keyword">function</span>(vendor) {
-   <span class="keyword">var</span>
-      regExp      = <span class="keyword">new</span> RegExp(vendor.toLowerCase()),
-      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> regExp.test(userAgent);
+};</pre></div></div>
             
         </li>
         
@@ -275,11 +264,29 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Checks the navigator&#39;s user agent against the list of desktop devices</p>
+              <p>A function testing for browser vendors</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> regExp.test(userAgent);
+            <div class="content"><div class='highlight'><pre>Scandio.device.isOs = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(vendor)</span> </span>{
+   <span class="hljs-keyword">var</span>
+      regExp      = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(vendor.toLowerCase()),
+      userAgent   = navigator.userAgent.toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Checks the navigator’s user agent against the list of desktop devices</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> regExp.test(userAgent);
 };</pre></div></div>
             
         </li>
