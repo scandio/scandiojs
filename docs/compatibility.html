@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Compatibility module</h2>
+              <h2 id="compatibility-module">Compatibility module</h2>
 
             </div>
             
@@ -136,16 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Backwards compatibility fixes for old browsers or old library versions</p>
-<p>Fix Array.prototype.indexOf for old browsers</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!ArrayProto.indexOf) {
-   ArrayProto.indexOf = <span class="keyword">function</span>(needle, fromIndex) {
-      <span class="keyword">return</span> $.inArray(needle, <span class="keyword">this</span>, fromIndex);
-   };
-}</pre></div></div>
             
         </li>
         
@@ -156,12 +143,44 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>jQuery.fn.on was added in version 1.7. Its similar predecessor was &quot;bind&quot;.
-We delegate to &quot;bind&quot; in old jQuery versions.</p>
+              <p>Backwards compatibility fixes for old browsers or old library versions</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (!$.fn.on) {
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Fix Array.prototype.indexOf for old browsers</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> (!ArrayProto.indexOf) {
+   ArrayProto.indexOf = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(needle, fromIndex)</span> </span>{
+      <span class="hljs-keyword">return</span> $.inArray(needle, <span class="hljs-keyword">this</span>, fromIndex);
+   };
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>jQuery.fn.on was added in version 1.7. Its similar predecessor was “bind”.
+We delegate to “bind” in old jQuery versions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> (!$.fn.on) {
    $.fn.on = $.fn.bind;
 }</pre></div></div>
             

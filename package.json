@@ -1,44 +1,51 @@
 {
-   "name": "scandio.js",
-   "title": "scandio.js",
-   "description": "JavaScript library speeding up your JS development.",
-   "version": "0.2.0",
-   "homepage": "http://scandio.de",
-   "author": {
-      "name": "Scandio GmbH",
-      "url": "http://scandio.de"
-   },
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/scandio/scandiojs.git"
-   },
-   "licenses": [
-      {
-         "type": "MIT",
-         "url": "https://github.com/scandio/scandiojs/blob/master/LICENSE"
-      }
-   ],
-   "dependencies": {
-
-   },
-   "devDependencies": {
-      "grunt": "~0.4.1",
-      "grunt-contrib-watch": "~0.4.4",
-      "grunt-contrib-jshint": "~0.6.0",
-      "grunt-jsonlint": "~1.0.0",
-      "grunt-contrib-uglify": "~0.2.2",
-      "grunt-contrib-concat": "~0.1.2",
-      "grunt-docco2": "latest",
-      "grunt-contrib-copy": "~0.4.0",
-      "grunt-testem": "latest",
-      "grunt-contrib-cssmin": "latest",
-      "grunt-contrib-jasmine": "latest"
-   },
-
-   "scripts": {
-      "install": "bower install",
-      "test": "grunt travis --verbose"
-   },
-
-   "keywords": ["scandio", "utility", "javascript", "conditional loading", "dom-logging", "string manipulation", "logging"]
+  "name": "scandio.js",
+  "title": "scandio.js",
+  "description": "JavaScript library speeding up your JS development.",
+  "version": "0.2.0",
+  "homepage": "http://scandio.de",
+  "author": {
+    "name": "Scandio GmbH",
+    "url": "http://scandio.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scandio/scandiojs.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/scandio/scandiojs/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-jasmine": "latest",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-rename": "0.0.3",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-docco": "latest",
+    "grunt-jsonlint": "~1.0.0",
+    "grunt-testem": "latest",
+    "load-grunt-config": "^0.13.1"
+  },
+  "scripts": {
+    "install": "bower install",
+    "test": "grunt travis --verbose"
+  },
+  "keywords": [
+    "scandio",
+    "utility",
+    "javascript",
+    "conditional loading",
+    "dom-logging",
+    "string manipulation",
+    "logging"
+  ]
 }

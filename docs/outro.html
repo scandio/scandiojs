@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Outro, AMD and conflict resolution</h2>
+              <h2 id="outro-amd-and-conflict-resolution">Outro, AMD and conflict resolution</h2>
 
             </div>
             
@@ -136,11 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -151,11 +143,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Retore the <code>previousScandio</code></p>
+              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   root.Scandio = previousScandio;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -166,12 +158,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Return yerself to continue</p>
+              <p>Retore the <code>previousScandio</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">this</span>;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   root.Scandio = previousScandio;</pre></div></div>
             
         </li>
         
@@ -182,12 +173,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Support for AMD/RequireJS
-If define function deefined and its amd</p>
+              <p>Return yerself to continue</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+};</pre></div></div>
             
         </li>
         
@@ -198,11 +189,12 @@ If define function deefined and its amd</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Define Scandio</p>
+              <p>Support for AMD/RequireJS
+If define function deefined and its amd</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   define(<span class="string">'Scandio'</span>, <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> define === <span class="hljs-string">'function'</span> &amp;&amp; define.amd) {</pre></div></div>
             
         </li>
         
@@ -213,14 +205,29 @@ If define function deefined and its amd</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
+              <p>Define Scandio</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   define(<span class="hljs-string">'Scandio'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
               <p>and return the library</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> Scandio;
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">return</span> Scandio;
    });
 }
-}(<span class="keyword">this</span>, jQuery, window, document, <span class="literal">undefined</span>));</pre></div></div>
+}(<span class="hljs-keyword">this</span>, jQuery, <span class="hljs-built_in">window</span>, <span class="hljs-built_in">document</span>, <span class="hljs-literal">undefined</span>));</pre></div></div>
             
         </li>
         
