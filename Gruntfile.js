@@ -122,6 +122,12 @@ module.exports = function( grunt ) {
       clean: {
          docco: ['docs'],
       },
+      'gh-pages': {
+         options: {
+            base: 'docs'
+         },
+         src: ['**']
+      },
       rename: {
          docco: {
             files: [
@@ -170,7 +176,6 @@ module.exports = function( grunt ) {
    grunt.registerTask( "test-em", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "testem"] );
    grunt.registerTask( "travis", ["jsonlint", "jshint", "jasmine"] );
    grunt.registerTask( "dist", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy"] );
-   grunt.registerTask( "dist-docs", ["jsonlint", "concat", "jshint", "uglify", "cssmin", "copy", "clean:docco", "docco", "rename:docco"] );
    grunt.registerTask( "docs", ["clean:docco", "docco", "rename:docco"] );
-
+   grunt.registerTask( "gh-docs", ["clean:docco", "docco", "rename:docco", "gh-pages"] );
 };
