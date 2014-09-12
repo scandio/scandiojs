@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Core module</h2>
+              <h2 id="core-module">Core module</h2>
 
             </div>
             
@@ -136,12 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Closes and secures a module with namespace within its own scope
-<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.mod = Scandio.module = (<span class="keyword">function</span>() {</pre></div></div>
             
         </li>
         
@@ -152,13 +143,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Setting up global environment object and DOM-ready state</p>
+              <p>Closes and secures a module with namespace within its own scope
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      isDomReady  = <span class="literal">false</span>,
-      globEnv     = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.mod = Scandio.module = (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -169,18 +159,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Returns a function requiring <code>namespace, module and an module environment object</code></p>
+              <p>Setting up global environment object and DOM-ready state</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>(namespace, module, modEnv) {
-      <span class="keyword">var</span>
-         typeError      = <span class="literal">null</span>,
-         invokedModule  = <span class="literal">null</span>;
-
-      namespace = Scandio.string.clean(
-         Scandio.string.lower(namespace)
-      );</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      isDomReady  = <span class="hljs-literal">false</span>,
+      globEnv     = {};</pre></div></div>
             
         </li>
         
@@ -191,11 +176,18 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Validates types of parameters in requiring <code>string, function and object</code></p>
+              <p>Returns a function requiring <code>namespace, module and an module environment object</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!Scandio.isString(namespace) || !Scandio.isFunction(module) || (modEnv &amp;&amp; !Scandio.isObject(modEnv))) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(namespace, module, modEnv)</span> </span>{
+      <span class="hljs-keyword">var</span>
+         typeError      = <span class="hljs-literal">null</span>,
+         invokedModule  = <span class="hljs-literal">null</span>;
+
+      namespace = Scandio.string.clean(
+         Scandio.string.lower(namespace)
+      );</pre></div></div>
             
         </li>
         
@@ -206,13 +198,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Set up a crazy long eloquent error message and…</p>
+              <p>Validates types of parameters in requiring <code>string, function and object</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Parameter mismatch in Scandio.mod - please provide (1) namespace as'</span> +
-            <span class="string">'string and a (2) module as function. (3) an modEnv object may be given to'</span> +
-            <span class="string">'extend the default global environment'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!Scandio.isString(namespace) || !Scandio.isFunction(<span class="hljs-built_in">module</span>) || (modEnv &amp;&amp; !Scandio.isObject(modEnv))) {</pre></div></div>
             
         </li>
         
@@ -222,6 +212,23 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Set up a crazy long eloquent error message and…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         typeError = <span class="hljs-string">'Parameter mismatch in Scandio.mod - please provide (1) namespace as'</span> +
+            <span class="hljs-string">'string and a (2) module as function. (3) an modEnv object may be given to'</span> +
+            <span class="hljs-string">'extend the default global environment'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>… debug it as an error</p>
 
@@ -233,36 +240,17 @@
         </li>
         
         
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p>Module names need to be unique</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.util.getByDots(namespace, modules, <span class="literal">true</span>) !== <span class="literal">true</span>) {</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Otherwise error will be triggered</p>
+              <p>Module names need to be unique</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         typeError = <span class="string">'Error: there is already a module with namespace "'</span> + namespace + <span class="string">'".'</span>;
-
-         Scandio.debug.error(typeError);
-      }
-      <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.util.getByDots(namespace, modules, <span class="hljs-literal">true</span>) !== <span class="hljs-literal">true</span>) {</pre></div></div>
             
         </li>
         
@@ -273,11 +261,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Extend global with module environment where module takes preference</p>
+              <p>Otherwise error will be triggered</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         $.extend(<span class="literal">true</span>, globEnv, modEnv);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         typeError = <span class="hljs-string">'Error: there is already a module with namespace "'</span> + namespace + <span class="hljs-string">'".'</span>;
+
+         Scandio.debug.error(typeError);
+      }
+      <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -288,12 +280,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>If module namespace is unique push it to internal state variable</p>
+              <p>Extend global with module environment where module takes preference</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         invokedModule = Scandio.util.setByDots(namespace, module.call(Scandio, $, globEnv, Scandio), modules);
-      }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         $.extend(<span class="hljs-literal">true</span>, globEnv, modEnv);</pre></div></div>
             
         </li>
         
@@ -304,14 +295,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p><em>Convention:</em> if module environment has a function called <code>readyFn</code>
-it will be invoked on DOM-Ready</p>
+              <p>If module namespace is unique push it to internal state variable</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
-         modEnv.readyFn(invokedModule.ready);
-      } <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         invokedModule = Scandio.util.setByDots(namespace, <span class="hljs-built_in">module</span>.call(Scandio, $, globEnv, Scandio), modules);
+      }</pre></div></div>
             
         </li>
         
@@ -322,14 +311,14 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>Otherwise the just load it on DOM-ready</p>
+              <p><em>Convention:</em> if module environment has a function called <code>readyFn</code>
+it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         $(document).ready(invokedModule.ready);
-      }
-   };
-}());</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
+         modEnv.readyFn(invokedModule.ready);
+      } <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -340,18 +329,14 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Returns a registered module by passing in a qualifier string (may be dot-notation)
-<em>Note:</em> Handing over a not fully qualifying string returns an object with hashes for submodules.</p>
+              <p>Otherwise the just load it on DOM-ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.modules = <span class="keyword">function</span>(namespace) {
-   namespace = Scandio.string.clean(
-      Scandio.string.lower(namespace)
-   );
-
-   <span class="keyword">return</span> Scandio.util.getByDots(namespace, modules, <span class="literal">false</span>);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         $(<span class="hljs-built_in">document</span>).ready(invokedModule.ready);
+      }
+   };
+}());</pre></div></div>
             
         </li>
         
@@ -362,12 +347,18 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Defers function execution based on condition and delay
-<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+              <p>Returns a registered module by passing in a qualifier string (may be dot-notation)
+<em>Note:</em> Handing over a not fully qualifying string returns an object with hashes for submodules.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.wait = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.modules = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(namespace)</span> </span>{
+   namespace = Scandio.string.clean(
+      Scandio.string.lower(namespace)
+   );
+
+   <span class="hljs-keyword">return</span> Scandio.util.getByDots(namespace, modules, <span class="hljs-literal">false</span>);
+};</pre></div></div>
             
         </li>
         
@@ -378,11 +369,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>Sets up the defered function</p>
+              <p>Defers function execution based on condition and delay
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> waitFn = <span class="keyword">function</span>(params) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.wait = (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -393,11 +385,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>Reads all the allowed to be passed in</p>
+              <p>Sets up the defered function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span> waitFn = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(params)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -408,11 +400,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>When it all started</p>
+              <p>Reads all the allowed to be passed in</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         startTime      = <span class="keyword">new</span> Date().getTime(),</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span></pre></div></div>
             
         </li>
         
@@ -423,11 +415,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>for how long the whole thing may take</p>
+              <p>When it all started</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         duration       = params.duration || <span class="number">3000</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         startTime      = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime(),</pre></div></div>
             
         </li>
         
@@ -438,11 +430,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>for how often we check the condition</p>
+              <p>for how long the whole thing may take</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         interval       = params.interval || <span class="number">100</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         duration       = params.duration || <span class="hljs-number">3000</span>,</pre></div></div>
             
         </li>
         
@@ -453,11 +445,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>the initial delay</p>
+              <p>for how often we check the condition</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         initialDelay   = params.initialDelay || <span class="number">10</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         interval       = params.interval || <span class="hljs-number">100</span>,</pre></div></div>
             
         </li>
         
@@ -468,11 +460,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>a condition function</p>
+              <p>the initial delay</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         condition      = params.condition || <span class="keyword">function</span>() {},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         initialDelay   = params.initialDelay || <span class="hljs-number">10</span>,</pre></div></div>
             
         </li>
         
@@ -483,11 +475,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>object containing all the callbacks (done and fail)</p>
+              <p>a condition function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         callbacks      = Scandio.util.extend({}, params.callbacks),</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         condition      = params.condition || <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{},</pre></div></div>
             
         </li>
         
@@ -498,11 +490,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Runs one roundtrip of execution</p>
+              <p>object containing all the callbacks (done and fail)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         execute = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         callbacks      = Scandio.util.extend({}, params.callbacks),</pre></div></div>
             
         </li>
         
@@ -513,12 +505,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>Time flew by and duration for execution exceeded</p>
+              <p>Runs one roundtrip of execution</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (<span class="keyword">new</span> Date().getTime() - startTime &gt; duration) {
-               <span class="keyword">if</span> (Scandio.isFunction(callbacks.fail)) { callbacks.fail(); }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         execute = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -529,12 +520,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>The condition passed and we&#39;re good</p>
+              <p>Time flew by and duration for execution exceeded</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> <span class="keyword">if</span> (condition()) {
-               <span class="keyword">if</span> (Scandio.isFunction(callbacks.done)) { callbacks.done(); }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime() - startTime &gt; duration) {
+               <span class="hljs-keyword">if</span> (Scandio.isFunction(callbacks.fail)) { callbacks.fail(); }</pre></div></div>
             
         </li>
         
@@ -545,14 +536,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Defer execution again by interval</p>
+              <p>The condition passed and we’re good</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            } <span class="keyword">else</span> {
-               setTimeout(execute, interval);
-            }
-         };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (condition()) {
+               <span class="hljs-keyword">if</span> (Scandio.isFunction(callbacks.done)) { callbacks.done(); }</pre></div></div>
             
         </li>
         
@@ -563,11 +552,14 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>Starts up intitial execution with delay</p>
+              <p>Defer execution again by interval</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      setTimeout(execute, initialDelay);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            } <span class="hljs-keyword">else</span> {
+               setTimeout(execute, interval);
+            }
+         };</pre></div></div>
             
         </li>
         
@@ -578,20 +570,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <p>Outer <code>waitFn</code> returns its callbacks</p>
+              <p>Starts up intitial execution with delay</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">return</span> {
-         done: <span class="keyword">function</span>(fn) {
-            callbacks.done = fn;
-         },
-         fail: <span class="keyword">function</span>(fn) {
-            callbacks.fail = fn;
-         }
-      };
-
-   };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      setTimeout(execute, initialDelay);</pre></div></div>
             
         </li>
         
@@ -602,19 +585,20 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Sets up global return only requiring condition</p>
+              <p>Outer <code>waitFn</code> returns its callbacks</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   waitFn.until = <span class="keyword">function</span>(condition) {
-      <span class="keyword">return</span> waitFn({
-         condition: condition
-      });
-   };
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">return</span> {
+         done: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> </span>{
+            callbacks.done = fn;
+         },
+         fail: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> </span>{
+            callbacks.fail = fn;
+         }
+      };
 
-   <span class="keyword">return</span> waitFn;
-
-}());</pre></div></div>
+   };</pre></div></div>
             
         </li>
         
@@ -625,12 +609,19 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <p>A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
-<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
+              <p>Sets up global return only requiring condition</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="literal">null</span>, (<span class="keyword">function</span>($, Scandio) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   waitFn.until = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(condition)</span> </span>{
+      <span class="hljs-keyword">return</span> waitFn({
+         condition: condition
+      });
+   };
+
+   <span class="hljs-keyword">return</span> waitFn;
+
+}());</pre></div></div>
             
         </li>
         
@@ -641,12 +632,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <p>The messenger/hub is just a plain jQuery object</p>
+              <p>A small Pub/Sub implementation for global event emission/listening (Messaging pattern)
+<em>Note:</em> This function being an IIFE leaves off parameters on outer function</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      messenger = $({}),</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin(<span class="hljs-literal">null</span>, (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($, Scandio)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -657,12 +648,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Subscribing to messenger with namespace as in <em>Scandio.messenger.subscribe(&#39;foo.bar&#39;, fn)</em>
-<em>Note:</em> First argument is event as in subscribe(&#39;foo&#39;, fn(e, arg…))!</p>
+              <p>The messenger/hub is just a plain jQuery object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      subscribe = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      messenger = $({}),</pre></div></div>
             
         </li>
         
@@ -673,12 +664,12 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
-              <p>Using $ as emitter allows namespaced events e.g. &#39;foo.bar&#39; will trigger on &#39;foo&#39; and &#39;foo.bar&#39;</p>
+              <p>Subscribing to messenger with namespace as in <em>Scandio.messenger.subscribe(‘foo.bar’, fn)</em>
+<em>Note:</em> First argument is event as in subscribe(‘foo’, fn(e, arg…))!</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         messenger.on.apply(messenger, arguments);
-      },</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      subscribe = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -689,12 +680,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
-              <p>Unsubscribes in same syntax as subscribing (namespaced)</p>
+              <p>Using $ as emitter allows namespaced events e.g. ‘foo.bar’ will trigger on ‘foo’ and ‘foo.bar’</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      unsubscribe = <span class="keyword">function</span>() {
-         messenger.off.apply(messenger, arguments);
+            <div class="content"><div class='highlight'><pre>         messenger.on.apply(messenger, <span class="hljs-built_in">arguments</span>);
       },</pre></div></div>
             
         </li>
@@ -706,13 +696,13 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
-              <p>Triggers subscribed listener&#39;s function with arguements (1st is $-event)</p>
+              <p>Unsubscribes in same syntax as subscribing (namespaced)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      publish = <span class="keyword">function</span>() {
-         messenger.trigger.apply(messenger, arguments);
-      };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      unsubscribe = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+         messenger.off.apply(messenger, <span class="hljs-built_in">arguments</span>);
+      },</pre></div></div>
             
         </li>
         
@@ -723,16 +713,13 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
-              <p>Returns public functions</p>
+              <p>Triggers subscribed listener’s function with arguements (1st is $-event)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> {
-      subscribe: subscribe,
-      unsubscribe: unsubscribe,
-      publish: publish
-   };
-}($, Scandio)));</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      publish = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+         messenger.trigger.apply(messenger, <span class="hljs-built_in">arguments</span>);
+      };</pre></div></div>
             
         </li>
         
@@ -743,11 +730,31 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
+              <p>Returns public functions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> {
+      subscribe: subscribe,
+      unsubscribe: unsubscribe,
+      publish: publish
+   };
+}($, Scandio)));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
               <p>Shorthand for redirecting the browser to a new <code>url</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.redirect = <span class="keyword">function</span>(url) {
+            <div class="content"><div class='highlight'><pre>Scandio.redirect = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url)</span> </span>{
    location.href = url;
 };</pre></div></div>
             

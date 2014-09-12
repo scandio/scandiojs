@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Utility module</h2>
+              <h2 id="utility-module">Utility module</h2>
 
             </div>
             
@@ -136,11 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Register util namespace on scandiojs object</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.util = {};</pre></div></div>
             
         </li>
         
@@ -151,13 +143,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Nothing too fancy: shorthand to <code>hasOwnProperty</code></p>
+              <p>Register util namespace on scandiojs object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.has = <span class="keyword">function</span>(obj, key) {
-   <span class="keyword">return</span> hasOwnProperty.call(obj, key);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util = {};</pre></div></div>
             
         </li>
         
@@ -168,16 +158,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Iterates over an <code>object</code> with an <code>iterator</code> in an optional <code>context</code>
-Falls back to nativeForEach if supported by browser (on prototpye)</p>
+              <p>Nothing too fancy: shorthand to <code>hasOwnProperty</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.each = Scandio.forEach = <span class="keyword">function</span>(obj, iterator, context) {
-   <span class="keyword">var</span>
-      key   = <span class="literal">null</span>,
-      i     = <span class="literal">null</span>,
-      l     = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.has = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj, key)</span> </span>{
+   <span class="hljs-keyword">return</span> hasOwnProperty.call(obj, key);
+};</pre></div></div>
             
         </li>
         
@@ -188,11 +175,16 @@ Falls back to nativeForEach if supported by browser (on prototpye)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Nothing to iterate, somewhat funny eh?</p>
+              <p>Iterates over an <code>object</code> with an <code>iterator</code> in an optional <code>context</code>
+Falls back to nativeForEach if supported by browser (on prototpye)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (obj === <span class="literal">null</span> || obj === <span class="literal">undefined</span>) { <span class="keyword">return</span>; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.each = Scandio.forEach = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj, iterator, context)</span> </span>{
+   <span class="hljs-keyword">var</span>
+      key   = <span class="hljs-literal">null</span>,
+      i     = <span class="hljs-literal">null</span>,
+      l     = <span class="hljs-literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -203,13 +195,11 @@ Falls back to nativeForEach if supported by browser (on prototpye)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Fall back to native foreach which is faster in newer browsers</p>
+              <p>Nothing to iterate, somewhat funny eh?</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (nativeForEach &amp;&amp; obj.forEach === nativeForEach) {
-      obj.forEach(iterator, context);
-   }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">if</span> (obj === <span class="hljs-literal">null</span> || obj === <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">return</span>; }</pre></div></div>
             
         </li>
         
@@ -220,12 +210,13 @@ Falls back to nativeForEach if supported by browser (on prototpye)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Passed <code>obj</code> has a length property, meaning its an array
-and an optimized for-loop can be used.</p>
+              <p>Fall back to native foreach which is faster in newer browsers</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">else</span> <span class="keyword">if</span> (obj.length === +obj.length) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">if</span> (nativeForEach &amp;&amp; obj.forEach === nativeForEach) {
+      obj.forEach(iterator, context);
+   }</pre></div></div>
             
         </li>
         
@@ -236,11 +227,12 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Iterate over length of <code>obj</code></p>
+              <p>Passed <code>obj</code> has a length property, meaning its an array
+and an optimized for-loop can be used.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">for</span> (i = <span class="number">0</span>, l = obj.length; i &lt; l; i++) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (obj.length === +obj.length) {</pre></div></div>
             
         </li>
         
@@ -251,13 +243,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>…call the <code>iterator</code>-function and return if its the breaker (done)</p>
+              <p>Iterate over length of <code>obj</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (iterator.call(context, obj[i], i, obj) === breaker) { <span class="keyword">return</span>; }
-      }
-   }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, l = obj.length; i &lt; l; i++) {</pre></div></div>
             
         </li>
         
@@ -268,11 +258,13 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Iterate over object</p>
+              <p>…call the <code>iterator</code>-function and return if its the breaker (done)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">if</span> (iterator.call(context, obj[i], i, obj) === breaker) { <span class="hljs-keyword">return</span>; }
+      }
+   }</pre></div></div>
             
         </li>
         
@@ -283,11 +275,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>For each key in obj</p>
+              <p>Iterate over object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">for</span> (key <span class="keyword">in</span> obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -298,11 +290,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>Only if it hasOwnProperty</p>
+              <p>For each key in obj</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">if</span> (Scandio.util.has(obj, key)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> obj) {</pre></div></div>
             
         </li>
         
@@ -313,15 +305,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>…call the <code>iterator</code>-function and return if its the breaker (done)</p>
+              <p>Only if it hasOwnProperty</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">if</span> (iterator.call(context, obj[key], key, obj) === breaker) { <span class="keyword">return</span>; }
-         }
-      }
-   }
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">if</span> (Scandio.util.has(obj, key)) {</pre></div></div>
             
         </li>
         
@@ -332,11 +320,15 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Extends an object with all the arguments passed in other objects</p>
+              <p>…call the <code>iterator</code>-function and return if its the breaker (done)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.extend = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (iterator.call(context, obj[key], key, obj) === breaker) { <span class="hljs-keyword">return</span>; }
+         }
+      }
+   }
+};</pre></div></div>
             
         </li>
         
@@ -347,11 +339,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p><code>obj</code> is destination <code>arguments</code>-2nd parater is source</p>
+              <p>Extends an object with all the arguments passed in other objects</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.util.each(slice.call(arguments, <span class="number">1</span>), <span class="keyword">function</span>(source) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.extend = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -362,11 +354,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>Source is set</p>
+              <p><code>obj</code> is destination <code>arguments</code>-2nd parater is source</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (source) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>), <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(source)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -377,11 +369,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>For every property in source</p>
+              <p>Source is set</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> source) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (source) {</pre></div></div>
             
         </li>
         
@@ -392,17 +384,11 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>Set it on the object without checking prior existence</p>
+              <p>For every property in source</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            obj[prop] = source[prop];
-         }
-      }
-   });
-
-   <span class="keyword">return</span> obj;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> prop <span class="hljs-keyword">in</span> source) {</pre></div></div>
             
         </li>
         
@@ -413,12 +399,17 @@ and an optimized for-loop can be used.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Iterates over an <code>object</code> with an <code>iterator</code> in an optional <code>context</code>
-while results will only contain values if they pass the <code>iterator</code>-test</p>
+              <p>Set it on the object without checking prior existence</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.filter = <span class="keyword">function</span>(obj, iterator, context) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            obj[prop] = source[prop];
+         }
+      }
+   });
+
+   <span class="hljs-keyword">return</span> obj;
+};</pre></div></div>
             
         </li>
         
@@ -429,11 +420,12 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>What will be returned</p>
+              <p>Iterates over an <code>object</code> with an <code>iterator</code> in an optional <code>context</code>
+while results will only contain values if they pass the <code>iterator</code>-test</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> results = [];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.filter = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj, iterator, context)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -444,11 +436,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>Nothing to iterate</p>
+              <p>What will be returned</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (obj === <span class="literal">null</span> || obj === <span class="literal">undefined</span>) { <span class="keyword">return</span> results; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span> results = [];</pre></div></div>
             
         </li>
         
@@ -459,12 +451,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Fallback to native filter for performance reasons</p>
+              <p>Nothing to iterate</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">if</span> (nativeFilter &amp;&amp; obj.filter === nativeFilter)
-         { <span class="keyword">return</span> obj.filter(iterator, context); }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">if</span> (obj === <span class="hljs-literal">null</span> || obj === <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">return</span> results; }</pre></div></div>
             
         </li>
         
@@ -475,11 +466,12 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Foreach <code>value</code> with <code>index</code> and the <code>context</code> being <code>list</code></p>
+              <p>Fallback to native filter for performance reasons</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.util.each(obj, <span class="keyword">function</span>(value, index, list) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">if</span> (nativeFilter &amp;&amp; obj.filter === nativeFilter)
+         { <span class="hljs-keyword">return</span> obj.filter(iterator, context); }</pre></div></div>
             
         </li>
         
@@ -490,17 +482,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Push the value to <code>results</code> if test passes as specified in iterator</p>
+              <p>Foreach <code>value</code> with <code>index</code> and the <code>context</code> being <code>list</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span>(iterator.call(context, value, index, list)) {
-         results.push(value);
-      }
-   });
-
-   <span class="keyword">return</span> results;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(obj, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value, index, list)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -511,12 +497,17 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>Accesses an obj by dot-notation allowing a default/notFound value
-<em>E.g.:</em> Scandio.util.getByDots(&quot;name.fullname&quot;, {name: {fullname: &#39;me&#39;}}) returns me</p>
+              <p>Push the value to <code>results</code> if test passes as specified in iterator</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.getByDots = <span class="keyword">function</span>(dots, obj, notFound) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span>(iterator.call(context, value, index, list)) {
+         results.push(value);
+      }
+   });
+
+   <span class="hljs-keyword">return</span> results;
+};</pre></div></div>
             
         </li>
         
@@ -527,14 +518,12 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Setup path and destination variables</p>
+              <p>Accesses an obj by dot-notation allowing a default/notFound value
+<em>E.g.:</em> Scandio.util.getByDots(“name.fullname”, {name: {fullname: ‘me’}}) returns me</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      dest   = obj,
-      path   = dots.split(<span class="string">'.'</span>),
-      i      = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.getByDots = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(dots, obj, notFound)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -545,11 +534,14 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Dig into the <code>path</code> an question the <code>obj</code></p>
+              <p>Setup path and destination variables</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; path.length; i++) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      dest   = obj,
+      path   = dots.split(<span class="hljs-string">'.'</span>),
+      i      = <span class="hljs-literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -560,11 +552,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>Found something on the <code>obj</code> and reset the destination</p>
+              <p>Dig into the <code>path</code> an question the <code>obj</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> ( dest[path[i]] ) { dest = dest[path[i]]; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; path.length; i++) {</pre></div></div>
             
         </li>
         
@@ -575,15 +567,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <p>Nothing found…</p>
+              <p>Found something on the <code>obj</code> and reset the destination</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">else</span> {
-         dest = <span class="literal">undefined</span>;
-         <span class="keyword">break</span>;
-      }
-   }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> ( dest[path[i]] ) { dest = dest[path[i]]; }</pre></div></div>
             
         </li>
         
@@ -594,12 +582,15 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Dest or notFound</p>
+              <p>Nothing found…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> dest || notFound;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> {
+         dest = <span class="hljs-literal">undefined</span>;
+         <span class="hljs-keyword">break</span>;
+      }
+   }</pre></div></div>
             
         </li>
         
@@ -610,12 +601,12 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <p>Sets an obj by dot-notation
-<em>E.g.:</em> Scandio.util.setByDots(&quot;name.firstname&quot;, &quot;doop&quot;, {name: {fullname: &#39;me&#39;}}) returns me</p>
+              <p>Dest or notFound</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.setByDots = <span class="keyword">function</span>(dots, value, obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> dest || notFound;
+};</pre></div></div>
             
         </li>
         
@@ -626,13 +617,12 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <p>Split string by dots</p>
+              <p>Sets an obj by dot-notation
+<em>E.g.:</em> Scandio.util.setByDots(“name.firstname”, “doop”, {name: {fullname: ‘me’}}) returns me</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      path  = dots.split(<span class="string">"."</span>),
-      key   = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.setByDots = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(dots, value, obj)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -643,11 +633,13 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Moves in on the path</p>
+              <p>Split string by dots</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">while</span> (path.length &gt; <span class="number">1</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      path  = dots.split(<span class="hljs-string">"."</span>),
+      key   = <span class="hljs-literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -658,11 +650,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
-              <p>Gets the latest key</p>
+              <p>Moves in on the path</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      key = path.shift();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">while</span> (path.length &gt; <span class="hljs-number">1</span>) {</pre></div></div>
             
         </li>
         
@@ -673,12 +665,11 @@ while results will only contain values if they pass the <code>iterator</code>-te
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
-              <p>Creates empty object if not found</p>
+              <p>Gets the latest key</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!Scandio.isObject(obj)) { obj = {}; }
-      <span class="keyword">if</span> (!(key <span class="keyword">in</span> obj)) { obj[key] = {}; }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      key = path.shift();</pre></div></div>
             
         </li>
         
@@ -688,6 +679,22 @@ while results will only contain values if they pass the <code>iterator</code>-te
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Creates empty object if not found</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!Scandio.isObject(obj)) { obj = {}; }
+      <span class="hljs-keyword">if</span> (!(key <span class="hljs-keyword">in</span> obj)) { obj[key] = {}; }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <p>Sets the nesting to next deeper key</p>
 
@@ -699,35 +706,18 @@ while results will only contain values if they pass the <code>iterator</code>-te
         </li>
         
         
-        <li id="section-37">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
-              </div>
-              <p>Returns the result of setting the value</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> obj[ path[<span class="number">0</span>] ] = value;
-};</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
-              <p>Collects all function from an object and returns an array containing them
-<em>E.g.:</em> calling it with Scandio.util.functions({capitalize: function() {return}, greet: &#39;hi&#39;})
-would only return an array containing the <code>capitalize</code> function.</p>
+              <p>Returns the result of setting the value</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.functions = <span class="keyword">function</span>(obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> obj[ path[<span class="hljs-number">0</span>] ] = value;
+};</pre></div></div>
             
         </li>
         
@@ -738,13 +728,13 @@ would only return an array containing the <code>capitalize</code> function.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
-              <p>Setup local variables</p>
+              <p>Collects all function from an object and returns an array containing them
+<em>E.g.:</em> calling it with Scandio.util.functions({capitalize: function() {return}, greet: ‘hi’})
+would only return an array containing the <code>capitalize</code> function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      functions   = {},
-      key         = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.functions = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(obj)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -755,11 +745,13 @@ would only return an array containing the <code>capitalize</code> function.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
-              <p>For each key in object…</p>
+              <p>Setup local variables</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span> (key <span class="keyword">in</span> obj) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      functions   = {},
+      key         = <span class="hljs-literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -770,15 +762,11 @@ would only return an array containing the <code>capitalize</code> function.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
-              <p>…check if it is a function and push it to result</p>
+              <p>For each key in object…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (Scandio.isFunction(obj[key])) { functions[key] = obj[key]; }
-   }
-
-   <span class="keyword">return</span> functions;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> obj) {</pre></div></div>
             
         </li>
         
@@ -789,19 +777,15 @@ would only return an array containing the <code>capitalize</code> function.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
-              <p>Allows for extending Scandio. functionality by handing in an <code>namespace</code> and a object-literal
-containing the functions.
-<em>E.g.:</em> calling <code>Scandio.util.mixin(&#39;string&#39;, {capitalize: fn(string)})</code> makes the capitalize function
-available as in Scandio.string.capitalize(&#39;string&#39;).</p>
+              <p>…check if it is a function and push it to result</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.util.mixin = <span class="keyword">function</span>(namespace, obj) {
-   <span class="keyword">var</span>
-      destination = Scandio,
-      path        = namespace !== <span class="literal">null</span> ? namespace.split(<span class="string">"."</span>) : [],
-      atModule    = <span class="literal">null</span>,
-      i           = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isFunction(obj[key])) { functions[key] = obj[key]; }
+   }
+
+   <span class="hljs-keyword">return</span> functions;
+};</pre></div></div>
             
         </li>
         
@@ -812,11 +796,19 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
-              <p>Register the namespace if its not existent</p>
+              <p>Allows for extending Scandio. functionality by handing in an <code>namespace</code> and a object-literal
+containing the functions.
+<em>E.g.:</em> calling <code>Scandio.util.mixin(&#39;string&#39;, {capitalize: fn(string)})</code> makes the capitalize function
+available as in Scandio.string.capitalize(‘string’).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; path.length; i++) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.util.mixin = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(namespace, obj)</span> </span>{
+   <span class="hljs-keyword">var</span>
+      destination = Scandio,
+      path        = namespace !== <span class="hljs-literal">null</span> ? namespace.split(<span class="hljs-string">"."</span>) : [],
+      atModule    = <span class="hljs-literal">null</span>,
+      i           = <span class="hljs-literal">null</span>;</pre></div></div>
             
         </li>
         
@@ -827,11 +819,11 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-44">&#182;</a>
               </div>
-              <p>The current sub/module</p>
+              <p>Register the namespace if its not existent</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      atModule = path[i];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; path.length; i++) {</pre></div></div>
             
         </li>
         
@@ -842,13 +834,11 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-45">&#182;</a>
               </div>
-              <p>Namespace not registered yet</p>
+              <p>The current sub/module</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!destination[ atModule ]) {
-         destination[ atModule ] = {};
-      }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      atModule = path[i];</pre></div></div>
             
         </li>
         
@@ -858,6 +848,23 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>Namespace not registered yet</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!destination[ atModule ]) {
+         destination[ atModule ] = {};
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
               </div>
               <p>Sets the current pointer to module</p>
 
@@ -869,32 +876,17 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
         </li>
         
         
-        <li id="section-47">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-47">&#182;</a>
-              </div>
-              <p>For each function on the passed in <code>obj</code> by name</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>   Scandio.util.each(Scandio.util.functions(obj), <span class="keyword">function</span>(func, name) {</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-48">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-48">&#182;</a>
               </div>
-              <p>Defines the function on the destination module</p>
+              <p>For each function on the passed in <code>obj</code> by name</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      destination[name] = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.util.each(Scandio.util.functions(obj), <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(func, name)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -905,12 +897,11 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-49">&#182;</a>
               </div>
-              <p>Merge args with wrapped object (constructor new Scandio.(obj))</p>
+              <p>Defines the function on the destination module</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">var</span> args = <span class="keyword">this</span>._wrapped ? [<span class="keyword">this</span>._wrapped] : [];
-         push.apply(args, arguments);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      destination[name] = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -921,11 +912,27 @@ available as in Scandio.string.capitalize(&#39;string&#39;).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-50">&#182;</a>
               </div>
+              <p>Merge args with wrapped object (constructor new Scandio.(obj))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">var</span> args = <span class="hljs-keyword">this</span>._wrapped ? [<span class="hljs-keyword">this</span>._wrapped] : [];
+         push.apply(args, <span class="hljs-built_in">arguments</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
               <p>The result of applying the function with Scandio. and its args</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         <span class="keyword">return</span> func.apply(Scandio, args);
+            <div class="content"><div class='highlight'><pre>         <span class="hljs-keyword">return</span> func.apply(Scandio, args);
       };
    });
 };</pre></div></div>

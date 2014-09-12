@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.html">
-                scandio-0.2.js
+              <a class="source" href="scandio-0.2.0.html">
+                scandio-0.2.0.js
               </a>
             
               
@@ -56,11 +56,6 @@
               
               <a class="source" href="dom.html">
                 dom.js
-              </a>
-            
-              
-              <a class="source" href="index.html">
-                index.js
               </a>
             
               
@@ -120,10 +115,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Timining module</h2>
+              <h2 id="timining-module">Timining module</h2>
 
             </div>
             
@@ -136,11 +131,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Register timinig namespace on scandiojs object</p>
-
+              
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.timing = {};</pre></div></div>
             
         </li>
         
@@ -151,13 +143,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Puts the breaks on a function which may be called to often
-such as scrolling or resizing callbacks.
-The function will actually be called after <code>release</code>-milliseconds elapsed</p>
+              <p>Register timinig namespace on scandiojs object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.timing.breaks = <span class="keyword">function</span>(on, release) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.timing = {};</pre></div></div>
             
         </li>
         
@@ -168,17 +158,13 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Initialize the context, arg, timeout and previous local variables</p>
+              <p>Puts the breaks on a function which may be called to often
+such as scrolling or resizing callbacks.
+The function will actually be called after <code>release</code>-milliseconds elapsed</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span>
-      context = <span class="literal">null</span>,
-      args = <span class="literal">null</span>,
-      result = <span class="literal">null</span>,
-      timeout = <span class="literal">null</span>,
-      previous = <span class="number">0</span>,
-      remaining = <span class="literal">null</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.timing.breaks = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(on, release)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -189,11 +175,17 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Wrapper to be called if <code>release</code> has not elapsed yet</p>
+              <p>Initialize the context, arg, timeout and previous local variables</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      toBeCalled = <span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span>
+      context = <span class="hljs-literal">null</span>,
+      args = <span class="hljs-literal">null</span>,
+      result = <span class="hljs-literal">null</span>,
+      timeout = <span class="hljs-literal">null</span>,
+      previous = <span class="hljs-number">0</span>,
+      remaining = <span class="hljs-literal">null</span>,</pre></div></div>
             
         </li>
         
@@ -204,12 +196,11 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Timestamp of call</p>
+              <p>Wrapper to be called if <code>release</code> has not elapsed yet</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         previous = <span class="keyword">new</span> Date();
-         timeout = <span class="literal">null</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      toBeCalled = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -219,6 +210,22 @@ The function will actually be called after <code>release</code>-milliseconds ela
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Timestamp of call</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>         previous = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+         timeout = <span class="hljs-literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Result being function on which brakes have been put</p>
 
@@ -230,32 +237,17 @@ The function will actually be called after <code>release</code>-milliseconds ela
         </li>
         
         
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p>Returning a function which returns the execution&#39;s result</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> <span class="keyword">function</span>() {</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Where the function is in time</p>
+              <p>Returning a function which returns the execution’s result</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">var</span> now = <span class="keyword">new</span> Date();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -266,13 +258,11 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>If a previous call hasnt been made its now</p>
+              <p>Where the function is in time</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (!previous) {
-         previous = now;
-      }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();</pre></div></div>
             
         </li>
         
@@ -283,11 +273,13 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>How much time remains until final execution of <code>on</code></p>
+              <p>If a previous call hasnt been made its now</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      remaining = release - (now - previous);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!previous) {
+         previous = now;
+      }</pre></div></div>
             
         </li>
         
@@ -298,12 +290,11 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>The function context and arguments</p>
+              <p>How much time remains until final execution of <code>on</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      context = <span class="keyword">this</span>;
-      args = arguments;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      remaining = release - (now - previous);</pre></div></div>
             
         </li>
         
@@ -314,11 +305,12 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>Time has elapsed, <code>on</code> can be called</p>
+              <p>The function context and arguments</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      context = <span class="hljs-keyword">this</span>;
+      args = <span class="hljs-built_in">arguments</span>;</pre></div></div>
             
         </li>
         
@@ -329,11 +321,11 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Clears all state</p>
+              <p>Time has elapsed, <code>on</code> can be called</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         clearTimeout(timeout);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (remaining &lt;= <span class="hljs-number">0</span>) {</pre></div></div>
             
         </li>
         
@@ -344,14 +336,11 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>This will break it on next call</p>
+              <p>Clears all state</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         timeout = <span class="literal">null</span>;
-         previous = now;
-         result = on.apply(context, args);
-      } <span class="keyword">else</span> <span class="keyword">if</span> (!timeout) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         clearTimeout(timeout);</pre></div></div>
             
         </li>
         
@@ -362,16 +351,14 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>Next execution round</p>
+              <p>This will break it on next call</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         timeout = setTimeout(toBeCalled, remaining);
-      }
-
-      <span class="keyword">return</span> result;
-   };
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         timeout = <span class="hljs-literal">null</span>;
+         previous = now;
+         result = on.apply(context, args);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!timeout) {</pre></div></div>
             
         </li>
         
@@ -382,11 +369,16 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>Delays a function execution <code>ms</code> milliseconds.</p>
+              <p>Next execution round</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.timing.delay = <span class="keyword">function</span>(fn, ms) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>         timeout = setTimeout(toBeCalled, remaining);
+      }
+
+      <span class="hljs-keyword">return</span> result;
+   };
+};</pre></div></div>
             
         </li>
         
@@ -397,11 +389,11 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>Arguments are anything after <code>fn</code> and <code>ms</code></p>
+              <p>Delays a function execution <code>ms</code> milliseconds.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">var</span> args = slice.call(arguments, <span class="number">2</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.timing.delay = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn, ms)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -412,12 +404,27 @@ The function will actually be called after <code>release</code>-milliseconds ela
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
+              <p>Arguments are anything after <code>fn</code> and <code>ms</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">var</span> args = slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">2</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
               <p>Return the result of setTimeout</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   <span class="keyword">return</span> setTimeout(<span class="keyword">function</span>() {
-      <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, args);
+            <div class="content"><div class='highlight'><pre>   <span class="hljs-keyword">return</span> setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-keyword">return</span> fn.apply(<span class="hljs-literal">null</span>, args);
    }, ms);
 };</pre></div></div>
             
