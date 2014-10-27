@@ -34,7 +34,6 @@ module.exports = function( grunt ) {
             "js/timing.js",
             "js/ajax.js",
             "js/core.js",
-            "js/confluence.js",
             "js/device.js",
             "js/responsive.js",
             "js/outro.js"
