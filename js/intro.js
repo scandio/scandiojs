@@ -136,4 +136,4 @@
    root.Scandio = Scandio;
 
    // Version of our library
-   Scandio.VERSION   = '0.1.0';
+   Scandio.VERSION   = '0.2.1';
