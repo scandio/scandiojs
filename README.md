@@ -9,6 +9,8 @@
 For a project without bower just navigate to the `dist` directory and pick the latest [development](https://github.com/scandio/scandiojs/blob/master/dist/scandio.js) or [production](https://github.com/scandio/scandiojs/blob/master/dist/scandio.min.js) version.
 You might aswell pick up the [sourcemap](https://github.com/scandio/scandiojs/blob/master/dist/scandio.min.map) file if you're on a recent browser and familiar with sourcemaps.
 
+The annotated source can be found as a [GitHub page](http://scandio.github.io/scandiojs/) and are served from the `gh-pages` branch.
+
 *Note:* If you're intend on using the DOM-Logging functionality, you should also pick up the [css-file](https://github.com/scandio/scandiojs/blob/master/dist/scandio.css) to get some styling.
 
 ## Diving into scandiojs
