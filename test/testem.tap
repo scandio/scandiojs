@@ -1,93 +1,93 @@
 # Using testem 0.6.18
 # Whole list of tests
-ok 1 testem.json - Chrome 37.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns
-ok 2 testem.json - Chrome 37.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs
-ok 3 testem.json - Chrome 37.0 - A suite testing ajax functionality of scandio.js is should construct a script tag
-ok 4 testem.json - Chrome 37.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls
-ok 5 testem.json - Chrome 37.0 - A suite testing the bridge functionality of scandio.js should persit simple values in the DOM-store
-ok 6 testem.json - Chrome 37.0 - A suite testing the bridge functionality of scandio.js should return default values on non-defined paths
-ok 7 testem.json - Chrome 37.0 - A suite testing the bridge functionality of scandio.js should overwrite defined values
-ok 8 testem.json - Chrome 37.0 - A suite testing the bridge functionality of scandio.js should persit nested values in the DOM-store
-ok 9 testem.json - Chrome 37.0 - A suite testing the bridge functionality of scandio.js should merge existing stores into one
-ok 10 testem.json - Chrome 37.0 - A suite testing the compatibility module of scandiojs should find the correct index of an array's element
-ok 11 testem.json - Chrome 37.0 - A suite testing the compatibility module of scandiojs should not find unexistent values within an array
-ok 12 testem.json - Chrome 37.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions
-ok 13 testem.json - Chrome 37.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions
-ok 14 testem.json - Chrome 37.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger
-ok 15 testem.json - Chrome 37.0 - A suite testing the core module tests on module definition it should allow defining a root module
-ok 16 testem.json - Chrome 37.0 - A suite testing the core module tests on module definition it should allow defining a nested module
-ok 17 testem.json - Chrome 37.0 - A suite testing the core module tests on module definition it should allow defining another nested module
-ok 18 testem.json - Chrome 37.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM
-ok 19 testem.json - Chrome 37.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live)
-ok 20 testem.json - Chrome 37.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's
-ok 21 testem.json - Chrome 37.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label
-ok 22 testem.json - Chrome 37.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js
-ok 23 testem.json - Chrome 37.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods
-ok 24 testem.json - Chrome 37.0 - A suite testing the initialization of scandio.js should have any version number which is a string
-ok 25 testem.json - Chrome 37.0 - A suite testing the type checking functionality should correctly test on primitive types
-ok 26 testem.json - Chrome 37.0 - A suite testing the type checking functionality should not duck punch things
-ok 27 testem.json - Chrome 37.0 - A suite testing the type checking functionality should check the type of objects
-ok 28 testem.json - Chrome 37.0 - A suite testing json module should correctly encode json (using native if possible)
-ok 29 testem.json - Chrome 37.0 - A suite testing json module should correctly decode json (using native if possible)
-ok 30 testem.json - Chrome 37.0 - A suite testing json module should correctly encode json (using fallback)
-ok 31 testem.json - Chrome 37.0 - A suite testing json module should correctly decode json (using fallback)
-ok 32 testem.json - Chrome 37.0 - A suite testing the logger functions should exist a global variable for logging
-ok 33 testem.json - Chrome 37.0 - A suite testing the logger functions should exist a logging function for any log method
-ok 34 testem.json - Chrome 37.0 - A suite testing the logger functions should store debug statements in the log history
-ok 35 testem.json - Chrome 37.0 - A suite testing the logger functions should not log below the log level but store the history
-ok 36 testem.json - Chrome 37.0 - A suite testing the outro should have a conflict resolution function
-ok 37 testem.json - Chrome 37.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'
-ok 38 testem.json - Chrome 37.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings
-ok 39 testem.json - Chrome 37.0 - A suite testing the string functions tests on string capitalization should not capitalize every word
-ok 40 testem.json - Chrome 37.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings
-ok 41 testem.json - Chrome 37.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence
-ok 42 testem.json - Chrome 37.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start
-ok 43 testem.json - Chrome 37.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end
-ok 44 testem.json - Chrome 37.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start
-ok 45 testem.json - Chrome 37.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween
-ok 46 testem.json - Chrome 37.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start
-ok 47 testem.json - Chrome 37.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end
-ok 48 testem.json - Chrome 37.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start
-ok 49 testem.json - Chrome 37.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string
-ok 50 testem.json - Chrome 37.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string
-ok 51 testem.json - Chrome 37.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given
-ok 52 testem.json - Chrome 37.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given
-ok 53 testem.json - Chrome 37.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given
-ok 54 testem.json - Chrome 37.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start
-ok 55 testem.json - Chrome 37.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start
-ok 56 testem.json - Chrome 37.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end
-ok 57 testem.json - Chrome 37.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start
-ok 58 testem.json - Chrome 37.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space)
-ok 59 testem.json - Chrome 37.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-)
-ok 60 testem.json - Chrome 37.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-)
-ok 61 testem.json - Chrome 37.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function
-ok 62 testem.json - Chrome 37.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds without args should defer the execution of a function
-ok 63 testem.json - Chrome 37.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds with args should defer the execution of a function
-ok 64 testem.json - Chrome 37.0 - A suite testing the utility functions tests on object properties should return correctly check on object props
-ok 65 testem.json - Chrome 37.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object
-ok 66 testem.json - Chrome 37.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count
-ok 67 testem.json - Chrome 37.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype
-ok 68 testem.json - Chrome 37.0 - A suite testing the utility functions tests on object iteration with each should handle null props
-ok 69 testem.json - Chrome 37.0 - A suite testing the utility functions tests on filtering objects should filter values of an object
-ok 70 testem.json - Chrome 37.0 - A suite testing the utility functions tests on filtering objects should filter values of an array
-ok 71 testem.json - Chrome 37.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object
-ok 72 testem.json - Chrome 37.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function
-ok 73 testem.json - Chrome 37.0 - A suite testing the utility functions tests on getting functions of an object should only return functions
-ok 74 testem.json - Chrome 37.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object
-ok 75 testem.json - Chrome 37.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
-ok 76 testem.json - Chrome 37.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array
-ok 77 testem.json - Chrome 37.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
-ok 78 testem.json - Chrome 37.0 - A suite testing the utility functions tests on setting object values using dot notation should set properties on an object
-ok 79 testem.json - Chrome 37.0 - A suite testing the utility functions tests on setting object values using dot notation should set nested properties on an object
-ok 80 testem.json - Chrome 37.0 - A suite testing the utility functions tests on setting object values using dot notation should overwrite nested properties on an object
-ok 81 testem.json - Chrome 37.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one
-ok 82 testem.json - Chrome 37.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source
-ok 83 testem.json - Chrome 37.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source
-ok 84 testem.json - Chrome 37.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins
-ok 85 testem.json - Chrome 37.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones
-ok 86 testem.json - Chrome 37.0 - Tests on string module should have mixed in the module on namespace 'string.custom'
-ok 87 testem.json - Chrome 37.0 - Tests on string module should properly capitalize strings
-ok 88 testem.json - Chrome 37.0 - Tests on string module should properly lowercase strings
+ok 1 testem.json - Chrome 38.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns
+ok 2 testem.json - Chrome 38.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs
+ok 3 testem.json - Chrome 38.0 - A suite testing ajax functionality of scandio.js is should construct a script tag
+ok 4 testem.json - Chrome 38.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls
+ok 5 testem.json - Chrome 38.0 - A suite testing the bridge functionality of scandio.js should persit simple values in the DOM-store
+ok 6 testem.json - Chrome 38.0 - A suite testing the bridge functionality of scandio.js should return default values on non-defined paths
+ok 7 testem.json - Chrome 38.0 - A suite testing the bridge functionality of scandio.js should overwrite defined values
+ok 8 testem.json - Chrome 38.0 - A suite testing the bridge functionality of scandio.js should persit nested values in the DOM-store
+ok 9 testem.json - Chrome 38.0 - A suite testing the bridge functionality of scandio.js should merge existing stores into one
+ok 10 testem.json - Chrome 38.0 - A suite testing the compatibility module of scandiojs should find the correct index of an array's element
+ok 11 testem.json - Chrome 38.0 - A suite testing the compatibility module of scandiojs should not find unexistent values within an array
+ok 12 testem.json - Chrome 38.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions
+ok 13 testem.json - Chrome 38.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions
+ok 14 testem.json - Chrome 38.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger
+ok 15 testem.json - Chrome 38.0 - A suite testing the core module tests on module definition it should allow defining a root module
+ok 16 testem.json - Chrome 38.0 - A suite testing the core module tests on module definition it should allow defining a nested module
+ok 17 testem.json - Chrome 38.0 - A suite testing the core module tests on module definition it should allow defining another nested module
+ok 18 testem.json - Chrome 38.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM
+ok 19 testem.json - Chrome 38.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live)
+ok 20 testem.json - Chrome 38.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's
+ok 21 testem.json - Chrome 38.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label
+ok 22 testem.json - Chrome 38.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js
+ok 23 testem.json - Chrome 38.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods
+ok 24 testem.json - Chrome 38.0 - A suite testing the initialization of scandio.js should have any version number which is a string
+ok 25 testem.json - Chrome 38.0 - A suite testing the type checking functionality should correctly test on primitive types
+ok 26 testem.json - Chrome 38.0 - A suite testing the type checking functionality should not duck punch things
+ok 27 testem.json - Chrome 38.0 - A suite testing the type checking functionality should check the type of objects
+ok 28 testem.json - Chrome 38.0 - A suite testing json module should correctly encode json (using native if possible)
+ok 29 testem.json - Chrome 38.0 - A suite testing json module should correctly decode json (using native if possible)
+ok 30 testem.json - Chrome 38.0 - A suite testing json module should correctly encode json (using fallback)
+ok 31 testem.json - Chrome 38.0 - A suite testing json module should correctly decode json (using fallback)
+ok 32 testem.json - Chrome 38.0 - A suite testing the logger functions should exist a global variable for logging
+ok 33 testem.json - Chrome 38.0 - A suite testing the logger functions should exist a logging function for any log method
+ok 34 testem.json - Chrome 38.0 - A suite testing the logger functions should store debug statements in the log history
+ok 35 testem.json - Chrome 38.0 - A suite testing the logger functions should not log below the log level but store the history
+ok 36 testem.json - Chrome 38.0 - A suite testing the outro should have a conflict resolution function
+ok 37 testem.json - Chrome 38.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'
+ok 38 testem.json - Chrome 38.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings
+ok 39 testem.json - Chrome 38.0 - A suite testing the string functions tests on string capitalization should not capitalize every word
+ok 40 testem.json - Chrome 38.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings
+ok 41 testem.json - Chrome 38.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence
+ok 42 testem.json - Chrome 38.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start
+ok 43 testem.json - Chrome 38.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end
+ok 44 testem.json - Chrome 38.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start
+ok 45 testem.json - Chrome 38.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween
+ok 46 testem.json - Chrome 38.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start
+ok 47 testem.json - Chrome 38.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end
+ok 48 testem.json - Chrome 38.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start
+ok 49 testem.json - Chrome 38.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string
+ok 50 testem.json - Chrome 38.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string
+ok 51 testem.json - Chrome 38.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given
+ok 52 testem.json - Chrome 38.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given
+ok 53 testem.json - Chrome 38.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given
+ok 54 testem.json - Chrome 38.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start
+ok 55 testem.json - Chrome 38.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start
+ok 56 testem.json - Chrome 38.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end
+ok 57 testem.json - Chrome 38.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start
+ok 58 testem.json - Chrome 38.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space)
+ok 59 testem.json - Chrome 38.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-)
+ok 60 testem.json - Chrome 38.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-)
+ok 61 testem.json - Chrome 38.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function
+ok 62 testem.json - Chrome 38.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds without args should defer the execution of a function
+ok 63 testem.json - Chrome 38.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds with args should defer the execution of a function
+ok 64 testem.json - Chrome 38.0 - A suite testing the utility functions tests on object properties should return correctly check on object props
+ok 65 testem.json - Chrome 38.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object
+ok 66 testem.json - Chrome 38.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count
+ok 67 testem.json - Chrome 38.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype
+ok 68 testem.json - Chrome 38.0 - A suite testing the utility functions tests on object iteration with each should handle null props
+ok 69 testem.json - Chrome 38.0 - A suite testing the utility functions tests on filtering objects should filter values of an object
+ok 70 testem.json - Chrome 38.0 - A suite testing the utility functions tests on filtering objects should filter values of an array
+ok 71 testem.json - Chrome 38.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object
+ok 72 testem.json - Chrome 38.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function
+ok 73 testem.json - Chrome 38.0 - A suite testing the utility functions tests on getting functions of an object should only return functions
+ok 74 testem.json - Chrome 38.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object
+ok 75 testem.json - Chrome 38.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
+ok 76 testem.json - Chrome 38.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array
+ok 77 testem.json - Chrome 38.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
+ok 78 testem.json - Chrome 38.0 - A suite testing the utility functions tests on setting object values using dot notation should set properties on an object
+ok 79 testem.json - Chrome 38.0 - A suite testing the utility functions tests on setting object values using dot notation should set nested properties on an object
+ok 80 testem.json - Chrome 38.0 - A suite testing the utility functions tests on setting object values using dot notation should overwrite nested properties on an object
+ok 81 testem.json - Chrome 38.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one
+ok 82 testem.json - Chrome 38.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source
+ok 83 testem.json - Chrome 38.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source
+ok 84 testem.json - Chrome 38.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins
+ok 85 testem.json - Chrome 38.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones
+ok 86 testem.json - Chrome 38.0 - Tests on string module should have mixed in the module on namespace 'string.custom'
+ok 87 testem.json - Chrome 38.0 - Tests on string module should properly capitalize strings
+ok 88 testem.json - Chrome 38.0 - Tests on string module should properly lowercase strings
 ok 89 testem.json - Safari 7.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns
 ok 90 testem.json - Safari 7.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs
 ok 91 testem.json - Safari 7.0 - A suite testing ajax functionality of scandio.js is should construct a script tag
@@ -176,94 +176,94 @@ ok 173 testem.json - Safari 7.0 - A suite testing the utility functions tests ex
 ok 174 testem.json - Safari 7.0 - Tests on string module should have mixed in the module on namespace 'string.custom'
 ok 175 testem.json - Safari 7.0 - Tests on string module should properly capitalize strings
 ok 176 testem.json - Safari 7.0 - Tests on string module should properly lowercase strings
-ok 177 testem.json - Firefox 31.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns
-ok 178 testem.json - Firefox 31.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs
-ok 179 testem.json - Firefox 31.0 - A suite testing ajax functionality of scandio.js is should construct a script tag
-ok 180 testem.json - Firefox 31.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls
-ok 181 testem.json - Firefox 31.0 - A suite testing the bridge functionality of scandio.js should persit simple values in the DOM-store
-ok 182 testem.json - Firefox 31.0 - A suite testing the bridge functionality of scandio.js should return default values on non-defined paths
-ok 183 testem.json - Firefox 31.0 - A suite testing the bridge functionality of scandio.js should overwrite defined values
-ok 184 testem.json - Firefox 31.0 - A suite testing the bridge functionality of scandio.js should persit nested values in the DOM-store
-ok 185 testem.json - Firefox 31.0 - A suite testing the bridge functionality of scandio.js should merge existing stores into one
-ok 186 testem.json - Firefox 31.0 - A suite testing the compatibility module of scandiojs should find the correct index of an array's element
-ok 187 testem.json - Firefox 31.0 - A suite testing the compatibility module of scandiojs should not find unexistent values within an array
-ok 188 testem.json - Firefox 31.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions
-ok 189 testem.json - Firefox 31.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions
-ok 190 testem.json - Firefox 31.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger
-ok 191 testem.json - Firefox 31.0 - A suite testing the core module tests on module definition it should allow defining a root module
-ok 192 testem.json - Firefox 31.0 - A suite testing the core module tests on module definition it should allow defining a nested module
-ok 193 testem.json - Firefox 31.0 - A suite testing the core module tests on module definition it should allow defining another nested module
-ok 194 testem.json - Firefox 31.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM
-ok 195 testem.json - Firefox 31.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live)
-ok 196 testem.json - Firefox 31.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's
-ok 197 testem.json - Firefox 31.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label
-ok 198 testem.json - Firefox 31.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js
-ok 199 testem.json - Firefox 31.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods
-ok 200 testem.json - Firefox 31.0 - A suite testing the initialization of scandio.js should have any version number which is a string
-ok 201 testem.json - Firefox 31.0 - A suite testing the type checking functionality should correctly test on primitive types
-ok 202 testem.json - Firefox 31.0 - A suite testing the type checking functionality should not duck punch things
-ok 203 testem.json - Firefox 31.0 - A suite testing the type checking functionality should check the type of objects
-ok 204 testem.json - Firefox 31.0 - A suite testing json module should correctly encode json (using native if possible)
-ok 205 testem.json - Firefox 31.0 - A suite testing json module should correctly decode json (using native if possible)
-ok 206 testem.json - Firefox 31.0 - A suite testing json module should correctly encode json (using fallback)
-ok 207 testem.json - Firefox 31.0 - A suite testing json module should correctly decode json (using fallback)
-ok 208 testem.json - Firefox 31.0 - A suite testing the logger functions should exist a global variable for logging
-ok 209 testem.json - Firefox 31.0 - A suite testing the logger functions should exist a logging function for any log method
-ok 210 testem.json - Firefox 31.0 - A suite testing the logger functions should store debug statements in the log history
-ok 211 testem.json - Firefox 31.0 - A suite testing the logger functions should not log below the log level but store the history
-ok 212 testem.json - Firefox 31.0 - A suite testing the outro should have a conflict resolution function
-ok 213 testem.json - Firefox 31.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'
-ok 214 testem.json - Firefox 31.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings
-ok 215 testem.json - Firefox 31.0 - A suite testing the string functions tests on string capitalization should not capitalize every word
-ok 216 testem.json - Firefox 31.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings
-ok 217 testem.json - Firefox 31.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence
-ok 218 testem.json - Firefox 31.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start
-ok 219 testem.json - Firefox 31.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end
-ok 220 testem.json - Firefox 31.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start
-ok 221 testem.json - Firefox 31.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween
-ok 222 testem.json - Firefox 31.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start
-ok 223 testem.json - Firefox 31.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end
-ok 224 testem.json - Firefox 31.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start
-ok 225 testem.json - Firefox 31.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string
-ok 226 testem.json - Firefox 31.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string
-ok 227 testem.json - Firefox 31.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given
-ok 228 testem.json - Firefox 31.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given
-ok 229 testem.json - Firefox 31.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given
-ok 230 testem.json - Firefox 31.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start
-ok 231 testem.json - Firefox 31.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start
-ok 232 testem.json - Firefox 31.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end
-ok 233 testem.json - Firefox 31.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start
-ok 234 testem.json - Firefox 31.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space)
-ok 235 testem.json - Firefox 31.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-)
-ok 236 testem.json - Firefox 31.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-)
-ok 237 testem.json - Firefox 31.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function
-ok 238 testem.json - Firefox 31.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds without args should defer the execution of a function
-ok 239 testem.json - Firefox 31.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds with args should defer the execution of a function
-ok 240 testem.json - Firefox 31.0 - A suite testing the utility functions tests on object properties should return correctly check on object props
-ok 241 testem.json - Firefox 31.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object
-ok 242 testem.json - Firefox 31.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count
-ok 243 testem.json - Firefox 31.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype
-ok 244 testem.json - Firefox 31.0 - A suite testing the utility functions tests on object iteration with each should handle null props
-ok 245 testem.json - Firefox 31.0 - A suite testing the utility functions tests on filtering objects should filter values of an object
-ok 246 testem.json - Firefox 31.0 - A suite testing the utility functions tests on filtering objects should filter values of an array
-ok 247 testem.json - Firefox 31.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object
-ok 248 testem.json - Firefox 31.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function
-ok 249 testem.json - Firefox 31.0 - A suite testing the utility functions tests on getting functions of an object should only return functions
-ok 250 testem.json - Firefox 31.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object
-ok 251 testem.json - Firefox 31.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
-ok 252 testem.json - Firefox 31.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array
-ok 253 testem.json - Firefox 31.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
-ok 254 testem.json - Firefox 31.0 - A suite testing the utility functions tests on setting object values using dot notation should set properties on an object
-ok 255 testem.json - Firefox 31.0 - A suite testing the utility functions tests on setting object values using dot notation should set nested properties on an object
-ok 256 testem.json - Firefox 31.0 - A suite testing the utility functions tests on setting object values using dot notation should overwrite nested properties on an object
-ok 257 testem.json - Firefox 31.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one
-ok 258 testem.json - Firefox 31.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source
-ok 259 testem.json - Firefox 31.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source
-ok 260 testem.json - Firefox 31.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins
-ok 261 testem.json - Firefox 31.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones
-ok 262 testem.json - Firefox 31.0 - Tests on string module should have mixed in the module on namespace 'string.custom'
-ok 263 testem.json - Firefox 31.0 - Tests on string module should properly capitalize strings
-ok 264 testem.json - Firefox 31.0 - Tests on string module should properly lowercase strings
+ok 177 testem.json - Firefox 29.0 - A suite testing ajax functionality of scandio.js should maintain a set of callbacks for cdns
+ok 178 testem.json - Firefox 29.0 - A suite testing ajax functionality of scandio.js should be able to contruct a proper url from a cdnjs
+ok 179 testem.json - Firefox 29.0 - A suite testing ajax functionality of scandio.js is should construct a script tag
+ok 180 testem.json - Firefox 29.0 - A suite testing ajax functionality of scandio.js should construct a set of valid plugin urls
+ok 181 testem.json - Firefox 29.0 - A suite testing the bridge functionality of scandio.js should persit simple values in the DOM-store
+ok 182 testem.json - Firefox 29.0 - A suite testing the bridge functionality of scandio.js should return default values on non-defined paths
+ok 183 testem.json - Firefox 29.0 - A suite testing the bridge functionality of scandio.js should overwrite defined values
+ok 184 testem.json - Firefox 29.0 - A suite testing the bridge functionality of scandio.js should persit nested values in the DOM-store
+ok 185 testem.json - Firefox 29.0 - A suite testing the bridge functionality of scandio.js should merge existing stores into one
+ok 186 testem.json - Firefox 29.0 - A suite testing the compatibility module of scandiojs should find the correct index of an array's element
+ok 187 testem.json - Firefox 29.0 - A suite testing the compatibility module of scandiojs should not find unexistent values within an array
+ok 188 testem.json - Firefox 29.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fully qualified subscriptions
+ok 189 testem.json - Firefox 29.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for fuzzy (unqualified) subscriptions
+ok 190 testem.json - Firefox 29.0 - A suite testing the core module tests on messenger (pub/sub) functionality should allow for unsubscribing from messenger
+ok 191 testem.json - Firefox 29.0 - A suite testing the core module tests on module definition it should allow defining a root module
+ok 192 testem.json - Firefox 29.0 - A suite testing the core module tests on module definition it should allow defining a nested module
+ok 193 testem.json - Firefox 29.0 - A suite testing the core module tests on module definition it should allow defining another nested module
+ok 194 testem.json - Firefox 29.0 - A suite testing the DOM functions tests on the DOM-cache should get existing objects from the DOM
+ok 195 testem.json - Firefox 29.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects and their attributes (live)
+ok 196 testem.json - Firefox 29.0 - A suite testing the DOM functions tests on the DOM-cache should return cached objects which may differ from the DOM's
+ok 197 testem.json - Firefox 29.0 - A suite testing the DOM functions tests on the DOM-cache should allow updating all objects and single ones by label
+ok 198 testem.json - Firefox 29.0 - A suite testing the initialization of scandio.js should exist a global variable of scandio.js
+ok 199 testem.json - Firefox 29.0 - A suite testing the initialization of scandio.js should not trigger any errors on console methods
+ok 200 testem.json - Firefox 29.0 - A suite testing the initialization of scandio.js should have any version number which is a string
+ok 201 testem.json - Firefox 29.0 - A suite testing the type checking functionality should correctly test on primitive types
+ok 202 testem.json - Firefox 29.0 - A suite testing the type checking functionality should not duck punch things
+ok 203 testem.json - Firefox 29.0 - A suite testing the type checking functionality should check the type of objects
+ok 204 testem.json - Firefox 29.0 - A suite testing json module should correctly encode json (using native if possible)
+ok 205 testem.json - Firefox 29.0 - A suite testing json module should correctly decode json (using native if possible)
+ok 206 testem.json - Firefox 29.0 - A suite testing json module should correctly encode json (using fallback)
+ok 207 testem.json - Firefox 29.0 - A suite testing json module should correctly decode json (using fallback)
+ok 208 testem.json - Firefox 29.0 - A suite testing the logger functions should exist a global variable for logging
+ok 209 testem.json - Firefox 29.0 - A suite testing the logger functions should exist a logging function for any log method
+ok 210 testem.json - Firefox 29.0 - A suite testing the logger functions should store debug statements in the log history
+ok 211 testem.json - Firefox 29.0 - A suite testing the logger functions should not log below the log level but store the history
+ok 212 testem.json - Firefox 29.0 - A suite testing the outro should have a conflict resolution function
+ok 213 testem.json - Firefox 29.0 - A suite testing the string functions tests on string capitalization should have mixed in the module on namespace 'string'
+ok 214 testem.json - Firefox 29.0 - A suite testing the string functions tests on string capitalization should properly capitalize strings
+ok 215 testem.json - Firefox 29.0 - A suite testing the string functions tests on string capitalization should not capitalize every word
+ok 216 testem.json - Firefox 29.0 - A suite testing the string functions tests on converting a string to lowercase should properly lowercase strings
+ok 217 testem.json - Firefox 29.0 - A suite testing the string functions tests on converting a string to lowercase should lowercase every word in a sentence
+ok 218 testem.json - Firefox 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's start
+ok 219 testem.json - Firefox 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end
+ok 220 testem.json - Firefox 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end and start
+ok 221 testem.json - Firefox 29.0 - A suite testing the string functions tests on cleanin up a string (freeing it from mess everywhere) should properly remove mess from the string's end, start and inbetween
+ok 222 testem.json - Firefox 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's start
+ok 223 testem.json - Firefox 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end
+ok 224 testem.json - Firefox 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should properly remove mess from the string's end and start
+ok 225 testem.json - Firefox 29.0 - A suite testing the string functions tests on trimming a string (freeing it from mess around it) should not remove mess inbetween the string
+ok 226 testem.json - Firefox 29.0 - A suite testing the string functions tests on chopping a string into subparts should properly chop up a string
+ok 227 testem.json - Firefox 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the start of the string given
+ok 228 testem.json - Firefox 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the end of the string given
+ok 229 testem.json - Firefox 29.0 - A suite testing the string functions tests on searching for substrings within a string should find a substring at the the middle of the string given
+ok 230 testem.json - Firefox 29.0 - A suite testing the string functions tests on checking the start/beginning of a string should properly check against the string's start
+ok 231 testem.json - Firefox 29.0 - A suite testing the string functions tests on checking the start/beginning of a string should falsly check against the string's start
+ok 232 testem.json - Firefox 29.0 - A suite testing the string functions tests on checking the end of a string should properly check against the string's end
+ok 233 testem.json - Firefox 29.0 - A suite testing the string functions tests on checking the end of a string should falsly check against the string's start
+ok 234 testem.json - Firefox 29.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (space)
+ok 235 testem.json - Firefox 29.0 - A suite testing the string functions tests on exploding a string should explode a string by delimiter into an array (-)
+ok 236 testem.json - Firefox 29.0 - A suite testing the string functions tests on imploding an array into an string should implode an array by delimiter into an string (-)
+ok 237 testem.json - Firefox 29.0 - A suite testing the timing functions tests on delaying a function call for n-milliseconds should defer the execution of a function
+ok 238 testem.json - Firefox 29.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds without args should defer the execution of a function
+ok 239 testem.json - Firefox 29.0 - A suite testing the timing functions tests on putting the breaks on a function call for n-milliseconds with args should defer the execution of a function
+ok 240 testem.json - Firefox 29.0 - A suite testing the utility functions tests on object properties should return correctly check on object props
+ok 241 testem.json - Firefox 29.0 - A suite testing the utility functions tests on object properties should not assume unexistent props on an object
+ok 242 testem.json - Firefox 29.0 - A suite testing the utility functions tests on object iteration with each give a proper value and iteration count
+ok 243 testem.json - Firefox 29.0 - A suite testing the utility functions tests on object iteration with each should iterate properly over object-hashes not the prototype
+ok 244 testem.json - Firefox 29.0 - A suite testing the utility functions tests on object iteration with each should handle null props
+ok 245 testem.json - Firefox 29.0 - A suite testing the utility functions tests on filtering objects should filter values of an object
+ok 246 testem.json - Firefox 29.0 - A suite testing the utility functions tests on filtering objects should filter values of an array
+ok 247 testem.json - Firefox 29.0 - A suite testing the utility functions tests on mixing in another module should mixin function of a passed object
+ok 248 testem.json - Firefox 29.0 - A suite testing the utility functions tests on mixing in another module should not mixin anything except an function
+ok 249 testem.json - Firefox 29.0 - A suite testing the utility functions tests on getting functions of an object should only return functions
+ok 250 testem.json - Firefox 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an object
+ok 251 testem.json - Firefox 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
+ok 252 testem.json - Firefox 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should access nesting properties on an array
+ok 253 testem.json - Firefox 29.0 - A suite testing the utility functions tests on accessing object and arrays using dot notation should use a default value if the prop is not found
+ok 254 testem.json - Firefox 29.0 - A suite testing the utility functions tests on setting object values using dot notation should set properties on an object
+ok 255 testem.json - Firefox 29.0 - A suite testing the utility functions tests on setting object values using dot notation should set nested properties on an object
+ok 256 testem.json - Firefox 29.0 - A suite testing the utility functions tests on setting object values using dot notation should overwrite nested properties on an object
+ok 257 testem.json - Firefox 29.0 - A suite testing the utility functions tests extending a source with a destination object should extend an object's attributes with another one
+ok 258 testem.json - Firefox 29.0 - A suite testing the utility functions tests extending a source with a destination object should overwrite destination with source
+ok 259 testem.json - Firefox 29.0 - A suite testing the utility functions tests extending a source with a destination object should not overwrite existent properties in source
+ok 260 testem.json - Firefox 29.0 - A suite testing the utility functions tests extending a source with a destination object should extend from multiple object where last value wins
+ok 261 testem.json - Firefox 29.0 - A suite testing the utility functions tests extending a source with a destination object should not extend undefined values but nulled ones
+ok 262 testem.json - Firefox 29.0 - Tests on string module should have mixed in the module on namespace 'string.custom'
+ok 263 testem.json - Firefox 29.0 - Tests on string module should properly capitalize strings
+ok 264 testem.json - Firefox 29.0 - Tests on string module should properly lowercase strings
 
 1..264
 # tests 264
