@@ -19,34 +19,35 @@ module.exports = function( grunt ) {
       concat: {
          scandiojs: {
             options: {
-            separator: ""
-         },
-         src: [
-            "js/intro.js",
-            "js/compatibility.js",
-            "js/dom.js",
-            "js/string.js",
-            "js/logger.js",
-            "js/util.js",
-            "js/is.js",
-            "js/json.js",
-            "js/bridge.js",
-            "js/timing.js",
-            "js/ajax.js",
-            "js/core.js",
-            "js/device.js",
-            "js/responsive.js",
-            "js/outro.js"
-         ],
-            dest: "dist/scandio-<%= pkg.version %>.js"
-         },
-         scandiocss: {
-            options: {
-               separator: ""
+                separator: "",
+                process: true
             },
             src: [
-               "assets/css/common.css",
-               "assets/css/logger.css"
+               "js/intro.js",
+               "js/compatibility.js",
+               "js/dom.js",
+               "js/string.js",
+               "js/logger.js",
+               "js/util.js",
+               "js/is.js",
+               "js/json.js",
+               "js/bridge.js",
+               "js/timing.js",
+               "js/ajax.js",
+               "js/core.js",
+               "js/device.js",
+               "js/responsive.js",
+               "js/outro.js"
+            ],
+               dest: "dist/scandio-<%= pkg.version %>.js"
+            },
+         scandiocss: {
+             options: {
+                separator: ""
+             },
+             src: [
+                "assets/css/common.css",
+                "assets/css/logger.css"
             ],
             dest: "dist/scandio-<%= pkg.version %>.css"
          }

@@ -100,7 +100,7 @@
    },
 
    _injectDom = function() {
-      $(function() {
+      $(function() {
          var
             script   = null,
             head     = document.head || document.getElementsByTagName('head')[0];
@@ -136,7 +136,7 @@
    root.Scandio = Scandio;
 
    // Version of our library
-   Scandio.VERSION   = '0.1.0';
+   Scandio.VERSION   = '0.2.1';
 // Compatibility module
 // ---------------
 
