@@ -100,7 +100,7 @@
    },
 
    _injectDom = function() {
-      $(function() {
+      $(function() {
          var
             script   = null,
             head     = document.head || document.getElementsByTagName('head')[0];
