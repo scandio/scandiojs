@@ -2,7 +2,7 @@
   "name": "scandio.js",
   "title": "scandio.js",
   "description": "JavaScript library speeding up your JS development.",
-  "version": "0.2.4",
+  "version": "0.2.3",
   "homepage": "http://scandio.de",
   "author": {
     "name": "Scandio GmbH",
@@ -31,7 +31,6 @@
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-docco": "latest",
-    "grunt-gh-pages": "^0.9.1",
     "grunt-jsonlint": "~1.0.0",
     "grunt-testem": "latest",
     "load-grunt-config": "^0.13.1"

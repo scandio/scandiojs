@@ -111,9 +111,13 @@ Scandio.wait = (function () {
       return {
          done: function(fn) {
             callbacks.done = fn;
+
+            return this;
          },
          fail: function(fn) {
             callbacks.fail = fn;
+
+            return this;
          }
       };
 

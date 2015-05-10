@@ -187,15 +187,11 @@ Scandio.wait({
    initialDelay: 10,
    condition: function() {
       return true;
-   },
-   callbacks: {
-      done: function() {
-         Scandio.debug.info('We made it!');
-      },
-      fail: function() {
-         Scandio.debug.error('We failed so badly!');
-      }
-   }
+   }.done(function() {
+     Scandio.debug.info('We made it!');
+   }).fail(function() {
+     Scandio.debug.error('We failed so badly!');
+   })
 });
 
 // Register your custom modules
