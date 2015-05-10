@@ -1,0 +1,107 @@
+.scandio-js {
+
+}
+.scandio-js .scandio-log {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 30%;
+  height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 5px;
+  margin: 10px;
+  z-index: 9999;
+  background-color: #f2f2f2;
+  border-width: 1px;
+  border: 2px dotted #ddd;
+  border-radius: 4px 4px 0 0;
+  box-shadow: none;
+  font-size: 11px;
+}
+
+.scandio-log .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.scandio-log .alert hr {
+  margin: 2px 0;
+  border: 1px solid transparent;
+}
+
+.scandio-log .alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+
+.scandio-log .alert .alert-link {
+  font-weight: bold;
+}
+
+.scandio-log .alert > p,
+.scandio-log .alert > ul {
+  margin-bottom: 0;
+}
+
+.scandio-log .alert > p + p {
+  margin-top: 5px;
+}
+
+.scandio-log .alert-success {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.scandio-log .alert-success hr {
+  border-top-color: #c9e2b3;
+}
+
+.scandio-log .alert-success .alert-link {
+  color: #356635;
+}
+
+.scandio-log .alert-info {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.scandio-log .alert-info hr {
+  border-top-color: #a6e1ec;
+}
+
+.scandio-log .alert-info .alert-link {
+  color: #2d6987;
+}
+
+.scandio-log .alert-warning {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+
+.scandio-log .alert-warning hr {
+  border-top-color: #f8e5be;
+}
+
+.scandio-log .alert-warning .alert-link {
+  color: #a47e3c;
+}
+
+.scandio-log .alert-danger {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.scandio-log .alert-danger hr {
+  border-top-color: #e6c1c7;
+}
+
+.scandio-log .alert-danger .alert-link {
+  color: #953b39;
+}
