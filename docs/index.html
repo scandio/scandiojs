@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>scandio-0.2.0.js</title>
+  <title>scandio-0.2.4.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.0.html">
-                scandio-0.2.0.js
+              <a class="source" href="scandio-0.2.4.html">
+                scandio-0.2.4.js
               </a>
             
               
@@ -36,11 +36,6 @@
               
               <a class="source" href="compatibility.html">
                 compatibility.js
-              </a>
-            
-              
-              <a class="source" href="confluence.html">
-                confluence.js
               </a>
             
               
@@ -106,7 +101,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>scandio-0.2.0.js</h1>
+                  <h1>scandio-0.2.4.js</h1>
               </div>
           </li>
         
@@ -459,7 +454,7 @@
    },
 
    _injectDom = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
-      $(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+      $(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
          <span class="hljs-keyword">var</span>
             script   = <span class="hljs-literal">null</span>,
             head     = <span class="hljs-built_in">document</span>.head || <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'head'</span>)[<span class="hljs-number">0</span>];
@@ -568,7 +563,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.VERSION   = <span class="hljs-string">'0.1.0'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.VERSION   = <span class="hljs-string">'0.2.4'</span>;</pre></div></div>
             
         </li>
         
@@ -4376,13 +4371,15 @@ called in html’s head-section</p>
                 <a class="pilcrow" href="#section-261">&#182;</a>
               </div>
               <p><em>Convention:</em> if module environment has a function called <code>readyFn</code>
-it will be invoked on DOM-Ready</p>
+it will be invoked on DOM-Ready.
+NOTE: if there is no ready function in invokeModule, we don’t want to invoke anything!</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
-         modEnv.readyFn(invokedModule.ready);
-      } <span class="hljs-keyword">else</span> {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isObject(invokedModule) &amp;&amp; Scandio.isFunction(invokedModule.ready)) {
+	      <span class="hljs-keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
+	         modEnv.readyFn(invokedModule.ready);
+	      } <span class="hljs-keyword">else</span> {</pre></div></div>
             
         </li>
         
@@ -4397,7 +4394,8 @@ it will be invoked on DOM-Ready</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>         $(<span class="hljs-built_in">document</span>).ready(invokedModule.ready);
+            <div class="content"><div class='highlight'><pre>	         $(<span class="hljs-built_in">document</span>).ready(invokedModule.ready);
+	      }
       }
    };
 }());</pre></div></div>
@@ -4831,7 +4829,7 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-288">&#182;</a>
               </div>
-              <h2 id="conflucence-module">Conflucence module</h2>
+              <h2 id="device-detection-module">Device detection module</h2>
 
             </div>
             
@@ -4856,46 +4854,6 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-290">&#182;</a>
               </div>
-              <p>Sets up confluence object</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.confluence = {};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-291">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-291">&#182;</a>
-              </div>
-              <h2 id="device-detection-module">Device detection module</h2>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-292">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-292">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-293">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-293">&#182;</a>
-              </div>
               <p>Sets up device object</p>
 
             </div>
@@ -4908,11 +4866,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-294">
+        <li id="section-291">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-294">&#182;</a>
+                <a class="pilcrow" href="#section-291">&#182;</a>
               </div>
               <p>A rudimentary function testing for mobile devices
 <em>Note:</em> The list of OSes it not complete and feature-testing might be a better option (modernizr e.g.)</p>
@@ -4927,11 +4885,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-295">
+        <li id="section-292">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-295">&#182;</a>
+                <a class="pilcrow" href="#section-292">&#182;</a>
               </div>
               <p>Checks the navigator’s user agent against the list of mobile devices</p>
 
@@ -4943,11 +4901,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-296">
+        <li id="section-293">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-296">&#182;</a>
+                <a class="pilcrow" href="#section-293">&#182;</a>
               </div>
               <p>A function testing for desktop devices</p>
 
@@ -4961,11 +4919,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-297">
+        <li id="section-294">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-297">&#182;</a>
+                <a class="pilcrow" href="#section-294">&#182;</a>
               </div>
               <p>Checks the navigator’s user agent against the list of desktop devices</p>
 
@@ -4977,11 +4935,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-298">
+        <li id="section-295">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-298">&#182;</a>
+                <a class="pilcrow" href="#section-295">&#182;</a>
               </div>
               <p>A function testing for browser vendors</p>
 
@@ -4995,11 +4953,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-299">
+        <li id="section-296">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-299">&#182;</a>
+                <a class="pilcrow" href="#section-296">&#182;</a>
               </div>
               <p>Checks the navigator’s user agent against the list of desktop devices</p>
 
@@ -5011,11 +4969,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-300">
+        <li id="section-297">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-300">&#182;</a>
+                <a class="pilcrow" href="#section-297">&#182;</a>
               </div>
               <p>A function testing for browser vendors</p>
 
@@ -5029,11 +4987,11 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
-        <li id="section-301">
+        <li id="section-298">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-301">&#182;</a>
+                <a class="pilcrow" href="#section-298">&#182;</a>
               </div>
               <p>Checks the navigator’s user agent against the list of desktop devices</p>
 
@@ -5045,13 +5003,59 @@ it will be invoked on DOM-Ready</p>
         </li>
         
         
+        <li id="section-299">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-299">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-300">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-300">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-301">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-301">&#182;</a>
+              </div>
+              <p>Sets up responsive object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Scandio.responsive = {
+   breakpointEl:     <span class="hljs-string">'.breakpoint'</span>
+};
+
+Scandio.responsive.breakpoint = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span> </span>{
+   <span class="hljs-keyword">return</span> $( Scandio.responsive.breakpointEl ).html() === name;
+};</pre></div></div>
+            
+        </li>
+        
+        
         <li id="section-302">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-302">&#182;</a>
               </div>
-              <hr>
+              <h2 id="outro-amd-and-conflict-resolution">Outro, AMD and conflict resolution</h2>
 
             </div>
             
@@ -5076,17 +5080,11 @@ it will be invoked on DOM-Ready</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-304">&#182;</a>
               </div>
-              <p>Sets up responsive object</p>
+              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Scandio.responsive = {
-   breakpointEl:     <span class="hljs-string">'.breakpoint'</span>
-};
-
-Scandio.responsive.breakpoint = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(name)</span> </span>{
-   <span class="hljs-keyword">return</span> $( Scandio.responsive.breakpointEl ).html() === name;
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
             
         </li>
         
@@ -5097,46 +5095,6 @@ Scandio.responsive.breakpoint = <span class="hljs-function"><span class="hljs-ke
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-305">&#182;</a>
               </div>
-              <h2 id="outro-amd-and-conflict-resolution">Outro, AMD and conflict resolution</h2>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-306">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-306">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-307">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-307">&#182;</a>
-              </div>
-              <p>Tries to resolve version conflicts by restoring the previously loaded version globally</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Scandio.noConflict = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-308">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-308">&#182;</a>
-              </div>
               <p>Retore the <code>previousScandio</code></p>
 
             </div>
@@ -5146,11 +5104,11 @@ Scandio.responsive.breakpoint = <span class="hljs-function"><span class="hljs-ke
         </li>
         
         
-        <li id="section-309">
+        <li id="section-306">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-309">&#182;</a>
+                <a class="pilcrow" href="#section-306">&#182;</a>
               </div>
               <p>Return yerself to continue</p>
 
@@ -5162,11 +5120,11 @@ Scandio.responsive.breakpoint = <span class="hljs-function"><span class="hljs-ke
         </li>
         
         
-        <li id="section-310">
+        <li id="section-307">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-310">&#182;</a>
+                <a class="pilcrow" href="#section-307">&#182;</a>
               </div>
               <p>Support for AMD/RequireJS
 If define function deefined and its amd</p>
@@ -5178,11 +5136,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-311">
+        <li id="section-308">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-311">&#182;</a>
+                <a class="pilcrow" href="#section-308">&#182;</a>
               </div>
               <p>Define Scandio</p>
 
@@ -5193,11 +5151,11 @@ If define function deefined and its amd</p>
         </li>
         
         
-        <li id="section-312">
+        <li id="section-309">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-312">&#182;</a>
+                <a class="pilcrow" href="#section-309">&#182;</a>
               </div>
               <p>and return the library</p>
 

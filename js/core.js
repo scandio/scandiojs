@@ -48,7 +48,7 @@ Scandio.mod = Scandio.module = (function() {
       // *Convention:* if module environment has a function called `readyFn`
       // it will be invoked on DOM-Ready.
       // NOTE: if there is no ready function in invokeModule, we don't want to invoke anything!
-      if (Scandio.isFunction(invokedModule.ready)) {
+      if (Scandio.isObject(invokedModule) && Scandio.isFunction(invokedModule.ready)) {
 	      if (modEnv && Scandio.isFunction(modEnv.readyFn)) {
 	         modEnv.readyFn(invokedModule.ready);
 	      } else {
