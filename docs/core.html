@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.3.html">
-                scandio-0.2.3.js
+              <a class="source" href="scandio-0.2.5.html">
+                scandio-0.2.5.js
               </a>
             
               
@@ -312,7 +312,7 @@ NOTE: if there is no ready function in invokeModule, we don’t want to invoke a
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isFunction(invokedModule.ready)) {
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isObject(invokedModule) &amp;&amp; Scandio.isFunction(invokedModule.ready)) {
 	      <span class="hljs-keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
 	         modEnv.readyFn(invokedModule.ready);
 	      } <span class="hljs-keyword">else</span> {</pre></div></div>
