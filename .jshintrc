@@ -16,7 +16,8 @@
       "define": true,
       "jQuery": true,
       "$": true,
-      "alert": true
+      "alert": true,
+      "Scandio": true
    },
    "node": true
 }

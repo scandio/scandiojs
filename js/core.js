@@ -50,6 +50,11 @@ Scandio.mod = Scandio.module = (function() {
       // NOTE: if there is no ready function in invokeModule, we don't want to invoke anything!
       if (Scandio.isObject(invokedModule) && Scandio.isFunction(invokedModule.ready)) {
 	      if (modEnv && Scandio.isFunction(modEnv.readyFn)) {
+           console.warn(
+             "`modEnv.readyFn` and specifying a custom DOM-Ready is depricated and will be removed. "+
+             "Please use your own custom DOM-Ready handling or just pass a `ready`."
+            );
+
 	         modEnv.readyFn(invokedModule.ready);
 	      } else {
 	         // Otherwise the just load it on DOM-ready
