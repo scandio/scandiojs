@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>scandio-0.2.6.js</title>
+  <title>scandio-0.2.7.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.6.html">
-                scandio-0.2.6.js
+              <a class="source" href="scandio-0.2.7.html">
+                scandio-0.2.7.js
               </a>
             
               
@@ -101,7 +101,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>scandio-0.2.6.js</h1>
+                  <h1>scandio-0.2.7.js</h1>
               </div>
           </li>
         
@@ -563,7 +563,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>   Scandio.VERSION   = <span class="hljs-string">'0.2.6'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>   Scandio.VERSION   = <span class="hljs-string">'0.2.7'</span>;</pre></div></div>
             
         </li>
         
@@ -4378,9 +4378,9 @@ NOTE: if there is no ready function in invokeModule, we don’t want to invoke a
             
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isObject(invokedModule) &amp;&amp; Scandio.isFunction(invokedModule.ready)) {
 	      <span class="hljs-keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
-           <span class="hljs-built_in">console</span>.warn(
-             <span class="hljs-string">"`modEnv.readyFn` and specifying a custom DOM-Ready is depricated and will be removed. "</span>+
-             <span class="hljs-string">"Please use your own custom DOM-Ready handling or just pass a `ready`."</span>
+            Scandio.debug.warn(
+              <span class="hljs-string">"`modEnv.readyFn` and specifying a custom DOM-Ready is depricated and will be removed. "</span>+
+              <span class="hljs-string">"Please use your own custom DOM-Ready handling or just pass a `ready`."</span>
             );
 
 	         modEnv.readyFn(invokedModule.ready);

@@ -19,8 +19,8 @@
           <div id="jump_page">
             
               
-              <a class="source" href="scandio-0.2.6.html">
-                scandio-0.2.6.js
+              <a class="source" href="scandio-0.2.7.html">
+                scandio-0.2.7.js
               </a>
             
               
@@ -314,9 +314,9 @@ NOTE: if there is no ready function in invokeModule, we don’t want to invoke a
             
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (Scandio.isObject(invokedModule) &amp;&amp; Scandio.isFunction(invokedModule.ready)) {
 	      <span class="hljs-keyword">if</span> (modEnv &amp;&amp; Scandio.isFunction(modEnv.readyFn)) {
-           <span class="hljs-built_in">console</span>.warn(
-             <span class="hljs-string">"`modEnv.readyFn` and specifying a custom DOM-Ready is depricated and will be removed. "</span>+
-             <span class="hljs-string">"Please use your own custom DOM-Ready handling or just pass a `ready`."</span>
+            Scandio.debug.warn(
+              <span class="hljs-string">"`modEnv.readyFn` and specifying a custom DOM-Ready is depricated and will be removed. "</span>+
+              <span class="hljs-string">"Please use your own custom DOM-Ready handling or just pass a `ready`."</span>
             );
 
 	         modEnv.readyFn(invokedModule.ready);
